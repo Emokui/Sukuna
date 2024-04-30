@@ -47,7 +47,7 @@ Github = select, 香港节点, 日本节点, 新加坡节点, no-alert=0, hidden
 美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(US), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
 日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
 新加坡节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(坡)|(Singapore)|(SG), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-Sub-Store = select, Warp+GSC, policy-path=https://sub.store/download/collection/Sub-store, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
+Sub-Store = select, Warp+GSC, policy-path=, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
 韩国节点 = select, policy-regex-filter=(🇰🇷)|(韩)|(SouthKorea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
 
 [Rule]
