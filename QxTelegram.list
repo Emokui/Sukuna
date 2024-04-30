@@ -1,5 +1,5 @@
-HOST,api.imem.app
-HOST,api.swiftgram.app
+#HOST,api.imem.app
+#HOST,api.swiftgram.app
 HOST-SUFFIX,cdn-telegram.org
 HOST-SUFFIX,comments.app
 HOST-SUFFIX,contest.com
