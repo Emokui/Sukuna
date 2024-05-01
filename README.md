@@ -1,6 +1,12 @@
 loon：Loon配置无dns泄漏。
 
 
+loon 手动版
+
+
+loon2.0 自动兼手动版
+
+
 dns.list：dns泄漏分流（彻底解决用配置）。
 
 
