@@ -51,7 +51,7 @@ disable-udp-ports = 443
 
 #手动分组策略
 [Proxy Group]
-Niflix = select,香港手动,新国手动,美国手动,日本手动,Final,韩国手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
+Netflix = select,香港手动,新国手动,美国手动,日本手动,Final,韩国手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
 Spotify = select,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 Google = select,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
 Pixvix = select,日本手动,台湾手动,香港手动,新国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
@@ -82,19 +82,19 @@ OpenAi = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url
 全球节点 = NameRegex, FilterKey = "^"
 #分流规则
 [Remote Rule]
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=DIRECT, tag=Instagram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=Instagram, tag=Instagram, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Soptify, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Twitter, tag=Twitter, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=Pixvix, tag=pixvix, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=DIRECT, tag=Niflix, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Netflix, tag=Niflix, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list, policy=PayPal, tag=PayPal, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Youtube, tag=Youtube, enabled=true
 https://raw.githubusercontent.com/Emokui/conf-rule/main/Talkatone.list, policy=Talkatone, tag=Talkatone, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=DIRECT, tag=Microsoft, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Mincrosoft, tag=Microsoft, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
 https://ruleset.skk.moe/List/non_ip/direct.conf, policy=DIRECT, tag=DIRECT 3, enabled=true
 https://ruleset.skk.moe/List/non_ip/domestic.conf, policy=DIRECT, tag=DIRECT 2, enabled=true
