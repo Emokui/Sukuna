@@ -1,10 +1,13 @@
-loon：Loon配置无dns泄漏。
+Loon配置无dns泄漏。
 
 
-loon 手动版
+loon1.0 手动版
 
 
 loon2.0 自动兼手动版
+
+
+surge 自用配置
 
 
 dns.list：dns泄漏分流（彻底解决用配置）。
