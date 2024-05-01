@@ -87,7 +87,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Soptify, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Twitter, tag=Twitter, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=Pixvix, tag=pixvix, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Netflix, tag=Niflix, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Netflix, tag=Netflix, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list, policy=PayPal, tag=PayPal, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
