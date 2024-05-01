@@ -2,7 +2,7 @@
 # Final策略组里放 订阅链接/sub store订阅
 # 如果不使用sub store模块，且多个订阅
 # 请创新的策略组加自己的订阅，再添加进Final策略组
-# Final策略为兜底,本配置没有额外的 国外媒体、网站分流合集，
+# Final策略为兜底,本配置没有设置 额外的 国外媒体、网站的合集分流
 # 匹配不到的将走Final策略
 
 [General]
@@ -37,23 +37,25 @@ DCI-KR = snell, kr-chuncheon-oracle-3dd360.ip1.shop, 33543, psk=SIukX37Y9wLITLKY
 Google = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Final, no-alert=0, hidden=0, include-all-proxies=0
 OpenAi = select, 美国节点, 日本节点, 台湾节点, 新国节点, no-alert=0, hidden=0, include-all-proxies=0
 Telegram = select, 香港节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
+Instagram = select, 香港节点, 韩国节点, 日本节点, 台湾节点, 新国节点, 美国节点, Final，no-alert=0, hidden=0, include-all-proxies=0
 YouTuBe = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
-BiliBili = select, DIRECT, 香港节点, 台湾节点
-Microsoft = select, DIRECT, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点
+TikTok = select, 台湾节点, 日本节点, 韩国节点, 美国节点, Final, no-alert=0, hidden=0, include-all-proxies=0
+BiliBili = select, DIRECT, 香港节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
+Microsoft = select, DIRECT, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 Talkatone = select, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=美国节点
 PayPal = select, 香港节点, 韩国节点, 日本节点, 台湾节点, 新国节点, 美国节点, Final，no-alert=0, hidden=0, include-all-proxies=0
 Pixiv = select, 香港节点, 韩国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-Spotify = select, 香港节点, 日本节点, 韩国节点, 新国节点, 美国节点, Final,  no-alert=0, hidden=0, include-all-proxies=0
+Spotify = select, 香港节点, 日本节点, 韩国节点, 新国节点, 美国节点, 台湾节点, Final,  no-alert=0, hidden=0, include-all-proxies=0
 Twitter = select, 香港节点, 韩国节点, 日本节点, 台湾节点, 新国节点, 美国节点, Final, no-alert=0, hidden=0, include-all-proxies=0
 Netflix = selext, 香港节点, 韩国节点, 日本节点, 台湾节点, 新国节点, 美国节点, Final，no-alert=0, hidden=0, include-all-proxies=0
 
-香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-台湾节点 = select, update-interval=0, policy-regex-filter=(🇨🇳)|(台)|(Tai)|(TW), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(US), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-新国节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(坡)|(Singapore)|(SG), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-韩国节点 = select, DCI-KR, policy-regex-filter=(🇰🇷)|(韩)|(SouthKorea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
-Final = select, Warp+GSC, policy-path=[你的订阅链接/sub组合订阅]
+香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+台湾节点 = select, update-interval=0, policy-regex-filter=(🇨🇳)|(台)|(Tai)|(TW), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(US), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+新国节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(坡)|(Singapore)|(SG), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+韩国节点 = select, DCI-KR, policy-regex-filter=(🇰🇷)|(韩)|(SouthKorea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Final
+Final = select, Warp+GSC, DCI-KR, policy-path=[你的订阅链接/sub组合订阅
 
 [Rule]
 # > Ad
@@ -65,11 +67,15 @@ RULE-SET,https://ruleset.skk.moe/List/non_ip/reject-drop.conf,REJECT-DROP,extend
 RULE-SET,https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list,Talkatone,extended-matching
 # > Telegram
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram,extended-matching
+# > Instagram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Instagram/Instagram.list,Instagram,extended-matching
 # > YouTuBe
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,YouTuBe,extended-matching
-# > OpenAi
+# > TikTok
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list,TikTok,extended-matching
 # > Netflix
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list,Netflix,extended-matching
+# > OpenAi
 RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,OpenAi,extended-matching
 # > PayPal
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list,PayPal,no-resolve
@@ -80,7 +86,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # > 推特
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list,Twitter,no-resolve
 # > 微软
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list,Microsoft,extended-matching
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list,Microsoft,extended-matching
 # > 谷歌
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google,extended-matching
 # > B站
