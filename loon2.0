@@ -4,9 +4,10 @@
 # 因此设置了Final策略且是手动（Final策略包含所有节点）
 # 不存在dns泄漏本配置 
 # 如遇到某某网站不能访问可以反馈
+
 [General]
 sni-sniffing = true
-ipv6 = true
+ipv6 = false
 # > 跳过某个域名或者IP段
 skip-proxy = localhost,*.local,passenger.t3go.cn,e.crashlytics.com,captive.apple.com,app.yinxiang.com,injections.adguard.org,local.adguard.org,cable.auth.com,www.baidu.com,yunbusiness.ccb.com,10.0.0.0/8,100.64.0.0/10,127.0.0.1/32,169.254.0.0/16,172.16.0.0/12,192.168.0.0/16,224.0.0.0/4,240.0.0.0/4,::1/128,fc00::/7,fd00::/8,fe80::/10,ff00::/8,2001::/32,2001:db8::/32,2002::/16,::ffff:0:0:0:0/1,::ffff:128:0:0:0/1
 bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
