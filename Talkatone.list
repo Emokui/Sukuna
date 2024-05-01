@@ -11,6 +11,7 @@ DOMAIN-SUFFIX,cohere.com
 DOMAIN-SUFFIX,ip-api.com
 DOMAIN-SUFFIX,agkn.com
 DOMAIN-SUFFIX,tktn.at
+DOMAIN-KEYWORD,tktn
 IP-CIDR,50.117.27.0/24,no-resolve
 IP-CIDR,69.46.75.0/24,no-resolve
 IP-CIDR,205.164.56.0/24,no-resolve
