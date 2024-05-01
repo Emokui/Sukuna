@@ -1,3 +1,4 @@
+# 半自动配置
 # 未分配国外媒体、网站的合集 分流及策略组
 # 因为过于繁琐，未分配到的会走Final策略
 # 因此设置了Final策略且是手动（Final策略包含所有节点）
@@ -134,3 +135,5 @@ https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Taobao_remove
 
 
 [MITM]
+
+skip-server-cert-verify = false
