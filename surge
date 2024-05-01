@@ -1,3 +1,7 @@
+# 手动配置
+# Sub Store放组合订阅链接/订阅链接，如果不使用sub store模块，请创新的策略组加自己的订阅，再添加进sub store策略
+# Final策略为兜底
+
 [General]
 loglevel = notify
 show-error-page-for-reject = true
@@ -23,99 +27,74 @@ allow-hotspot-access = false
 
 [Proxy]
 Warp+GSC = wireguard, section-name=GetSomeCats, test-url=http://cp.cloudflare.com/generate_204
+DCI-KR = snell, kr-chuncheon-oracle-3dd360.ip1.shop, 33543, psk=SIukX37Y9wLITLKY, obfs=http, obfs-host=icloud.com, version=4, reuse=true, tfo=true, ip-version=v4-only, block-quic=off
 
 [Proxy Group]
 
-Final = select, 香港节点, 韩国节点, 台湾节点, 美国节点, 日本节点, 新加坡节点, Sub-Store, Warp+GSC, no-alert=0, hidden=0, include-all-proxies=0
+Final = select, 香港节点, 台湾节点, 美国节点, 日本节点, 韩国节点, Sub Store, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
 Google = select, 香港节点, 美国节点, 新加坡节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
-OpenAI = select, 美国节点, 日本节点, 台湾节点, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
-Telegram = select, 香港节点, 韩国节点, 台湾节点, 美国节点, 日本节点, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
+GPT = select, 美国节点, 日本节点, 台湾节点, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
+Telegram = select, 香港节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
 YouTuBe = select, 香港节点, 美国节点, 新加坡节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
 BiliBili = select, DIRECT, 香港节点, 台湾节点
 Microsoft = select, DIRECT, 香港节点, 美国节点, 新加坡节点, 日本节点, 台湾节点
 Talkatone = select, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=美国节点
-BiAn = select, 香港节点, 韩国节点, 台湾节点,日本节点, no-alert=0, hidden=0, include-all-proxies=0
-PayPal = select, 日本节点,美国节点, no-alert=0, hidden=0, include-all-proxies=0
+PayPal = select, 日本节点, 美国节点, no-alert=0, hidden=0, include-all-proxies=0
 Pixvix = select, 香港节点, 韩国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-Spotify = select, 香港节点, 韩国节点, 台湾节点, 美国节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
-WhatsApp = select, 日本节点, 韩国节点, 台湾节点, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
+Spotify = select, 香港节点, 日本节点, 韩国节点, 新国节点, 美国节点, Final,  no-alert=0, hidden=0, include-all-proxies=0
 Twitter = select, 韩国节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
-Github = select, 香港节点, 日本节点, 新加坡节点, no-alert=0, hidden=0, include-all-proxies=0
 
-香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-台湾节点 = select, update-interval=0, policy-regex-filter=(🇨🇳)|(台)|(Tai)|(TW), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(US), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-新加坡节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(坡)|(Singapore)|(SG), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
-Sub-Store = select, Warp+GSC, policy-path=, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
-韩国节点 = select, policy-regex-filter=(🇰🇷)|(韩)|(SouthKorea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub-Store
+香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
+台湾节点 = smart, update-interval=0, policy-regex-filter=(🇨🇳)|(台)|(Tai)|(TW), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
+美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(US), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
+日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
+新加坡节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(坡)|(Singapore)|(SG), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
+Sub Store = select, Warp+GSC, policy-path=[你的订阅链接/sub组合订阅]
+韩国节点 = select, DCI-KR, policy-regex-filter=(🇰🇷)|(韩)|(SouthKorea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Sub Store
 
 [Rule]
-# > ad
+# > Ad
 DOMAIN-SET,https://ruleset.skk.moe/List/domainset/reject.conf,REJECT,extended-matching
 RULE-SET,https://ruleset.skk.moe/List/non_ip/reject.conf,REJECT,extended-matching
 RULE-SET,https://ruleset.skk.moe/List/non_ip/reject-no-drop.conf,REJECT-NO-DROP,extended-matching
 RULE-SET,https://ruleset.skk.moe/List/non_ip/reject-drop.conf,REJECT-DROP,extended-matching
-# > weixin
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list,DIRECT,extended-matching
-# > OpenAI
-RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,OpenAI,extended-matching
-# > LAN
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list,DIRECT,extended-matching
-# > Mincrosoft
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list,Microsoft,extended-matching
+# > Tktn
+DOMAIN-KEYWORD,textnow,Talkatone,extended-matching
+DOMAIN-KEYWORD,tktn,Talkatone,extended-matching
+# > Talkatone
+RULE-SET,https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list,Talkatone,extended-matching
 # > Telegram
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram,extended-matching
-# > MeiTi
+# > YouTuBe
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,YouTuBe,extended-matching
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili,no-resolve
-# > Google
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google,extended-matching
-# > Talkatone
-RULE-SET,https://raw.githubusercontent.com/Emokui/DNS-/main/Talkatone,Talkatone,extended-matching
-# > BiAn
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Binance/Binance.list,BiAn,no-resolve
+# > OpenAI
+RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,GPT,extended-matching
 # > PayPal
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list,PayPal,no-resolve
 # > Pixvix
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Pixiv/Pixiv.list,Pixvix,no-resolve
 # > Spotify
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list,Spotify,no-resolve
-# > Whatsapp
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Whatsapp/Whatsapp.list,WhatsApp,no-resolve
-# > Twitter
+# >  推特
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list,Twitter,no-resolve
-# > Github
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitHub/GitHub.list,Github
+# > 微软
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list,Microsoft,extended-matching
+# > 谷歌
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google,extended-matching
+# > 微信
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list,DIRECT,extended-matching
+# > B站
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili,no-resolve
+# > 本地
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list,DIRECT,extended-matching
 # > 防止应用请求循环
 IP-CIDR,0.0.0.0/32,REJECT,no-resolve
-# > China
-# RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaASN/ChinaASN.list,DIRECT,extended-matching
+# > 国内
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list,DIRECT,extended-matching
 RULE-SET,https://ruleset.skk.moe/List/non_ip/domestic.conf,DIRECT,extended-matching
 RULE-SET,https://ruleset.skk.moe/List/non_ip/direct.conf,DIRECT,extended-matching
-# tktn
-DOMAIN-KEYWORD,textnow,Talkatone,extended-matching
-DOMAIN-KEYWORD,tktn,Talkatone,extended-matching
-# >  兜底规则
+# >  兜底
 GEOIP,CN,DIRECT,no-resolve
 FINAL,Final,dns-failed
 
 [MITM]
-
-[Script]
-# Request
-通过请求手动打断连接 = type=http-request,pattern=^https?:\/\/kill-active-requests\.com,script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/kill-active-requests/index.js,timeout=10,argument=DISMISS=2&TIMEOUT=10&REQ_NOTIFY=0,engine=auto #!FROM-MODULE:打断请求
-# Event
-网络变化时打断连接 = type=event,event-name=network-changed,timeout=10,script-update-interval=3600,debug=false,enable=true,script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/kill-active-requests/index.js,argument=DISMISS=2&TIMEOUT=10&EVENT_NOTIFY=1,engine=auto #!FROM-MODULE:打断请求
-# Panel
-面板手动打断连接 = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/kill-active-requests/index.js,argument=DISMISS=2&TIMEOUT=10&icon=xmark.circle&icon-color=#C5424A,engine=auto #!FROM-MODULE:打断请求
-
-[WireGuard GetSomeCats]
-private-key = CLQJ+u6DuD/Y4/OpB6AzEOZCQERrNVcRhPkI+i21dkw=
-self-ip = 172.16.0.2
-self-ip-v6 = 2606:4700:110:8ea9:642c:49bc:17f3:b85
-prefer-ipv6 = true
-dns-server = 162.159.36.1, 2606:4700:4700::1111
-mtu = 1420
-peer = (public-key = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, allowed-ips = "0.0.0.0/0, ::0/0", endpoint = 162.159.195.8:2408, keepalive = 45, client-id = 207/13/73)
