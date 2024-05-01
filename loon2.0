@@ -58,7 +58,7 @@ disable-udp-ports = 443
 新国自动 = url-test,新国节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 日本自动 = url-test,日本节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
 香港自动 = url-test,香港节点,url = http://www.gstatic.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-Nitflix = select,韩国自动,台湾自动,美国自动,新国自动,日本自动,香港自动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
+Netflix = select,韩国自动,台湾自动,美国自动,新国自动,日本自动,香港自动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
 Spotify = select,香港自动,日本自动,新国自动,美国自动,台湾自动,韩国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 Google = select,Final,日本自动,美国自动,香港自动,新国自动,台湾自动,韩国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
 Pixvix = select,香港自动,日本自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
@@ -92,7 +92,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Youtube, tag=Youtube, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Twitter, tag=Twitter, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Nitflix, tag=Nitflix, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Netflix, tag=Netflix, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
