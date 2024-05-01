@@ -1,3 +1,7 @@
+# 未分配国外媒体、网站 分流及策略组
+# 因为过于繁琐，未分配到的会走Final策略
+# 不存在dns泄漏本配置 
+# 如遇到某某网站不能访问可以反馈
 [General]
 sni-sniffing = true
 ipv6 = true
@@ -44,7 +48,7 @@ disable-udp-ports = 443
 #订阅节点
 [Remote Proxy]
 
-#手动分组策略
+#分组策略
 [Proxy Group]
 韩国自动 = url-test,韩国节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 台湾自动 = url-test,台湾节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
@@ -52,27 +56,20 @@ disable-udp-ports = 443
 新国自动 = url-test,新国节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 日本自动 = url-test,日本节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
 香港自动 = url-test,香港节点,url = http://www.gstatic.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-全球自动 = url-test,全球节点,url = http://www.apple.com/library/test/success.html,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
-Spotify = select,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,全球手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
-Google = select,香港手动,台湾手动,日本手动,全球手动,香港自动,日本自动,美国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
-BiAn = select,美国手动,韩国手动,日本手动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/erdongchanyo/Direct.png
-Pixvix = select,日本手动,台湾手动,香港手动,新国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
-BiliBili = select,DIRECT,香港手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
-TikTok = select,美国手动,日本手动,韩国手动,美国自动,日本自动,韩国自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
-PayPal = select,美国手动,香港手动,全球手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
-Twitter = select,日本手动,韩国手动,日本自动,韩国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
+Nitflix = select,韩国自动,台湾自动,美国自动,新国自动,日本自动,香港自动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
+Spotify = select,香港自动,日本自动,新国自动,美国自动,台湾自动,韩国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+Google = select,Final,日本自动,美国自动,香港自动,新国自动,台湾自动,韩国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
+Pixvix = select,香港自动,日本自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
+BiliBili = select,DIRECT,香港自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
+TikTok = select,美国自动,日本自动,韩国自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
+Instagram = select,香港自动,日本自动,韩国自动,台湾自动,美国自动,新国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
+PayPal = select,美国自动,日本自动,香港自动,新国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
+Twitter = select,日本自动,韩国自动,香港自动,美国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
 OpenAi = url-test,美国自动,url = http://cp.cloudflare.com/generate_204,interval = 600,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
-GitHub = select,新国手动,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Github.png
-Youtube = select,香港手动,美国手动,日本手动,韩国手动,台湾手动,香港自动,美国自动,日本自动,台湾自动,韩国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
-Telegram = select,新国手动,香港手动,台湾手动,日本手动,韩国自动,台湾自动,新国自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
+Youtube = select,香港自动,美国自动,日本自动,台湾自动,韩国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
+Microsoft = select,DIRECT,香港自动,日本自动,新国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+Telegram = select,香港自动,日本自动,新国自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
 Talkatone = select,美国节点,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
-WahtsApp = select,日本手动,韩国手动,新国手动,日本自动,韩国自动,新国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/whatsapp_01.png
-香港手动 = select,香港节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾手动 = select,台湾节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本手动 = select,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国手动 = select,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国手动 = select,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国手动 = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 Final = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 [Remote Filter]
 香港节点 = NameRegex, FilterKey = "^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
@@ -85,18 +82,17 @@ Final = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url 
 
 #分流规则
 [Remote Rule]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=Instagram, tag=Instagram, enabled=true
 https://raw.githubusercontent.com/Emokui/conf-rule/main/Talkatone.list, policy=Talkatone, tag=Talkatone, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Binance/Binance.list, policy=BiAN, tag=BiAn, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list, policy=PayPal, tag=PayPal, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=Pixvix, tag=pixvix, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Soptify, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list, policy=WahtsApp, tag=WhatsApp, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Youtube, tag=Youtube, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Twitter, tag=Twitter, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Nitflix, tag=Nitflix, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GitHub/GitHub.list, policy=GitHub, tag=GitHub, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list, policy=DIRECT, tag=DIRECT 1, enabled=true
