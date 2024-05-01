@@ -1,7 +1,7 @@
 # 手动配置
-# Sub Store放组合订阅链接/订阅链接
-# 如果不使用sub store模块
-# 请创新的策略组加自己的订阅，再添加进substore策略
+# Sub Store策略组里放 订阅链接/sub store订阅
+# 如果不使用sub store模块，且多个订阅
+# 请创新的策略组加自己的订阅，再添加进substore策略组
 # Final策略为兜底
 
 [General]
