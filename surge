@@ -37,7 +37,7 @@ Final = select, 香港节点, 台湾节点, 美国节点, 日本节点, 韩国�
 Google = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
 GPT = select, 美国节点, 日本节点, 台湾节点, 新国节点, no-alert=0, hidden=0, include-all-proxies=0
 Telegram = select, 香港节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
-YouTuBe = select, 香港节点, 美国节点, 国节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
+YouTuBe = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
 BiliBili = select, DIRECT, 香港节点, 台湾节点
 Microsoft = select, DIRECT, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点
 Talkatone = select, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=美国节点
