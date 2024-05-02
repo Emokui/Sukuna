@@ -1,4 +1,4 @@
-# Final为兜底策略,包含所有节点
+# Final为兜底策略,包含所有地区策略
 # 本配置无dns泄漏,可能会有少数网站加载慢/不能访问
 # 如不在意dns泄漏,本地规则geoip关闭域名类请求不匹配
 # 如遇到某某网站不能访问可以反馈 @naibai_bot
@@ -32,7 +32,8 @@ disable-udp-ports = 443
 
 
 [Proxy Group]
-Final = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+Final = select,全球手动,香港节点,日本节点,韩国节点,台湾节点,新国节点,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+全球手动 = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 Google = select,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
 Mincrosoft = select,DIRECT,香港手动,新国手动,日本手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
 Telegram = select,新国手动,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
@@ -54,7 +55,6 @@ OpenAi = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url
 韩国手动 = select,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 新国手动 = select,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 美国手动 = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-
 [Remote Filter]
 
 香港节点 = NameRegex, FilterKey = "香港|HK|HongKong|🇭🇰"
