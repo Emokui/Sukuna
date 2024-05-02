@@ -35,10 +35,10 @@ disable-udp-ports = 443
 Final = select,DIRECT,全球自动,全球手动,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
 全球手动 = select,全球节点,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 Google = select,香港自动,台湾自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
-Mincrosoft = select,DIRECT,香港自动,新国自动,日本自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
+Microsoft = select,DIRECT,香港自动,新国自动,日本自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
 Telegram = select,新国自动,香港自动,台湾自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
 Instagram = select,香港自动,日本自动,韩国自动,台湾自动,新国自动,美国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
-Youtube = select,新国自动,香港自动,台湾自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
+YouTube = select,新国自动,香港自动,台湾自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
 Netflix = select,香港自动,新国自动,美国自动,日本自动,韩国自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
 Spotify = select,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 Pixiv = select,日本自动,台湾自动,香港自动,新国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
@@ -79,7 +79,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list, policy=PayPal, tag=PayPal, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Youtube, tag=Youtube, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=YouTube, tag=YouTube, enabled=true
 https://raw.githubusercontent.com/Emokui/conf-rule/main/Talkatone.list, policy=Talkatone, tag=Talkatone, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Mincrosoft, tag=Microsoft, enabled=true
