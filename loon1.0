@@ -1,87 +1,71 @@
-# 手动配置
-# 未分配国外媒体、网站 合集的分流规则及策略
-# 因为过于繁琐，未分配的会走Final策略组
-# Final策略包含所有节点 
-# 本配置无dns泄漏
+# Final为兜底策略,包含所有节点
+# 本配置无dns泄漏,可能会有少数网站加载慢/不能访问
+# 如不在意dns泄漏,本地规则geoip关闭域名类请求不匹配
 # 如遇到某某网站不能访问可以反馈 @naibai_bot
 
 [General]
 ipv6 = false
-# 跳过某个域名或者IP段
-skip-proxy = localhost,*.local,passenger.t3go.cn,e.crashlytics.com,captive.apple.com,app.yinxiang.com,injections.adguard.org,local.adguard.org,cable.auth.com,www.baidu.com,yunbusiness.ccb.com,10.0.0.0/8,100.64.0.0/10,127.0.0.1/32,169.254.0.0/16,172.16.0.0/12,192.168.0.0/16,224.0.0.0/4,240.0.0.0/4,::1/128,fc00::/7,fd00::/8,fe80::/10,ff00::/8,2001::/32,2001:db8::/32,2002::/16,::ffff:0:0:0:0/1,::ffff:128:0:0:0/1
-bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
-# DNS 服务器
+skip-proxy = localhost,*.local,10.0.0.0/8,127.0.0.0/8,169.254.0.0/16,192.0.2.0/24,192.168.0.0/16,198.51.100.0/24,224.0.0.0/4
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+real-ip = *.iCloud.com,*.apple.com
 dns-server = system,119.29.29.29,223.5.5.5
-# Wi-Fi 网络共享
 allow-udp-proxy = true
 allow-wifi-access = false
 wifi-access-http-port = 1234
 wifi-access-socks5-port = 1235
-# 解决一些ip请求无法匹配域名类规则的问题。real-ip指定的域名将不返回fake ip响应，直接将dns请求发往目标dns服务器
-real-ip = msftconnecttest.com,msftncsi.com,*.msftconnecttest.com,*.msftncsi.com,*.srv.nintendo.net,*.stun.playstation.net,xbox.*.microsoft.com,*.xboxlive.com,*.battlenet.com.cn,*.battlenet.com,*.blzstatic.cn,*.battle.net
-# 代理测速 URL
 proxy-test-url = http://www.gstatic.com/generate_204
 internet-test-url = http://wifi.vivo.com.cn/generate_204
-# 测速超时 (s)
 test-timeout = 5
 interface-mode = auto
-# 当节点连续失败多少次后开始切换节点
 switch-node-after-failure-times = 3
-# 解析器
 resource-parser = https://gitlab.com/sub-store/Sub-Store/-/releases/permalink/latest/downloads/sub-store-parser.loon.min.js
-# ssid-trigger参数，用于指定SSID下流量模式切换，（default表示默认，cellular表示蜂窝，目前支持三种值：rule，direct，proxy） 
-# ssid-trigger = "default":rule, "cellular":rule,"ASUS_5G":direct
-# geoip
 geoip-url = https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
-# 策略切换时关闭链接
 disconnect-on-policy-change = true
-# udp端口禁用
 disable-stun = true
 disable-udp-ports = 443
-
-
 [Host]
 
-
-#本地节点
 [Proxy]
 
-#订阅节点
+
 [Remote Proxy]
 
-#手动分组策略
+
 [Proxy Group]
+Final = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+Google = select,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
+Mincrosoft = select,DIRECT,香港手动,新国手动,日本手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
+Telegram = select,新国手动,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
+Instagram = select,香港手动,日本手动,韩国手动,Final,台湾手动,新国手动,美国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
+Youtube = select,新国手动,香港手动,台湾手动,日本手动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
 Netflix = select,香港手动,新国手动,美国手动,日本手动,Final,韩国手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix_Letter.png
 Spotify = select,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
-Google = select,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
 Pixiv = select,日本手动,台湾手动,香港手动,新国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/ZhiPianRen1.png
+Emby = select,DIRECT,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,Final,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
 PayPal = select,美国手动,Final,日本手动,韩国手动,香港手动,新国手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
-Youtube = select,新国手动,香港手动,台湾手动,日本手动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
-Telegram = select,新国手动,香港手动,台湾手动,日本手动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
 Talkatone = select,美国节点,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
-Mincrosoft = select,DIRECT,香港手动,新国手动,日本手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
-Instagram = select,香港手动,日本手动,韩国手动,Final,台湾手动,新国手动,美国手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
 香港手动 = select,香港节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
 台湾手动 = select,台湾节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
 日本手动 = select,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国手动 = select,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+韩国手动 = select,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 新国手动 = select,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 美国手动 = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-Final = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 BiliBili = select,DIRECT,香港手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
 Twitter = select,日本手动,韩国手动,香港手动,台湾手动,Final,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
 TikTok = select,美国手动,韩国手动,日本手动,Final,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
 OpenAi = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
+
 [Remote Filter]
-香港节点 = NameRegex, FilterKey = "^(?=.*((?i)🇭🇰|香港|(\b(HK|Hong)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-台湾节点 = NameRegex, FilterKey = "^(?=.*((?i)🇹🇼|台湾|(\b(TW|Tai|Taiwan)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-日本节点 = NameRegex, FilterKey = "^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|Japan)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-韩国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|Korea)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-新国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
-美国节点 = NameRegex, FilterKey = "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|United States)\d{0,2}\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+
+香港节点 = NameRegex, FilterKey = "香港|HK|HongKong|🇭🇰"
+台湾节点 = NameRegex, FilterKey = "台湾|TW|Tai|🇼🇸"
+日本节点 = NameRegex, FilterKey = "日本|JP|Japan|🇯🇵"
+美国节点 = NameRegex, FilterKey = "美国|US|United States|🇺🇸"
+新国节点 = NameRegex, FilterKey = "新加坡|狮城|SG|Singapore|🇸🇬"
 全球节点 = NameRegex, FilterKey = "^"
-#分流规则
+
 [Remote Rule]
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/master/Ruleset/Emby/Emby.list, policy=Emby, tag=Emby, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=Instagram, tag=Instagram, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Soptify, enabled=true
@@ -99,6 +83,8 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://ruleset.skk.moe/List/non_ip/direct.conf, policy=DIRECT, tag=DIRECT 3, enabled=true
 https://ruleset.skk.moe/List/non_ip/domestic.conf, policy=DIRECT, tag=DIRECT 2, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list, policy=DIRECT, tag=DIRECT 1, enabled=true
+https://raw.githubusercontent.com/Code-Dramatist/Rule_Actions/main/Direct_Rule/Direct_Rule.rule, policy=DIRECT, tag=直连, enabled=false
+
 [Rule]
 GEOIP,CN,DIRECT,no-resolve
 FINAL,Final
@@ -111,7 +97,7 @@ FINAL,Final
 
 [Remote Script]
 
-# 插件
+
 [Plugin]
 https://github.com/BiliUniverse/Global/raw/main/modules/BiliBili.Global.plugin, enabled=true
 https://raw.githubusercontent.com/ClydeTime/BiliBili/main/modules/BiliBili.Modified.plugin, enabled=true
@@ -134,4 +120,5 @@ https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Taobao_remove
 
 
 [MITM]
-skip-server-cert-verify = false
+
+skip-server-cert-verify = true
