@@ -33,7 +33,6 @@ disable-udp-ports = 443
 
 [Proxy Group]
 Final = select,DIRECT,全球自动,全球手动,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
-全球自动 = url-test,全球节点,url = http://www.gstatic.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 全球手动 = select,全球节点,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 Google = select,香港自动,台湾自动,日本自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
 Mincrosoft = select,DIRECT,香港自动,新国自动,日本自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/iCloud.png
@@ -46,16 +45,18 @@ Pixiv = select,日本自动,台湾自动,香港自动,新国自动,url = http://
 Emby = select,DIRECT,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
 PayPal = select,美国自动,日本自动,韩国自动,香港自动,新国自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
 Talkatone = select,美国节点,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
+BiliBili = select,DIRECT,香港自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
+Twitter = select,日本自动,韩国自动,香港自动,台湾自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
+TikTok = select,美国自动,韩国自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
+OpenAi = url-test,美国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
+全球自动 = url-test,全球节点,url = http://www.gstatic.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 香港自动 = url-test,香港节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
 台湾自动 = url-test,台湾节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
 日本自动 = url-test,日本节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
 韩国自动 = url-test,韩国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
 新国自动 = url-test,新国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
 美国自动 = url-test,美国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-BiliBili = select,DIRECT,香港自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
-Twitter = select,日本自动,韩国自动,香港自动,台湾自动,url = http://www.apple.com/library/test/success.html,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
-TikTok = select,美国自动,韩国自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
-OpenAi = url-test,美国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
+
 
 [Remote Filter]
 
