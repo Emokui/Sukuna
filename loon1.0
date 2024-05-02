@@ -3,7 +3,7 @@
 # 因为过于繁琐，未分配的会走Final策略组
 # Final策略包含所有节点 
 # 本配置无dns泄漏
-# 如遇到某某网站不能访问可以反馈
+# 如遇到某某网站不能访问可以反馈 @naibai_bot
 
 [General]
 ipv6 = false
