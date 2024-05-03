@@ -82,7 +82,7 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google
 # >  China
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaASN/ChinaASN_Resolve.list,DIRECT,no-resolve
-GEOIP,CN,DIRECT,no-resolve
+GEOIP,CN,DIRECT
 # >  Final
 FINAL,Final,dns-failed
 
