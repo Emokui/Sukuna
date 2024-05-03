@@ -1,22 +1,22 @@
 Loon配置无dns泄漏。
 
 
-loon1.0 手动版
+Loon1.0 手动版
 
 
-loon2.0 自动兼手动版
+Loon2.0 自动兼手动版
 
 
-surge   精简版
+Surge   精简版
 
 
 Direct.list 国内直连集8.9w条
 
 
-dns.list：dns泄漏分流（彻底解决用配置）
+Dns.list：dns泄漏分流（彻底解决用配置）
 
 
-talkatone.list：分流no-resolve版
+Talkatone.list：分流no-resolve版
 
 
 大佬的分流规则仓：https://github.com/blackmatrix7
