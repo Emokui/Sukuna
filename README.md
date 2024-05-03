@@ -10,6 +10,9 @@ loon2.0 自动兼手动版
 surge 自用配置
 
 
+DIRECT.list 国内直连集8.9w条
+
+
 dns.list：dns泄漏分流（彻底解决用配置）。
 
 
