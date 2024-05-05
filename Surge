@@ -18,10 +18,8 @@ dns-server = 223.5.5.5, 119.29.29.29,system
 # encrypted-dns-server = quic://dns.alidns.com
 hijack-dns = 8.8.8.8:53, 8.8.4.4:53
 read-etc-hosts = true
-http-api-web-dashboard = false
-use-default-policy-if-wifi-not-primary = false
 skip-proxy = 192.168.0.0/24, 10.0.0.0/8, 172.16.0.0/12, 127.0.0.1, localhost, *.local
-always-real-ip = *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com*.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.battlenet.com.cn, *.battlenet.com, *.blzstatic.cn, *.battle.net
+always-real-ip = *.icloud.com,*.apple.com
 allow-hotspot-access = false
 disable-geoip-db-auto-update = false
 udp-policy-not-supported-behaviour = REJECT
@@ -32,14 +30,13 @@ DCI-KR = snell, kr-chuncheon-oracle-3dd360.ip1.shop, 33543, psk=SIukX37Y9wLITLKY
 [Proxy Group]
 Final = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 Google = select, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-Microsoft = select, DIRECT, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点
+Microsoft = select, DIRECT, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 GlobalMedia = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, Final, no-alert=0, hidden=0, include-all-proxies=0
 YouTuBe = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 Telegram = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-OpenAi = url-test, no-alert=1, hidden=0, include-all-proxies=0, include-other-group=美国节点
+OpenAi = select, 美国节点, 日本节点, 新国节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 PayPal = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 Spotify = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-Apple = select, DIRECT, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 BiliBili = select, DIRECT, 香港节点, 台湾节点
 Twitter = select, 香港节点, 日本节点, 韩国节点, 台湾节点, 美国节点, no-alert=0, hidden=0, include-all-proxies=0
 TikTok = select, 日本节点, 韩国节点, 台湾节点, 美国节点, Final, no-alert=0, hidden=0, include-all-proxies=0
@@ -49,15 +46,13 @@ TikTok = select, 日本节点, 韩国节点, 台湾节点, 美国节点, Final, 
 美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(美)|(States)|(US), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 新国节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(新)|(Singapore)|(SG), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
-韩国节点 = select, update-interval=0, policy-regex-filter=(🇰🇷)|(韩)|(Korea)|(KR), no-alert=0, hidden=0, include-all-proxies=0, include-other-group=Proxy
+韩国节点 = select, update-interval=0, policy-regex-filter=(🇰🇷)|(韩)|(Korea)|(KR), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 Proxy = select, policy-path=订阅链接, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
 
 [Rule]
 IP-CIDR,0.0.0.0/32,REJECT,no-resolve
 # >  LAN
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Lan/Lan.list,DIRECT,no-resolve
-# >  Apple
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list,Apple,no-resolve
 # >  BiliBili
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili
 # >  YouTuBe
