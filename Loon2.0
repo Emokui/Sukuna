@@ -13,8 +13,8 @@ allow-udp-proxy = true
 allow-wifi-access = false
 wifi-access-http-port = 1234
 wifi-access-socks5-port = 1235
-proxy-test-url = http://captive.apple.com/generate_204
-internet-test-url = http://cp.cloudflare.com/generate_204
+internet-test-url = http://captive.apple.com/generate_204
+proxy-test-url = http://cp.cloudflare.com/generate_204
 test-timeout = 5
 interface-mode = auto
 switch-node-after-failure-times = 3
@@ -32,17 +32,17 @@ disable-udp-ports = 443
 
 [Proxy Group]
 Final = select,DIRECT,全球自动,全球手动,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Loon_2.png
-GlobalMedia = select,Final,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
-Microsoft = select,DIRECT,香港自动,新国自动,日本自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/bing(3).png
-Google = select,香港自动,台湾自动,日本自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
-Telegram = select,新国自动,香港自动,台湾自动,日本自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
-Youtube = select,新国自动,香港自动,台湾自动,日本自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
-OpenAi = url-test,美国节点,url = http://captive.apple.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
-PayPal = select,美国自动,日本自动,韩国自动,香港自动,新国自动,台湾自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
-Spotify = select,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
-TikTok = select,美国自动,韩国自动,日本自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
-Twitter = select,日本自动,韩国自动,香港自动,台湾自动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
-BiliBili = select,DIRECT,香港自动,台湾自动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
+GlobalMedia = select,Final,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+Microsoft = select,DIRECT,香港自动,新国自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/bing(3).png
+Google = select,香港自动,台湾自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
+Telegram = select,新国自动,香港自动,台湾自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
+YouTube = select,新国自动,香港自动,台湾自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
+OpenAi = url-test,美国节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
+PayPal = select,美国自动,日本自动,韩国自动,香港自动,新国自动,台湾自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/social-paypal.png
+Spotify = select,香港自动,台湾自动,日本自动,韩国自动,新国自动,美国自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+TikTok = select,美国自动,韩国自动,日本自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
+Twitter = select,日本自动,韩国自动,香港自动,台湾自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/twitter.png
+BiliBili = select,DIRECT,香港自动,台湾自动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
 全球手动 = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/quanqiu(1).png
 全球自动 = url-test,全球节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/quanqiu.png
 香港自动 = url-test,香港节点,url = http://cp.cloudflare.com/generate_204,interval = 100,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
@@ -64,11 +64,11 @@ BiliBili = select,DIRECT,香港自动,台湾自动,url = http://www.gstatic.com/
 
 [Remote Rule]
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Youtube, tag=Youtube, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=YouTube, tag=YouTube, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list, policy=PayPal, tag=PayPal, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Soptify, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Shopify/Shopify.list, policy=Spotify, tag=Spotify, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Twitter, tag=Twitter, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GlobalMedia/GlobalMedia_All_No_Resolve.list, policy=GlobalMedia, tag=GlobalMedia, enabled=true
