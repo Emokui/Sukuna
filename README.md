@@ -1,13 +1,13 @@
 Loon配置无dns泄漏。
 
 
-Loon1.0 手动版
+Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
 
 
-Loon2.0 自动兼手动版
+Loon2.0 自动兼手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
 
 
-Surge   精简版
+Surge   精简版:
 
 
 Direct.list 国内直连集8.9w条
