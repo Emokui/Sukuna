@@ -73,7 +73,8 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 # >  Google
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google
 # >  China
-DOMAIN-SET,https://raw.githubusercontent.com/Emokui/conf-rule/main/Direct.list,DIRECT
+DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_Domain.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax.list,DIRECT
 GEOIP,CN,DIRECT,no-resolve
 # >  LAN
 IP-CIDR,0.0.0.0/32,REJECT,no-resolve
