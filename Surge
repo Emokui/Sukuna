@@ -32,7 +32,7 @@ Final = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾�
 Google = select, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 Microsoft = select, DIRECT, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 GlobalMedia = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, Final, no-alert=0, hidden=0, include-all-proxies=0
-YouTuBe = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
+YouTube = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 Telegram = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
 OpenAi = select, 美国节点, 日本节点, 新国节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 PayPal = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
