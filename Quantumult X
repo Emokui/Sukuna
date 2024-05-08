@@ -28,29 +28,27 @@ no-ipv6
 server = 223.5.5.5
 server = 119.29.29.29
 [policy]
-# TikTok
+# 兜底策略
 static=兜底策略, proxy, direct, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Quantumult_X_3.png
-# Spotify
+# Telegram
 static=Telegram, 香港节点, 日本节点, 韩国节点, 自动选择, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
 # YouTube
 static=YouTube, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
-# Microsoft
+# OpenAI
 static=OpenAI, proxy, 美国节点, 狮城节点, 自动选择, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
 # Google
 static=Google, proxy, 自动选择, 香港节点, 日本节点, 韩国节点, 美国节点, 狮城节点, 台湾节点, 兜底策略, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png
-# OpenAI
+# Spotify
 static=Spotify, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/spotify.png
-# Telegram
+# TikTok
 static=TikTok, proxy, 日本节点, 韩国节点, 美国节点, 台湾节点, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png
 # BiliBili
 static=BiliBili, direct, 香港节点, 台湾节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBiliTV.png
-# 苹果服务
+# 微软服务
 static=Microsoft, direct, proxy, 自动选择, 香港节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png
-
-# 国际媒体
+# 苹果服务
 static=苹果服务, direct, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_Classic.png
-
-# 兜底策略
+# 国际媒体
 static = 国际媒体, proxy, direct, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/Streaming.png
 
 # 自动选择
