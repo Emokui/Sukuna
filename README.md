@@ -6,8 +6,13 @@ Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.
 
 Loon2.0 自动兼手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
 
+Surge配置无dns泄漏
 
 Surge   精简版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
+
+
+Quanmutult X 自用配置
+QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
 
 
 Direct.list 国内直连集8.9w条:https://raw.githubusercontent.com/Emokui/conf-rule/main/Direct.list
