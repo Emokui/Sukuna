@@ -10,7 +10,6 @@ DOMAIN-SUFFIX,ip-api.com
 DOMAIN-SUFFIX,agkn.com
 DOMAIN-SUFFIX,tktn.at
 DOMAIN-KEYWORD,tktn
-DOMAIN-KEYWORD,textnow
 DOMAIN-KEYWORD,textfree
 IP-CIDR,50.117.27.0/24,no-resolve
 IP-CIDR,69.46.75.0/24,no-resolve
