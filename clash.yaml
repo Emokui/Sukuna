@@ -78,14 +78,6 @@ use:  &conf2 {type: select,   use: [Subscribe] }
 # App策略组
 pr:   &conf3 {type: select,   proxies: [延迟优选, 手动选择, DIRECT, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
 
-pr:   &TG {type: select,   proxies: [手动选择, 香港节点, 台湾节点, 日本节点,] }
-
-pr:   &BB {type: select,   proxies: [DIRECT, 香港节点, 台湾节点] }
-
-pr:   &WR {type: select,   proxies: [ DIRECT, 香港节点, 日本节点, 美国节点] }
-
-pr:   &GG {type: select,   proxies: [手动选择, 延迟优选, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
-
 # 延迟策略组
 auto: &conf4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe] }
 
@@ -115,15 +107,15 @@ proxy-groups:
 
   - {name: 手动选择, <<: *conf4}
 
-  - {name: 哔哩哔哩, <<: *BB}
+  - {name: 哔哩哔哩, <<: *conf3}
 
-  - {name: 电报消息, <<: *TG}
+  - {name: 电报消息, <<: *conf3}
 
-  - {name: 微软服务, <<: *WR}
+  - {name: 微软服务, <<: *conf3}
 
-  - {name: 谷歌服务, <<: *GG}
+  - {name: 谷歌服务, <<: *conf3}
 
-  - {name: 国际媒体, <<: *GG}
+  - {name: 国际媒体, <<: *conf3}
 
   - {name: 香港节点, <<: *conf2, filter: "香港|港|HK|(?i)HongKong"}
 
