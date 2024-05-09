@@ -1,33 +1,35 @@
-Loon配置无dns泄漏。
-
+**Loon配置无dns泄漏**
 
 Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
 
-
 Loon2.0 自动兼手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
 
-Surge配置无dns泄漏
 
-Surge   精简版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
+**Surge配置无dns泄漏**
 
+Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 
-Quanmutult X 自用配置
+**Quanmutult X 自用配置**
 QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
 
 
-Direct.list 国内直连集8.9w条:https://raw.githubusercontent.com/Emokui/conf-rule/main/Direct.list
+
+**Direct.list 国内直连集8.9w条:**
+https://raw.githubusercontent.com/Emokui/conf-rule/main/Direct.list
 
 
-Dns.list：dns泄漏分流（彻底解决用配置）:https://raw.githubusercontent.com/Emokui/Set-/main/Dns.list
+**Dns.list：dns泄漏分流（彻底解决用配置):**
+https://raw.githubusercontent.com/Emokui/Set-/main/Dns.list
 
 
-Talkatone.list：分流no-resolve版:https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
+**Talkatone.list:分流no-resolve版:**
+https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
 
 
-大佬的分流规则仓：https://github.com/blackmatrix7
+**大佬的分流规则仓：**
+https://github.com/blackmatrix7
+
+**自定义分流请从上面仓库取，无dns泄漏IP类规则要用no-resolve版**
 
 
-自定义分流请从上面仓库取，无dns泄漏IP类规则要用no-resolve版
-
-
-本地规则:GEIOP,CN,DIRECT,no-resolve
+**本地规则:GEIOP,CN,DIRECT,no-resolve**
