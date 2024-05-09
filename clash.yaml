@@ -77,10 +77,15 @@ use:  &conf2 {type: select,   use: [Subscribe] }
 
 # App策略组
 pr:   &conf3 {type: select,   proxies: [延迟优选, 手动选择, DIRECT, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
+
 pr:   &TG {type: select,   proxies: [手动选择, 香港节点, 台湾节点, 日本节点,] }
+
 pr:   &BB {type: select,   proxies: [DIRECT, 香港节点, 台湾节点] }
+
 pr:   &WR {type: select,   proxies: [ DIRECT, 香港节点, 日本节点, 美国节点] }
+
 pr:   &GG {type: select,   proxies: [手动选择, 延迟优选, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
+
 # 延迟策略组
 auto: &conf4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe] }
 
