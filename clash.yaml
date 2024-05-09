@@ -94,7 +94,7 @@ i:    &conf7 {type: http,     behavior: ipcidr,    interval: 86400}
 proxy-providers:
   Subscribe: {<<: *conf1, 
   path: ./proxy-providers/Sub.yaml, 
-  url: https://cloudflaresub.yuwan.link/api/v1/client/subscribe?token=4e278154120250882329680ef58cbf0a&list=true&udp=true}
+  url: 订阅链接&list=true&udp=true}
     # 可以使用任意类型的链接替换上面文字,多个链接使用英文符号的竖杠|隔开一起写上即可
     # Sub-Store生成的链接,可以直接替换上述url引号中的部分,具体见Sub-Store教程                       
 proxies: null
