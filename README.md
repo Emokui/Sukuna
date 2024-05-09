@@ -9,6 +9,11 @@ Loon2.0 自动兼手动版:https://raw.githubusercontent.com/Emokui/conf-rule/ma
 
 Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 
+
+**Clash配置无Dns泄露:**
+https://raw.githubusercontent.com/Emokui/conf-rule/main/clash.yaml
+
+
 **Quanmutult X 自用配置**
 QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
 
