@@ -72,13 +72,16 @@ dns:
 # 订阅更新与测试
 p:    &conf1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
 
-# 手动选择策略组
+# 手动策略组
 use:  &conf2 {type: select,   use: [Subscribe] }
 
-# 策略组引用
+# App策略组
 pr:   &conf3 {type: select,   proxies: [延迟优选, 手动选择, DIRECT, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
-
-# 延迟优选策略组
+pr:   &TG {type: select,   proxies: [手动选择, 香港节点, 台湾节点, 日本节点,] }
+pr:   &BB {type: select,   proxies: [DIRECT, 香港节点, 台湾节点] }
+pr:   &WR {type: select,   proxies: [ DIRECT, 香港节点, 日本节点, 美国节点] }
+pr:   &GG {type: select,   proxies: [手动选择, 延迟优选, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
+# 延迟策略组
 auto: &conf4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe] }
 
 # 规则类型:domain
@@ -107,15 +110,15 @@ proxy-groups:
 
   - {name: 手动选择, <<: *conf4}
 
-  - {name: 哔哩哔哩, <<: *conf3}
+  - {name: 哔哩哔哩, <<: *BB}
 
-  - {name: Telegram, <<: *conf3}
+  - {name: 电报消息, <<: *TG}
 
-  - {name: 微软服务, <<: *conf3}
+  - {name: 微软服务, <<: *WR}
 
-  - {name: 谷歌服务, <<: *conf3}
+  - {name: 谷歌服务, <<: *GG}
 
-  - {name: 国际媒体, <<: *conf3}
+  - {name: 国际媒体, <<: *GG}
 
   - {name: 香港节点, <<: *conf2, filter: "香港|港|HK|(?i)HongKong"}
 
@@ -134,9 +137,9 @@ proxy-groups:
 rule-providers:
   规则修正: {<<: *conf6, url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Unbreak.yaml, path: ./Ruleset/Unbreak.yaml}
 
-  哔哩哔哩: {<<: *conf6, url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/StreamingSE.yaml, path: ./Ruleset/StreamingSE.yaml}
+  哔哩哔哩: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml, path: ./BiliBili/BiliBili_No_Resolve.yaml}
 
-  Telegram: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml, path: ./Telegram/Telegram_No_Resolve.yaml}
+  电报消息: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml, path: ./Telegram/Telegram_No_Resolve.yaml}
 
   微软服务: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml, path: ./Microsoft/Microsoft_No_Resolve.yaml}
 
@@ -155,14 +158,14 @@ rule-providers:
 rules:
   - RULE-SET, 规则修正, DIRECT
   - RULE-SET, 哔哩哔哩, 哔哩哔哩
-  - RULE-SET, Telegram, Telegram
+  - RULE-SET, 电报消息, 电报消息
   - RULE-SET, 微软服务, 微软服务
   - RULE-SET, 谷歌服务, 谷歌服务 
   - RULE-SET, 国际媒体, 国际媒体
   - RULE-SET, 苹果服务, DIRECT
   - RULE-SET, 国内直连, DIRECT
   - RULE-SET, 本地网络, DIRECT
-  - GEOIP, CN, DIRECT, NO-RESOLVE
+  - GEOIP, CN, DIRECT, no-resolve
   - MATCH, Final
 
 
