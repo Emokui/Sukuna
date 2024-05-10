@@ -1,20 +1,23 @@
 redir-port: 7892      # Redir 端口
-mixed-port: 7893      # 混合端口 HTTP和SOCKS5用一个端口
-geodata-mode: true    #【Meta专属】使用geoip.dat数据库(默认：false使用mmdb数据库)
-tcp-concurrent: true #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
-allow-lan: false       # 允许局域网的连接（可用来共享代理）
+mixed-port: 7893      # HTTP和SOCKS5端口
+geodata-mode: false   # 使用geoip.dat数据库 (默认：false使用mmdb数据库)
+tcp-concurrent: true  # TCP 并发连接所有 IP, 将使用最快握手的 TCP
+allow-lan: false      # 代理共享
 bind-address: "*"     # 仅在将allow-lan设置为true时适用
                       # #"*": 绑定所有IP地址
 find-process-mode: strict           #匹配所有进程（always/strict/off）
-ipv6: false           # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
-mode: rule            # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
-log-level: info       # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
+ipv6: false           # IPv6 开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
+mode: rule            # 规则模式：rule / global/ direct/ script
+log-level: info       # 日志输出级别 (5个级别：silent / error / warning / info / debug）
 external-controller: 0.0.0.0:9093   #外部控制器,可以使用 RESTful API 来控制你的 clash 内核
 global-client-fingerprint: chrome   #全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
                                     #可选： "chrome","firefox","safari","ios","random","none" options.
 
-geox-url:             #自定义 geodata url
-  mmdb: "https://raw.githubusercontent.com/Masaiki/GeoIP2-CN/release/Country.mmdb"
+# geox-url:             #自定义 geodata url
+  # mmdb: "https://raw.githubusercontent.com/Masaiki/GeoIP2-CN/release/Country.mmdb"
+
+geoip-url:
+  mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
 
 profile:
   store-selected: true # 存储 select 选择记录
@@ -30,9 +33,9 @@ sniffer:               # 嗅探域名 可选配置
       ports: [80, 8080-8880]
       override-destination: true
       
-tun:                   # Tun 配置
+tun:                   
   enable: true
-  stack: system        # 可选： system/gvisor/lwip
+  stack: system        # system/gvisor/lwip
                        # tun模式堆栈,如无使用问题,建议使用 system 栈;
                        # MacOS 用户推荐 gvisor栈,IOS无法使用system栈
   dns-hijack:          # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
@@ -49,8 +52,8 @@ dns:
   listen: 0.0.0.0:53       # DNS监听地址
   fake-ip-range: 198.18.0.1/16    # Fake-IP解析地址池
   # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接 
-  # fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
-                          
+  fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
+               
 
   nameserver:        # 常规 DNS 服务器
     - 223.5.5.5
@@ -73,13 +76,14 @@ proxy-providers:
  conf1:
     type: http
     # 机场订阅链接
-    url: "-------------"
+    url: "_______________________"
     path: ./proxies/airport1.yaml
     interval: 86400
 
 # 策略组
 proxy-groups:
   - {name: 🔚Final, type: select, proxies: [☪️延迟优选, 🌏️手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 🍋B站视频, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点]}
   - {name: 🎬油管视频, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
   - {name: Ⓜ️微软服务, type: select, proxies: [DIRECT, 🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点]}
   - {name: 🇬谷歌服务, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
@@ -96,8 +100,17 @@ proxy-groups:
   - {name: 🇰🇷 韩国节点, type: select, use: [conf1], filter: "韩国|韩|KR|(?i)Korea"}
   - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
   - {name: 🌏️手动选择, type: select, use: [conf1]}
+  
 # 规则集（yaml 文件每天自动更新）
 rule-providers:
+
+  BiliBili:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./BiliBili/BiliBili_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml"
+    interval: 86400
 
   YouTube:
     type: http
@@ -143,20 +156,21 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    path: ./China/China_Classical_No_Resolve.yaml
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Classical_No_Resolve.yaml"
+    path: ./ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml"
     interval: 86400
 
 # 规则
 rules:
-  - RULE-SET, YouTube, 🎬油管视频
-  - RULE-SET, Telegram, ✈️电报消息  
-  - RULE-SET, Microsoft, Ⓜ️微软服务
-  - RULE-SET, China, 🇬谷歌服务
-  - RULE-SET, GlobalMedia, 🌐国际媒体  
-  - RULE-SET, China, DIRECT
-  - GEOIP, CN, DIRECT,no-resolve
-  - MATCH, 🔚Final
+  - RULE-SET,BiliBili,🍋B站视频
+  - RULE-SET,YouTube,🎬油管视频
+  - RULE-SET,Telegram,✈️电报消息  
+  - RULE-SET,Microsoft,Ⓜ️微软服务
+  - RULE-SET,Google,🇬谷歌服务
+  - RULE-SET,GlobalMedia,🌐国际媒体  
+  - RULE-SET,China,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
+  - MATCH,🔚Final
 
 script:
   shortcuts:
