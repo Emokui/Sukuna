@@ -1,3 +1,6 @@
+#     “79行填写订阅链接”
+
+
 redir-port: 7892      # Redir 端口
 mixed-port: 7893      # HTTP和SOCKS5端口
 geodata-mode: false   # 使用geoip.dat数据库 (默认：false使用mmdb数据库)
@@ -76,20 +79,26 @@ proxy-providers:
  conf1:
     type: http
     # 机场订阅链接
-    url: "_______________________"
+    url: "___________________________"
     path: ./proxies/airport1.yaml
     interval: 86400
 
 # 策略组
 proxy-groups:
-  - {name: 🔚Final, type: select, proxies: [☪️延迟优选, 🌏️手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
-  - {name: 🍋B站视频, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点]}
-  - {name: 🎬油管视频, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
-  - {name: Ⓜ️微软服务, type: select, proxies: [DIRECT, 🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点]}
-  - {name: 🇬谷歌服务, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
-  - {name: 🌐国际媒体, type: select, proxies: [☪️延迟优选, 🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
-  - {name: ✈️电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
-
+  - {name: 🔚Final, type: select, proxies: [☪️延迟优选, ✅手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: ✅手动选择, type: select, use: [conf1]}
+  - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
+  - {name: 🍋BiliBili, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点]}
+  - {name: 🍎YouTube, type: select, proxies: [✅手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇸🇬 狮城节点, 🇺🇸 美国节点, 🇰🇷 韩国节点]}
+  - {name: 🍇Microsoft, type: select, proxies: [DIRECT, ✅手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点]}
+  - {name: 🍰Google, type: select, proxies: [✅手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 🍈GlobalMedia, type: select, proxies: [☪️延迟优选, ✅手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点, 🇰🇷 韩国节点]}
+  - {name: 🍐Telegram, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 👾OpenAI, type: select, proxies: [✅手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 🍓TikTok, type: select, proxies: [✅手动选择, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点, 🇰🇷 韩国节点]}
+  - {name: 🍊Twitter, type: select, proxies: [✅手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点, 🇰🇷 韩国节点]}
+  - {name: 🍦Talkatone, type: select, use: [conf1], filter: "美国|美|US|(?i)UnitedStates"}
+ 
  # ----------------国家或地区策略组---------------------
   # 若有多个机场，可以使用 `include-all-providers: true` 代替 `use: [conf1]`
   - {name: 🇭🇰 香港节点, type: select, use: [conf1], filter: "香港|港|HK|(?i)HongKong"}
@@ -98,8 +107,7 @@ proxy-groups:
   - {name: 🇸🇬 狮城节点, type: select, use: [conf1], filter: "新加坡|狮|SG|(?i)Singapore"}
   - {name: 🇺🇸 美国节点, type: select, use: [conf1], filter: "美国|美|US|(?i)UnitedStates"}
   - {name: 🇰🇷 韩国节点, type: select, use: [conf1], filter: "韩国|韩|KR|(?i)Korea"}
-  - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
-  - {name: 🌏️手动选择, type: select, use: [conf1]}
+
   
 # 规则集（yaml 文件每天自动更新）
 rule-providers:
@@ -110,6 +118,38 @@ rule-providers:
     format: yaml
     path: ./BiliBili/BiliBili_No_Resolve.yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml"
+    interval: 86400
+
+  Twitter:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Twitter/Twitter_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter_No_Resolve.yaml"
+    interval: 86400
+
+  TikTok:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./TikTok/TikTok_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok_No_Resolve.yaml"
+    interval: 86400 
+
+  OpenAI:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./OpenAI/OpenAI_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml"
+    interval: 86400    
+
+  Talkatone:
+    type: http
+    behavior: classical
+    format: text
+    path: ./main/Talkatone.list
+    url: "https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list"
     interval: 86400
 
   YouTube:
@@ -162,12 +202,16 @@ rule-providers:
 
 # 规则
 rules:
-  - RULE-SET,BiliBili,🍋B站视频
-  - RULE-SET,YouTube,🎬油管视频
-  - RULE-SET,Telegram,✈️电报消息  
-  - RULE-SET,Microsoft,Ⓜ️微软服务
-  - RULE-SET,Google,🇬谷歌服务
-  - RULE-SET,GlobalMedia,🌐国际媒体  
+  - RULE-SET,BiliBili,🍋BiliBili 
+  - RULE-SET,TikTok,🍓TikTok  
+  - RULE-SET,OpenAI,👾OpenAI
+  - RULE-SET,Twitter,🍊Twitter
+  - RULE-SET,Talkatone,🍦Talkatone
+  - RULE-SET,YouTube,🍎YouTube
+  - RULE-SET,Telegram,🍐Telegram  
+  - RULE-SET,Microsoft,🍇Microsoft
+  - RULE-SET,Google,🍰Google
+  - RULE-SET,GlobalMedia,🍈GlobalMedia  
   - RULE-SET,China,DIRECT
   - GEOIP,CN,DIRECT,no-resolve
   - MATCH,🔚Final
