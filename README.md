@@ -16,7 +16,7 @@ Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 **Clash配置无Dns泄露:**
 
 
-https://raw.githubusercontent.com/Emokui/conf-rule/main/clash.yaml
+https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 
 **Quanmutult X 自用配置**
