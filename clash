@@ -70,112 +70,83 @@ dns:
 
 #  机场订阅
 proxy-providers:
-  🛫 我的机场 1:
+ conf1:
     type: http
-    # 机场订阅链接，使用 Clash 链接
-    url: "https://example.com/xxx/xxx&flag=clash"
+    # 机场订阅链接
+    url: "       "
     path: ./proxies/airport1.yaml
     interval: 86400
-    # 初步筛选需要的节点，可有效减轻路由器压力，支持正则表达式，不筛选可删除此配置项
-    filter: "(?i)港|hk|hongkong|hong kong|台|tw|taiwan|日本|jp|japan|新|sg|singapore|美|us|unitedstates|united states"
-    # 初步排除不需要的节点，支持正则表达式，若不排除可删除此配置项
-    exclude-filter: "高倍|×10"
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 600
 
 # 策略组
 proxy-groups:
-  - {name: 🚀 节点选择, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 漏网之鱼, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 🤖 人工智能, type: select, proxies: [ 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: Ⓜ️ 微软服务, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 🇬 谷歌服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 🍎苹果服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 🇨🇳 直连域名, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
-  - {name: 电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: Final, type: select, proxies: [🧭延迟优选, 🌏️手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: Ⓜ️微软服务, type: select, proxies: [DIRECT, 🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点]}
+  - {name: 🇬谷歌服务, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 国际媒体, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
 
  # ----------------国家或地区策略组---------------------
-  - {name: 🇭🇰 香港节点, type: select, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)港|hk|hongkong|hong kong"}
-  - {name: 🇹🇼 台湾节点, type: select, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)台|tw|taiwan"}
-  # 若有多个机场，可以使用 `include-all-providers: true` 代替 `use: [🛫 我的机场 1, 🛫 我的机场 2, ...]`
-  - {name: 🇯🇵 日本节点, type: select, include-all-providers: true, filter: "(?i)日本|jp|japan"}
-  - {name: 🇸🇬 新加坡节点, type: select, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)新|sg|singapore"}
-  - {name: 🇺🇸 美国节点, type: select, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)美|us|unitedstates|united states"}
-
+  # 若有多个机场，可以使用 `include-all-providers: true` 代替 `use: [conf1]`
+  - {name: 🇭🇰 香港节点, type: select, use: [conf1], filter: "香港|港|HK|(?i)HongKong"}
+  - {name: 🇹🇼 台湾节点, type: select, use: [conf1], filter: "台湾|湾|TW|(?i)Taiwan"}
+  - {name: 🇯🇵 日本节点, type: select, use: [conf1], filter: "日本|日|JP|(?i)Japan"}
+  - {name: 🇸🇬 狮城节点, type: select, use: [conf1], filter: "新加坡|狮|SG|(?i)Singapore"}
+  - {name: 🇺🇸 美国节点, type: select, use: [conf1], filter: "美国|美|US|(?i)UnitedStates"}
+  - {name: 🇰🇷 韩国节点, type: select, use: [conf1], filter: "韩国|韩|KR|(?i)Korea"}
+  - {name: 🧭延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
+  - {name: 🌏️手动选择, type: select, use: [conf1]}
 # 规则集（yaml 文件每天自动更新）
 rule-providers:
-  ads:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/ads.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
-    interval: 86400
 
-  microsoft-cn:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/microsoft-cn.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/microsoft-cn.list"
-    interval: 86400
-
-  apple-cn:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/apple-cn.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/apple-cn.list"
-    interval: 86400
-
-  google-cn:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/google-cn.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/google-cn.list"
-    interval: 86400
-
-  ai:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/ai.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ai.list"
-    interval: 86400
-
-  cn:
-    type: http
-    behavior: domain
-    format: text
-    path: ./rules/cn.list
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cn.list"
-    interval: 86400
-
-  telegram:
+  Telegram:
     type: http
     behavior: classical
     format: text
     path: ./Telegram/Telegram_No_Resolve.yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml"
     interval: 86400
+ 
+  Microsoft:
+    type: http
+    behavior: classical
+    format: text
+    path: ./Microsoft/Microsoft_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml"
+    interval: 86400
+
+  Google:
+    type: http
+    behavior: classical
+    format: text
+    path: ./Google/Google_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml"
+    interval: 86400
+
+  GlobalMedia:
+    type: http
+    behavior: classical
+    format: text
+    path: ./GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml
+    url: "https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml"
+    interval: 86400
+
+  China:
+    type: http
+    behavior: classical
+    format: text
+    path: ./China/China_Classical_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Classical_No_Resolve.yaml"
+    interval: 86400
 
 # 规则
 rules:
-  - RULE-SET, ads, REJECT
-  - RULE-SET,microsoft-cn,Ⓜ️ 微软服务
-  - RULE-SET,apple-cn,🍎 苹果服务
-  - RULE-SET,google-cn,🇬 谷歌服务
-  - RULE-SET,ai,🤖 人工智能
-  - RULE-SET,cn,🇨🇳 直连域名
-  - RULE-SET, telegram, 电报消息
-  - GEOIP, CN, DIRECT, no-resolve
-  - MATCH, 漏网之鱼
-
-
-
+  - RULE-SET, Telegram, 电报消息  
+  - RULE-SET, Microsoft, Ⓜ️微软服务
+  - RULE-SET, China, 🇬谷歌服务
+  - RULE-SET, GlobalMedia, 国际媒体  
+  - RULE-SET, China, DIRECT
+  - GEOIP, CN, DIRECT,no-resolve
+  - MATCH, Final
 
 script:
   shortcuts:
