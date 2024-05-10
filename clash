@@ -109,6 +109,7 @@ rule-providers:
   ads:
     type: http
     behavior: domain
+    format: text
     path: ./rules/ads.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
     interval: 86400
@@ -116,6 +117,7 @@ rule-providers:
   microsoft-cn:
     type: http
     behavior: domain
+    format: text
     path: ./rules/microsoft-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/microsoft-cn.list"
     interval: 86400
@@ -123,6 +125,7 @@ rule-providers:
   apple-cn:
     type: http
     behavior: domain
+    format: text
     path: ./rules/apple-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/apple-cn.list"
     interval: 86400
@@ -130,6 +133,7 @@ rule-providers:
   google-cn:
     type: http
     behavior: domain
+    format: text
     path: ./rules/google-cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/google-cn.list"
     interval: 86400
@@ -137,6 +141,7 @@ rule-providers:
   ai:
     type: http
     behavior: domain
+    format: text
     path: ./rules/ai.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ai.list"
     interval: 86400
@@ -144,13 +149,15 @@ rule-providers:
   cn:
     type: http
     behavior: domain
+    format: text
     path: ./rules/cn.list
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cn.list"
     interval: 86400
 
-    telegram:
+  telegram:
     type: http
     behavior: classical
+    format: text
     path: ./Telegram/Telegram_No_Resolve.yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml"
     interval: 86400
