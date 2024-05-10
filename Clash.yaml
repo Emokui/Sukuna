@@ -1,8 +1,8 @@
 redir-port: 7892      # Redir 端口
 mixed-port: 7893      # 混合端口 HTTP和SOCKS5用一个端口
 geodata-mode: true    #【Meta专属】使用geoip.dat数据库(默认：false使用mmdb数据库)
-tcp-concurrent: false #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
-allow-lan: true       # 允许局域网的连接（可用来共享代理）
+tcp-concurrent: true #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
+allow-lan: false       # 允许局域网的连接（可用来共享代理）
 bind-address: "*"     # 仅在将allow-lan设置为true时适用
                       # #"*": 绑定所有IP地址
 find-process-mode: strict           #匹配所有进程（always/strict/off）
@@ -37,7 +37,7 @@ tun:                   # Tun 配置
                        # MacOS 用户推荐 gvisor栈,IOS无法使用system栈
   dns-hijack:          # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
      - 'any:53'
-# strict_route: true   # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
+  strict_route: true   # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
   auto-route: true     # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
   auto-detect-interface: true     # 自动识别出口网卡
         
@@ -49,7 +49,7 @@ dns:
   listen: 0.0.0.0:53       # DNS监听地址
   fake-ip-range: 198.18.0.1/16    # Fake-IP解析地址池
   # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接 
-  fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
+  # fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
                           
 
   nameserver:        # 常规 DNS 服务器
@@ -68,111 +68,97 @@ dns:
     ipcidr:          # IPCIDR
       - 240.0.0.0/4  
 
-# =====================================================================================================================
-# 订阅更新与测试
-p:    &conf1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
-
-# 手动策略组
-use:  &conf2 {type: select,   use: [Subscribe] }
-
-# App策略组
-pr:   &conf3 {type: select,   proxies: [延迟优选, 手动选择, DIRECT, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点] }
-
-# 延迟策略组
-auto: &conf4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [Subscribe] }
-
-# 规则类型:domain
-d:    &conf5 {type: http,     behavior: domain,    interval: 86400}
-
-# 规则类型:classical
-c:    &conf6 {type: http,     behavior: classical, interval: 86400}
-
-# 规则类型:ipcidr
-i:    &conf7 {type: http,     behavior: ipcidr,    interval: 86400}
-# =====================================================================================
-# 代理
+#  机场订阅
 proxy-providers:
-  Subscribe: {<<: *conf1, 
-  path: ./proxy-providers/Sub.yaml, 
-  url: 👉👉👉请在此处填写你的订阅链接👈👈👈&list=true&udp=true}
-    # 可以使用任意类型的链接替换上面文字,多个链接使用英文符号的竖杠|隔开一起写上即可
-    # Sub-Store生成的链接,可以直接替换上述url引号中的部分,具体见Sub-Store教程                       
-proxies: null
-# =======================================================================================================
+ conf1:
+    type: http
+    # 机场订阅链接
+    url: "-------------"
+    path: ./proxies/airport1.yaml
+    interval: 86400
+
 # 策略组
 proxy-groups:
-  - {name: Final, <<: *conf3}
+  - {name: 🔚Final, type: select, proxies: [☪️延迟优选, 🌏️手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 🎬油管视频, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: Ⓜ️微软服务, type: select, proxies: [DIRECT, 🌏️手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点]}
+  - {name: 🇬谷歌服务, type: select, proxies: [🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: 🌐国际媒体, type: select, proxies: [☪️延迟优选, 🌏️手动选择, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
+  - {name: ✈️电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
 
-  - {name: 延迟优选, <<: *conf4}
-
-  - {name: 手动选择, <<: *conf4}
-
-  - {name: 哔哩哔哩, <<: *conf3}
-
-  - {name: 电报消息, <<: *conf3}
-
-  - {name: 微软服务, <<: *conf3}
-
-  - {name: 谷歌服务, <<: *conf3}
-
-  - {name: 国际媒体, <<: *conf3}
-
-  - {name: 香港节点, <<: *conf2, filter: "香港|港|HK|(?i)HongKong"}
-
-  - {name: 台湾节点, <<: *conf2, filter: "台湾|湾|TW|(?i)Taiwan"}
-
-  - {name: 日本节点, <<: *conf2, filter: "日本|日|JP|(?i)Japan"}
-
-  - {name: 韩国节点, <<: *conf2, filter: "韩国|韩|KR|(?i)Korea"}
-
-  - {name: 狮城节点, <<: *conf2, filter: "新加坡|狮|SG|(?i)Singapore"}
-
-  - {name: 美国节点, <<: *conf2, filter: "美国|美|US|(?i)UnitedStates"}
-
-
-# 规则提供商
+ # ----------------国家或地区策略组---------------------
+  # 若有多个机场，可以使用 `include-all-providers: true` 代替 `use: [conf1]`
+  - {name: 🇭🇰 香港节点, type: select, use: [conf1], filter: "香港|港|HK|(?i)HongKong"}
+  - {name: 🇹🇼 台湾节点, type: select, use: [conf1], filter: "台湾|湾|TW|(?i)Taiwan"}
+  - {name: 🇯🇵 日本节点, type: select, use: [conf1], filter: "日本|日|JP|(?i)Japan"}
+  - {name: 🇸🇬 狮城节点, type: select, use: [conf1], filter: "新加坡|狮|SG|(?i)Singapore"}
+  - {name: 🇺🇸 美国节点, type: select, use: [conf1], filter: "美国|美|US|(?i)UnitedStates"}
+  - {name: 🇰🇷 韩国节点, type: select, use: [conf1], filter: "韩国|韩|KR|(?i)Korea"}
+  - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
+  - {name: 🌏️手动选择, type: select, use: [conf1]}
+# 规则集（yaml 文件每天自动更新）
 rule-providers:
-  规则修正: {<<: *conf6, url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Unbreak.yaml, path: ./Ruleset/Unbreak.yaml}
 
-  哔哩哔哩: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml, path: ./BiliBili/BiliBili_No_Resolve.yaml}
+  YouTube:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./YouTube/YouTube_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml"
+    interval: 86400
 
-  电报消息: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml, path: ./Telegram/Telegram_No_Resolve.yaml}
+  Telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Telegram/Telegram_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml"
+    interval: 86400
+ 
+  Microsoft:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Microsoft/Microsoft_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml"
+    interval: 86400
 
-  微软服务: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml, path: ./Microsoft/Microsoft_No_Resolve.yaml}
+  Google:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Google/Google_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml"
+    interval: 86400
 
-  谷歌服务: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml, path: ./Google/Google_No_Resolve.yaml}
+  GlobalMedia:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml"
+    interval: 86400
 
-  国际媒体: {<<: *conf6, url: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml, path: ./GlobalMedia/GlobalMedia_Classical_No_Resolve.yaml}
+  China:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./China/China_Classical_No_Resolve.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Classical_No_Resolve.yaml"
+    interval: 86400
 
-  苹果服务: {<<: *conf6, url: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Clash/Ruleset/Apple.yaml, path: ./Ruleset/Apple.yaml}
-
-  国内直连: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Classical_No_Resolve.yaml, path: ./China/China_Classical_No_Resolve.yaml}
-
-  本地网络: {<<: *conf6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan_No_Resolve.yaml, path: ./Lan/Lan_No_Resolve.yaml}
-  
-
-# 规则 
+# 规则
 rules:
-  - RULE-SET, 规则修正, DIRECT
-  - RULE-SET, 哔哩哔哩, 哔哩哔哩
-  - RULE-SET, 电报消息, 电报消息
-  - RULE-SET, 微软服务, 微软服务
-  - RULE-SET, 谷歌服务, 谷歌服务 
-  - RULE-SET, 国际媒体, 国际媒体
-  - RULE-SET, 苹果服务, DIRECT
-  - RULE-SET, 国内直连, DIRECT
-  - RULE-SET, 本地网络, DIRECT
-  - GEOIP, CN, DIRECT, no-resolve
-  - MATCH, Final
-
+  - RULE-SET, YouTube, 🎬油管视频
+  - RULE-SET, Telegram, ✈️电报消息  
+  - RULE-SET, Microsoft, Ⓜ️微软服务
+  - RULE-SET, China, 🇬谷歌服务
+  - RULE-SET, GlobalMedia, 🌐国际媒体  
+  - RULE-SET, China, DIRECT
+  - GEOIP, CN, DIRECT,no-resolve
+  - MATCH, 🔚Final
 
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
 
-
-
-
-
-
-    
