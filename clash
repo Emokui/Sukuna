@@ -1,0 +1,213 @@
+redir-port: 7892      # Redir 端口
+mixed-port: 7893      # 混合端口 HTTP和SOCKS5用一个端口
+geodata-mode: true    #【Meta专属】使用geoip.dat数据库(默认：false使用mmdb数据库)
+tcp-concurrent: false #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
+allow-lan: true       # 允许局域网的连接（可用来共享代理）
+bind-address: "*"     # 仅在将allow-lan设置为true时适用
+                      # #"*": 绑定所有IP地址
+find-process-mode: strict           #匹配所有进程（always/strict/off）
+ipv6: false           # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
+mode: rule            # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
+log-level: info       # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
+external-controller: 0.0.0.0:9093   #外部控制器,可以使用 RESTful API 来控制你的 clash 内核
+global-client-fingerprint: chrome   #全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
+                                    #可选： "chrome","firefox","safari","ios","random","none" options.
+
+geox-url:             #自定义 geodata url
+  mmdb: "https://raw.githubusercontent.com/Masaiki/GeoIP2-CN/release/Country.mmdb"
+
+profile:
+  store-selected: true # 存储 select 选择记录
+  store-fake-ip: true  # 持久化 fake-ip
+  
+sniffer:               # 嗅探域名 可选配置
+  enable: true
+  parse-pure-ip: true  # 是否使用嗅探结果作为实际访问，默认 true
+  sniff:
+    TLS:               # TLS 默认嗅探 443
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+      
+tun:                   # Tun 配置
+  enable: true
+  stack: system        # 可选： system/gvisor/lwip
+                       # tun模式堆栈,如无使用问题,建议使用 system 栈;
+                       # MacOS 用户推荐 gvisor栈,IOS无法使用system栈
+  dns-hijack:          # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
+     - 'any:53'
+# strict_route: true   # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
+  auto-route: true     # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
+  auto-detect-interface: true     # 自动识别出口网卡
+        
+
+dns:
+  enable: true             # 禁用系统 DNS
+  ipv6: false              # 关闭 IPv6
+  enhanced-mode: fake-ip   # 增强模式：redir-host或fake-ip
+  listen: 0.0.0.0:53       # DNS监听地址
+  fake-ip-range: 198.18.0.1/16    # Fake-IP解析地址池
+  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接 
+  fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
+                          
+
+  nameserver:        # 常规 DNS 服务器
+    - 223.5.5.5
+    - 119.29.29.29
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+  fallback:          # 国外 DNS 服务器
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+
+  fallback-filter:   # 回退过滤器
+    geoip: true      # GEOIP 启用
+    geoip-code: CN   # GEOIP 编码
+    ipcidr:          # IPCIDR
+      - 240.0.0.0/4  
+
+#  机场订阅
+proxy-providers:
+  🛫 我的机场 1:
+    type: http
+    # 机场订阅链接，使用 Clash 链接
+    url: "https://example.com/xxx/xxx&flag=clash"
+    path: ./proxies/airport1.yaml
+    interval: 86400
+    # 初步筛选需要的节点，可有效减轻路由器压力，支持正则表达式，不筛选可删除此配置项
+    filter: "(?i)港|hk|hongkong|hong kong|台|tw|taiwan|日本|jp|japan|新|sg|singapore|美|us|unitedstates|united states"
+    # 初步排除不需要的节点，支持正则表达式，若不排除可删除此配置项
+    exclude-filter: "高倍|×10"
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 600
+
+  🛫 我的机场 2:
+    type: http
+    url: "https://example.com/xxx/xxx&flag=clash"
+    path: ./proxies/airport2.yaml
+    interval: 86400
+    filter: "(?i)港|hk|hongkong|hong kong|台|tw|taiwan|日本|jp|japan|新|sg|singapore|美|us|unitedstates|united states"
+    exclude-filter: "高倍|×10"
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 600
+
+# 策略组
+proxy-groups:
+  - {name: 🚀 节点选择, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🐟 漏网之鱼, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🤖 人工智能, type: select, proxies: [ 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: Ⓜ️ 微软服务, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🇬 谷歌服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🍎 苹果服务, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🇨🇳 直连域名, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 📲 电报消息, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+  - {name: 🛑 广告拦截, type: select, proxies: [REJECT]}
+
+  # ----------------国家或地区策略组---------------------
+  # 自动选择节点，即按照 url 测试结果使用延迟最低的节点；测试后容差大于 50ms 才会切换到延迟低的那个节点；筛选出“香港”节点，支持正则表达式
+  - {name: 🇭🇰 香港节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)港|hk|hongkong|hong kong"}
+  # 节点负载均衡，即将请求均匀分配到多个节点上，优点是更稳定，速度可能有提升；将相同顶级域名的请求分配给策略组内的同一个代理节点；推荐在节点复用比较多的情况下使用
+  - {name: 🇹🇼 台湾节点, type: load-balance, strategy: consistent-hashing, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)台|tw|taiwan"}
+  # 若有多个机场，可以使用 `include-all-providers: true` 代替 `use: [🛫 我的机场 1, 🛫 我的机场 2, ...]`
+  - {name: 🇯🇵 日本节点, type: url-test, tolerance: 50, include-all-providers: true, filter: "(?i)日本|jp|japan"}
+  - {name: 🇸🇬 新加坡节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)新|sg|singapore"}
+  - {name: 🇺🇸 美国节点, type: url-test, tolerance: 50, use: [🛫 我的机场 1, 🛫 我的机场 2], filter: "(?i)美|us|unitedstates|united states"}
+
+# 规则集（yaml 文件每天自动更新）
+rule-providers:
+  ads:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/ads.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ads.list"
+    interval: 86400
+
+  microsoft-cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/microsoft-cn.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/microsoft-cn.list"
+    interval: 86400
+
+  apple-cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/apple-cn.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/apple-cn.list"
+    interval: 86400
+
+  google-cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/google-cn.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/google-cn.list"
+    interval: 86400
+
+  ai:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/ai.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/ai.list"
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/proxy.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/proxy.list"
+    interval: 86400
+
+  cn:
+    type: http
+    behavior: domain
+    format: text
+    path: ./rules/cn.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/cn.list"
+    interval: 86400
+
+  telegramip:
+    type: http
+    behavior: ipcidr
+    format: text
+    path: ./rules/telegramip.list
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/clash-ruleset/telegramip.list"
+    interval: 86400
+
+# 规则
+rules:
+  - RULE-SET,ads,🛑 广告拦截
+  - RULE-SET,microsoft-cn,Ⓜ️ 微软服务
+  - RULE-SET,apple-cn,🍎 苹果服务
+  - RULE-SET,google-cn,🇬 谷歌服务
+  - RULE-SET,ai,🤖 人工智能
+  - RULE-SET,proxy,🪜 代理域名
+  - RULE-SET,cn,🇨🇳 直连域名
+  - RULE-SET,telegramip,📲 电报消息,no-resolve
+  - RULE-SET,GEOIP,CN,no-resolve
+  - MATCH,🐟 漏网之鱼
+
+
+
+
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+
+
+
+
+
+
+    
