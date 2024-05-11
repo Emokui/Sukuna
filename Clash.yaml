@@ -1,4 +1,4 @@
-#    80行填写订阅链接
+#  78行填写订阅链接
 redir-port: 7892      # Redir 端口
 mixed-port: 7893      # HTTP和SOCKS5端口
 geodata-mode: false   # 使用geoip.dat数据库 (默认：false使用mmdb数据库)
@@ -14,10 +14,8 @@ external-controller: 0.0.0.0:9093   #外部控制器,可以使用 RESTful API �
 global-client-fingerprint: chrome   #全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
                                     #可选： "chrome","firefox","safari","ios","random","none" options.
 
-# geox-url:             #自定义 geodata url
-  # mmdb: "https://raw.githubusercontent.com/Masaiki/GeoIP2-CN/release/Country.mmdb"
-
-geoip-url:
+geox-url:
+  geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
   mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
 
 profile:
@@ -41,43 +39,43 @@ tun:
                        # MacOS 用户推荐 gvisor栈,IOS无法使用system栈
   dns-hijack:          # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
      - 'any:53'
+     - "tcp://any:53"
   strict_route: true   # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
   auto-route: true     # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
   auto-detect-interface: true     # 自动识别出口网卡
-        
 
 dns:
-  enable: true             # 禁用系统 DNS
+  enable: false             # 禁用系统 DNS
   ipv6: false              # 关闭 IPv6
   enhanced-mode: fake-ip   # 增强模式：redir-host或fake-ip
   listen: 0.0.0.0:53       # DNS监听地址
   fake-ip-range: 198.18.0.1/16    # Fake-IP解析地址池
   # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接 
   fake-ip-filter: ['*.lan', 'cable.auth.com', '*.msftconnecttest.com', '*.msftncsi.com', 'network-test.debian.org', 'detectportal.firefox.com', 'resolver1.opendns.com', '*.srv.nintendo.net', '*.stun.playstation.net', 'xbox.*.microsoft.com', '*.xboxlive.com', 'stun.*', 'global.turn.twilio.com', 'global.stun.twilio.com', 'localhost.*.qq.com', 'localhost.*.weixin.qq.com', '*.logon.battlenet.com.cn', '*.logon.battle.net', '*.blzstatic.cn', 'music.163.com', '*.music.163.com', '*.126.net', 'musicapi.taihe.com', 'music.taihe.com', 'songsearch.kugou.com', 'trackercdn.kugou.com', '*.kuwo.cn', 'api-jooxtt.sanook.com', 'api.joox.com', 'joox.com', 'y.qq.com', '*.y.qq.com', 'streamoc.music.tc.qq.com', 'mobileoc.music.tc.qq.com', 'isure.stream.qqmusic.qq.com', 'dl.stream.qqmusic.qq.com', 'aqqmusic.tc.qq.com', 'amobile.music.tc.qq.com', '*.xiami.com', '*.music.migu.cn', 'music.migu.cn', 'proxy.golang.org', '*.mcdn.bilivideo.cn', '*.cmpassport.com', 'id6.me', 'open.e.189.cn', 'mdn.open.wo.cn', 'opencloud.wostore.cn', 'auth.wosms.cn', '*.jegotrip.com.cn', '*.icitymobile.mobi', '*.pingan.com.cn', '*.cmbchina.com', 'pool.ntp.org', '*.pool.ntp.org', 'ntp.*.com', 'time.*.com', 'ntp?.*.com', 'time?.*.com', 'time.*.gov', 'time.*.edu.cn', '*.ntp.org.cn', 'PDC._msDCS.*.*', 'DC._msDCS.*.*', 'GC._msDCS.*.*']
-               
-
-  nameserver:        # 常规 DNS 服务器
+  default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
+    - 114.114.114.114
+    - '[2402:4e00::]'
+    - '[2400:3200::1]'
+  nameserver:
+    - 'tls://8.8.4.4#dns'
+    - 'tls://1.0.0.1#dns'
+    - 'tls://[2001:4860:4860::8844]#dns'
+    - 'tls://[2606:4700:4700::1001]#dns'
+  proxy-server-nameserver:
     - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-
-  fallback:          # 国外 DNS 服务器
-    - https://dns.google/dns-query
-    - https://cloudflare-dns.com/dns-query
-
-  fallback-filter:   # 回退过滤器
-    geoip: true      # GEOIP 启用
-    geoip-code: CN   # GEOIP 编码
-    ipcidr:          # IPCIDR
-      - 240.0.0.0/4  
+  nameserver-policy:
+    "geosite:cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
 
 #  机场订阅
 proxy-providers:
  conf1:
     type: http
     # 机场订阅链接
-    url: "————————————————————"
+    url: "-----------------------"
     path: ./proxies/airport1.yaml
     interval: 86400
 
@@ -85,7 +83,7 @@ proxy-providers:
 proxy-groups:
   - {name: 🔚Final, type: select, proxies: [☪️延迟优选, ✅手动选择, 🇰🇷 韩国节点, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
   - {name: ✅手动选择, type: select, use: [conf1]}
-  - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [conf1]}
+  - {name: ☪️延迟优选, type: url-test, lazy: true,  url: http://www.google.com/generate_204, interval: 900, use: [conf1]}
   - {name: 🍋BiliBili, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点]}
   - {name: 🍐Telegram, type: select, proxies: [🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇸 美国节点]}
   - {name: 🍎YouTube, type: select, proxies: [✅手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇸🇬 狮城节点, 🇺🇸 美国节点, 🇰🇷 韩国节点]}
