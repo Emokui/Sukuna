@@ -26,13 +26,6 @@ QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
 
 
 
-**Direct.list 国内直连集8.9w条:**
-
-
-https://raw.githubusercontent.com/Emokui/conf-rule/main/Direct.list
-
-
-
 **Dns.list：dns泄漏分流（彻底解决用配置):**
 
 
