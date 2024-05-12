@@ -2,7 +2,7 @@
 
 Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
 
-Loon2.0 自动兼手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
+Loon2.0 地区自动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
 
 
 
@@ -16,7 +16,7 @@ Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 **Clash配置无Dns泄露:**
 
 
-https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
+Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 
 **Quanmutult X 自用配置**
