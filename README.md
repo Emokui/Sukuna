@@ -1,8 +1,8 @@
 **Loon配置无dns泄漏**
 
-Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
+**Loon1.0 手动版:**https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
 
-Loon2.0 地区自动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
+**Loon2.0 地区自动版:**https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
 
 
 
