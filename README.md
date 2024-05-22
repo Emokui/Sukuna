@@ -61,7 +61,7 @@ https://github.com/blackmatrix7
 **博客: https://sk.102004.xyz/**
 
 
-**图床: https://img.102004.yxz/**
+**图床: https://img.102004.xyz/**
 
 
 **测速: https://speed.102004.xyz/**
