@@ -50,3 +50,6 @@ https://github.com/blackmatrix7
 
 
 **本地规则:GEIOP,CN,DIRECT,no-resolve**
+
+
+**哪吒监控: https://nz.102004.xyz/**
