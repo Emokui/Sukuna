@@ -1,0 +1,81 @@
+# Loon极简配置
+# 适合无特定分流、自建节点、极简主义人群
+# 兜底请求一律走代理
+
+[General]
+ipv6 = false
+skip-proxy = localhost,*.local,10.0.0.0/8,127.0.0.0/8,169.254.0.0/16,192.0.2.0/24,192.168.0.0/16,198.51.100.0/24,224.0.0.0/4
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+real-ip = *.icloud.com,*.apple.com
+dns-server = system,119.29.29.29,223.5.5.5
+allow-udp-proxy = true
+allow-wifi-access = true
+wifi-access-http-port = 1234
+wifi-access-socks5-port = 1235
+proxy-test-url = http://cp.cloudflare.com/generate_204
+internet-test-url = http://captive.apple.com/generate_204
+test-timeout = 5
+interface-mode = auto
+switch-node-after-failure-times = 3
+resource-parser = https://gitlab.com/sub-store/Sub-Store/-/releases/permalink/latest/downloads/sub-store-parser.loon.min.js
+geoip-url = https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
+disconnect-on-policy-change = true
+disable-stun = true
+disable-udp-ports = 443
+[Host]
+
+[Proxy]
+
+
+[Remote Proxy]
+Sub-store = https://sub.store/download/collection/Sub-store,udp=true,fast-open=false,vmess-aead=true,enabled=true,img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/SubStore.png
+
+[Proxy Group]
+Proxy = select,DIRECT,手动选择,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Loon_2.png
+手动选择 = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/ipInfo.png
+
+[Remote Filter]
+
+全球节点 = NameRegex, FilterKey = "^"
+
+[Remote Rule]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list, policy=DIRECT, tag=China, enabled=true
+
+[Rule]
+GEOIP,CN,DIRECT
+FINAL,Proxy
+
+[Rewrite]
+
+[Remote Rewrite]
+
+[Script]
+
+[Remote Script]
+
+
+[Plugin]
+https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_Google_CAPTCHA.plugin, enabled=true
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/DragonRead_remove_ads.plugin, enabled=false
+https://github.com/BiliUniverse/Global/raw/main/modules/BiliBili.Global.plugin, enabled=false
+https://raw.githubusercontent.com/ClydeTime/BiliBili/main/modules/BiliBili.Modified.plugin, enabled=false
+https://github.com/BiliUniverse/Redirect/raw/main/modules/BiliBili.Redirect.sgmodule, enabled=false
+https://gist.githubusercontent.com/Sliverkiss/a7496bd073820942b44a9b36874aaf4c/raw/sliverkiss.loon.plugin, enabled=false
+https://raw.githubusercontent.com/chxm1023/Script_X/main/Collections.plugin, enabled=false
+https://github.com/BiliUniverse/Enhanced/raw/main/modules/BiliBili.Enhanced.plugin, enabled=false
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=Google, tag=Sub-Store, enabled=true
+https://raw.githubusercontent.com/ClydeTime/BiliBili/master/modules/BiliBiliDailyBonus.plugin, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Google.plugin, enabled=false
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=Google, tag=BoxJs, enabled=true
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Node_detection_tool.plugin, enabled=true
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Spotify_remove_ads.plugin, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Script-Hub.plugin, policy=Google, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/YouTube_remove_ads.plugin, enabled=false
+https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.plugin, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/LoonGallery.plugin, policy=香港手动, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Taobao_remove_ads.plugin, enabled=false
+
+
+[MITM]
+
+skip-server-cert-verify = true
