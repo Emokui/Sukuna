@@ -11,40 +11,39 @@ Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 **极简配置**
 
-Loon-restart: 
+Loon-restart: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-restart
+
+
+
+
 
 
 **Quanmutult X 自用配置**
-
 
 QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
 
 
 
-**Dns.list：dns泄漏分流（彻底解决用配置):**
-
+**Dns.list：DNS泄漏检测分流（掩耳盗铃防泄漏):**
 
 https://raw.githubusercontent.com/Emokui/Set-/main/Dns.list
 
 
-
 **Talkatone.list:分流no-resolve版:**
-
 
 https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
 
 
 
-**大佬的分流规则仓：**
-
+**B7大佬的分流规则仓：**
 
 https://github.com/blackmatrix7
 
-
-**自定义分流请从上面仓库取，无dns泄漏IP类规则要用no-resolve版**
-
+**自定义分流请从上面仓库取，无DNS泄漏IP类规则要用no-resolve版**
 
 **本地规则:GEIOP,CN,DIRECT,no-resolve**
+
+
 
 
 **哪吒监控: https://nz.102004.xyz/**
