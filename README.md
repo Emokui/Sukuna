@@ -9,6 +9,17 @@ Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 
+**B7大佬的分流规则仓：**
+
+https://github.com/blackmatrix7
+
+**自定义分流请从上面仓库取，无DNS泄漏IP类规则要用no-resolve版**
+
+**本地规则:GEIOP,CN,DIRECT,no-resolve**
+
+
+
+
 **极简配置**
 
 Loon-restart: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-restart
@@ -42,22 +53,4 @@ https://github.com/blackmatrix7
 **自定义分流请从上面仓库取，无DNS泄漏IP类规则要用no-resolve版**
 
 **本地规则:GEIOP,CN,DIRECT,no-resolve**
-
-
-
-
-**哪吒监控: https://nz.102004.xyz/**
-
-
-**影视站: https://sk.ygking.lol/
-https://xs.ygking.lol/**
-
-
-**博客: https://sk.102004.xyz/**
-
-
-**图床: https://img.102004.xyz/**
-
-
-**测速: https://speed.102004.xyz/**
 
