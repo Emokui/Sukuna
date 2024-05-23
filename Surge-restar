@@ -33,7 +33,7 @@ Proxy = select, policy-path=订阅链接, update-interval=0, no-alert=0, hidden=
 Final = select, DIRECT, Proxy, no-alert=0, hidden=0, include-all-proxies=0
 
 [Rule]
-IP-CIDR,0.0.0.0/32,REJECT
+IP-CIDR,0.0.0.0/32,REJECT,no-resolve
 # China
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list,DIRECT
 GEOIP,CN,DIRECT
