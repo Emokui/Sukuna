@@ -15,7 +15,7 @@ Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 Loon-restart: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-restart
 
 
-Surge-restart： https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge-restar
+Surge-restart： https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge-restart
 
 
 
