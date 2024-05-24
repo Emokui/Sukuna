@@ -11,7 +11,7 @@ Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 **轻量配置**
 
-Loon-small:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-Small
+Loon-small: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-Small
 
 
 
