@@ -14,7 +14,8 @@ Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 Loon-small: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-Small
 
 
-
+Surge-small:
+https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge-small
 
 
 **极简配置**
