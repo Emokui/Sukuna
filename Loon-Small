@@ -102,4 +102,4 @@ https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/
 
 
 [MITM]
-skip-server-cert-verify = true
+skip-server-cert-verify = true 
