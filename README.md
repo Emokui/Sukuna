@@ -9,6 +9,13 @@ Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
 Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
 
 
+**轻量配置**
+
+Loon-Small:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-Small
+
+
+
+
 
 **极简配置**
 
