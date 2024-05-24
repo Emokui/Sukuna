@@ -1,0 +1,74 @@
+# Surge轻量版
+# Proxy策略放订阅链接
+
+[General]
+loglevel = notify
+show-error-page-for-reject = true
+allow-wifi-access = false
+all-hybrid = false
+ipv6 = false
+ipv6-vif = disabled
+test-timeout = 5
+internet-test-url = http://captive.apple.com/generate_204
+proxy-test-url = http://cp.cloudflare.com/generate_204
+geoip-maxmind-url = https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb
+exclude-simple-hostnames = true
+dns-server = 223.5.5.5, 119.29.29.29, system
+hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+read-etc-hosts = true
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8,172.16.0.0/12,100.64.0.0/10, 17.0.0.0/8, *.local, *.crashlytics.com, localhost, www.abchina.com.cn
+always-real-ip = *.icloud.com,*.apple.com
+allow-hotspot-access = false
+disable-geoip-db-auto-update = false
+udp-policy-not-supported-behaviour = REJECT
+udp-priority = true
+
+[Proxy]
+
+
+[Proxy Group]
+Final = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
+Google = select, Final, 香港节点, 韩国节点, 日本节点, 台湾节点, 美国节点, 新国节点, no-alert=0, hidden=0, include-all-proxies=0
+Microsoft = select, DIRECT, Proxy, 香港节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
+TikTok = select, Proxy, 日本节点, 韩国节点, 台湾节点, 美国节点, no-alert=0, hidden=0, include-all-proxies=0
+Telegram = select, Final, 香港节点, 台湾节点, 韩国节点, 日本节点, 美国节点, 新国节点, no-alert=0, hidden=0, include-all-proxies=0
+OpenAI = select, 香港节点, 台湾节点, 美国节点, 日本节点, 新国节点, 韩国节点, no-alert=1, hidden=0, include-all-proxies=0
+Spotify = select, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
+BiliBili = select, DIRECT, 香港节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
+香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+台湾节点 = smart, update-interval=0, policy-regex-filter=(🇨🇳)|(台)|(Tai), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(美)|(States)|(US), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+新国节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(新)|(Singapore)|(SG), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+韩国节点 = select, EC2-🇰🇷, Light-🇰🇷, azure-🇰🇷, update-interval=0, policy-regex-filter=(🇰🇷)|(韩)|(Korea)|(KR), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+Proxy = select, policy-path=你的订阅, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
+
+[Rule]
+IP-CIDR,0.0.0.0/32,REJECT,no-resolve
+# >  Telegram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram,no-resolve
+# >  TikTok
+RULE-SET,http://script.hub/file/_start_/https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list/_end_/TikTok.list?type=rule-set&target=surge-rule-set&del=true,TikTok
+# >  OpenAi
+RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,OpenAI,extended-matching
+# >  Spotify
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list,Spotify,no-resolve
+# >  Microsoft
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list,Microsoft
+# >  Google
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google
+# >  BiliBili
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili
+# >  Dns泄漏(掩耳盗铃)
+RULE-SET,https://raw.githubusercontent.com/Emokui/Set-/main/Dns.list,Proxy
+# >  LAN
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Lan/Lan.list,DIRECT
+# >  China
+RULE-SET,https://ruleset.skk.moe/List/non_ip/domestic.conf,DIRECT
+GEOIP,CN,DIRECT
+# >  Final
+FINAL,Final,dns-failed
+
+[MITM]
+skip-server-cert-verify = true
+h2 = true
