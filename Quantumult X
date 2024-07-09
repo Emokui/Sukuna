@@ -45,7 +45,7 @@ static=BiliBili, direct, 香港节点, 台湾节点, img-url=https://raw.githubu
 # Mincrosoft
 static=Microsoft, direct, proxy, 自动选择, 香港节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png
 # Apple
-static=苹果服务, direct, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_Classic.png
+static=Apple, direct, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_Classic.png
 # 自动选择
 url-latency-benchmark=自动选择, server-tag-regex=.*, check-interval=600, tolerance=0, alive-checking=false, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
 
