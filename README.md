@@ -23,7 +23,8 @@ https://raw.githubusercontent.com/Emokui/conf/main/Surge-small
 Loon-restart: https://raw.githubusercontent.com/Emokui/conf/main/Loon-restart
 
 
-Surge-restart： https://raw.githubusercontent.com/Emokui/conf/main/Surge-restart
+Surge-restart:
+https://raw.githubusercontent.com/Emokui/conf/main/Surge-restart
 
 
 
