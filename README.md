@@ -1,36 +1,36 @@
 **无DNS泄漏配置**
 
-Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon1.0
+Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf/main/Loon1.0
 
-Loon2.0 地区自动版:https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon2.0
+Loon2.0 地区自动版:https://raw.githubusercontent.com/Emokui/conf/main/Loon2.0
 
-Surge:https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge
+Surge:https://raw.githubusercontent.com/Emokui/conf/main/Surge
 
-Clash:https://raw.githubusercontent.com/Emokui/conf-rule/main/Clash.yaml
+Clash:https://raw.githubusercontent.com/Emokui/conf/main/Clash.yaml
 
 
 **轻量配置**
 
-Loon-small: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-Small
+Loon-small: https://raw.githubusercontent.com/Emokui/conf/main/Loon-Small
 
 
 Surge-small:
-https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge-small
+https://raw.githubusercontent.com/Emokui/conf/main/Surge-small
 
 
 **极简配置**
 
-Loon-restart: https://raw.githubusercontent.com/Emokui/conf-rule/main/Loon-restart
+Loon-restart: https://raw.githubusercontent.com/Emokui/conf/main/Loon-restart
 
 
-Surge-restart： https://raw.githubusercontent.com/Emokui/conf-rule/main/Surge-restart
+Surge-restart： https://raw.githubusercontent.com/Emokui/conf/main/Surge-restart
 
 
 
 
 **Quanmutult X 自用配置**
 
-QX:https://raw.githubusercontent.com/Emokui/conf-rule/main/Quantumult%20X
+QX:https://raw.githubusercontent.com/Emokui/conf/main/Quantumult%20X
 
 
 
