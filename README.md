@@ -1,31 +1,10 @@
 **无DNS泄漏配置**
 
-Loon1.0 手动版:https://raw.githubusercontent.com/Emokui/conf/main/Loon1.0
-
-Loon2.0 地区自动版:https://raw.githubusercontent.com/Emokui/conf/main/Loon2.0
+Loon:https://raw.githubusercontent.com/Emokui/conf/main/Loon2.0
 
 Surge:https://raw.githubusercontent.com/Emokui/conf/main/Surge
 
 Clash:https://raw.githubusercontent.com/Emokui/conf/main/Clash.yaml
-
-
-**轻量配置**
-
-Loon-small: https://raw.githubusercontent.com/Emokui/conf/main/Loon-Small
-
-
-Surge-small:
-https://raw.githubusercontent.com/Emokui/conf/main/Surge-small
-
-
-**极简配置**
-
-Loon-restart: https://raw.githubusercontent.com/Emokui/conf/main/Loon-restart
-
-
-Surge-restart:
-https://raw.githubusercontent.com/Emokui/conf/main/Surge-restart
-
 
 
 
