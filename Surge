@@ -9,76 +9,66 @@ show-error-page-for-reject = true
 allow-wifi-access = false
 all-hybrid = false
 ipv6 = false
+ipv6-vif = auto
 test-timeout = 5
 internet-test-url = http://captive.apple.com/generate_204
 proxy-test-url = http://cp.cloudflare.com/generate_204
 geoip-maxmind-url = https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb
 exclude-simple-hostnames = true
-dns-server = 223.5.5.5, 119.29.29.29,system
-# encrypted-dns-server = quic://dns.alidns.com
+dns-server = 223.5.5.5, 119.29.29.29, system
 hijack-dns = 8.8.8.8:53, 8.8.4.4:53
 read-etc-hosts = true
-skip-proxy = 192.168.0.0/24, 10.0.0.0/8, 172.16.0.0/12, 127.0.0.1, localhost, *.local
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8,172.16.0.0/12,100.64.0.0/10, 17.0.0.0/8, *.local, *.crashlytics.com, localhost, www.abchina.com.cn
 always-real-ip = *.icloud.com,*.apple.com
 allow-hotspot-access = false
 disable-geoip-db-auto-update = false
 udp-policy-not-supported-behaviour = REJECT
-
-[Proxy]
-DCI-KR = snell, kr-chuncheon-oracle-3dd360.ip1.shop, 33543, psk=SIukX37Y9wLITLKY, obfs=http, obfs-host=icloud.com, version=4, reuse=true, tfo=true, ip-version=v4-only, block-quic=off
+udp-priority = true
+compatibility-mode = 1
 
 [Proxy Group]
 Final = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-Google = select, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-Microsoft = select, DIRECT, Final, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-GlobalMedia = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, Final, no-alert=0, hidden=0, include-all-proxies=0
-YouTube = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-Telegram = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
-OpenAi = select, 美国节点, 日本节点, 新国节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-PayPal = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-Spotify = select, 香港节点, 美国节点, 新国节点, 日本节点, 台湾节点, 韩国节点, Proxy, no-alert=0, hidden=0, include-all-proxies=0
-BiliBili = select, DIRECT, 香港节点, 台湾节点
-Twitter = select, 香港节点, 日本节点, 韩国节点, 台湾节点, 美国节点, no-alert=0, hidden=0, include-all-proxies=0
-TikTok = select, 日本节点, 韩国节点, 台湾节点, 美国节点, Final, no-alert=0, hidden=0, include-all-proxies=0
-
-香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
-台湾节点 = select, update-interval=0, policy-regex-filter=(🇼🇸)|(台)|(Tai)|(TW), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+Google = select, Final, Proxy, 韩国节点, 日本节点, 台湾节点, 香港节点, 美国节点, 新国节点, no-alert=0, hidden=0, include-all-proxies=0
+Microsoft = select, Final, DIRECT, 香港节点, 日本节点, no-alert=0, hidden=0, include-all-proxies=0
+YouTuBe = select, 香港节点, 美国节点, 日本节点, 韩国节点, no-alert=0, hidden=0, include-all-proxies=0
+TikTok = select, 日本节点, 韩国节点, 台湾节点, 美国节点, no-alert=0, hidden=0, include-all-proxies=0
+Telegram = select, no-alert=1, hidden=0, include-all-proxies=0, persistent=1
+OpenAI = select, Final, no-alert=1, hidden=0, include-all-proxies=0, include-other-group=美国节点
+Talkatone = select, Final, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=美国节点
+BiliBili = select, DIRECT, 香港节点, 台湾节点, no-alert=0, hidden=0, include-all-proxies=0
+香港节点 = select, update-interval=0, policy-regex-filter=(🇭🇰)|(港)|(Hong)|(HK), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy, persistent=0
+台湾节点 = select, update-interval=0, policy-regex-filter=(🇼🇸)|(Tai), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 美国节点 = select, update-interval=0, policy-regex-filter=(🇺🇸)|(美)|(States)|(US), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 日本节点 = select, update-interval=0, policy-regex-filter=(🇯🇵)|(日)|(Japan)|(JP), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
 新国节点 = select, update-interval=0, policy-regex-filter=(🇸🇬)|(新)|(Singapore)|(SG), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
-韩国节点 = select, update-interval=0, policy-regex-filter=(🇰🇷)|(韩)|(Korea)|(KR), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
-Proxy = select, policy-path=订阅链接, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
+韩国节点 = select, update-interval=0, policy-regex-filter=(🇰🇷)|(韩), no-alert=1, hidden=0, include-all-proxies=0, include-other-group=Proxy
+Proxy = select, policy-path=https://sub.store/download/Fish, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0
 
 [Rule]
-# >  Telegram
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram
-# >  BiliBili
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili
-# >  YouTube
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,YouTube,extended-matching
-# >  TikTok
-RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list,TikTok
-# >  OpenAi
-RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,OpenAi,extended-matching
-# >  PayPal
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list,PayPal
-# >  Spotify
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list,Spotify
-# >  Twitter
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list,Twitter
-# >  GlobalMedia
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GlobalMedia/GlobalMedia_All_No_Resolve.list,GlobalMedia
-# >  Microsoft
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list,Microsoft
-# >  Google
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google
-# >  China
-DOMAIN-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_Domain.list,DIRECT
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax.list,DIRECT
-GEOIP,CN,DIRECT,no-resolve
-# >  LAN
 IP-CIDR,0.0.0.0/32,REJECT,no-resolve
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Lan/Lan.list,DIRECT
+# >  Telegram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram,no-resolve,extended-matching
+# >  TikTok
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list,TikTok,no-resolve
+# >  YouTube
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,YouTuBe
+# >  OpenAi
+RULE-SET,https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list,OpenAI,extended-matching
+# >  Talkatone
+RULE-SET,https://raw.githubusercontent.com/Emokui/conf/main/talkatone-ad.list,REJECT,no-resolve
+RULE-SET,https://raw.githubusercontent.com/Emokui/conf-rule/main/Talkatone.list,Talkatone,extended-matching
+# >  Microsoft
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list,Microsoft,extended-matching
+# >  Google
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,Google,extended-matching
+# >  BiliBili
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,BiliBili,extended-matching
+# >  LAN
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Lan/Lan.list,DIRECT,extended-matching
+# >  China
+RULE-SET,https://ruleset.skk.moe/List/non_ip/domestic.conf,DIRECT,extended-matching
+# RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list,DIRECT
+GEOIP,CN,DIRECT,no-resolve
 # >  Final
 FINAL,Final,dns-failed
 
