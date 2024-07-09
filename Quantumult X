@@ -5,8 +5,6 @@ server_check_url = http://cp.cloudflare.com/generate_204
 network_check_url = http://taobao.com/
 # 网络超时检测
 server_check_timeout = 3000
-# 配置文件图标
-profile_img_url = https://img.102004.xyz/file/b8af84136dafa65d500bc.jpg
 # 地理位置查询
 geo_location_checker = http://ip-api.com/json/?lang=zh-CN, https://github.com/Centralmatrix3/Scripts/raw/master/Scripts/IP-API.js
 # 资源解析器
@@ -29,7 +27,7 @@ server = 223.5.5.5
 server = 119.29.29.29
 [policy]
 # 兜底策略
-static=兜底策略, proxy, direct, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Quantumult_X_3.png
+static=Final, proxy, direct, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Quantumult_X_3.png
 # Telegram
 static=Telegram, 香港节点, 日本节点, 韩国节点, 自动选择, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
 # YouTube
@@ -71,12 +69,13 @@ url-latency-benchmark=美国节点, server-tag-regex=美国|美|🇺🇸|US|Stat
 # 本地节点
 
 [server_remote]
+
 # 远程订阅
 
 [filter_local]
 
 # 最终规则
-FINAL, 兜底策略
+FINAL, Final
 
 [filter_remote]
 # 规则修正
@@ -93,7 +92,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Quant
 # OpenAI
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/OpenAI/OpenAI.list, tag=OpenAI, force-policy=OpenAI, update-interval=172800, opt-parser=false, enabled=true
 # Apple
-https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/ruleset/Apple.list, tag=苹果服务, force-policy=苹果服务, update-interval=172800, opt-parser=false, enabled=true
+https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/ruleset/Apple.list, tag=Apple, force-policy=Apple, update-interval=172800, opt-parser=false, enabled=true
 # Google
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Google/Google.list, tag=Google, force-policy=Google, update-interval=172800, opt-parser=false, enabled=true
 # Mincrosoft
