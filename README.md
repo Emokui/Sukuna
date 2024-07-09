@@ -1,6 +1,6 @@
 **无DNS泄漏配置**
 
-Loon:https://raw.githubusercontent.com/Emokui/conf/main/Loon2.0
+Loon:https://raw.githubusercontent.com/Emokui/conf/main/Loon
 
 Surge:https://raw.githubusercontent.com/Emokui/conf/main/Surge
 
