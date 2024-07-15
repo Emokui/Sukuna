@@ -1,0 +1,905 @@
+mode: rule
+redir-port: 7892
+mixed-port: 7897
+socks-port: 7898
+port: 7899
+allow-lan: false
+log-level: info
+ipv6: false
+secret: ''
+external-controller: 127.0.0.1:9097
+global-client-fingerprint: chrome
+find-process-mode: strict
+geodata-mode: false
+bind-address: '*'
+profile:
+  store-selected: true
+  store-fake-ip: true
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  sniff:
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+geox-url:
+  geoip: https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat
+  mmdb: https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb
+tcp-concurrent: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:53
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+  - '*'
+  - +.lan
+  - +.local
+  default-nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+  nameserver:
+  - tls://8.8.4.4
+  - tls://1.0.0.1
+  proxy-server-nameserver:
+  - https://doh.pub/dns-query
+  nameserver-policy: null
+  geosite:cn,private:
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+  fallback: []
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+  - any:53
+  strict_route: true
+  auto-route: true
+  auto-detect-interface: true
+  device: Meta
+  strict-route: true
+  mtu: 1500
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+proxies:
+- name: Ama🇯🇵
+  server: 35.78.148.234
+  port: 24789
+  type: tuic
+  uuid: 35E3FEF0-127B-FEE5-DD76-6923BFA83B09
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: AZU🇰🇷
+  server: 20.41.81.201
+  port: 10237
+  type: tuic
+  uuid: A839462E-A75B-CFC5-A593-EA1859B769D5
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: GCP🇭🇰
+  server: 34.92.134.133
+  port: 27265
+  type: tuic
+  uuid: E595F2E9-1612-D4BB-83A6-981144E2880E
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: GCP🇨🇭
+  server: 34.65.253.136
+  port: 5881
+  udp: true
+  skip-cert-verify: true
+  sni: bing.com
+  type: hysteria2
+  password: 0cTrhqY6oEIPhrFBY9hqqjdMJFE
+- name: GCP🇼🇸
+  server: 34.81.3.205
+  port: 32510
+  type: tuic
+  uuid: 25ba99af-45ab-7730-dd06-f184b32c50f6
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: GCP🇺🇸
+  server: 34.168.13.252
+  port: 33529
+  type: tuic
+  uuid: 1662d4cc-9653-dba5-42f4-1be46b28afde
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: EC2🇯🇵
+  server: 35.72.126.102
+  port: 57438
+  type: tuic
+  uuid: B981E0AD-C3D4-E4D4-5142-781553847EB1
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: EC2🇰🇷
+  server: 3.34.178.249
+  port: 17754
+  type: tuic
+  uuid: 04D8592F-22E1-4919-8B99-50A1174B6230
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: GCP🇸🇬
+  server: 34.142.180.151
+  port: 39030
+  type: tuic
+  uuid: 8b3af03e-a5ce-c70f-c405-89ecfabda212
+  password: ajs102004/
+  apln: [h3]
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇭🇰HK1 Alice 0.7x
+  type: ss
+  server: hk.softbank.best
+  port: 34334
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK2 Apple 0.7x
+  type: ss
+  server: hk.softbank.best
+  port: 11566
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK3 Aeza 0.7x
+  type: ss
+  server: hk.softbank.best
+  port: 58274
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK4 LSHIY
+  type: ss
+  server: hk.softbank.best
+  port: 26296
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK5 Lain
+  type: ss
+  server: hk.softbank.best
+  port: 46152
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK6 Hytron
+  type: ss
+  server: hk.softbank.best
+  port: 43798
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK7 Hytron
+  type: ss
+  server: hk.softbank.best
+  port: 48183
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK8 香港寬頻 [Home]
+  type: ss
+  server: hk.softbank.best
+  port: 52215
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇲🇴Macau 澳門電訊 [Home] 3x
+  type: ss
+  server: hk.softbank.best
+  port: 58173
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇯🇵JP1 Lain
+  type: ss
+  server: jp.softbank.best
+  port: 40975
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇯🇵JP2 Lain
+  type: ss
+  server: jp.softbank.best
+  port: 57290
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇯🇵JP3 Lain
+  type: ss
+  server: jp.softbank.best
+  port: 31859
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇯🇵JP4 NTTドコモ [ISP]
+  type: ss
+  server: jp.softbank.best
+  port: 37221
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇰🇷KR SK텔레콤 [Home]
+  type: ss
+  server: jp.softbank.best
+  port: 40196
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇼TW1 中華電信 [Home] 0.7x
+  type: ss
+  server: hk.softbank.best
+  port: 55702
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇼TW2 Wap
+  type: ss
+  server: hk.softbank.best
+  port: 23942
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG1 Oracle 0.7x
+  type: ss
+  server: hk.softbank.best
+  port: 59185
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG2 DigitalOcean 0.7x
+  type: ss
+  server: sg.softbank.best
+  port: 46416
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG3 Akari 0.7x
+  type: ss
+  server: sg.softbank.best
+  port: 49636
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG4 Akari
+  type: ss
+  server: sg.softbank.best
+  port: 46156
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG5 Homura
+  type: ss
+  server: sg.softbank.best
+  port: 46417
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇸🇬SG6 GreenCloud
+  type: ss
+  server: sg.softbank.best
+  port: 30581
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇺🇸US1 Lain
+  type: ss
+  server: jp.softbank.best
+  port: 36889
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇺🇸US2 Frontier [Home]
+  type: ss
+  server: jp.softbank.best
+  port: 13884
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇺🇸US3 Oracle
+  type: ss
+  server: jp.softbank.best
+  port: 33967
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇨🇦Canada Servica
+  type: ss
+  server: jp.softbank.best
+  port: 24156
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇩🇪Germany Gcore 0.8x
+  type: ss
+  server: eu.softbank.best
+  port: 13037
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇩🇪Germany Xtom 0.8x
+  type: ss
+  server: eu.softbank.best
+  port: 21304
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇳🇱Netherlands Liteserver 0.8x
+  type: ss
+  server: eu.softbank.best
+  port: 28164
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇬🇧England Upstream
+  type: ss
+  server: eu.softbank.best
+  port: 38573
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇬🇧England 英國電信 [Home]
+  type: ss
+  server: eu.softbank.best
+  port: 40773
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇱🇺Luxemburg FranTech 0.8x
+  type: ss
+  server: eu.softbank.best
+  port: 24643
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇰🇵N.Korea CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 51392
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇲🇴Macao CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 44120
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇲🇲Myanmar CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 40786
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇰🇭Cambodia CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 11722
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇦🇶Antarctica CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 55909
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇬🇺Guam CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 12846
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇲Turkmenistan CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 51183
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇬🇮Gibraltar CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 38152
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇦🇫Afghanistan CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 57131
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇻🇦Vatican CloudFlare 1.5x
+  type: ss
+  server: cf.softbank.best
+  port: 22958
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇭Thailand Siamdata [ISP] 1.5x
+  type: ss
+  server: hk.softbank.best
+  port: 44634
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇭Thailand TOT [Home] 1.5x
+  type: ss
+  server: hk.softbank.best
+  port: 41094
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇻🇳Vietnam FPT [Home] 1.5x
+  type: ss
+  server: hk.softbank.best
+  port: 38169
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇲🇾Malaysia TMNet [Home] 2x
+  type: ss
+  server: sg.softbank.best
+  port: 10700
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇵🇭Philippines EasternTelecoms [ISP] 2x
+  type: ss
+  server: sg.softbank.best
+  port: 24362
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇦🇺Australia Oracle
+  type: ss
+  server: sg.softbank.best
+  port: 47050
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇦🇪UAE Azure
+  type: ss
+  server: sg.softbank.best
+  port: 47316
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇷🇺Russia EdgeCenter
+  type: ss
+  server: eu.softbank.best
+  port: 33435
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇷🇺Russia OKB [ISP]
+  type: ss
+  server: eu.softbank.best
+  port: 61105
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇵🇱Poland Korbank [Edu]
+  type: ss
+  server: eu.softbank.best
+  port: 50799
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇧🇪Belgium Royale
+  type: ss
+  server: jp.softbank.best
+  port: 49275
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇮🇸Iceland Hostkey
+  type: ss
+  server: eu.softbank.best
+  port: 25873
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇹🇷Turkiye GIR
+  type: ss
+  server: eu.softbank.best
+  port: 64082
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇺🇦Ukraina FOP [ISP]
+  type: ss
+  server: eu.softbank.best
+  port: 46473
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇳🇬Nigeria Melbicom
+  type: ss
+  server: eu.softbank.best
+  port: 64477
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇧🇷Brazil Oracle
+  type: ss
+  server: jp.softbank.best
+  port: 29475
+  cipher: aes-128-gcm
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇺🇾Uruguay ANTEL [ISP]
+  type: ss
+  server: jp.softbank.best
+  port: 47591
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇵🇪Peru RCP [ISP]
+  type: ss
+  server: jp.softbank.best
+  port: 39156
+  cipher: chacha20-ietf-poly1305
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+- name: 🇭🇰HK9 Hysteria2 0.4x
+  server: hkmix01.saba.moe
+  port: 9080
+  udp: true
+  skip-cert-verify: false
+  sni: hkmix01.yuwan.link
+  type: hysteria2
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+- name: 🇭🇰HK10 Trojan 0.3x
+  type: trojan
+  server: hkmix02.saba.moe
+  port: 30303
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+  udp: true
+  sni: hkmix02.yuwan.link
+- name: 🇯🇵JP5 Xtom Hysteria2 0.4x
+  server: xtomjp01.yuwan.link
+  port: 8080
+  udp: true
+  skip-cert-verify: false
+  sni: xtomjp01.yuwan.link
+  type: hysteria2
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+- name: 🇰🇷KR Gcore Hysteria2 0x
+  server: g-renchuan.588500.xyz
+  port: 30303
+  udp: true
+  skip-cert-verify: false
+  sni: g-renchuan.588500.xyz
+  type: hysteria2
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+- name: 🇦🇺Australia Oracle Hysteria2 0.01x
+  server: melbourne02.yuwan.link
+  port: 8080
+  udp: true
+  skip-cert-verify: false
+  sni: melbourne02.yuwan.link
+  type: hysteria2
+  password: 1f73cbe6-50fa-4fbc-b5c8-772d5126f220
+proxy-groups:
+- name: 🔚Final
+  type: select
+  proxies:
+  - ☪️ 手动选择
+  - 🇰🇷 韩国节点
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🇯🇵 日本节点
+  - 🇸🇬 狮城节点
+  - 🇺🇸 美国节点
+- name: ☪️ 手动选择
+  type: select
+  proxies:
+  - AZU🇰🇷
+  - EC2🇰🇷
+  - EC2🇯🇵
+  - Ama🇯🇵
+  - GCP🇭🇰
+  - GCP🇨🇭
+  - GCP🇼🇸
+  - GCP🇺🇸
+  - GCP🇸🇬
+  - 🇭🇰HK1 Alice 0.7x
+  - 🇭🇰HK2 Apple 0.7x
+  - 🇭🇰HK3 Aeza 0.7x
+  - 🇭🇰HK4 LSHIY
+  - 🇭🇰HK5 Lain
+  - 🇭🇰HK6 Hytron
+  - 🇭🇰HK7 Hytron
+  - 🇭🇰HK8 香港寬頻 [Home]
+  - 🇭🇰HK9 Hysteria2 0.4x
+  - 🇭🇰HK10 Trojan 0.3x
+  - 🇲🇴Macau 澳門電訊 [Home] 3x
+  - 🇲🇴Macao CloudFlare 1.5x
+  - 🇯🇵JP1 Lain
+  - 🇯🇵JP2 Lain
+  - 🇯🇵JP3 Lain
+  - 🇯🇵JP4 NTTドコモ [ISP]
+  - 🇯🇵JP5 Xtom Hysteria2 0.4x
+  - 🇰🇷KR SK텔레콤 [Home]
+  - 🇰🇷KR Gcore Hysteria2 0x
+  - 🇹🇼TW1 中華電信 [Home] 0.7x
+  - 🇹🇼TW2 Wap
+  - 🇸🇬SG1 Oracle 0.7x
+  - 🇸🇬SG2 DigitalOcean 0.7x
+  - 🇸🇬SG3 Akari 0.7x
+  - 🇸🇬SG4 Akari
+  - 🇸🇬SG5 Homura
+  - 🇸🇬SG6 GreenCloud
+  - 🇺🇸US1 Lain
+  - 🇺🇸US2 Frontier [Home]
+  - 🇺🇸US3 Oracle
+  - 🇨🇦Canada Servica
+  - 🇩🇪Germany Gcore 0.8x
+  - 🇩🇪Germany Xtom 0.8x
+  - 🇳🇱Netherlands Liteserver 0.8x
+  - 🇬🇧England Upstream
+  - 🇬🇧England 英國電信 [Home]
+  - 🇱🇺Luxemburg FranTech 0.8x
+  - 🇰🇵N.Korea CloudFlare 1.5x
+  - 🇲🇲Myanmar CloudFlare 1.5x
+  - 🇰🇭Cambodia CloudFlare 1.5x
+  - 🇦🇶Antarctica CloudFlare 1.5x
+  - 🇬🇺Guam CloudFlare 1.5x
+  - 🇹🇲Turkmenistan CloudFlare 1.5x
+  - 🇬🇮Gibraltar CloudFlare 1.5x
+  - 🇦🇫Afghanistan CloudFlare 1.5x
+  - 🇻🇦Vatican CloudFlare 1.5x
+  - 🇹🇭Thailand Siamdata [ISP] 1.5x
+  - 🇹🇭Thailand TOT [Home] 1.5x
+  - 🇻🇳Vietnam FPT [Home] 1.5x
+  - 🇲🇾Malaysia TMNet [Home] 2x
+  - 🇵🇭Philippines EasternTelecoms [ISP] 2x
+  - 🇦🇺Australia Oracle
+  - 🇦🇺Australia Oracle Hysteria2 0.01x
+  - 🇦🇪UAE Azure
+  - 🇷🇺Russia EdgeCenter
+  - 🇷🇺Russia OKB [ISP]
+  - 🇵🇱Poland Korbank [Edu]
+  - 🇧🇪Belgium Royale
+  - 🇮🇸Iceland Hostkey
+  - 🇹🇷Turkiye GIR
+  - 🇺🇦Ukraina FOP [ISP]
+  - 🇳🇬Nigeria Melbicom
+  - 🇧🇷Brazil Oracle
+  - 🇺🇾Uruguay ANTEL [ISP]
+  - 🇵🇪Peru RCP [ISP]
+- name: 🍋BiliBili
+  type: select
+  proxies:
+  - DIRECT
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点  
+- name: 🍐Telegram
+  type: select
+  proxies:
+  - AZU🇰🇷
+  - EC2🇰🇷
+  - EC2🇯🇵
+  - GCP🇭🇰
+  - Ama🇯🇵
+- name: 🍎YouTube
+  type: select
+  proxies:
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - 🇹🇼 台湾节点
+  - 🇺🇸 美国节点
+  - 🇰🇷 韩国节点
+  - ☪️ 手动选择
+- name: 🍇Microsoft
+  type: select
+  proxies:
+  - DIRECT
+  - 🇭🇰 香港节点
+  - 🇯🇵 日本节点
+  - ☪️ 手动选择
+- name: 🍰Google
+  type: select
+  proxies:
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - ☪️ 手动选择
+- name: 👾OpenAI
+  type: select
+  proxies:
+  - 🇺🇸 美国节点
+  - ☪️ 手动选择
+- name: 🍓TikTok
+  type: select
+  proxies:
+  - Ama🇯🇵
+  - EC2🇯🇵
+  - AZU🇰🇷
+  - EC2🇰🇷
+  - GCP🇭🇰
+  - ☪️ 手动选择
+- name: 🍉Spotify
+  type: select
+  proxies:
+  - 🇭🇰 香港节点
+  - 🇹🇼 台湾节点
+  - 🇯🇵 日本节点
+  - 🇺🇸 美国节点
+  - 🇰🇷 韩国节点
+  - ☪️ 手动选择
+- name: 🍦Talkatone
+  type: select
+  proxies:
+  - 🇺🇸US1 Lain
+  - 🇺🇸US2 Frontier [Home]
+  - 🇺🇸US3 Oracle
+  - GCP🇺🇸
+- name: 🇭🇰 香港节点
+  type: select
+  proxies:
+  - GCP🇭🇰
+  - 🇭🇰HK1 Alice 0.7x
+  - 🇭🇰HK2 Apple 0.7x
+  - 🇭🇰HK3 Aeza 0.7x
+  - 🇭🇰HK4 LSHIY
+  - 🇭🇰HK5 Lain
+  - 🇭🇰HK6 Hytron
+  - 🇭🇰HK7 Hytron
+  - 🇭🇰HK8 香港寬頻 [Home]
+  - 🇭🇰HK9 Hysteria2 0.4x
+  - 🇭🇰HK10 Trojan 0.3x
+- name: 🇹🇼 台湾节点
+  type: select
+  proxies:
+  - 🇹🇼TW1 中華電信 [Home] 0.7x
+  - 🇹🇼TW2 Wap
+  - GCP🇼🇸
+- name: 🇯🇵 日本节点
+  type: select
+  proxies:
+  - Ama🇯🇵
+  - EC2🇯🇵
+  - 🇯🇵JP1 Lain
+  - 🇯🇵JP2 Lain
+  - 🇯🇵JP3 Lain
+  - 🇯🇵JP4 NTTドコモ [ISP]
+  - 🇯🇵JP5 Xtom Hysteria2 0.4x
+- name: 🇸🇬 狮城节点
+  type: select
+  proxies:
+  - 🇸🇬SG1 Oracle 0.7x
+  - 🇸🇬SG2 DigitalOcean 0.7x
+  - 🇸🇬SG3 Akari 0.7x
+  - 🇸🇬SG4 Akari
+  - 🇸🇬SG5 Homura
+  - 🇸🇬SG6 GreenCloud
+  - GCP🇸🇬
+- name: 🇺🇸 美国节点
+  type: select
+  proxies:
+  - 🇺🇸US2 Frontier [Home]
+  - 🇺🇸US1 Lain
+  - 🇺🇸US3 Oracle
+  - GCP🇺🇸
+- name: 🇰🇷 韩国节点
+  type: select
+  proxies:
+  - EC2🇰🇷
+  - AZU🇰🇷
+  - 🇰🇷KR SK텔레콤 [Home]
+  - 🇰🇷KR Gcore Hysteria2 0x
+rule-providers:
+  BiliBili:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./BiliBili/BiliBili_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
+    interval: 86400
+  Spotify:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Spotify/Spotify_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+    interval: 86400
+  TikTok:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./TikTok/TikTok_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok_No_Resolve.yaml
+    interval: 86400
+  OpenAI:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./OpenAI/OpenAI_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
+    interval: 86400
+  Talkatone:
+    type: http
+    behavior: classical
+    format: text
+    path: ./main/Talkatone.list
+    url: https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
+    interval: 86400
+  YouTube:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./YouTube/YouTube_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+    interval: 86400
+  Telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Telegram/Telegram_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+    interval: 86400
+  Microsoft:
+    type: http
+    behavior: classical
+    format: text
+    path: ./Microsoft/Microsoft.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
+    interval: 86400
+  Google:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Google/Google_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+    interval: 86400
+  China:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    interval: 86400
+rules:
+- RULE-SET,BiliBili,🍋BiliBili
+- RULE-SET,TikTok,🍓TikTok
+- RULE-SET,OpenAI,👾OpenAI
+- RULE-SET,Spotify,🍉Spotify
+- RULE-SET,YouTube,🍎YouTube
+- RULE-SET,Telegram,🍐Telegram
+- RULE-SET,Talkatone,🍦Talkatone
+- RULE-SET,Microsoft,🍇Microsoft
+- RULE-SET,Google,🍰Google
+- RULE-SET,China,DIRECT
+- GEOIP,CN,DIRECT,no-resolve
+- MATCH,🔚Final
