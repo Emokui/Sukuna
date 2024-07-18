@@ -5,6 +5,8 @@ server_check_url = http://cp.cloudflare.com/generate_204
 network_check_url = http://taobao.com/
 # 网络超时检测
 server_check_timeout = 3000
+# 配置文件图标
+profile_img_url = https://img.102004.xyz/file/b8af84136dafa65d500bc.jpg
 # 地理位置查询
 geo_location_checker = http://ip-api.com/json/?lang=zh-CN, https://github.com/Centralmatrix3/Scripts/raw/master/Scripts/IP-API.js
 # 资源解析器
@@ -35,7 +37,7 @@ static=YouTube, proxy, 自动选择, 香港节点, 台湾节点, 日本节点, �
 # OpenAI
 static=OpenAI, proxy, 美国节点, 狮城节点, 自动选择, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
 # Google
-static=Google, proxy, 自动选择, 香港节点, 日本节点, 韩国节点, 美国节点, 狮城节点, 台湾节点, 兜底策略, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png
+static=Google, proxy, 自动选择, 香港节点, 日本节点, 韩国节点, 美国节点, 狮城节点, 台湾节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png
 # TikTok
 static=TikTok, proxy, 日本节点, 韩国节点, 美国节点, 台湾节点, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png
 # BiliBili
@@ -108,6 +110,8 @@ FILTER_REGION, tag=FILTER_REGION, force-policy=direct, update-interval=172800, o
 # 本地重写
 
 [rewrite_remote]
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/MGTV.js, tag=芒果TV, update-interval=172800, opt-parser=true, enabled=true
+https://raw.githubusercontent.com/RuCu6/QuanX/main/Rewrites/Cube/cnftp.snippet, tag=芒果AD, update-interval=172800, opt-parser=true, enabled=true
 
 # 哔站去广告
 https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/rewrite/BiliBili.conf, tag=哔站去广告, update-interval=172800, opt-parser=false, enabled=false
