@@ -6,6 +6,7 @@ Surge:https://raw.githubusercontent.com/Emokui/conf/main/Surge
 
 Clash:https://raw.githubusercontent.com/Emokui/conf/main/Clash.yaml
 
+Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/main/Shadowrocket
 
 
 **Quanmutult X 自用配置**
