@@ -1,28 +1,28 @@
 **无DNS泄漏配置**
 
-Loon:https://raw.githubusercontent.com/Emokui/conf/main/Loon
+Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
 
-Surge:https://raw.githubusercontent.com/Emokui/conf/main/Surge
+Surge:https://raw.githubusercontent.com/Emokui/conf/rule/Surge
 
-Clash:https://raw.githubusercontent.com/Emokui/conf/main/Clash.yaml
+Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash.yaml
 
-Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/main/Shadowrocket
+Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
 
 
 **Quanmutult X 自用配置**
 
-QX:https://raw.githubusercontent.com/Emokui/conf/main/Quantumult%20X
+QX:https://raw.githubusercontent.com/Emokui/conf/rule/Quantumult%20X
 
 
 
 **Dns.list：DNS泄漏检测分流（掩耳盗铃防泄漏):**
 
-https://raw.githubusercontent.com/Emokui/Set-/main/Dns.list
+https://raw.githubusercontent.com/Emokui/Set-/rule/Dns.list
 
 
 **Talkatone.list:分流no-resolve版:**
 
-https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
+https://raw.githubusercontent.com/Emokui/Set-/rule/Talkatone.list
 
 
 
