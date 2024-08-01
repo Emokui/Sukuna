@@ -1,18 +1,128 @@
-#   81行填写订阅链接
+# 78行填写订阅链接
+pr:
+  &pr {
+    type: select,
+    proxies:
+      [
+        ☪️ 全部节点,
+        🇭🇰 香港节点,
+        🇹🇼 台湾节点,
+        🇯🇵 日本节点,
+        🇰🇷 韩国节点,
+        🇸🇬 狮城节点,
+        🇺🇸 美国节点,
+      ],
+  }
+pr2:
+  &pr2 {
+    type: select,
+    proxies:
+      [
+        DIRECT,
+        🇭🇰 香港节点,
+        🇹🇼 台湾节点,
+        ☪️ 全部节点,
+      ],
+  }
+
+pr3:
+  &pr3 {
+    type: select,
+    proxies:
+      [
+        🇸🇬 狮城节点,        
+        🇭🇰 香港节点,
+        🇹🇼 台湾节点,
+        🇯🇵 日本节点,
+        🇰🇷 韩国节点,
+        🇺🇸 美国节点,
+        ☪️ 全部节点,
+      ],
+  }
+
+pr4:
+  &pr4 {
+    type: select,
+    proxies:
+      [
+        🇺🇸 美国节点,
+        🇸🇬 狮城节点,        
+        🇹🇼 台湾节点,
+        🇯🇵 日本节点,
+        🇰🇷 韩国节点,
+        ☪️ 全部节点,
+      ],
+  }
+
+p:
+  &p {
+    type: http,
+    interval: 3600,
+    health-check:
+      {
+        enable: true,
+        url: https://www.gstatic.com/generate_204,
+        interval: 300,
+      },
+  }
+
+use: &use
+  type: select
+  use:
+    - 订阅一
+
+proxy-providers:
+  订阅一:
+    <<: *p
+    path: ./proxy_provider/订阅一.yaml
+    url: "你的订阅链接"
+
 mode: rule
-redir-port: 7892
-mixed-port: 7897
-socks-port: 7898
-port: 7899
-allow-lan: false
-log-level: info
 ipv6: false
-secret: ''
-external-controller: 127.0.0.1:9097
-global-client-fingerprint: chrome
+log-level: info
+allow-lan: false
+mixed-port: 7890
+unified-delay: true
 tcp-concurrent: true
-geodata-mode: false
+external-controller: :9090
+
+geodata-mode: true
+
+
+geox-url:
+  geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
 find-process-mode: strict
+keep-alive-interval: 1800
+global-client-fingerprint: random
+profile:
+  store-selected: true
+  store-fake-ip: true
+ntp:
+  enable: true
+  write-to-system: false
+  server: time.apple.com
+  port: 123
+  interval: 30
+
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+
+tun:
+  enable: false  # enable 'true'
+  stack: system  # or 'gvisor'
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-detect-interface: true
+
 dns:
   enable: true
   ipv6: false
@@ -20,174 +130,48 @@ dns:
   listen: 0.0.0.0:53
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - '*'
-    - '+.lan'
-    - '+.local'
+  - '*'
+  - +.lan
+  - +.local
   default-nameserver:
   - 223.5.5.5
   - 119.29.29.29
-  - 114.114.114.114
-  - '[2402:4e00::]'
-  - '[2400:3200::1]'
   nameserver:
-  - tls://8.8.4.4#dns
-  - tls://1.0.0.1#dns
-  - tls://[2001:4860:4860::8844]#dns
-  - tls://[2606:4700:4700::1001]#dns
+  - tls://8.8.4.4
+  - tls://1.0.0.1
   proxy-server-nameserver:
   - https://doh.pub/dns-query
-  nameserver-policy:
-    geosite:cn,private:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+  nameserver-policy: null
+  geosite:cn,private:
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
   fallback: []
-bind-address: '*'
-profile:
-  store-selected: true
-  store-fake-ip: true
-sniffer:
-  enable: true
-  parse-pure-ip: true
-  sniff:
-    TLS:
-      ports:
-      - 443
-      - 8443
-    HTTP:
-      ports:
-      - 80
-      - 8080-8880
-      override-destination: true
-tun:
-  enable: true
-  stack: system
-  dns-hijack:
-  - any:53
-  strict_route: true
-  auto-route: true
-  auto-detect-interface: true
-  device: Meta
-  strict-route: true
-  mtu: 1500
-geox-url:
-  geoip: https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat
-  mmdb: https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb
+  use-system-hosts: false
+  tcp-concurrent: true
+  geodata-mode: false
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
-proxy-providers:
-  conf1:
-    type: http
-    url: ________________________
-    path: ./proxies/airport1.yaml
-    interval: 86400
+
 proxy-groups:
-- name: 🔚Final
-  type: select
-  proxies:
-  - ✅手动选择
-  - 🇰🇷 韩国节点
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-- name: ✅手动选择
-  type: select
-  use:
-  - conf1
-- name: 🍋BiliBili
-  type: select
-  proxies:
-  - DIRECT
-  - 🇭🇰 香港节点
-  - 🇯🇵 台湾节点
-- name: 🍐Telegram
-  type: select
-  proxies:
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-- name: 🍎YouTube
-  type: select
-  proxies:
-  - ✅手动选择
-  - 🇭🇰 香港节点
-  - 🇯🇵 日本节点
-  - 🇹🇼 台湾节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-  - 🇰🇷 韩国节点
-- name: 🍇Microsoft
-  type: select
-  proxies:
-  - DIRECT
-  - ✅手动选择
-  - 🇭🇰 香港节点
-  - 🇯🇵 日本节点
-- name: 🍰Google
-  type: select
-  proxies:
-  - ✅手动选择
-  - 🇭🇰 香港节点
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-- name: 👾OpenAI
-  type: select
-  proxies:
-  - ✅手动选择
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-- name: 🍓TikTok
-  type: select
-  proxies:
-  - ✅手动选择
-  - 🇹🇼 台湾节点
-  - 🇯🇵 日本节点
-  - 🇸🇬 狮城节点
-  - 🇺🇸 美国节点
-  - 🇰🇷 韩国节点
-- name: 🍦Talkatone
-  type: select
-  use:
-  - conf1
-  filter: 美国|美|US|(?i)UnitedStates
-- name: 🇭🇰 香港节点
-  type: select
-  use:
-  - conf1
-  filter: 香港|港|HK|(?i)HongKong
-- name: 🇹🇼 台湾节点
-  type: select
-  use:
-  - conf1
-  filter: 台湾|湾|TW|(?i)Taiwan
-- name: 🇯🇵 日本节点
-  type: select
-  use:
-  - conf1
-  filter: 日本|日|JP|(?i)Japan
-- name: 🇸🇬 狮城节点
-  type: select
-  use:
-  - conf1
-  filter: 新加坡|狮|SG|(?i)Singapore
-- name: 🇺🇸 美国节点
-  type: select
-  use:
-  - conf1
-  filter: 美国|美|US|(?i)UnitedStates
-- name: 🇰🇷 韩国节点
-  type: select
-  use:
-  - conf1
-  filter: 韩国|韩|KR|(?i)Korea
+  - { name: 🔚 Final, <<: *pr }
+  - { name: ☪️ 全部节点, <<: *use }
+  - { name: 🍋 BiliBili, <<: *pr2}
+  - { name: 🍐 Telegram, <<: *pr3}
+  - { name: 🍎 YouTube, <<: *pr3 }
+  - { name: 🍇 Microsoft, <<: *pr3 }
+  - { name: 🍰 Google, <<: *pr3 }
+  - { name: 👾 OpenAI, <<: *pr4 }
+  - { name: 🍓 TikTok, <<: *pr4 }
+  - { name: 🍉 Spotify, <<: *pr3 }
+  - { name: 🍦 Talkatone, <<: *pr }
+  - { name: 🇭🇰 香港节点, <<: *use, filter: "(?i)港|hk|hongkong|🇭🇰" }
+  - { name: 🇹🇼 台湾节点, <<: *use, filter: "(?i)台|tw|🇹🇼" }
+  - { name: 🇯🇵 日本节点, <<: *use, filter: "(?i)日本|jp|🇯🇵" }
+  - { name: 🇺🇸 美国节点, <<: *use, filter: "(?i)美|unitedstates|🇺🇸" }
+  - { name: 🇸🇬 狮城节点, <<: *use, filter: "(?i)(新|sg|🇸🇬)" }
+  - { name: 🇰🇷 韩国节点, <<: *use, filter: "(?i)(韩|🇰🇷 )" }
+
 rule-providers:
   BiliBili:
     type: http
@@ -195,6 +179,13 @@ rule-providers:
     format: yaml
     path: ./BiliBili/BiliBili_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
+    interval: 86400
+  Spotify:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Spotify/Spotify_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
     interval: 86400
   TikTok:
     type: http
@@ -234,9 +225,9 @@ rule-providers:
   Microsoft:
     type: http
     behavior: classical
-    format: yaml
-    path: ./Microsoft/Microsoft_No_Resolve.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+    format: text
+    path: ./Microsoft/Microsoft.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
     interval: 86400
   Google:
     type: http
@@ -252,15 +243,17 @@ rule-providers:
     path: ./ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
     interval: 86400
+
 rules:
-- RULE-SET,BiliBili,🍋BiliBili
-- RULE-SET,TikTok,🍓TikTok
-- RULE-SET,OpenAI,👾OpenAI
-- RULE-SET,YouTube,🍎YouTube
-- RULE-SET,Telegram,🍐Telegram
-- RULE-SET,Talkatone,🍦Talkatone
-- RULE-SET,Microsoft,🍇Microsoft
-- RULE-SET,Google,🍰Google
+- RULE-SET,BiliBili,🍋 BiliBili
+- RULE-SET,TikTok,🍓 TikTok
+- RULE-SET,OpenAI,👾 OpenAI
+- RULE-SET,Spotify,🍉 Spotify
+- RULE-SET,YouTube,🍎 YouTube
+- RULE-SET,Telegram,🍐 Telegram
+- RULE-SET,Talkatone,🍦 Talkatone
+- RULE-SET,Microsoft,🍇 Microsoft
+- RULE-SET,Google,🍰 Google
 - RULE-SET,China,DIRECT
 - GEOIP,CN,DIRECT,no-resolve
-- MATCH,🔚Final
+- MATCH,🔚 Final
