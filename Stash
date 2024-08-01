@@ -1,0 +1,182 @@
+pr: &pr {type: select, proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点]}
+pr2: &pr2 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, Select]}
+pr3: &pr3 {type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select]}
+pr4: &pr4 {type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select]}
+p: &p {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
+use: &use
+  type: select
+  use:
+    - airport
+proxy-providers:
+  SubStore:
+    !!merge <<: *p
+    path: ./proxy_provider/
+    url: "http://sub.store/download/Fish"
+    benchmark-url: https://www.gstatic.com/generate_204
+    interval: 3600
+mode: rule
+ipv6: false
+log-level: info
+allow-lan: false
+mixed-port: 7890
+unified-delay: true
+tcp-concurrent: true
+external-controller: :9090
+geodata-mode: true
+geox-url:
+  geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
+find-process-mode: strict
+keep-alive-interval: 1800
+global-client-fingerprint: random
+profile:
+  store-selected: true
+  store-fake-ip: true
+ntp:
+  enable: true
+  write-to-system: false
+  server: time.apple.com
+  port: 123
+  interval: 30
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+tun:
+  enable: false # enable 'true'
+  stack: system # or 'gvisor'
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-detect-interface: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:53
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*'
+    - +.lan
+    - +.local
+  default-nameserver:
+    - system
+    - 223.5.5.5
+    - 119.29.29.29
+    - 8.8.4.4
+  nameserver:
+    - system
+    - 119.29.29.29
+    - 8.8.8.8
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+  nameserver-policy: null
+  geosite:cn,private:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback: []
+  use-system-hosts: false
+  tcp-concurrent: true
+  geodata-mode: false
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+proxy-groups:
+  - {name: Final, !!merge <<: *pr, icon: 'https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/stash1.png', proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点], type: select}
+  - {name: Select, !!merge <<: *use, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png', type: select, use: [SubStore], use-url: null}
+  - {name: BiliBili, !!merge <<: *pr2, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBiliTV.png', proxies: [DIRECT, 香港节点, 台湾节点, Select], type: select}
+  - {name: Telegram, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
+  - {name: YouTube, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
+  - {name: Microsoft, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
+  - {name: Google, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
+  - {name: OpenAI, !!merge <<: *pr4, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png', proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], type: select}
+  - {name: TikTok, !!merge <<: *pr4, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png', proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], type: select}
+  - {name: Spotify, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
+  - {name: 香港节点, !!merge <<: *use, filter: "(?i)港|hk|hongkong|🇭🇰", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png', type: select, use: [SubStore], proxies: null}
+  - {name: 台湾节点, !!merge <<: *use, filter: "(?i)台|tw|🇹🇼", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png', type: select, use: [SubStore], proxies: null}
+  - {name: 日本节点, !!merge <<: *use, filter: "(?i)日本|jp|🇯🇵", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png', type: select, use: [SubStore], proxies: null}
+  - {name: 美国节点, !!merge <<: *use, filter: "(?i)美|unitedstates|🇺🇸", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png', type: select, use: [SubStore], proxies: null}
+  - {name: 狮城节点, !!merge <<: *use, filter: "(?i)(新|sg|🇸🇬)", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png', type: select, use: [SubStore], proxies: null}
+  - {name: 韩国节点, !!merge <<: *use, filter: "(?i)(韩|🇰🇷 )", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png', type: select, use: [SubStore], proxies: null}
+rule-providers:
+  BiliBili:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./BiliBili/BiliBili_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
+    interval: 86400
+  Spotify:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Spotify/Spotify_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify_No_Resolve.yaml
+    interval: 86400
+  TikTok:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./TikTok/TikTok_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok_No_Resolve.yaml
+    interval: 86400
+  OpenAI:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./OpenAI/OpenAI_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
+    interval: 86400
+  YouTube:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./YouTube/YouTube_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+    interval: 86400
+  Telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Telegram/Telegram_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+    interval: 86400
+  Microsoft:
+    type: http
+    behavior: classical
+    format: text
+    path: ./Microsoft/Microsoft.list
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
+    interval: 86400
+  Google:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Google/Google_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+    interval: 86400
+  China:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    interval: 86400
+rules:
+  - RULE-SET,BiliBili,BiliBili
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Microsoft,Microsoft
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,Google,Google
+  - RULE-SET,OpenAI,OpenAI
+  - RULE-SET,TikTok,TikTok
+  - RULE-SET,Spotify,Spotify
+  - RULE-SET,China,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
+  - MATCH,Final
+subscribe-url: http://sub.store/download/Fish
