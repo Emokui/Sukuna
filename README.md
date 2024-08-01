@@ -4,7 +4,7 @@
 🐟Clash：https://raw.githubusercontent.com/Emokui/conf/rule/Fishcloud.yaml
 
 
-Clash verge直接链接，导入然后再修改文件在75行粘贴🐟云机场所有节点即可
+Clash verge直接复制链接导入，然后再修改文件:在75行粘贴🐟云机场所有节点即可
 
 
 Clash meta用户先下载此文件编辑再从文件导入即可
