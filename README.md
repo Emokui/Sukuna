@@ -1,4 +1,4 @@
-**Clash配置🐟云机场专用版**
+**Clash配置🐟云机场专用版(会随节点名称改变而更新）**
 
 
 🐟Clash：https://raw.githubusercontent.com/Emokui/conf/rule/Fishcloud.yaml
