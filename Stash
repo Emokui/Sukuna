@@ -47,8 +47,8 @@ sniffer:
       ports: [80, 8080-8880]
       override-destination: true
 tun:
-  enable: false # enable 'true'
-  stack: system # or 'gvisor'
+  enable: true
+  stack: system
   dns-hijack:
     - "any:53"
     - "tcp://any:53"
@@ -66,12 +66,8 @@ dns:
     - +.local
   default-nameserver:
     - system
-    - 223.5.5.5
-    - 119.29.29.29
-    - 8.8.4.4
   nameserver:
     - system
-    - 119.29.29.29
     - 8.8.8.8
   proxy-server-nameserver:
     - https://doh.pub/dns-query
