@@ -22,11 +22,11 @@ udp_drop_list = 443
 
 [dns]
 # 禁用系统DNS/IPv6
-no-system
+# no-system
 no-ipv6
 # 自定义 DNS 服务器
-server = 223.5.5.5
-server = 119.29.29.29
+# server = 223.5.5.5
+# server = 119.29.29.29
 [policy]
 # 兜底策略
 static=Final, proxy, direct, 自动选择, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Quantumult_X_3.png
