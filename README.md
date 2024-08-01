@@ -4,6 +4,9 @@ Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
 
 Surge:https://raw.githubusercontent.com/Emokui/conf/rule/Surge
 
+Stash:https://raw.githubusercontent.com/Emokui/conf/rule/Stash
+
+
 Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash.yaml
 
 Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
