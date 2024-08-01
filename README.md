@@ -1,25 +1,3 @@
-**Clash配置🐟云机场专用版(会随节点名称改变而更新）**
-
-
-🐟Clash：https://raw.githubusercontent.com/Emokui/conf/rule/Fishcloud.yaml
-
-
-**Clash verge直接复制链接导入，然后再修改文件:在75行粘贴🐟云机场所有节点即可**
-
-
-**Clash meta用户先下载此文件编辑再从文件导入即可**
-
-
-**想用🐟云机场的可以走我aff: https://cn.saba.moe/zh/#/auth/signup;referral=rGy2Fftb**
-
-
-**(多国节点有家宽 ISP 及低倍率 0倍率节点）**
-
-
-
-
-
-
 **无DNS泄漏配置**
 
 Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
