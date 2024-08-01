@@ -1,3 +1,6 @@
+##目标写完主流代理App配置目前还剩 Sing·Box 未完成##
+
+
 **无DNS泄漏配置**
 
 Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
