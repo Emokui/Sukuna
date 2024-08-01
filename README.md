@@ -1,7 +1,7 @@
 **Clash配置🐟云机场专用版**
 
 
-🐟：https://raw.githubusercontent.com/Emokui/conf/rule/Fishcloud.yaml
+🐟Clash：https://raw.githubusercontent.com/Emokui/conf/rule/Fishcloud.yaml
 
 
 Clash verge直接链接，导入然后再修改文件在75行粘贴🐟云机场所有节点即可
