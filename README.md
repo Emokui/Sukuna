@@ -9,10 +9,11 @@ Surge:https://raw.githubusercontent.com/Emokui/conf/rule/Surge
 
 Stash:https://raw.githubusercontent.com/Emokui/conf/rule/Stash
 
-
 Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash.yaml
 
 Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
+
+# 本配置无dns泄漏,可能会有少数网站加载慢/不能访问，如不在意dns泄漏,本地规则geoip关闭域名类请求不匹配（Loon）/不执行DNS解析（Surge)
 
 
 **Quanmutult X 自用配置**
