@@ -160,10 +160,9 @@ proxy-groups:
   - { name: 🍎 YouTube, <<: *pr3 }
   - { name: 🍇 Microsoft, <<: *pr3 }
   - { name: 🍰 Google, <<: *pr3 }
-  - { name: 👾 OpenAI, <<: *pr4 }
+  - { name: 🍦 OpenAI, <<: *pr4 }
   - { name: 🍓 TikTok, <<: *pr4 }
   - { name: 🍉 Spotify, <<: *pr3 }
-  - { name: 🍦 Talkatone, <<: *pr }
   - { name: 🇭🇰 香港节点, <<: *use, filter: "(?i)港|hk|hongkong|🇭🇰" }
   - { name: 🇹🇼 台湾节点, <<: *use, filter: "(?i)台|tw|🇹🇼" }
   - { name: 🇯🇵 日本节点, <<: *use, filter: "(?i)日本|jp|🇯🇵" }
@@ -199,13 +198,6 @@ rule-providers:
     format: yaml
     path: ./OpenAI/OpenAI_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
-    interval: 86400
-  Talkatone:
-    type: http
-    behavior: classical
-    format: text
-    path: ./main/Talkatone.list
-    url: https://raw.githubusercontent.com/Emokui/Set-/main/Talkatone.list
     interval: 86400
   YouTube:
     type: http
@@ -246,11 +238,10 @@ rule-providers:
 rules:
 - RULE-SET,BiliBili,🍋 BiliBili
 - RULE-SET,TikTok,🍓 TikTok
-- RULE-SET,OpenAI,👾 OpenAI
+- RULE-SET,OpenAI,🍦 OpenAI
 - RULE-SET,Spotify,🍉 Spotify
 - RULE-SET,YouTube,🍎 YouTube
 - RULE-SET,Telegram,🍐 Telegram
-- RULE-SET,Talkatone,🍦 Talkatone
 - RULE-SET,Microsoft,🍇 Microsoft
 - RULE-SET,Google,🍰 Google
 - RULE-SET,China,DIRECT
