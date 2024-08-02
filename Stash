@@ -1,8 +1,3 @@
-pr: &pr {type: select, proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点]}
-pr2: &pr2 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, Select]}
-pr3: &pr3 {type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select]}
-pr4: &pr4 {type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select]}
-p: &p {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
 use: &use
   type: select
   use:
@@ -80,6 +75,13 @@ dns:
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
+
+pr: &pr {type: select, proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点]}
+pr2: &pr2 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, Select]}
+pr3: &pr3 {type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select]}
+pr4: &pr4 {type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select]}
+p: &p {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
+
 proxy-groups:
   - {name: Final, !!merge <<: *pr, icon: 'https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/stash1.png', proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点], type: select}
   - {name: Select, !!merge <<: *use, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png', type: select, use: [SubStore], use-url: null}
