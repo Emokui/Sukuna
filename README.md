@@ -9,7 +9,7 @@ Surge:https://raw.githubusercontent.com/Emokui/conf/rule/Surge
 
 Stash:https://raw.githubusercontent.com/Emokui/conf/rule/Stash
 
-Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash.yaml
+Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash
 
 Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
 
