@@ -1,4 +1,4 @@
-**随性而写，简练清爽。**
+  **随性而写，简练清爽**
 
 **助理每个DNS焦虑患者康复**
 
@@ -12,11 +12,6 @@ Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash
 
 Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
 
-
-如不在意dns泄漏,请去往 "规则 - geoip" 关闭域名类请求不匹配（Loon）/ 不执行DNS解析（Surge)
-
-
-甚者可以将外部规则集改为不含 no-resolve 的
 
 
 **Quanmutult X 自用配置**
