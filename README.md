@@ -1,9 +1,6 @@
 ### 随性而写，简练清爽 ###
 
 
-
-**助力每个DNS焦虑患者康复**
-
 Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
 
 Surge:https://raw.githubusercontent.com/Emokui/conf/rule/Surge
