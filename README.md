@@ -14,4 +14,4 @@ Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
 
 QX:https://raw.githubusercontent.com/Emokui/conf/rule/Quantumult%20X
 
-## 助力每个DNS焦虑患者康复 ##
+# 助力每个DNS焦虑患者康复
