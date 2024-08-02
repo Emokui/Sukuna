@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/Emokui/Set-/rule/Talkatone.list
 
 https://github.com/blackmatrix7
 
-**自定义分流请从上面仓库取，无DNS泄漏IP类规则要用no-resolve版**
+**自定义分流请从上面仓库取，无DNS泄漏IP类规则要用no-resolve格式**
 
 **本地规则:GEIOP,CN,DIRECT,no-resolve**
 
