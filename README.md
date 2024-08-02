@@ -13,7 +13,7 @@ Clash:https://raw.githubusercontent.com/Emokui/conf/rule/Clash
 
 Shadowrocket:https://raw.githubusercontent.com/Emokui/conf/rule/Shadowrocket
 
-本配置无dns泄漏,可能会有少数网站加载慢/不能访问，如不在意dns泄漏,本地规则geoip关闭域名类请求不匹配（Loon）/不执行DNS解析（Surge)
+如不在意dns泄漏,请去往 "规则 - geoip" 关闭域名类请求不匹配（Loon）/ 不执行DNS解析（Surge) 甚者可以将外部规则集改为不含 no-resolve 的
 
 
 **Quanmutult X 自用配置**
