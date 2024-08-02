@@ -1,14 +1,8 @@
-use: &use
-  type: select
-  use:
-    - airport
 proxy-providers:
   SubStore:
-    !!merge <<: *p
-    path: ./proxy_provider/
+    type: http
+    path: ./proxies/SubStore.yaml
     url: "http://sub.store/download/Fish"
-    benchmark-url: https://www.gstatic.com/generate_204
-    interval: 3600
 mode: rule
 ipv6: false
 log-level: info
@@ -41,12 +35,11 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
-
-  dns-hijack:
-    - "any:53"
-    - "tcp://any:53"
-  auto-route: true
-  auto-detect-interface: true
+      dns-hijack:
+        - "any:53"
+        - "tcp://any:53"
+      auto-route: true
+      auto-detect-interface: true
 dns:
   enable: true
   ipv6: false
@@ -61,7 +54,6 @@ dns:
     - system
   nameserver:
     - system
-    - 8.8.8.8
   proxy-server-nameserver:
     - https://doh.pub/dns-query
   nameserver-policy: null
@@ -72,33 +64,27 @@ dns:
   use-system-hosts: false
   tcp-concurrent: true
   geodata-mode: false
+  skip-cert-verify: null
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
-
-pr: &pr {type: select, proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点]}
-pr2: &pr2 {type: select, proxies: [DIRECT, 香港节点, 台湾节点, Select]}
-pr3: &pr3 {type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select]}
-pr4: &pr4 {type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select]}
-p: &p {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
-
 proxy-groups:
-  - {name: Final, !!merge <<: *pr, icon: 'https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/stash1.png', proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点], type: select}
-  - {name: Select, !!merge <<: *use, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png', type: select, use: [SubStore], use-url: null}
-  - {name: BiliBili, !!merge <<: *pr2, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBiliTV.png', proxies: [DIRECT, 香港节点, 台湾节点, Select], type: select}
-  - {name: Telegram, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
-  - {name: YouTube, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
-  - {name: Microsoft, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
-  - {name: Google, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
-  - {name: OpenAI, !!merge <<: *pr4, icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png', proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], type: select}
-  - {name: TikTok, !!merge <<: *pr4, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png', proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], type: select}
-  - {name: Spotify, !!merge <<: *pr3, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png', proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], type: select}
-  - {name: 香港节点, !!merge <<: *use, filter: "(?i)港|hk|hongkong|🇭🇰", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png', type: select, use: [SubStore], proxies: null}
-  - {name: 台湾节点, !!merge <<: *use, filter: "(?i)台|tw|🇹🇼", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png', type: select, use: [SubStore], proxies: null}
-  - {name: 日本节点, !!merge <<: *use, filter: "(?i)日本|jp|🇯🇵", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png', type: select, use: [SubStore], proxies: null}
-  - {name: 美国节点, !!merge <<: *use, filter: "(?i)美|unitedstates|🇺🇸", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png', type: select, use: [SubStore], proxies: null}
-  - {name: 狮城节点, !!merge <<: *use, filter: "(?i)(新|sg|🇸🇬)", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png', type: select, use: [SubStore], proxies: null}
-  - {name: 韩国节点, !!merge <<: *use, filter: "(?i)(韩|🇰🇷 )", icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png', type: select, use: [SubStore], proxies: null}
+  - {name: Final, type: select, proxies: [Select, 香港节点, 台湾节点, 日本节点, 韩国节点, 狮城节点, 美国节点], icon: 'https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/stash1.png'}
+  - {name: Select, type: select, use: [SubStore], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+  - {name: Telegram, type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png'}
+  - {name: YouTube, type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png'}
+  - {name: Microsoft, type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png'}
+  - {name: OpenAI, type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png'}
+  - {name: Spotify, type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select]}
+  - {name: Google, type: select, proxies: [狮城节点, 香港节点, 台湾节点, 日本节点, 韩国节点, 美国节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png'}
+  - {name: BiliBili, type: select, proxies: [DIRECT, 香港节点, 台湾节点, Select], icon: 'https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBiliTV.png'}
+  - {name: TikTok, type: select, proxies: [美国节点, 狮城节点, 台湾节点, 日本节点, 韩国节点, Select], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png'}
+  - {name: 香港节点, type: select, use: [SubStore], filter: "(?i)港|hk|hongkong|🇭🇰", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png'}
+  - {name: 台湾节点, type: select, use: [SubStore], filter: "(?i)台|tw|🇹🇼", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png'}
+  - {name: 日本节点, type: select, use: [SubStore], filter: "(?i)日本|jp|🇯🇵", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png'}
+  - {name: 美国节点, type: select, use: [SubStore], filter: "(?i)美|unitedstates|🇺🇸", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png'}
+  - {name: 狮城节点, type: select, use: [SubStore], filter: "(?i)(新|sg|🇸🇬)", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png'}
+  - {name: 韩国节点, type: select, use: [SubStore], filter: "(?i)(韩|🇰🇷 )", icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png'}
 rule-providers:
   BiliBili:
     type: http
