@@ -1,3 +1,4 @@
+# DNS检测网站
 DOMAIN,ip-scan.adspower.net,PROXY
 DOMAIN-SUFFIX,immersivetranslate.com,PROXY
 DOMAIN-SUFFIX,browserscan.net,PROXY
