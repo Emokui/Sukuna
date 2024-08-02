@@ -1,7 +1,6 @@
-**目前还剩 Sing·Box 未完成 已完成的配置也会持续打磨 目前仅作手动配置**
+**随性而写，简练清爽。**
 
-
-**无DNS泄漏配置**
+**助理每个DNS焦虑患者康复**
 
 Loon:https://raw.githubusercontent.com/Emokui/conf/rule/Loon
 
@@ -26,7 +25,7 @@ QX:https://raw.githubusercontent.com/Emokui/conf/rule/Quantumult%20X
 
 
 
-**Dns.list：DNS泄漏检测分流（掩耳盗铃防泄漏):**
+**Dns.list：偷懒掩耳盗铃**
 
 https://raw.githubusercontent.com/Emokui/Set-/rule/Dns.list
 
