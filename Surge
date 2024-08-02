@@ -1,8 +1,4 @@
 # Final为兜底策略 Proxy策略组里填写订阅链接
-# 本配置无dns泄漏,可能会有少数网站加载慢/不能访问
-# 如不在意dns泄漏,本地规则geoip关闭不执行DNS解析
-# 如遇到某某网站不能访问可以反馈 @naibai_bot
-
 [General]
 loglevel = notify
 show-error-page-for-reject = true
