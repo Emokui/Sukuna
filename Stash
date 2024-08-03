@@ -1,3 +1,4 @@
+# 作者:YGKING 
 proxy-providers:
   SubStore:
     type: http
