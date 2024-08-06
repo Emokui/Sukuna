@@ -20,7 +20,7 @@ disconnect-on-policy-change = true
 disable-stun = true
 disable-udp-ports = 443
 [Host]
-
+*raw.githubusercontent.com = server:223.5.5.5
 [Proxy]
 
 [Remote Proxy]
