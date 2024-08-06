@@ -1,4 +1,4 @@
-# 78行填写订阅链接
+# 101行填写订阅链接
 pr:
   &pr {
     type: select,
@@ -11,14 +11,24 @@ pr:
         🇰🇷 韩国节点,
         🇸🇬 狮城节点,
         🇺🇸 美国节点,
+        🇰🇷 AZU,
+        🇰🇷 EC2,
+        🇯🇵 EC2,
+        🇺🇸 GCP,
+        🇺🇸 Vultr,
+        🇨🇭 GCP,
+        🇼🇸 GCP,
+        🇸🇬 GCP,
       ],
-  }
+  }  
+
 pr2:
   &pr2 {
     type: select,
     proxies:
       [
         DIRECT,
+        🔚 Final,
         🇭🇰 香港节点,
         🇹🇼 台湾节点,
         ☪️ 手动选择,
@@ -30,13 +40,9 @@ pr3:
     type: select,
     proxies:
       [
-        🇸🇬 狮城节点,        
-        🇭🇰 香港节点,
-        🇹🇼 台湾节点,
-        🇯🇵 日本节点,
-        🇰🇷 韩国节点,
-        🇺🇸 美国节点,
-        ☪️ 手动选择,
+        🇰🇷 AZU,
+        🇰🇷 EC2,
+        🇯🇵 EC2,
       ],
   }
 
@@ -45,12 +51,29 @@ pr4:
     type: select,
     proxies:
       [
-        🇺🇸 美国节点,
-        🇸🇬 狮城节点,        
+        🇯🇵 EC2,
+        🇰🇷 AZU,
+        🇰🇷 EC2,
+        🇺🇸 Vultr,
+        🔚 Final,
+        🇭🇰 香港节点,
         🇹🇼 台湾节点,
         🇯🇵 日本节点,
+      ],
+  }
+
+pr5:
+  &pr5 {
+    type: select,
+    proxies:
+      [
+        🇯🇵 EC2,
+        🇰🇷 EC2,
+        🇺🇸 Vultr,
+        🔚 Final,
+        🇯🇵 日本节点,
         🇰🇷 韩国节点,
-        ☪️ 手动选择,
+        🇺🇸 美国节点,
       ],
   }
 
@@ -69,13 +92,94 @@ p:
 use: &use
   type: select
   use:
-    - 订阅一
+    - provider1
 
 proxy-providers:
-  订阅一:
+  provider1:
     <<: *p
-    path: ./proxy_provider/订阅一.yaml
-    url: "你的订阅链接"
+    path: ./proxy_provider/provider1.yaml
+    url: "订阅链接"
+
+proxies:
+- name: 🇰🇷 AZU
+  server: 20.41.81.201
+  port: 10237
+  type: tuic
+  uuid: A839462E-A75B-CFC5-A593-EA1859B769D5
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇺🇸 Vultr
+  server: 45.76.244.245
+  port: 18195
+  type: tuic
+  uuid: 4B170BCB-6DC1-68A9-FC62-50160BC3F808
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇨🇭 GCP
+  server: 34.65.253.136
+  port: 5881
+  udp: true
+  skip-cert-verify: true
+  sni: bing.com
+  type: hysteria2
+  password: 0cTrhqY6oEIPhrFBY9hqqjdMJFE
+- name: 🇼🇸 GCP
+  server: 34.81.3.205
+  port: 32510
+  type: tuic
+  uuid: 25ba99af-45ab-7730-dd06-f184b32c50f6
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇺🇸 GCP
+  server: 34.168.13.252
+  port: 33529
+  type: tuic
+  uuid: 1662d4cc-9653-dba5-42f4-1be46b28afde
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇯🇵 EC2
+  server: 35.72.126.102
+  port: 57438
+  type: tuic
+  uuid: B981E0AD-C3D4-E4D4-5142-781553847EB1
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇰🇷 EC2
+  server: 3.34.178.249
+  port: 17754
+  type: tuic
+  uuid: 04D8592F-22E1-4919-8B99-50A1174B6230
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+- name: 🇸🇬 GCP
+  server: 34.142.180.151
+  port: 39030
+  type: tuic
+  uuid: 8b3af03e-a5ce-c70f-c405-89ecfabda212
+  password: ajs102004/
+  apln:
+  - h3
+  sin: www.bing.com
+  skip-cert-verify: true
+
 
 mode: rule
 ipv6: false
@@ -136,15 +240,18 @@ dns:
   default-nameserver:
   - system
   nameserver:
-  - system
-  - tls://8.8.4.4
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
   proxy-server-nameserver:
   - https://doh.pub/dns-query
-  nameserver-policy: null
+  nameserver-policy:
+     'raw.githubusercontent': '223.5.5.5'
   geosite:cn,private:
   - https://doh.pub/dns-query
   - https://dns.alidns.com/dns-query
-  fallback: []
+  fallback:
+    - tls://8.8.4.4
+    - tls://1.1.1.1
   use-system-hosts: false
   tcp-concurrent: true
   geodata-mode: false
@@ -154,15 +261,15 @@ script:
 
 proxy-groups:
   - { name: 🔚 Final, <<: *pr }
-  - { name: ☪️ 手动选择, <<: *use }
+  - { name: ☪️ 手动选择, <<: *use,}
   - { name: 🍋 BiliBili, <<: *pr2}
   - { name: 🍐 Telegram, <<: *pr3}
-  - { name: 🍎 YouTube, <<: *pr3 }
-  - { name: 🍇 Microsoft, <<: *pr3 }
-  - { name: 🍰 Google, <<: *pr3 }
-  - { name: 🍦 OpenAI, <<: *pr4 }
-  - { name: 🍓 TikTok, <<: *pr4 }
-  - { name: 🍉 Spotify, <<: *pr3 }
+  - { name: 🍎 YouTube, <<: *pr4 }
+  - { name: 🍇 Microsoft, <<: *pr4 }
+  - { name: 🍰 Google, <<: *pr4 }
+  - { name: 👾 OpenAI, <<: *pr5 }
+  - { name: 🍓 TikTok, <<: *pr5 }
+  - { name: 🍉 Spotify, <<: *pr4 }
   - { name: 🇭🇰 香港节点, <<: *use, filter: "(?i)港|hk|hongkong|🇭🇰" }
   - { name: 🇹🇼 台湾节点, <<: *use, filter: "(?i)台|tw|🇹🇼" }
   - { name: 🇯🇵 日本节点, <<: *use, filter: "(?i)日本|jp|🇯🇵" }
@@ -238,7 +345,7 @@ rule-providers:
 rules:
 - RULE-SET,BiliBili,🍋 BiliBili
 - RULE-SET,TikTok,🍓 TikTok
-- RULE-SET,OpenAI,🍦 OpenAI
+- RULE-SET,OpenAI,👾 OpenAI
 - RULE-SET,Spotify,🍉 Spotify
 - RULE-SET,YouTube,🍎 YouTube
 - RULE-SET,Telegram,🍐 Telegram
@@ -247,3 +354,4 @@ rules:
 - RULE-SET,China,DIRECT
 - GEOIP,CN,DIRECT,no-resolve
 - MATCH,🔚 Final
+- MATCH,REJECT
