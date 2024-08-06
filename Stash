@@ -1,4 +1,4 @@
-# 作者:YGKING 
+# 默认订阅名:SubStore
 proxy-providers:
   SubStore:
     type: http
@@ -48,24 +48,27 @@ dns:
   listen: 0.0.0.0:53
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - '*'
-    - +.lan
-    - +.local
+  - '*'
+  - +.lan
+  - +.local
   default-nameserver:
-    - system
+  - system
   nameserver:
-    - system
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
   proxy-server-nameserver:
-    - https://doh.pub/dns-query
-  nameserver-policy: null
+  - https://doh.pub/dns-query
+  nameserver-policy:
+     'raw.githubusercontent': '223.5.5.5'
   geosite:cn,private:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-  fallback: []
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+  fallback:
+    - tls://8.8.4.4
+    - tls://1.1.1.1
   use-system-hosts: false
   tcp-concurrent: true
   geodata-mode: false
-  skip-cert-verify: null
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
