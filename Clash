@@ -227,9 +227,9 @@ rule-providers:
   China:
     type: http
     behavior: classical
-    format: text
-    path: ./non_ip/domestic.conf
-    url: https://ruleset.skk.moe/List/non_ip/domestic.conf
+    format: yaml
+    path: ./ChinaMax_Classical_No_IPv6_No_Resolve.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml
     interval: 86400
 
 rules:
