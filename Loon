@@ -1,16 +1,17 @@
-# 手动配置/持续更新
+# Final为兜底策略
 [General]
+sni-sniffing = true
 ipv6 = false
 skip-proxy = localhost,*.local,10.0.0.0/8,127.0.0.0/8,169.254.0.0/16,192.0.2.0/24,192.168.0.0/16,198.51.100.0/24,224.0.0.0/4
 bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
 real-ip = *.icloud.com,*.apple.com
-dns-server = system
+dns-server = system,
 allow-udp-proxy = true
-allow-wifi-access = false
+allow-wifi-access = true
 wifi-access-http-port = 1234
 wifi-access-socks5-port = 1235
-internet-test-url = http://captive.apple.com/generate_204
 proxy-test-url = http://cp.cloudflare.com/generate_204
+internet-test-url = http://captive.apple.com/generate_204
 test-timeout = 5
 interface-mode = auto
 switch-node-after-failure-times = 3
@@ -21,27 +22,29 @@ disable-stun = true
 disable-udp-ports = 443
 [Host]
 *raw.githubusercontent.com = server:223.5.5.5
+
 [Proxy]
+
 
 [Remote Proxy]
 
 
+
 [Proxy Group]
-Final = select,DIRECT,全球手动,香港节点,台湾节点,日本节点,韩国节点,新国节点,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Loon_2.png
-Microsoft = select,DIRECT,香港节点,新国节点,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/iCloud.png
-Google = select,香港节点,台湾节点,日本节点,新国节点,美国节点,韩国节点,Final,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png
-Telegram = select,香港节点,新国节点,台湾节点,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
-YouTube = select,香港节点,台湾节点,新国节点,日本节点,美国节点,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/youtube.png
-OpenAi = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
-TikTok = select,美国节点,韩国节点,日本节点,台湾节点,香港节点,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_1.png
-BiliBili = select,DIRECT,香港节点,台湾节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BiliBili.png
-全球手动 = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/lige47/quanqiu(1).png
-香港节点 = select,香港节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾节点 = select,台湾节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本节点 = select,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国节点 = select,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国节点 = select,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国节点 = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+Final = select,DIRECT,全球手动,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/Loon_2.png
+BiliBili = select,DIRECT,香港手动,台湾手动,url = http://www.gstatic.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili.png
+TikTok = select,日本手动,韩国手动,台湾手动,美国手动,新国手动,全球手动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok_2.png
+OpenAi = select,美国手动,韩国手动,日本手动,新国手动,台湾手动,全球手动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/ChatGPT6.png
+Google = select,香港手动,台湾手动,日本手动,全球手动,韩国手动,新国手动,美国手动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gcp.png
+Microsoft = select,DIRECT,香港手动,美国手动,全球手动,日本手动,韩国手动,新国手动,台湾手动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_iCloud.png
+Telegram = select,香港手动,台湾手动,日本手动,韩国手动,新国手动,美国手动,url = http://captive.apple.com/generate_204,img-url = https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Category_Productivity.png
+全球手动 = select,全球节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+香港手动 = select,香港节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
+台湾手动 = select,台湾节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+日本手动 = select,日本节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+韩国手动 = select,韩国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+新国手动 = select,新国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+美国手动 = select,美国节点,url = http://cp.cloudflare.com/generate_204,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 
 [Remote Filter]
 
@@ -54,17 +57,13 @@ BiliBili = select,DIRECT,香港节点,台湾节点,url = http://cp.cloudflare.co
 全球节点 = NameRegex, FilterKey = "^"
 
 [Remote Rule]
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=YouTube, tag=YouTube, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list, policy=TikTok, tag=TikTok, enabled=true
 https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list, policy=OpenAi, tag=OpenAi, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/BiliBili/BiliBili.list, policy=BiliBili, tag=BiliBili, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
-https://ruleset.skk.moe/List/non_ip/direct.conf, policy=DIRECT, tag=DIRECT 1, enabled=true
-https://ruleset.skk.moe/List/non_ip/domestic.conf, policy=DIRECT, tag=DIRECT 2, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China_All_No_Resolve.list, policy=DIRECT, tag=DIRECT 3, enabled=true
-https://raw.githubusercontent.com/Code-Dramatist/Rule_Actions/main/Direct_Rule/Direct_Rule.rule, policy=DIRECT, tag=备用直连, enabled=false
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
+https://ruleset.skk.moe/List/non_ip/domestic.conf, policy=DIRECT, tag=DIRECT, enabled=true
 
 [Rule]
 GEOIP,CN,DIRECT,no-resolve
@@ -80,25 +79,13 @@ FINAL,Final
 
 
 [Plugin]
-https://github.com/BiliUniverse/Global/raw/main/modules/BiliBili.Global.plugin, enabled=true
-https://raw.githubusercontent.com/ClydeTime/BiliBili/main/modules/BiliBili.Modified.plugin, enabled=true
-https://github.com/BiliUniverse/Redirect/raw/main/modules/BiliBili.Redirect.sgmodule, enabled=false
-https://gist.githubusercontent.com/Sliverkiss/a7496bd073820942b44a9b36874aaf4c/raw/sliverkiss.loon.plugin, enabled=false
-https://raw.githubusercontent.com/chxm1023/Script_X/main/Collections.plugin, enabled=false
-https://github.com/BiliUniverse/Enhanced/raw/main/modules/BiliBili.Enhanced.plugin, enabled=true
-https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=Google, tag=Sub-Store, enabled=true
-https://raw.githubusercontent.com/ClydeTime/BiliBili/master/modules/BiliBiliDailyBonus.plugin, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Google.plugin, enabled=false
-https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=Google, tag=BoxJs, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Node_detection_tool.plugin, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Spotify_remove_ads.plugin, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Script-Hub.plugin, policy=Google, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/YouTube_remove_ads.plugin, enabled=true
-https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.plugin, enabled=true
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/LoonGallery.plugin, policy=香港节点, enabled=false
-https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Taobao_remove_ads.plugin, enabled=false
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=DIRECT, enabled=false
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, policy=Google, tag=BoxJs, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/LoonGallery.plugin, policy=DIRECT, enabled=false
+https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin, policy=DIRECT, tag=Sub-Store, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/Node_detection_tool.plugin, enabled=false
+https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Plugin/YouTube_remove_ads.plugin, enabled=false
 
 
 [MITM]
-
 skip-server-cert-verify = true
