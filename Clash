@@ -85,10 +85,7 @@ mixed-port: 7890
 unified-delay: true
 tcp-concurrent: true
 external-controller: :9090
-
 geodata-mode: true
-
-
 geox-url:
   geoip: "https://hub.gitmirror.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
   mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
@@ -104,7 +101,6 @@ ntp:
   server: time.apple.com
   port: 123
   interval: 30
-
 sniffer:
   enable: true
   sniff:
@@ -113,7 +109,6 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
       override-destination: true
-
 tun:
   enable: true
   stack: system
@@ -136,13 +131,15 @@ dns:
   default-nameserver:
   - system
   - 223.5.5.5
+  nameserver:
+  - https://223.5.5.5/dns-query
+  - quic://223.5.5.5
   use-system-hosts: true
   tcp-concurrent: true
   geodata-mode: false
 script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
-
 proxy-groups:
   - { name: 🔚 Final, <<: *pr }
   - { name: ☪️ 全部节点, <<: *use }
