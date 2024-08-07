@@ -135,14 +135,8 @@ dns:
   - +.local
   default-nameserver:
   - system
-  nameserver:
   - 223.5.5.5
-  nameserver-policy:
-     'raw.githubusercontent': '223.5.5.5'
-  fallback:
-    - tls://8.8.4.4
-    - tls://1.1.1.1
-  use-system-hosts: false
+  use-system-hosts: true
   tcp-concurrent: true
   geodata-mode: false
 script:
