@@ -1,3 +1,4 @@
+# Final为兜底策略
 [general]
 # 代理延迟测试
 server_check_url = http://cp.cloudflare.com/generate_204
