@@ -82,9 +82,6 @@ url-latency-benchmark=美国节点, server-tag-regex=美国|美|🇺🇸|US|Stat
 FINAL, Final
 
 [filter_remote]
-# 规则修正
-https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/ruleset/Unbreak.list, tag=规则修正, force-policy=direct, update-interval=172800, opt-parser=false, enabled=true
-
 # BiliBili
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/BiliBili/BiliBili.list, tag=BiliBili, force-policy=BiliBili, update-interval=172800, opt-parser=false, enabled=true
 # Telegram
