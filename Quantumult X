@@ -3,7 +3,7 @@
 # 代理延迟测试
 server_check_url = http://cp.cloudflare.com/generate_204
 # 直连延迟测试
-network_check_url = http://taobao.com/
+network_check_url = http://captive.apple.com/generate_204
 # 网络超时检测
 server_check_timeout = 3000
 # 配置文件图标
