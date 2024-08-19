@@ -1,0 +1,20 @@
+# DNS检测网站
+DOMAIN,ip-scan.adspower.net,PROXY
+DOMAIN-SUFFIX,immersivetranslate.com,PROXY
+DOMAIN-SUFFIX,browserscan.net,PROXY
+DOMAIN-SUFFIX,edns.ip-api.com,PROXY
+DOMAIN-SUFFIX,ipv4.surfsharkdns.com,PROXY
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY
+DOMAIN-SUFFIX,dnsleak.com,PROXY
+DOMAIN-SUFFIX,expressvpn.com,PROXY
+DOMAIN-SUFFIX,nordvpn.com,PROXY
+DOMAIN-SUFFIX,surfshark.com,PROXY
+DOMAIN-SUFFIX,ipleak.net,PROXY
+DOMAIN-SUFFIX,perfect-privacy.com,PROXY
+DOMAIN-SUFFIX,browserleaks.com,PROXY
+DOMAIN-SUFFIX,browserleaks.org,PROXY
+DOMAIN-SUFFIX,browserleaks.net,PROXY
+DOMAIN-SUFFIX,vpnunlimited.com,PROXY
+DOMAIN-SUFFIX,whoer.net,PROXY
+DOMAIN-SUFFIX,whrq.net,PROXY
+DOMAIN-KEYWORD,leak,PROXY
