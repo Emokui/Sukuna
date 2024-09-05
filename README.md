@@ -7,8 +7,8 @@ https://github.com/blackmatrix7
 
 
 **照片DIY图标**
-https://raw.githubusercontent.com/Emokui/main/rule/Short/图标DIY.shortcut
+https://raw.githubusercontent.com/Emokui/nicy/main/Short/图标DIY.shortcut
 
 
 **Appstore提取图标**
-https://raw.githubusercontent.com/Emokui/main/rule/Short/图标Ultra.shortcut
+https://raw.githubusercontent.com/Emokui/nicy/main/Short/图标Ultra.shortcut
