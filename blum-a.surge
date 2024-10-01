@@ -3,8 +3,6 @@ name = Blum Autoclicker
 version = 1.0
 icon = https://cdn.prod.website-files.com/65b6a1a4a0e2af577bccce96/65ba99c1616e21b24009b86c_blum-256.png
 
-[Script]
-BlumAutoClicker = type=http-response, pattern=https://telegram.blum.codes/*, requires-body=true, max-size=0, script-path=blum_autoclicker.js
 
 [MITM]
 hostname = telegram.blum.codes
