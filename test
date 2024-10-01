@@ -1,0 +1,149 @@
+[General]
+name = Blum Autoclicker
+version = 1.0
+icon = https://cdn.prod.website-files.com/65b6a1a4a0e2af577bccce96/65ba99c1616e21b24009b86c_blum-256.png
+
+[Script]
+# 自动点击 Blum 游戏的模块
+BlumAutoClicker = type=http-response, pattern=https://telegram.blum.codes/*, requires-body=true, max-size=0, script-path=blum_autoclicker.js
+
+[MITM]
+hostname = telegram.blum.codes
+
+[Arguments]
+# 允许用户通过 Surge 编辑这些参数
+minBombHits = 1 # 点击炸弹的最小次数
+minIceHits = 3 # 点击冰块的最小次数
+flowerSkipPercentage = 20 # 花朵跳过的概率（百分比）
+minDelayMs = 2000 # 点击之间的最小延迟
+maxDelayMs = 5000 # 点击之间的最大延迟
+autoClickPlay = false # 是否自动点击“Play”按钮
+
+// 从 Surge 的 Arguments 中读取参数，用户可以在 Surge 模块编辑界面修改这些值
+const settings = {
+  minBombHits: parseInt($argument.minBombHits) || 1,
+  minIceHits: parseInt($argument.minIceHits) || 3,
+  flowerSkipPercentage: parseInt($argument.flowerSkipPercentage) || 20,
+  minDelayMs: parseInt($argument.minDelayMs) || 2000,
+  maxDelayMs: parseInt($argument.maxDelayMs) || 5000,
+  autoClickPlay: $argument.autoClickPlay === 'true' || false
+};
+
+// 自动点击脚本逻辑
+const script = `
+(function() {
+  let GAME_SETTINGS = ${JSON.stringify(settings)};
+
+  let isGamePaused = false;
+  let gameStats = {
+    score: 0,
+    bombHits: 0,
+    iceHits: 0,
+    flowersSkipped: 0,
+    isGameOver: false,
+  };
+
+  const originalPush = Array.prototype.push;
+  Array.prototype.push = function (...items) {
+    if (!isGamePaused) {
+      items.forEach(item => handleGameElement(item));
+    }
+    return originalPush.apply(this, items);
+  };
+
+  function handleGameElement(element) {
+    if (!element || !element.item) return;
+
+    const { type } = element.item;
+    switch (type) {
+      case "CLOVER":
+        processFlower(element);
+        break;
+      case "BOMB":
+        processBomb(element);
+        break;
+      case "FREEZE":
+        processIce(element);
+        break;
+    }
+  }
+
+  function processFlower(element) {
+    const shouldSkip = Math.random() < (GAME_SETTINGS.flowerSkipPercentage / 100);
+    if (shouldSkip) {
+      gameStats.flowersSkipped++;
+    } else {
+      gameStats.score++;
+      clickElement(element);
+    }
+  }
+
+  function processBomb(element) {
+    if (gameStats.bombHits < GAME_SETTINGS.minBombHits) {
+      gameStats.score = 0;
+      clickElement(element);
+      gameStats.bombHits++;
+    }
+  }
+
+  function processIce(element) {
+    if (gameStats.iceHits < GAME_SETTINGS.minIceHits) {
+      clickElement(element);
+      gameStats.iceHits++;
+    }
+  }
+
+  function clickElement(element) {
+    element.onClick(element);
+    element.isExplosion = true;
+    element.addedAt = performance.now();
+  }
+
+  function checkGameCompletion() {
+    const rewardElement = document.querySelector('#app > div > div > div.content > div.reward');
+    if (rewardElement && !gameStats.isGameOver) {
+      gameStats.isGameOver = true;
+      resetGameStats();
+    }
+  }
+
+  function resetGameStats() {
+    gameStats = {
+      score: 0,
+      bombHits: 0,
+      iceHits: 0,
+      flowersSkipped: 0,
+      isGameOver: false,
+    };
+  }
+
+  function getNewGameDelay() {
+    return Math.floor(Math.random() * (GAME_SETTINGS.maxDelayMs - GAME_SETTINGS.minDelayMs + 1) + GAME_SETTINGS.minDelayMs);
+  }
+
+  function checkAndClickPlayButton() {
+    const playButtons = document.querySelectorAll('button.kit-button.is-large.is-primary, a.play-btn[href="/game"], button.kit-button.is-large.is-primary');
+
+    playButtons.forEach(button => {
+      if (!isGamePaused && GAME_SETTINGS.autoClickPlay && (/Play/.test(button.textContent) || /Continue/.test(button.textContent))) {
+        setTimeout(() => {
+          button.click();
+          gameStats.isGameOver = false;
+        }, getNewGameDelay());
+      }
+    });
+  }
+
+  function continuousPlayButtonCheck() {
+    checkAndClickPlayButton();
+    setTimeout(continuousPlayButtonCheck, 1000);
+  }
+
+  continuousPlayButtonCheck();
+})();
+`;
+
+// 注入脚本到 HTML 文档
+const body = $response.body;
+$response.body = body.replace('</body>', `<script>${script}</script></body>`);
+$done({ body });
