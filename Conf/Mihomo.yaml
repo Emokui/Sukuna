@@ -1,3 +1,5 @@
+#  导入Mihomo的覆写 套用本模板，根据自己使用情况 修改细节
+
 proxy-groups:
 - name: Final
   type: select
