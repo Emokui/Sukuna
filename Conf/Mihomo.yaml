@@ -22,7 +22,7 @@ proxy-groups:
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Telegram.png
   include-all: true
-  filter: "🇯🇵 EC2|🇰🇷 EC2|🇰🇷 AZU|🇩🇪 Vultr"
+  filter: "🇯🇵|🇰🇷|🇭🇰|🇸🇬"
 
 - name: YouTube
   type: select
