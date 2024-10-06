@@ -1,77 +1,69 @@
 #  导入Mihomo的覆写 套用本模板，根据自己使用情况 修改细节
 
 proxy-groups:
+
 - name: Final
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/emokui.png
   proxies:
   - 手动选择
-  - 韩国节点
+  - 香港节点
   - 台湾节点
   - 日本节点
   - 狮城节点
   - 美国节点
+
 - name: 手动选择
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/qx.png
   include-all: true
+
 - name: Telegram
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Telegram.png
-  proxies:
-  - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
+  include-all: true
+  filter: "🇯🇵 EC2|🇰🇷 EC2|🇰🇷 AZU|🇩🇪 Vultr"
+
 - name: YouTube
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Youtube.png
   proxies:
+  - 香港节点
   - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
+  - 美国节点
+  - 手动选择
+
 - name: JuJuTsu
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/refs/heads/main/icon/picture/JuJu.png
-  proxies:
-  - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
-- name: Pokemmo
-  type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Pokemmo.png
-  proxies:
-  - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
+  include-all: true
+  filter: "JP|🇯🇵"
+
 - name: Microsoft
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Microsoft.png
   proxies:
+  - DIRECT
+  - 香港节点
   - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
+  - 手动选择
+
 - name: Google
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Google.png
   proxies:
-  - 台湾节点
+  - 香港节点
   - 日本节点
-  - 韩国节点
-  - 狮城节点
+  - 美国节点
+  - 手动选择
+
 - name: Talkatone
   type: select
   icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Talkatone.png
   proxies:
-  - 台湾节点
-  - 日本节点
-  - 韩国节点
-  - 狮城节点
+  - 美国节点
   - 手动选择
+
 - name: BiliBili
   type: select
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/bilibili.png
@@ -79,13 +71,40 @@ proxy-groups:
   - DIRECT
   - 香港节点
   - 台湾节点
-- {name: 香港节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "HK|🇭🇰", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png }
-- {name: 台湾节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "TW|🇼🇸", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png }
-- {name: 日本节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "JP|🇯🇵", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png }
-- {name: 狮城节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "SG|🇸🇬", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png }
-- {name: 美国节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "US|🇺🇸", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png }
-- {name: 韩国节点, type: url-test, include-all: true, interval: 300, tolerance: 50,  filter: "KR|🇰🇷", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png }
+  - 手动选择
+
+- name: 香港节点
+  type: select
+  include-all: true
+  filter: "HK|🇭🇰"
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+
+- name: 台湾节点
+  type: select
+  include-all: true
+  filter: "TW|🇼🇸"
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+
+- name: 日本节点
+  type: select
+  include-all: true
+  filter: "JP|🇯🇵"
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png 
+
+- name: 狮城节点
+  type: select
+  include-all: true
+  filter: "SG|🇸🇬"
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+
+- name: 美国节点
+  type: select
+  include-all: true
+  filter: "US|🇺🇸"
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+
 rule-providers:
+
   BiliBili:
     type: http
     behavior: classical
@@ -93,6 +112,7 @@ rule-providers:
     path: ./BiliBili/BiliBili_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
     interval: 86400
+
   JuJuTsu:
     type: http
     behavior: classical
@@ -100,6 +120,7 @@ rule-providers:
     path: ./Rule/Jujutsuphanpara
     url: https://raw.githubusercontent.com/Emokui/nicy/main/Rule/Jujutsuphanpara
     interval: 86400
+
   Talkatone:
     type: http
     behavior: classical
@@ -107,13 +128,7 @@ rule-providers:
     path: ./Rule/Talkatone
     url: https://raw.githubusercontent.com/Emokui/nicy/main/Rule/Talkatone
     interval: 86400
-  Pokemmo:
-    type: http
-    behavior: classical
-    format: text
-    path: ./Rule/Pokemmo
-    url: https://raw.githubusercontent.com/Emokui/nicy/main/Rule/Pokemmo
-    interval: 86400
+
   YouTube:
     type: http
     behavior: classical
@@ -121,6 +136,7 @@ rule-providers:
     path: ./YouTube/YouTube_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
     interval: 86400
+
   Telegram:
     type: http
     behavior: classical
@@ -128,6 +144,7 @@ rule-providers:
     path: ./Telegram/Telegram_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
     interval: 86400
+
   Microsoft:
     type: http
     behavior: classical
@@ -135,6 +152,7 @@ rule-providers:
     path: ./Microsoft/Microsoft.list
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
     interval: 86400
+
   Google:
     type: http
     behavior: classical
@@ -142,6 +160,7 @@ rule-providers:
     path: ./Google/Google_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
     interval: 86400
+
   China:
     type: http
     behavior: classical
@@ -149,12 +168,12 @@ rule-providers:
     path: ./non_ip/domestic.conf
     url: https://ruleset.skk.moe/List/non_ip/domestic.conf
     interval: 86400
+    
 rules:
 - RULE-SET,Talkatone,Talkatone
 - RULE-SET,Microsoft,Microsoft
 - RULE-SET,BiliBili,BiliBili
 - RULE-SET,Telegram,Telegram
-- RULE-SET,Pokemmo,Pokemmo
 - RULE-SET,YouTube,YouTube
 - RULE-SET,JuJuTsu,JuJuTsu
 - RULE-SET,Google,Google
