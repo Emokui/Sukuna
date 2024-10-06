@@ -117,16 +117,16 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    path: ./Rule/Jujutsuphanpara
-    url: https://raw.githubusercontent.com/Emokui/nicy/main/Rule/Jujutsuphanpara
+    path: ./Rule/Jujutsuphanpara.list
+    url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/Jujutsuphanpara.list
     interval: 86400
 
   Talkatone:
     type: http
     behavior: classical
     format: text
-    path: ./Rule/Talkatone
-    url: https://raw.githubusercontent.com/Emokui/nicy/main/Rule/Talkatone
+    path: ./Rule/Talkatone.list
+    url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/Talkatone.list
     interval: 86400
 
   YouTube:
