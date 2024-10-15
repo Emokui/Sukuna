@@ -13,3 +13,9 @@ DOMAIN-SUFFIX,ads.pubmatic.com
 DOMAIN-SUFFIX,cdn2.inner-active.mobi
 DOMAIN-SUFFIX,web.facebook.com
 DOMAIN-SUFFIX,sdk-files.smaato.net
+DOMAIN,googleads.g.doubleclick.net
+DOMAIN,mads.amazon-adsystem.com
+DOMAIN,googleads.g.doubleclick.net
+DOMAIN,pagead2.googlesyndication.com
+DOMAIN,aax.amazon-adsystem.com
+DOMAIN,aax-eu.amazon-adsystem.com
