@@ -1,4 +1,4 @@
-#  导入Mihomo的覆写 套用本模板，根据自己使用情况 修改细节
+#  导入Mihomo覆写 套用本模板，根据自己使用情况 修改细节
 
 proxy-groups:
 
@@ -15,33 +15,27 @@ proxy-groups:
 
 - name: 手动选择
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/qx.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Surge.PNG
   include-all: true
 
 - name: Telegram
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Telegram.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Telegram.PNG
   include-all: true
   filter: "🇯🇵|🇰🇷|🇭🇰|🇸🇬"
 
 - name: YouTube
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Youtube.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Youtube.PNG
   proxies:
   - 香港节点
   - 台湾节点
   - 美国节点
   - 手动选择
-
-- name: JuJuTsu
-  type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/refs/heads/main/icon/picture/JuJu.png
-  include-all: true
-  filter: "JP|🇯🇵"
-
+  
 - name: Microsoft
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Microsoft.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Microsoft.PNG
   proxies:
   - DIRECT
   - 香港节点
@@ -50,23 +44,16 @@ proxy-groups:
 
 - name: Google
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Google.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Google.PNG
   proxies:
   - 香港节点
   - 日本节点
   - 美国节点
   - 手动选择
 
-- name: Talkatone
-  type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/Talkatone.png
-  proxies:
-  - 美国节点
-  - 手动选择
-
 - name: BiliBili
   type: select
-  icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/bilibili.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/BiliBli.PNG
   proxies:
   - DIRECT
   - 香港节点
@@ -77,31 +64,31 @@ proxy-groups:
   type: select
   include-all: true
   filter: "HK|🇭🇰"
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/HongKong.PNG
 
 - name: 台湾节点
   type: select
   include-all: true
   filter: "TW|🇼🇸"
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Taiwan.PNG
 
 - name: 日本节点
   type: select
   include-all: true
   filter: "JP|🇯🇵"
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png 
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Janpan.PNG 
 
 - name: 狮城节点
   type: select
   include-all: true
   filter: "SG|🇸🇬"
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Singapore.PNG
 
 - name: 美国节点
   type: select
   include-all: true
   filter: "US|🇺🇸"
-  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/America.PNG
 
 rule-providers:
 
@@ -111,22 +98,6 @@ rule-providers:
     format: yaml
     path: ./BiliBili/BiliBili_No_Resolve.yaml
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili_No_Resolve.yaml
-    interval: 86400
-
-  JuJuTsu:
-    type: http
-    behavior: classical
-    format: text
-    path: ./Rule/Jujutsuphanpara.list
-    url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/Jujutsuphanpara.list
-    interval: 86400
-
-  Talkatone:
-    type: http
-    behavior: classical
-    format: text
-    path: ./Rule/Talkatone.list
-    url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/Talkatone.list
     interval: 86400
 
   YouTube:
@@ -170,12 +141,10 @@ rule-providers:
     interval: 86400
     
 rules:
-- RULE-SET,Talkatone,Talkatone
 - RULE-SET,Microsoft,Microsoft
 - RULE-SET,BiliBili,BiliBili
 - RULE-SET,Telegram,Telegram
 - RULE-SET,YouTube,YouTube
-- RULE-SET,JuJuTsu,JuJuTsu
 - RULE-SET,Google,Google
 - RULE-SET,China,DIRECT
 - GEOIP,CN,DIRECT
