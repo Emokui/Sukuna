@@ -233,5 +233,5 @@ rules:
 - RULE-SET,Microsoft,🍇 Microsoft
 - RULE-SET,Google,🍰 Google
 - RULE-SET,China,DIRECT
-- GEOIP,CN,DIRECT,no-resolve
+- GEOIP,CN,DIRECT
 - MATCH,🔚 Final
