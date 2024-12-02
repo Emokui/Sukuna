@@ -1,4 +1,3 @@
-DOMAIN-SUFFIX,mzstatic.com
 DOMAIN-SUFFIX,apple.co
 DOMAIN-SUFFIX,appsto.re
 DOMAIN-SUFFIX,me.com
@@ -8,6 +7,7 @@ DOMAIN-SUFFIX,itunes.com
 DOMAIN-SUFFIX,aaplimg.com
 DOMAIN-SUFFIX,appstore.com
 DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,mzstatic.com
 DOMAIN-SUFFIX,apple-mapkit.com
 DOMAIN-SUFFIX,apple-cloudkit.com
 DOMAIN-SUFFIX,icloud-content.com
