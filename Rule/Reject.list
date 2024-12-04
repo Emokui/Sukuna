@@ -1,5 +1,6 @@
 IP-CIDR,95.161.76.100/31,no-resolve
-DOMAIN,creatives.smadex.com
+DOMAIN-SUFFIX,smadex.com
+DOMAIN-SUFFIX,adjust.com
 DOMAIN,00-gov.cn
 DOMAIN,0024aadd.com
 DOMAIN,0026645142c89aeb1.com
