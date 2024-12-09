@@ -8,10 +8,10 @@ DOMAIN-SUFFIX,bnappweb.academy
 DOMAIN-SUFFIX,bin.bnbstatic.com
 DOMAIN-SUFFIX,file.myqcloud.com
 DOMAIN-SUFFIX,ingest.sentry.io
-DOMAIN-SUFFIX,api.saasexch.io
-DOMAIN-SUFFIX,api.saasexch.co
-DOMAIN-SUFFIX,api.saasexch.cc
-DOMAIN-SUFFIX,api.saasexch.com
+DOMAIN-SUFFIX,saasexch.io
+DOMAIN-SUFFIX,saasexch.co
+DOMAIN-SUFFIX,saasexch.cc
+DOMAIN-SUFFIX,saasexch.com
 DOMAIN-SUFFIX,native.binance.com
 DOMAIN-SUFFIX,appsflyersdk.com
 DOMAIN-SUFFIX,app-measurement.com
