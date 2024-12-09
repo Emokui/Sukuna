@@ -1,10 +1,10 @@
-DOMAIN-SUFFIX,www.binance.info
-DOMAIN-SUFFIX,www.binance.co
-DOMAIN-SUFFIX,www.binancecnt.com
+DOMAIN-SUFFIX,binance.info
+DOMAIN-SUFFIX,binance.co
+DOMAIN-SUFFIX,binancecnt.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,cdn.forter.com
 DOMAIN-SUFFIX,api.forter.com
-DOMAIN-SUFFIX,www.bnappweb.academy
+DOMAIN-SUFFIX,bnappweb.academy
 DOMAIN-SUFFIX,bin.bnbstatic.com
 DOMAIN-SUFFIX,file.myqcloud.com
 DOMAIN-SUFFIX,ingest.sentry.io
