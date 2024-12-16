@@ -4,7 +4,7 @@ proxy-groups:
 
 - name: Final
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/nicy/main/icon/picture/emokui.png
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Surge.PNG
   proxies:
   - 手动选择
   - 香港节点
@@ -15,18 +15,18 @@ proxy-groups:
 
 - name: 手动选择
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Surge.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Surge.PNG
   include-all: true
 
 - name: Telegram
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Telegram.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Telegram.PNG
   include-all: true
   filter: "🇯🇵|🇰🇷|🇭🇰|🇸🇬"
 
 - name: YouTube
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Youtube.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Youtube.PNG
   proxies:
   - 香港节点
   - 台湾节点
@@ -35,7 +35,7 @@ proxy-groups:
   
 - name: Microsoft
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Microsoft.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Microsoft.PNG
   proxies:
   - DIRECT
   - 香港节点
@@ -44,7 +44,7 @@ proxy-groups:
 
 - name: Google
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Google.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Google.PNG
   proxies:
   - 香港节点
   - 日本节点
@@ -53,7 +53,7 @@ proxy-groups:
 
 - name: BiliBili
   type: select
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/BiliBli.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/BiliBli.PNG
   proxies:
   - DIRECT
   - 香港节点
@@ -64,31 +64,31 @@ proxy-groups:
   type: select
   include-all: true
   filter: "HK|🇭🇰"
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/HongKong.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/Country/HongKong.PNG
 
 - name: 台湾节点
   type: select
   include-all: true
   filter: "TW|🇼🇸"
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Taiwan.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/Country/Taiwan.PNG
 
 - name: 日本节点
   type: select
   include-all: true
   filter: "JP|🇯🇵"
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Janpan.PNG 
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/Country/Janpan.PNG 
 
 - name: 狮城节点
   type: select
   include-all: true
   filter: "SG|🇸🇬"
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/Singapore.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/Country/Singapore.PNG
 
 - name: 美国节点
   type: select
   include-all: true
   filter: "US|🇺🇸"
-  icon: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/Country/America.PNG
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/Country/America.PNG
 
 rule-providers:
 
@@ -104,40 +104,40 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    path: ./YouTube/YouTube_No_Resolve.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+    path: ./Clash-YouTube
+    url: https://saily.pages.dev/Clash-YouTube
     interval: 86400
 
   Telegram:
     type: http
     behavior: classical
     format: yaml
-    path: ./Telegram/Telegram_No_Resolve.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+    path: ./Clash-Telegram
+    url: https://saily.pages.dev/Clash-Telegram
     interval: 86400
 
   Microsoft:
     type: http
     behavior: classical
-    format: text
-    path: ./Microsoft/Microsoft.list
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.list
+    format: yaml
+    path: ./Clash-Microsoft
+    url: https://saily.pages.dev/Clash-Microsoft
     interval: 86400
 
   Google:
     type: http
     behavior: classical
     format: yaml
-    path: ./Google/Google_No_Resolve.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+    path: ./Clash-Google
+    url: https://saily.pages.dev/Clash-Google
     interval: 86400
 
   China:
     type: http
     behavior: classical
-    format: text
-    path: ./non_ip/domestic.conf
-    url: https://ruleset.skk.moe/List/non_ip/domestic.conf
+    format: yaml
+    path: ./Clash-China
+    url: https://saily.pages.dev/Clash-China
     interval: 86400
     
 rules:
