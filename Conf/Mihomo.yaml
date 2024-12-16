@@ -18,6 +18,15 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Surge.PNG
   include-all: true
 
+- name: OpenAi
+  type: select
+  icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/ChatGPT.PNG
+  proxies:
+  - 台湾节点
+  - 日本节点
+  - 狮城节点
+  - 美国节点
+
 - name: Telegram
   type: select
   icon: https://raw.githubusercontent.com/Emokui/Sukuna/main/icon/App/Telegram.PNG
@@ -92,6 +101,22 @@ proxy-groups:
 
 rule-providers:
 
+  Apple:
+    type: http
+    behavior: classical
+    format: text
+    path: ./APPLE
+    url: https://saily.pages.dev/APPLE
+    interval: 86400  
+
+  OpenAi:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./Clash-OpenAi
+    url: https://saily.pages.dev/Clash-OpenAi
+    interval: 86400
+
   BiliBili:
     type: http
     behavior: classical
@@ -145,7 +170,9 @@ rules:
 - RULE-SET,BiliBili,BiliBili
 - RULE-SET,Telegram,Telegram
 - RULE-SET,YouTube,YouTube
+- RULE-SET,OpenAi,OpenAi
 - RULE-SET,Google,Google
+- RULE-SET,Apple,DIRECT
 - RULE-SET,China,DIRECT
 - GEOIP,CN,DIRECT
 - MATCH,Final
