@@ -1,0 +1,61 @@
+#!name=Talkatone
+#!desc=屏蔽ad➕規則分流(需創建名為Talkatone策略組使用)
+#!icon=https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Talkatone.PNG
+
+[Rule]
+# 以下为该软件部分去广告规则
+DOMAIN-SUFFIX,ads.inmobi.com,REJECT
+DOMAIN-SUFFIX,tappx.com,REJECT
+DOMAIN-SUFFIX,criteo.com,REJECT
+DOMAIN-SUFFIX,pubmatic.com,REJECT
+DOMAIN-SUFFIX,smaato.net,REJECT
+DOMAIN-SUFFIX,amazon-adsystem.com,REJECT
+DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT
+DOMAIN-SUFFIX,adsappier.com,REJECT
+DOMAIN-SUFFIX,appier.net,REJECT
+DOMAIN-SUFFIX,appiersig.com,REJECT
+DOMAIN-SUFFIX,sp.mobidriven.com,REJECT
+DOMAIN-SUFFIX,dsp.appifun.com,REJECT
+DOMAIN-SUFFIX,telemetry.sdk.inmobi.cn,REJECT
+DOMAIN-SUFFIX,ads.talkatone.com,REJECT
+DOMAIN-SUFFIX,analytics.talkatone.com,REJECT
+DOMAIN-SUFFIX,track.talkatone.com,REJECT
+DOMAIN-SUFFIX,adserver.talkatone.com,REJECT
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
+# 以下是“直连”规则广告修改版
+DOMAIN-SUFFIX,inner-active.mobi,REJECT
+DOMAIN-SUFFIX,mobilefuse.com,REJECT
+# 以下为该软件需要走直连的规则
+DOMAIN-SUFFIX,inmobi.com,DIRECT
+DOMAIN-SUFFIX,crashlytics.com,DIRECT
+DOMAIN-SUFFIX,talkatone.com,DIRECT
+DOMAIN-SUFFIX,kochava.com,DIRECT
+DOMAIN-SUFFIX,cohere.com,DIRECT
+DOMAIN-SUFFIX,ip-api.com,DIRECT
+DOMAIN-SUFFIX,agkn.com,DIRECT
+DOMAIN-SUFFIX,tktn.at,DIRECT
+IP-CIDR,50.117.27.0/24,DIRECT,no-resolve
+IP-CIDR,69.46.75.0/24,DIRECT,no-resolve
+IP-CIDR,205.164.56.0/24,DIRECT,no-resolve
+IP-CIDR,63.251.124.0/24,DIRECT,no-resolve
+
+[Rewrite]
+# 动态广告路径拦截
+^https?:\/\/.*\.talkatone\.com\/ad.*$ - reject
+^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
+^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
+^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
+
+[Script]
+# 拦截顶部广告
+http-response ^https:\/\/.*\/ads\/topbanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Top_Banner
+
+# 拦截中部广告
+http-response ^https:\/\/.*\/ads\/middlebanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Middle_Banner
+
+# 拦截底部广告
+http-response ^https:\/\/.*\/ads\/bottombanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Bottom_Banner
+
+[MITM]
+hostname = *.talkatone.com
