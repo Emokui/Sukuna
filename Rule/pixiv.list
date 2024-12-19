@@ -7,7 +7,6 @@ DOMAIN-SUFFIX,pixiv.net
 DOMAIN-SUFFIX,pixiv.org
 DOMAIN-SUFFIX,pximg.net
 DOMAIN,in.appcenter.ms
-DOMAIN-SUFFIX.pixivlite.cn
 DOMAIN-SUFFIX,pivlite.com
 DOMAIN-SUFFIX,bravedefault.com
 IP-CIDR,203.137.29.48/32,no-resolve
