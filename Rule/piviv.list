@@ -1,0 +1,17 @@
+DOMAIN-SUFFIX,booth.pm
+DOMAIN-SUFFIX,fanbox.cc
+DOMAIN-SUFFIX,pixiv.cat
+DOMAIN-SUFFIX,pixiv.co.jp
+DOMAIN-SUFFIX,pixiv.me
+DOMAIN-SUFFIX,pixiv.net
+DOMAIN-SUFFIX,pixiv.org
+DOMAIN-SUFFIX,pximg.net
+DOMAIN,in.appcenter.ms
+DOMAIN-SUFFIX,pivlite.com
+DOMAIN-SUFFIX,bravedefault.com
+IP-CIDR,203.137.29.48/32,no-resolve
+IP-CIDR,210.140.139.158/32,no-resolve
+IP-CIDR,210.140.139.133/32,no-resolve
+IP-CIDR,210.140.139.161/32,no-resolve
+IP-CIDR,210.140.139.155/32,no-resolve
+
