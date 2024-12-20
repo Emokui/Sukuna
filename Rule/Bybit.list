@@ -11,11 +11,6 @@ DOMAIN-SUFFIX,bybdc6.com
 DOMAIN-SUFFIX,byabcde.com
 DOMAIN-SUFFIX,bybit-aws.com
 DOMAIN-SUFFIX,bybit-global.com
-IP-CIDR,18.138.38.72/32,no-resolve
-IP-CIDR,43.157.94.28/32,no-resolve
-IP-CIDR,43.133.241.84/32,no-resolve
-IP-CIDR,43.133.238.145/32,no-resolve
-IP-CIDR,162.62.213.19/32,no-resolve
 
 # 次要
 DOMAIN-SUFFIX,mail.ru
