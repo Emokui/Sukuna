@@ -10,7 +10,7 @@ DOMAIN-SUFFIX,bycbe.com
 DOMAIN-SUFFIX,byapis.com
 DOMAIN-SUFFIX,bytick.com
 DOMAIN-SUFFIX,byapps.net
-DOMAIN-SUFFIX,bybitglobal.com
+DOMAIN-SUFFIX,bybit-global.com
 IP-CIDR,43.157.94.28/32,no-resolve
 IP-CIDR,162.62.213.19/32,no-resolve
 
@@ -21,7 +21,6 @@ DOMAIN-SUFFIX,niubit.io
 DOMAIN-SUFFIX,builder.io
 DOMAIN-SUFFIX,algolia.io
 DOMAIN-SUFFIX,jsdelivr.net
-DOMAIN-SUFFIX,adsrvr.org
 DOMAIN-SUFFIX,geevisit.com
 DOMAIN-SUFFIX,geetest.com
 DOMAIN-SUFFIX,event.prod.bidr.io
