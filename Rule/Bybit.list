@@ -1,29 +1,31 @@
 # 主要
-DOMAIN-SUFFIX,byd3c3.com
-DOMAIN-SUFFIX,byabcde.com
-DOMAIN-SUFFIX,bybdc6.com
-DOMAIN-SUFFIX,bycsi.com
-DOMAIN-SUFFIX,bybit-aws.com
 DOMAIN-SUFFIX,bybit.biz
 DOMAIN-SUFFIX,bybit.com
 DOMAIN-SUFFIX,bycbe.com
+DOMAIN-SUFFIX,bycsi.com
+DOMAIN-SUFFIX,byapps.net
 DOMAIN-SUFFIX,byapis.com
 DOMAIN-SUFFIX,bytick.com
-DOMAIN-SUFFIX,byapps.net
+DOMAIN-SUFFIX,byd3c3.com
+DOMAIN-SUFFIX,bybdc6.com
+DOMAIN-SUFFIX,byabcde.com
+DOMAIN-SUFFIX,bybit-aws.com
 DOMAIN-SUFFIX,bybit-global.com
 IP-CIDR,18.138.38.72/32,no-resolve
 IP-CIDR,43.157.94.28/32,no-resolve
+IP-CIDR,43.133.241.84/32,no-resolve
+IP-CIDR,43.133.238.145/32,no-resolve
 IP-CIDR,162.62.213.19/32,no-resolve
 
 # 次要
 DOMAIN-SUFFIX,mail.ru
-DOMAIN-SUFFIX,yuandex.com
 DOMAIN-SUFFIX,niubit.io
 DOMAIN-SUFFIX,builder.io
 DOMAIN-SUFFIX,algolia.io
+DOMAIN-SUFFIX,yuandex.com
+DOMAIN-SUFFIX,geetest.com
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,geevisit.com
-DOMAIN-SUFFIX,geetest.com
 DOMAIN-SUFFIX,event.prod.bidr.io
 DOMAIN-SUFFIX,ffbbbdc6d3c353211fe2ba39c9f744cd.com
 DOMAIN-SUFFIX,ffe390afd658c19dcbf707e0597b846d.de
