@@ -11,6 +11,7 @@ DOMAIN-SUFFIX,byapis.com
 DOMAIN-SUFFIX,bytick.com
 DOMAIN-SUFFIX,byapps.net
 DOMAIN-SUFFIX,bybit-global.com
+IP-CIDR,18.138.38.72/32,no-resolve
 IP-CIDR,43.157.94.28/32,no-resolve
 IP-CIDR,162.62.213.19/32,no-resolve
 
