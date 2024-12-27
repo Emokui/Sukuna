@@ -27,7 +27,7 @@ let result = { addresses: [], ttl: parseInt(arg?.ttl || 60) };
   const timeout = parseInt(arg?.timeout || 2);
   const domain = $domain;
 
-  // 检查是否为 Apple 或 iCloud 的域名
+  // 判斷是否為 Apple 或 iCloud 的域名
   const isAppleDomain = domain.match(/.*\.apple\.com|.*\.icloud\.com|.*\.icloud-content\.com/i);
   const edns = isAppleDomain ? appleEdns : defaultEdns;
 
