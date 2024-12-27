@@ -1,0 +1,8 @@
+#!name=DNS 脚本
+#!desc=纯脚本实现 DNS 查询
+
+[Script]
+DNS.js = type=dns,script-path=https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Script/EDNS.js,desc=Apple DNS,argument="type=A&doh=https://dns.google/dns-query&ttl=60&timeout=2&edns=114.114.114.114&apple_edns=17.0.0.0&log=1"
+
+[Host]
+* = script:DNS.js
