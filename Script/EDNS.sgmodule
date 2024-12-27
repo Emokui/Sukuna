@@ -1,5 +1,6 @@
 #!name=DNS 脚本
 #!desc=纯脚本实现 DNS 查询
+#!arguments=type:"A,AAAA",doh:"https://8.8.4.4/dns-query",ttl:"60",timeout:"2",edns:"114.114.114.114",fallback:1,log:0,policy:0
 
 [Script]
 DNS.js = type=dns,script-path=https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Script/EDNS.js,desc=DNS.js,argument="type={{{type}}}&doh={{{doh}}}&ttl={{{ttl}}}&timeout={{{timeout}}}&edns={{{edns}}}&log={{{log}}}&fallback={{{fallback}}}&policy={{{policy}}}"
