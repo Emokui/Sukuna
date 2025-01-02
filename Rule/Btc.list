@@ -1,3 +1,8 @@
+# OKX
+DOMAIN-SUFFIX,okex.com
+DOMAIN-SUFFIX,oklink.com
+DOMAIN-SUFFIX,okx.com
+
 # Binance
 DOMAIN-SUFFIX,binance.info
 DOMAIN-SUFFIX,binance.co
@@ -61,7 +66,6 @@ DOMAIN-SUFFIX,bybdc6.com
 DOMAIN-SUFFIX,byabcde.com
 DOMAIN-SUFFIX,bybit-aws.com
 DOMAIN-SUFFIX,bybit-global.com
-
 DOMAIN-SUFFIX,mail.ru
 DOMAIN-SUFFIX,niubit.io
 DOMAIN-SUFFIX,builder.io
