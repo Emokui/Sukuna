@@ -2,7 +2,7 @@
 // @name         快猫去广告
 // @namespace    http://tampermonkey.net/
 // @version      1.9
-// @description  去广告
+// @description  简单去广
 // @author       Ron
 // @match        http://23.225.181.59/*
 // @match        https://24y2if5.xyz/*
