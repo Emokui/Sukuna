@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         快猫去广告
 // @namespace    http://tampermonkey.net/
-// @version      1.9
-// @description  简单去广
+// @version      2.0
+// @description  简单去广告
 // @author       Ron
 // @match        http://23.225.181.59/*
 // @match        https://24y2if5.xyz/*
@@ -47,6 +47,15 @@
             if (zIndex && zIndex >= 2000 && zIndex <= 2020) {
                 element.remove();
                 console.log(`移除 z-index 在 2000 至 2020 之间的 van-overlay 元素`);
+            }
+        });
+
+        // 移除广告弹窗
+        document.querySelectorAll('div.van-popup.van-popup--center').forEach(element => {
+            const zIndex = element.style.zIndex || element.style['z-index']; // 获取 z-index 值
+            if (zIndex && parseInt(zIndex) === 2006) {
+                element.remove();
+                console.log(`移除广告弹窗: ${element.outerHTML}`);
             }
         });
 
