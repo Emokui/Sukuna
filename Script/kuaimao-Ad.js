@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         快猫去广告
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      3.0
 // @description  简单去广告
 // @author       Ron
 // @match        http://23.225.181.59/*
@@ -50,12 +50,22 @@
             }
         });
 
-        // 移除广告弹窗
-        document.querySelectorAll('div.van-popup.van-popup--center').forEach(element => {
+        // 移除 z-index 在 2000 到 2050 之间的 van-overlay 元素
+        document.querySelectorAll('div.van-overlay').forEach(element => {
             const zIndex = element.style.zIndex || element.style['z-index']; // 获取 z-index 值
-            if (zIndex && parseInt(zIndex) === 2006) {
+            if (zIndex && parseInt(zIndex) >= 2000 && parseInt(zIndex) <= 2050) {
                 element.remove();
-                console.log(`移除广告弹窗: ${element.outerHTML}`);
+                console.log(`移除 z-index 在 2000 至 2050 之间的 van-overlay 元素`);
+            }
+        });
+
+        // 移除 "优秀推荐应用" 和其图片部分
+        document.querySelectorAll('div.my-tab').forEach(element => {
+            const tabText = element.querySelector('.tab span')?.innerText?.trim();
+            const image = element.querySelector('img.gobox');
+            if (tabText === '优秀推荐应用' && image) {
+                element.remove();
+                console.log(`移除 "优秀推荐应用" 及其图片`);
             }
         });
 
