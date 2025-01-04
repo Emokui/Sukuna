@@ -12,11 +12,12 @@
 (function () {
     'use strict';
 
-    // 广告图片的域名前缀
+    // 广告图片的域名前缀，包括新增的域名
     const adDomains = [
         'https://ad.xmmnsd.com/uploads/images/',
         'https://69vvnstttaaa888.dzlndygh.com/i/',
-        'https://hongniu.getehu.com/i/'
+        'https://hongniu.getehu.com/i/',
+        'https://ad.xmmnsl.com/uploads/images/' // 新增的域名
     ];
 
     // 移除广告图片、链接和特定元素
@@ -38,7 +39,16 @@
             }
         });
 
-        // 移除特定的 div 和类
+        // 移除具有 van-overlay 类并且 z-index 在 2000 到 2020 之间的 div
+        document.querySelectorAll('div.van-overlay').forEach(element => {
+            const zIndex = element.style.zIndex || element.style['z-index']; // 获取 z-index 值
+            if (zIndex && zIndex >= 2000 && zIndex <= 2020) {
+                element.remove();
+                console.log(`移除 z-index 在 2000 至 2020 之间的 van-overlay 元素`);
+            }
+        });
+
+        // 移除其他广告元素
         const selectors = [
             'ul.g-list',
             '.van-notice-bar',
@@ -48,16 +58,10 @@
             'div.collect',
             'div.timeout',
             'div.bootup',
-            'div.van-overlay[style="z-index: 2003;"]', // 新增选择器
-            '.download', // 新增下载广告元素选择器
-            'li[data-v-68d705c0]', // 新增下载 APP 元素选择器
-            'ul.foot-box', // 新增移除 <ul class="foot-box"> 元素
-            '.share-box', // 新增移除分享框元素
-            '.gbox', // 新增移除 <div class="gbox"> 元素
-            'div.van-overlay[style="z-index: 2007;"]', // 新增移除这个 div
-            'div[data-v-0eeea3a1].van_second.van-popup.van-popup--bottom', // 新增移除该弹窗
-            'div[data-v-0eeea3a1].van-popup.van-popup--center', // 新增移除该弹窗
-            'div[data-v-0eeea3a1].next' // 新增移除关闭和下一条按钮的 div
+            '.download',
+            'ul.foot-box',
+            '.share-box',
+            '.gbox',
         ];
 
         selectors.forEach(selector => {
