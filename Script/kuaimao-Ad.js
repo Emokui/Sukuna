@@ -14,12 +14,12 @@
 (function () {
     'use strict';
 
-    // 广告图片的域名前缀，包括新增的域名
+    // 广告图片的域名前缀
     const adDomains = [
         'https://ad.xmmnsd.com/uploads/images/',
         'https://69vvnstttaaa888.dzlndygh.com/i/',
         'https://hongniu.getehu.com/i/',
-        'https://ad.xmmnsl.com/uploads/images/' // 新增的域名
+        'https://ad.xmmnsl.com/uploads/images/' 
     ];
 
     // 移除广告图片、链接和特定元素
