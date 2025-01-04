@@ -6,6 +6,8 @@
 // @author       Ron
 // @match        http://23.225.181.59/*
 // @match        https://24y2if5.xyz/*
+// @match        https://i4433b6.xyz/*
+// @match        https://kmsvip.xyz/*
 // @grant        none
 // ==/UserScript==
 
