@@ -49,13 +49,13 @@ IP-CIDR,63.251.124.0/24,DIRECT,no-resolve
 
 [Script]
 # 拦截顶部广告
-http-response ^https:\/\/.*\/ads\/topbanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Top_Banner
+http-response ^https:\/\/.*\/ads\/topbanner script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, tag=Talkatone_Top_Banner
 
 # 拦截中部广告
-http-response ^https:\/\/.*\/ads\/middlebanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Middle_Banner
+http-response ^https:\/\/.*\/ads\/middlebanner script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, tag=Talkatone_Middle_Banner
 
 # 拦截底部广告
-http-response ^https:\/\/.*\/ads\/bottombanner script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js, requires-body=true, tag=Talkatone_Bottom_Banner
+http-response ^https:\/\/.*\/ads\/bottombanner script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, tag=Talkatone_Bottom_Banner
 
 [MITM]
 hostname = *.talkatone.com
