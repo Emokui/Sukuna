@@ -2,13 +2,13 @@
 #!desc= 屏蔽ad➕規則分流(需創建名為Talkatone策略組使用)
 [Script]
 # 拦截顶部广告
-Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js
+Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
 
 # 拦截中部广告
-Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js
+Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
 
 # 拦截底部广告
-Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/BigHeadTiger/surge.sgmodule/refs/heads/main/talkatone.js
+Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
 
 [URL Rewrite]
 # 动态广告路径拦截
