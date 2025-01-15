@@ -1,0 +1,63 @@
+#!name=Talkatone
+#!desc= 屏蔽ad➕規則分流(需創建名為Talkatone策略組使用)
+[Script]
+# 拦截顶部广告
+Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
+
+# 拦截中部广告
+Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
+
+# 拦截底部广告
+Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
+
+[URL Rewrite]
+# 动态广告路径拦截
+^https?:\/\/.*\.talkatone\.com\/ad.*$ reject
+^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
+^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
+^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
+
+[Rule]
+# 以下为该软件部分去广告规则
+DOMAIN-SUFFIX,ads.inmobi.com,REJECT
+DOMAIN-SUFFIX,tappx.com,REJECT
+DOMAIN-SUFFIX,criteo.com,REJECT
+DOMAIN-SUFFIX,pubmatic.com,REJECT
+DOMAIN-SUFFIX,smaato.net,REJECT
+DOMAIN-SUFFIX,amazon-adsystem.com,REJECT
+DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT
+DOMAIN-SUFFIX,adsappier.com,REJECT
+DOMAIN-SUFFIX,appier.net,REJECT
+DOMAIN-SUFFIX,appiersig.com,REJECT
+DOMAIN-SUFFIX,sp.mobidriven.com,REJECT
+DOMAIN-SUFFIX,dsp.appifun.com,REJECT
+DOMAIN-SUFFIX,telemetry.sdk.inmobi.cn,REJECT
+DOMAIN-SUFFIX,ads.talkatone.com,REJECT
+DOMAIN-SUFFIX,analytics.talkatone.com,REJECT
+DOMAIN-SUFFIX,track.talkatone.com,REJECT
+DOMAIN-SUFFIX,adserver.talkatone.com,REJECT
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
+# 以下是“直连”规则广告修改版
+DOMAIN-SUFFIX,inner-active.mobi,REJECT
+DOMAIN-SUFFIX,mobilefuse.com,REJECT
+
+# 以下为该软件需要走代理的策略组名
+DOMAIN-SUFFIX,tktn.be,Talkatone
+
+# 以下为该软件需要走直连的规则
+DOMAIN-SUFFIX,inmobi.com,Talkatone
+DOMAIN-SUFFIX,crashlytics.com,Talkatone
+DOMAIN-SUFFIX,talkatone.com,Talkatone
+DOMAIN-SUFFIX,kochava.com,Talkatone
+DOMAIN-SUFFIX,cohere.com,Talkatone
+DOMAIN-SUFFIX,ip-api.com,Talkatone
+DOMAIN-SUFFIX,agkn.com,Talkatone
+DOMAIN-SUFFIX,tktn.at,Talkatone
+IP-CIDR,50.117.27.0/24,Talkatone,no-resolve
+IP-CIDR,69.46.75.0/24,Talkatone,no-resolve
+IP-CIDR,205.164.56.0/24,Talkatone,no-resolve
+IP-CIDR,63.251.124.0/24,Talkatone,no-resolve
+
+[MITM]
+hostname = %APPEND% *.talkatone.com
