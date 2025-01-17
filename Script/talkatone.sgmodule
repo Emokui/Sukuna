@@ -1,5 +1,5 @@
-#!name=talkatone去廣告
-#!desc= Ron
+#!name= Talkatone
+#!desc= Ron修改版
 
 [Script]
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
@@ -36,6 +36,19 @@ DOMAIN-SUFFIX,doubleclick.net,REJECT
 DOMAIN-SUFFIX,googlesyndication.com,REJECT
 DOMAIN-SUFFIX,inner-active.mobi,REJECT
 DOMAIN-SUFFIX,mobilefuse.com,REJECT
+DOMAIN-SUFFIX,tktn.be,Final
+DOMAIN-SUFFIX,inmobi.com,Talkatone
+DOMAIN-SUFFIX,crashlytics.com,Talkatone
+DOMAIN-SUFFIX,talkatone.com,Talkatone
+DOMAIN-SUFFIX,kochava.com,Talkatone
+DOMAIN-SUFFIX,cohere.com,Talkatone
+DOMAIN-SUFFIX,ip-api.com,Talkatone
+DOMAIN-SUFFIX,agkn.com,Talkatone
+DOMAIN-SUFFIX,tktn.at,Talkatone
+IP-CIDR,50.117.27.0/24,Talkatone,no-resolve
+IP-CIDR,69.46.75.0/24,Talkatone,no-resolve
+IP-CIDR,205.164.56.0/24,Talkatone,no-resolve
+IP-CIDR,63.251.124.0/24,Talkatone,no-resolve
 
 [MITM]
 hostname = %APPEND% *.talkatone.com
