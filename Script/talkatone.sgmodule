@@ -1,5 +1,5 @@
 #!name= Talkatone
-#!desc= Ron修改版免流版
+#!desc= Ron修改免流版
 
 [Script]
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
