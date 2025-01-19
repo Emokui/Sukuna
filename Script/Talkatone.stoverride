@@ -1,0 +1,78 @@
+name: |-
+  Talkatone
+desc: |-
+  屏蔽ad➕規則分流
+icon: |-
+  https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/icon/App/Talkatone.PNG
+
+rules:
+  - DOMAIN-SUFFIX,ads.inmobi.com,REJECT
+  - DOMAIN-SUFFIX,tappx.com,REJECT
+  - DOMAIN-SUFFIX,criteo.com,REJECT
+  - DOMAIN-SUFFIX,pubmatic.com,REJECT
+  - DOMAIN-SUFFIX,smaato.net,REJECT
+  - DOMAIN-SUFFIX,amazon-adsystem.com,REJECT
+  - DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,adsappier.com,REJECT
+  - DOMAIN-SUFFIX,appier.net,REJECT
+  - DOMAIN-SUFFIX,appiersig.com,REJECT
+  - DOMAIN-SUFFIX,sp.mobidriven.com,REJECT
+  - DOMAIN-SUFFIX,dsp.appifun.com,REJECT
+  - DOMAIN-SUFFIX,telemetry.sdk.inmobi.cn,REJECT
+  - DOMAIN-SUFFIX,ads.talkatone.com,REJECT
+  - DOMAIN-SUFFIX,analytics.talkatone.com,REJECT
+  - DOMAIN-SUFFIX,track.talkatone.com,REJECT
+  - DOMAIN-SUFFIX,adserver.talkatone.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,inner-active.mobi,REJECT
+  - DOMAIN-SUFFIX,mobilefuse.com,REJECT
+  - DOMAIN-SUFFIX,inmobi.com,DIRECT
+  - DOMAIN-SUFFIX,crashlytics.com,DIRECT
+  - DOMAIN-SUFFIX,talkatone.com,DIRECT
+  - DOMAIN-SUFFIX,kochava.com,DIRECT
+  - DOMAIN-SUFFIX,cohere.com,DIRECT
+  - DOMAIN-SUFFIX,ip-api.com,DIRECT
+  - DOMAIN-SUFFIX,agkn.com,DIRECT
+  - DOMAIN-SUFFIX,tktn.at,DIRECT
+  - IP-CIDR,50.117.27.0/24,DIRECT,no-resolve
+  - IP-CIDR,69.46.75.0/24,DIRECT,no-resolve
+  - IP-CIDR,205.164.56.0/24,DIRECT,no-resolve
+  - IP-CIDR,63.251.124.0/24,DIRECT,no-resolve
+
+http:
+
+  mitm:
+    - "*.talkatone.com"
+
+  url-rewrite:
+    - >-
+      ^https?:\/\/.*\.talkatone\.com\/ad.*$ - reject
+    - >-
+      ^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
+    - >-
+      ^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
+    - >-
+      ^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
+
+  script:
+    - match: ^https:\/\/.*\/ads\/topbanner
+      name: "Talkatone_Top_Banner_4"
+      type: response
+      require-body: true
+      max-size: 0
+    - match: ^https:\/\/.*\/ads\/middlebanner
+      name: "Talkatone_Top_Banner_4"
+      type: response
+      require-body: true
+      max-size: 0
+    - match: ^https:\/\/.*\/ads\/bottombanner
+      name: "Talkatone_Top_Banner_4"
+      type: response
+      require-body: true
+      max-size: 0
+
+script-providers:
+  "Talkatone_Top_Banner_4":
+    url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
+    interval: 86400
