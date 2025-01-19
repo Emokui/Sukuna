@@ -1,5 +1,5 @@
 #!name=Talkatone
-#!desc= 屏蔽ad➕規則分流(需創建名為Talkatone策略組使用)
+#!desc= Ad+直连
 [Script]
 # 拦截顶部广告
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
