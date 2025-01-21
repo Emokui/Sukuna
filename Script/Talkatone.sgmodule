@@ -88,19 +88,19 @@ DOMAIN-SUFFIX,tktn.at,Talkatone
 DOMAIN-SUFFIX,tktn.be,Talkatone
 
 # 以下为该软件可能需要走直连的规则
-DOMAIN-SUFFIX,agkn.com,DIRECT
-DOMAIN-SUFFIX,cohere.com,DIRECT
-DOMAIN-SUFFIX,crashlytics.com,DIRECT
-DOMAIN-SUFFIX,inmobi.com,DIRECT
-DOMAIN-SUFFIX,inner-active.mobi,DIRECT
-DOMAIN-SUFFIX,ip-api.com,DIRECT
-DOMAIN-SUFFIX,kochava.com,DIRECT
-DOMAIN-SUFFIX,mobilefuse.com,DIRECT
-DOMAIN-SUFFIX,talkatone.com,DIRECT
-IP-CIDR,205.164.56.0/24,DIRECT,no-resolve
-IP-CIDR,216.172.154.0/24,DIRECT,no-resolve
-IP-CIDR,50.117.27.0/24,DIRECT,no-resolve
-IP-CIDR,63.251.124.0/24,DIRECT,no-resolve
-IP-CIDR,69.46.75.0/24,DIRECT,no-resolve
+DOMAIN-SUFFIX,agkn.com,Talkatone
+DOMAIN-SUFFIX,cohere.com,Talkatone
+DOMAIN-SUFFIX,crashlytics.com,Talkatone
+DOMAIN-SUFFIX,inmobi.com,Talkatone
+DOMAIN-SUFFIX,inner-active.mobi,Talkatone
+DOMAIN-SUFFIX,ip-api.com,Talkatone
+DOMAIN-SUFFIX,kochava.com,Talkatone
+DOMAIN-SUFFIX,mobilefuse.com,Talkatone
+DOMAIN-SUFFIX,talkatone.com,Talkatone
+IP-CIDR,205.164.56.0/24,Talkatone,no-resolve
+IP-CIDR,216.172.154.0/24,Talkatone,no-resolve
+IP-CIDR,50.117.27.0/24,Talkatone,no-resolve
+IP-CIDR,63.251.124.0/24,Talkatone,no-resolve
+IP-CIDR,69.46.75.0/24,Talkatone,no-resolve
 [MITM]
 hostname = %APPEND% *.talkatone.com
