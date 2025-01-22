@@ -1,21 +1,5 @@
 #!name=Talkatone
-#!desc= 去广告直连版
-[Script]
-# 拦截顶部广告
-Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
-# 拦截中部广告
-Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
-# 拦截底部广告
-Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
-[URL Rewrite]
-# 动态广告路径拦截
-^https?:\/\/.*\.talkatone\.com\/ad.*$ reject
-^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
-^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
-^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
+#!desc=去广告直连版(小火箭版)
 
 [Rule]
 # 以下为该软件部分去广告规则
@@ -81,12 +65,9 @@ DOMAIN-SUFFIX,view.adjust.com,REJECT-DROP
 DOMAIN-SUFFIX,vst.c.appier.net,REJECT-DROP
 DOMAIN-SUFFIX,wv.inner-active.mobi,REJECT-DROP
 DOMAIN-SUFFIX,www.googletagservices-cn.com,REJECT-DROP
-
-
 # 以下为该软件可能需要走代理的规则
 DOMAIN-SUFFIX,tktn.at,PROXY
 DOMAIN-SUFFIX,tktn.be,PROXY
-
 # 以下为该软件可能需要走直连的规则
 DOMAIN-SUFFIX,agkn.com,DIRECT
 DOMAIN-SUFFIX,cohere.com,DIRECT
@@ -102,5 +83,23 @@ IP-CIDR,216.172.154.0/24,DIRECT,no-resolve
 IP-CIDR,50.117.27.0/24,DIRECT,no-resolve
 IP-CIDR,63.251.124.0/24,DIRECT,no-resolve
 IP-CIDR,69.46.75.0/24,DIRECT,no-resolve
+
+[URL Rewrite]
+# 动态广告路径拦截
+^https?:\/\/.*\.talkatone\.com\/ad.*$ - reject
+^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
+^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
+^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
+
+[Script]
+# 拦截顶部广告
+Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, max-size=0
+
+# 拦截中部广告
+Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, max-size=0
+
+# 拦截底部广告
+Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js, requires-body=true, max-size=0
+
 [MITM]
 hostname = %APPEND% *.talkatone.com
