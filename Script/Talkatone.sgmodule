@@ -1,5 +1,5 @@
 #!name=Talkatone
-#!desc= 去除Ad
+#!desc= 去广告代理版
 [Script]
 # 拦截顶部广告
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
@@ -86,8 +86,6 @@ DOMAIN-SUFFIX,www.googletagservices-cn.com,REJECT-DROP
 # 以下为该软件可能需要走代理的规则
 DOMAIN-SUFFIX,tktn.at,Talkatone
 DOMAIN-SUFFIX,tktn.be,Talkatone
-
-# 以下为该软件可能需要走直连的规则
 DOMAIN-SUFFIX,agkn.com,Talkatone
 DOMAIN-SUFFIX,cohere.com,Talkatone
 DOMAIN-SUFFIX,crashlytics.com,Talkatone
