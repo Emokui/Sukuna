@@ -1,3 +1,6 @@
+## Blog ##
+https://mahito.us.kg
+
 
 ## B7分流仓 ##
 
