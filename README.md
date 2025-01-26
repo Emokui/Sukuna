@@ -1,5 +1,5 @@
 ## Blog ##
-https://mahito.us.kg
+https://macked.pages.dev
 
 
 ## B7分流仓 ##
