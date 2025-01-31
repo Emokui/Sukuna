@@ -1,5 +1,5 @@
 ## Blog ##
-https://macked.pages.dev
+https://eth.fbi.cloudns.be
 
 
 ## B7分流仓 ##
