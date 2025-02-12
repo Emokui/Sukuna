@@ -1,9 +1,13 @@
 // ==UserScript==
 // @name         kmAd
 // @namespace    http://github.com/Emokui/Sukuna
-// @version      1.25
-// @description  R18快猫短视频去广告+自动登录 适配移动端网页
+// @version      1.29
+// @description  R18快猫短视频去广告+自动登录 仅适配移动端网页（新增cdn站点加速观看，在match查看网址）
 // @author       Ron
+// @match        http://km.ygking.site/*
+// @match        https://kmvip.pages.dev/*
+// @match        https://kmsvip.pages.dev/*
+// @match        https://kmcdn.pages.dev/*
 // @match        http://23.225.181.59/*
 // @match        https://24y2if5.xyz/*
 // @match        https://i4433b6.xyz/*
