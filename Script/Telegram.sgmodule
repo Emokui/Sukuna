@@ -1,3 +1,6 @@
+#!name=Telegram
+#!desc=规则分流
+
 [Rule}
 DOMAIN,api.mixpanel.com,Telegram
 DOMAIN,events-gateway.ncdev.site,Telegram
