@@ -6,6 +6,9 @@ https://eth.fbi.cloudns.be
 https://suguru.pages.dev
 
 
-## B7分流仓 ##
+## 分流库 ##
+
+https://github.com/luestr/ShuntRules
+
 
 https://github.com/blackmatrix7/ios_rule_script/tree/master/rule
