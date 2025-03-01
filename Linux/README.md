@@ -82,14 +82,6 @@ proxies:
   - {"name":"socks","server":"127.0.0.1","port":40000,"udp":true,"ip-version":"v4-only","type":"socks5"}
 
 rule-providers:
-
-  Netflix:
-      type: http
-      behavior: classical
-      format: yaml
-      path: ./Netflix/Netflix_Classical.yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Netflix/Netflix_Classical.yaml
-      interval: 86400
       
   YouTube:
       type: http
@@ -108,7 +100,6 @@ rule-providers:
       interval: 86400
 
 rules:
-- RULE-SET,Netflix,socks
 - RULE-SET,OpenAi,socks
 - RULE-SET,YouTube,socks
 - MATCH,DIRECT
