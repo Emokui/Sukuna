@@ -7,10 +7,10 @@
 
 #### 1.配置 warp socks5 ####
 运行脚本,选择13,默认端口40000
-
 ```
 wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh [option] [lisence/url/token]
 ```
+
 
 #### 2.配置 snell ####
 无脑回车即可 (如需免流,则开启obfs,host填写伪装域名)
@@ -18,26 +18,28 @@ wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh [opt
 wget -O snell.sh --no-check-certificate https://git.io/Snell.sh && chmod +x snell.sh && ./snell.sh
 ```
 
-#### 3.下载 mihomo ####
 
+#### 3.下载 mihomo ####
 ```
 wget https://github.com/Emokui/Sukuna/raw/refs/heads/main/Linux/mihomo.gz
 ```
-### 4.解压 ###
 
+
+### 4.解压 ###
+**如果解压后名字不同，请重命名为 `mihomo`**
 ```
 gzip -d mihomo.gz
 
 ```
 
-#### 5.赋权 ####
 
+#### 5.赋权 ####
 ```
 chmod +x mihomo
 ```
 
-#### 6.创建配置命名为 config.yaml ####
 
+#### 6.创建配置命名为 `config.yaml` ####
 ```
 allow-lan: false
 mode: rule
@@ -106,18 +108,21 @@ rules:
 - MATCH,DIRECT
 ```
 
+
 #### 7.运行 mihomo ####
 ```
 ./mihomo -f /root/config.yaml
 ```
+
 
 #### 8.停止 mihomo ####
 ```
 pkill mihomo
 ```
 
+
 #### 9.设置开机启动 ####
-etc/systemd/system 下创建 mihomo.service 内容如下
+etc/systemd/system 下创建 `mihomo.service` 内容如下
 ```
 [Unit]
 Description=Clash Service
@@ -134,8 +139,8 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-#### 10.重新加载 systemd 管理器配置，并启用 mihomo 服务 ####
 
+#### 10.重新加载 systemd 管理器配置，并启用 mihomo 服务 ####
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable --now mihomo.service
