@@ -20,9 +20,15 @@ wget -O snell.sh --no-check-certificate https://git.io/Snell.sh && chmod +x snel
 
 
 #### 3.下载 mihomo ####
-**mihomo仓库 https://github.com/MetaCubeX/mihomo**
+
+
+**不放心可去 mihomo仓库 https://github.com/MetaCubeX/mihomo 获取**
 ```
 wget https://github.com/Emokui/Sukuna/raw/refs/heads/main/Linux/mihomo.gz
+```
+**系统兼容版**
+```
+wget https://github.com/Emokui/Sukuna/raw/refs/heads/main/Linux/mihomo-compatible.zip
 ```
 
 
