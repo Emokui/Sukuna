@@ -36,7 +36,6 @@ wget https://github.com/Emokui/Sukuna/raw/refs/heads/main/Linux/mihomo-compatibl
 **如果解压后名字不同，请重命名为 `mihomo`**
 ```
 gzip -d mihomo.gz
-
 ```
 
 
@@ -152,3 +151,4 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable --now mihomo.service
 systemctl status mihomo.service
+```
