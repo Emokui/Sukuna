@@ -1,4 +1,4 @@
-#!name= 𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
+#!name= 𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
 #!desc= Ad Proxy
 [Script]
 # 拦截顶部广告
@@ -84,21 +84,21 @@ DOMAIN-SUFFIX,www.googletagservices-cn.com,REJECT-DROP
 
 
 # 以下为该软件可能需要走代理的规则
-DOMAIN-SUFFIX,tktn.at,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,tktn.be,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,agkn.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,cohere.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,crashlytics.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,inmobi.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,inner-active.mobi,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,ip-api.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,kochava.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,mobilefuse.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-DOMAIN-SUFFIX,talkatone.com,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆
-IP-CIDR,205.164.56.0/24,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆,no-resolve
-IP-CIDR,216.172.154.0/24,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆,no-resolve
-IP-CIDR,50.117.27.0/24,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆,no-resolve
-IP-CIDR,63.251.124.0/24,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆,no-resolve
-IP-CIDR,69.46.75.0/24,𝑻𝒂𝒍𝒌𝒂𝒕𝒐𝒏𝒆,no-resolve
+DOMAIN-SUFFIX,tktn.at,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,tktn.be,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,agkn.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,cohere.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,crashlytics.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,inmobi.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,inner-active.mobi,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,ip-api.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,kochava.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,mobilefuse.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+DOMAIN-SUFFIX,talkatone.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
+IP-CIDR,205.164.56.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
+IP-CIDR,216.172.154.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
+IP-CIDR,50.117.27.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
+IP-CIDR,63.251.124.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
+IP-CIDR,69.46.75.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
 [MITM]
 hostname = %APPEND% *.talkatone.com
