@@ -95,8 +95,8 @@ rule-providers:
       type: http
       behavior: classical
       format: yaml
-      path: ./Rule/OpenAi.yaml
-      url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/OpenAi.yaml
+      path: ./Rule/OpenAi.list
+      url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/OpenAi.list
       interval: 86400
 
 rules:
