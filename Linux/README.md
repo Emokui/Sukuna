@@ -88,7 +88,7 @@ rule-providers:
       behavior: classical
       format: text
       path: ./Rule/YouTube.list            
-      url: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Rule/YouTube.list
+      url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/YouTube.list
       interval: 86400
 
   OpenAi:
@@ -96,7 +96,7 @@ rule-providers:
       behavior: classical
       format: yaml
       path: ./Rule/OpenAi.yaml
-      url: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Rule/OpenAi.yaml
+      url: https://raw.githubusercontent.com/Emokui/Sukuna/main/Rule/OpenAi.yaml
       interval: 86400
 
 rules:
