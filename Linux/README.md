@@ -86,9 +86,9 @@ rule-providers:
   YouTube:
       type: http
       behavior: classical
-      format: yaml
-      path: ./YouTube/YouTube.yaml            
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.yaml
+      format: text
+      path: ./Rule/YouTube.list            
+      url: https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Rule/YouTube.list
       interval: 86400
 
   OpenAi:
