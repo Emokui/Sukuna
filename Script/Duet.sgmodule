@@ -1,5 +1,5 @@
-#!name=DuetDisplay
-#!desc=DuetDisplay
+#!name= 𝘿𝙪𝙚𝘼𝙞𝙧
+#!desc= 𝘿𝙪𝙚𝘼𝙞𝙧
 
 [Script]
 DuetDisplay = type=http-response, pattern=https://rdp.duetdisplay.com/v1/users/validateReceipt, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/DuetDisplay.js, requires-body=true, max-size=-1, timeout=60
