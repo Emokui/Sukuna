@@ -1,5 +1,5 @@
 #!name= 𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-#!desc= Ad Proxy
+#!desc= 𝘼𝙙 𝙋𝙧𝙤𝙭𝙮
 [Script]
 # 拦截顶部广告
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
