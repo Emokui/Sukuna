@@ -1,5 +1,5 @@
-#!name=adblockpro
-#!desc=adblockpro
+#!name= 𝘼𝙙𝙗𝙡𝙤𝙘𝙠𝙥𝙧𝙤
+#!desc= 𝘼𝙙𝙗𝙡𝙤𝙘𝙠𝙥𝙧𝙤
 
 [Script]
 adblockpro = type=http-response, pattern=^https:\/\/api\.adblockpro\.app\/verify, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/adblockpro.js, requires-body=true, max-size=-1, timeout=60
