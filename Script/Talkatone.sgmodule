@@ -1,24 +1,15 @@
 #!name= 𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
 #!desc= 𝘼𝙙 𝙋𝙧𝙤𝙭𝙮
 [Script]
-# 拦截顶部广告
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
-# 拦截中部广告
 Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
-# 拦截底部广告
 Talkatone_Bottom_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/bottombanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
-
 [URL Rewrite]
-# 动态广告路径拦截
 ^https?:\/\/.*\.talkatone\.com\/ad.*$ reject
 ^https?:\/\/.*\.googleusercontent\.com\/talkatone_ads.*$ - reject
 ^https?:\/\/.*\.firebaseio\.com\/ad_requests.*$ - reject
 ^https?:\/\/.*\.doubleclick\.net\/pagead\/ads.*$ - reject
-
 [Rule]
-# 以下为该软件部分去广告规则
 DOMAIN-KEYWORD,googleads,REJECT-DROP
 DOMAIN-SUFFIX,aax.amazon-adsystem.com,REJECT-DROP
 DOMAIN-SUFFIX,aax-fe.amazon-adsystem.com,REJECT-DROP
@@ -81,9 +72,6 @@ DOMAIN-SUFFIX,view.adjust.com,REJECT-DROP
 DOMAIN-SUFFIX,vst.c.appier.net,REJECT-DROP
 DOMAIN-SUFFIX,wv.inner-active.mobi,REJECT-DROP
 DOMAIN-SUFFIX,www.googletagservices-cn.com,REJECT-DROP
-
-
-# 以下为该软件可能需要走代理的规则
 DOMAIN-SUFFIX,tktn.at,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
 DOMAIN-SUFFIX,tktn.be,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
 DOMAIN-SUFFIX,agkn.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
