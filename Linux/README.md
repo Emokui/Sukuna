@@ -47,7 +47,6 @@ bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/substore-dock
 #### 8. Serv00 ####
 
 ```
-https://raw.githubusercontent.com/Emokui/Sukuna/refs/heads/main/Linux/serv00.sh
 curl -O "https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/serv00.sh"
 chmod +x serv00.sh
 ./serv00.sh
