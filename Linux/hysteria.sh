@@ -559,8 +559,7 @@ menu() {
     clear
     echo "#############################################################"
     echo -e "#                  ${RED}Hysteria 2 一键安装脚本${PLAIN}                  #"
-    echo -e "# ${GREEN}介绍${PLAIN}: Musashi の 转载                                  #"
-    echo -e "# ${GREEN}GitHub${PLAIN}: https://github.com/Emokui                            #"
+    echo -e "# ${GREEN}介绍${PLAIN}: Musashi の 转载                                   #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安装 Hysteria 2"
