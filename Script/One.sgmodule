@@ -1,5 +1,5 @@
-#!name=One
-#!desc=One
+#!name= 𝙊𝙣𝙚
+#!desc= 𝙊𝙣𝙚
 
 [Script]
 One = type=http-response, pattern=^https?:\/\/(api|jmtp)(.*-uat)?\.\w+\.com\/v2.5\/(bootstrap|user\/login|user\/avatarFrame|article\/discovery|navigation|article\/detail|vip\/download|my\/userExtraInfo), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/One.js, requires-body=true, max-size=-1, timeout=60
