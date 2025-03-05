@@ -13,6 +13,7 @@ DOMAIN-SUFFIX,saasexch.io
 DOMAIN-SUFFIX,saasexch.co
 DOMAIN-SUFFIX,saasexch.cc
 DOMAIN-SUFFIX,saasexch.com
+DOMAIN-SUFFIX,saasexch.info
 DOMAIN-SUFFIX,binance.cloud
 DOMAIN-SUFFIX,binance.com
 DOMAIN-SUFFIX,binance.me
@@ -22,6 +23,9 @@ DOMAIN-SUFFIX,bnappzh.co
 DOMAIN-SUFFIX,bnbstatic.com
 DOMAIN-SUFFIX,bnbzh.ac
 DOMAIN-SUFFIX,bntrace.com
+DOMAIN-SUFFIX,awswaf.com
+DOMAIN-SUFFIX,forter.com
+DOMAIN-SUFFIX,nftstatic.com
 IP-CIDR,52.68.117.1/32,no-resolve
 IP-CIDR,54.150.106.1/32,no-resolve
 IP-CIDR,35.77.148.188/32,no-resolve
