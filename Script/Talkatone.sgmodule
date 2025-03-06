@@ -1,5 +1,7 @@
 #!name= 𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-#!desc= 𝗥𝗲𝗺𝗼𝘃𝗲 𝗔𝗱 𝗮𝗻𝗱 𝗣𝗿𝗼𝘅𝘆 𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻
+#!desc= 𝗥𝗲𝗺𝗼𝘃𝗲 𝗔𝗱 𝗔𝗻𝗱 𝗣𝗥𝗢𝗫𝗬 𝗢𝗥 𝗗𝗜𝗥𝗘𝗖𝗧 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻
+#!desc= 修改PROXY与DIRECT参数即可自定义直连或代理策略
+#!arguments=PROXY:PROXY,DIRECT:DIRECT
 [Script]
 Talkatone_Top_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/topbanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
 Talkatone_Middle_Banner = type=http-response, pattern=^https:\/\/.*\/ads\/middlebanner, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Emokui/Sukuna/main/Script/Talkatone.js
@@ -72,21 +74,21 @@ DOMAIN-SUFFIX,view.adjust.com,REJECT-DROP
 DOMAIN-SUFFIX,vst.c.appier.net,REJECT-DROP
 DOMAIN-SUFFIX,wv.inner-active.mobi,REJECT-DROP
 DOMAIN-SUFFIX,www.googletagservices-cn.com,REJECT-DROP
-DOMAIN-SUFFIX,tktn.at,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,tktn.be,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,agkn.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,cohere.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,crashlytics.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,inmobi.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,inner-active.mobi,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,ip-api.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,kochava.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,mobilefuse.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-DOMAIN-SUFFIX,talkatone.com,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲
-IP-CIDR,205.164.56.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
-IP-CIDR,216.172.154.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
-IP-CIDR,50.117.27.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
-IP-CIDR,63.251.124.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
-IP-CIDR,69.46.75.0/24,𝗧𝗮𝗹𝗸𝗮𝘁𝗼𝗻𝗲,no-resolve
+DOMAIN-SUFFIX,tktn.at,{{{PROXY}}}
+DOMAIN-SUFFIX,tktn.be,{{{PROXY}}}
+DOMAIN-SUFFIX,agkn.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,cohere.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,crashlytics.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,inmobi.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,inner-active.mobi,{{{DIRECT}}}
+DOMAIN-SUFFIX,ip-api.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,kochava.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,mobilefuse.com,{{{DIRECT}}}
+DOMAIN-SUFFIX,talkatone.com,{{{DIRECT}}}
+IP-CIDR,205.164.56.0/24,{{{DIRECT}}},no-resolve
+IP-CIDR,216.172.154.0/24,{{{DIRECT}}},no-resolve
+IP-CIDR,50.117.27.0/24,{{{DIRECT}}},no-resolve
+IP-CIDR,63.251.124.0/24,{{{DIRECT}}},no-resolve
+IP-CIDR,69.46.75.0/24,{{{DIRECT}}},no-resolve
 [MITM]
 hostname = %APPEND% *.talkatone.com
