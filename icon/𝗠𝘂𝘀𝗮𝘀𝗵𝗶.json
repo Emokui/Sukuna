@@ -17,6 +17,9 @@
 {"name":"Telegram","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/Telegram.png"},
 {"name":"Talkatone","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/Talkatone.PNG"},
 {"name":"OKE","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/OKE.PNG"},
+{"name":"ETH","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/ETH.png"},
+{"name":"Eth","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/Eth.PNG"},
+{"name":"eth","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/eth.png"},  
 {"name":"Btc","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/btc.png"},
 {"name":"Biance","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/Binace.PNG"}，
 {"name":"PayPal","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/PayPal.PNG"},
@@ -30,7 +33,7 @@
 {"name":"Quantumult","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/App/Quantumult.PNG"},
 {"name":"America","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/America.PNG"},
 {"name":"Argentina","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/Argentina.PNG"},
-{"name":"Australia","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/Australia.PNG"},
+{"name":"Australia","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/Australia.PNG"}，
 {"name":"Canada","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/Canada.PNG"},
 {"name":"China","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/China.PNG"},
 {"name":"Finland","url":"https://fbi.hk.dedyn.io/Emokui/Sukuna/main/icon/Country/Finland.PNG"},
