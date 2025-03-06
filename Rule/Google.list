@@ -1,25 +1,25 @@
-DOMAIN, lens.l.google.com
-DOMAIN, mtalk.google.com
-DOMAIN, safebrowsing-cache.google.com
-DOMAIN, redirector.c.bigcache.googleapis.com
-DOMAIN, clientservices.googleapis.com
-DOMAIN, fonts.googleapis.com
-DOMAIN, safebrowsing.googleapis.com
-DOMAIN, translate.googleapis.com
-DOMAIN, www.googleapis.com
-DOMAIN, fonts.gstatic.com
-DOMAIN, redirector.gvt1.com
-DOMAIN, crl.pki.goog
-DOMAIN, ocsp.pki.goog
-DOMAIN, voice.telephony.goog
-DOMAIN-SUFFIX, google.ad
-DOMAIN-SUFFIX, blogspot.ae
-DOMAIN-SUFFIX, google.ae
-DOMAIN-SUFFIX, google.com.af
-DOMAIN-SUFFIX, google.com.ag
-DOMAIN-SUFFIX, api.ai
-DOMAIN-SUFFIX, google.com.ai
-DOMAIN-SUFFIX, blogspot.al
+DOMAIN,lens.l.google.com
+DOMAIN,mtalk.google.com
+DOMAIN,safebrowsing-cache.google.com
+DOMAIN,redirector.c.bigcache.googleapis.com
+DOMAIN,clientservices.googleapis.com
+DOMAIN,fonts.googleapis.com
+DOMAIN,safebrowsing.googleapis.com
+DOMAIN,translate.googleapis.com
+DOMAIN,www.googleapis.com
+DOMAIN,fonts.gstatic.com
+DOMAIN,redirector.gvt1.com
+DOMAIN,crl.pki.goog
+DOMAIN,ocsp.pki.goog
+DOMAIN,voice.telephony.goog
+DOMAIN-SUFFIX,google.ad
+DOMAIN-SUFFIX,blogspot.ae
+DOMAIN-SUFFIX,google.ae
+DOMAIN-SUFFIX,google.com.af
+DOMAIN-SUFFIX,google.com.ag
+DOMAIN-SUFFIX,api.ai
+DOMAIN-SUFFIX,google.com.ai
+DOMAIN-SUFFIX,blogspot.al
 DOMAIN-SUFFIX, google.al
 DOMAIN-SUFFIX, blogspot.am
 DOMAIN-SUFFIX, google.am
@@ -658,77 +658,77 @@ DOMAIN-SUFFIX, google.rw
 DOMAIN-SUFFIX, google.com.sa
 DOMAIN-SUFFIX, google.com.sb
 DOMAIN-SUFFIX, google.sc
-DOMAIN-SUFFIX, blogspot.se
-DOMAIN-SUFFIX, google.se
-DOMAIN-SUFFIX, chronicle.security
-DOMAIN-SUFFIX, blogspot.sg
-DOMAIN-SUFFIX, google.com.sg
-DOMAIN-SUFFIX, google.sh
-DOMAIN-SUFFIX, blogspot.si
-DOMAIN-SUFFIX, google.si
-DOMAIN-SUFFIX, blogspot.sk
-DOMAIN-SUFFIX, google.sk
-DOMAIN-SUFFIX, google.com.sl
-DOMAIN-SUFFIX, google.sm
-DOMAIN-SUFFIX, blogspot.sn
-DOMAIN-SUFFIX, google.sn
-DOMAIN-SUFFIX, google.so
-DOMAIN-SUFFIX, iam.soy
-DOMAIN-SUFFIX, google.sr
-DOMAIN-SUFFIX, google.st
-DOMAIN-SUFFIX, google.com.sv
-DOMAIN-SUFFIX, blogspot.td
-DOMAIN-SUFFIX, google.td
-DOMAIN-SUFFIX, x.team
-DOMAIN-SUFFIX, google.tg
-DOMAIN-SUFFIX, google.co.th
-DOMAIN-SUFFIX, google.com.tj
-DOMAIN-SUFFIX, google.tl
-DOMAIN-SUFFIX, google.tm
-DOMAIN-SUFFIX, google.tn
-DOMAIN-SUFFIX, google.to
-DOMAIN-SUFFIX, fastlane.tools
-DOMAIN-SUFFIX, blogspot.com.tr
-DOMAIN-SUFFIX, google.com.tr
-DOMAIN-SUFFIX, google.tt
-DOMAIN-SUFFIX, blogspot.tw
-DOMAIN-SUFFIX, google.com.tw
-DOMAIN-SUFFIX, google.co.tz
-DOMAIN-SUFFIX, google.com.ua
-DOMAIN-SUFFIX, blogspot.ug
-DOMAIN-SUFFIX, google.co.ug
-DOMAIN-SUFFIX, blogspot.co.uk
-DOMAIN-SUFFIX, google.co.uk
-DOMAIN-SUFFIX, googlecompare.co.uk
-DOMAIN-SUFFIX, howtogetmo.co.uk
-DOMAIN-SUFFIX, thinkquarterly.co.uk
-DOMAIN-SUFFIX, blogspot.com.uy
-DOMAIN-SUFFIX, google.com.uy
-DOMAIN-SUFFIX, google.co.uz
-DOMAIN-SUFFIX, google.com.vc
-DOMAIN-SUFFIX, google.co.ve
-DOMAIN-SUFFIX, google.ventures
-DOMAIN-SUFFIX, google.vg
-DOMAIN-SUFFIX, google.co.vi
-DOMAIN-SUFFIX, blogspot.vn
-DOMAIN-SUFFIX, google.com.vn
-DOMAIN-SUFFIX, google.vu
-DOMAIN-SUFFIX, google.ws
-DOMAIN-SUFFIX, xn--p8j9a0d9c9a.xn--q9jyb4c
-DOMAIN-SUFFIX, abc.xyz
-DOMAIN-SUFFIX, blogspot.co.za
-DOMAIN-SUFFIX, google.co.za
-DOMAIN-SUFFIX, google.co.zm
-DOMAIN-SUFFIX, google.co.zw
-DOMAIN-KEYWORD, gmail
-DOMAIN-KEYWORD, google
-DOMAIN-KEYWORD, appspot
-DOMAIN-KEYWORD, blogspot
-DOMAIN-KEYWORD, recaptcha
-USER-AGENT, Google.Drive*
-USER-AGENT, *com.google.Drive*
-USER-AGENT, %E4%BA%91%E7%AB%AF%E7%A1%AC%E7%9B%98*
-IP-CIDR, 172.110.32.0/21
-IP-CIDR, 216.73.80.0/20
-IP-CIDR, 173.194.0.0/16
-IP-CIDR, 74.125.0.0/16
+DOMAIN-SUFFIX,blogspot.se
+DOMAIN-SUFFIX,google.se
+DOMAIN-SUFFIX,chronicle.security
+DOMAIN-SUFFIX,blogspot.sg
+DOMAIN-SUFFIX,google.com.sg
+DOMAIN-SUFFIX,google.sh
+DOMAIN-SUFFIX,blogspot.si
+DOMAIN-SUFFIX,google.si
+DOMAIN-SUFFIX,blogspot.sk
+DOMAIN-SUFFIX,google.sk
+DOMAIN-SUFFIX,google.com.sl
+DOMAIN-SUFFIX,google.sm
+DOMAIN-SUFFIX,blogspot.sn
+DOMAIN-SUFFIX,google.sn
+DOMAIN-SUFFIX,google.so
+DOMAIN-SUFFIX,iam.soy
+DOMAIN-SUFFIX,google.sr
+DOMAIN-SUFFIX,google.st
+DOMAIN-SUFFIX,google.com.sv
+DOMAIN-SUFFIX,blogspot.td
+DOMAIN-SUFFIX,google.td
+DOMAIN-SUFFIX,x.team
+DOMAIN-SUFFIX,google.tg
+DOMAIN-SUFFIX,google.co.th
+DOMAIN-SUFFIX,google.com.tj
+DOMAIN-SUFFIX,google.tl
+DOMAIN-SUFFIX,google.tm
+DOMAIN-SUFFIX,google.tn
+DOMAIN-SUFFIX,google.to
+DOMAIN-SUFFIX,fastlane.tools
+DOMAIN-SUFFIX,blogspot.com.tr
+DOMAIN-SUFFIX,google.com.tr
+DOMAIN-SUFFIX,google.tt
+DOMAIN-SUFFIX,blogspot.tw
+DOMAIN-SUFFIX,google.com.tw
+DOMAIN-SUFFIX,google.co.tz
+DOMAIN-SUFFIX,google.com.ua
+DOMAIN-SUFFIX,blogspot.ug
+DOMAIN-SUFFIX,google.co.ug
+DOMAIN-SUFFIX,blogspot.co.uk
+DOMAIN-SUFFIX,google.co.uk
+DOMAIN-SUFFIX,googlecompare.co.uk
+DOMAIN-SUFFIX,howtogetmo.co.uk
+DOMAIN-SUFFIX,thinkquarterly.co.uk
+DOMAIN-SUFFIX,blogspot.com.uy
+DOMAIN-SUFFIX,google.com.uy
+DOMAIN-SUFFIX,google.co.uz
+DOMAIN-SUFFIX,google.com.vc
+DOMAIN-SUFFIX,google.co.ve
+DOMAIN-SUFFIX,google.ventures
+DOMAIN-SUFFIX,google.vg
+DOMAIN-SUFFIX,google.co.vi
+DOMAIN-SUFFIX,blogspot.vn
+DOMAIN-SUFFIX,google.com.vn
+DOMAIN-SUFFIX,google.vu
+DOMAIN-SUFFIX,google.ws
+DOMAIN-SUFFIX,xn--p8j9a0d9c9a.xn--q9jyb4c
+DOMAIN-SUFFIX,abc.xyz
+DOMAIN-SUFFIX,blogspot.co.za
+DOMAIN-SUFFIX,google.co.za
+DOMAIN-SUFFIX,google.co.zm
+DOMAIN-SUFFIX,google.co.zw
+DOMAIN-KEYWORD,gmail
+DOMAIN-KEYWORD,google
+DOMAIN-KEYWORD,appspot
+DOMAIN-KEYWORD,blogspot
+DOMAIN-KEYWORD,recaptcha
+USER-AGENT,Google.Drive*
+USER-AGENT,*com.google.Drive*
+USER-AGENT,%E4%BA%91%E7%AB%AF%E7%A1%AC%E7%9B%98*
+IP-CIDR,172.110.32.0/21
+IP-CIDR,216.73.80.0/20
+IP-CIDR,173.194.0.0/16
+IP-CIDR,74.125.0.0/16
