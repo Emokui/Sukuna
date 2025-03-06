@@ -3,7 +3,7 @@ https://eth.fbi.cloudns.be
 
 
 ## R2网盘 ##
-https://suguru.pages.dev
+https://cn.hk.dedyn.io
 
 
 ## 分流库 ##
