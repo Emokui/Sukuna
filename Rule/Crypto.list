@@ -2,7 +2,6 @@
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
 DOMAIN-SUFFIX,okx.com
-
 # Binance
 DOMAIN-SUFFIX,binance.info
 DOMAIN-SUFFIX,binance.co
@@ -33,7 +32,6 @@ IP-CIDR,39.108.230.190/32,no-resolve
 IP-CIDR,120.24.233.110/32,no-resolve
 IP-CIDR,120.78.229.149/32,no-resolve
 IP-CIDR,47.107.64.0/18,no-resolve
-
 # Bitget
 DOMAIN-SUFFIX,engagelab.cc
 DOMAIN-SUFFIX,bitgetimg.com
@@ -52,7 +50,6 @@ IP-CIDR,8.212.49.105/32,no-resolve
 IP-CIDR,110.238.104.159/32,no-resolve
 IP-CIDR,119.8.191.101/32,no-resolve
 IP-CIDR,119.13.110.238/32,no-resolve
-
 # Bybit
 DOMAIN-SUFFIX,bybit.biz
 DOMAIN-SUFFIX,bybit.com
