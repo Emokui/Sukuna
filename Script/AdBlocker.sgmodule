@@ -2,7 +2,7 @@
 #!desc= 解锁pro,Mac版亦可
 
 [Script]
-adblockpro = type=http-response, pattern=^https:\/\/api\.adblockpro\.app\/verify, script-path=https://fbi.gk.dedyn.io/Emokui/Sukuna/main/Script/adblockpro.js, requires-body=true, max-size=-1, timeout=60
+adblockpro = type=http-response, pattern=^https:\/\/api\.adblockpro\.app\/verify, script-path=https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/adblockpro.js, requires-body=true, max-size=-1, timeout=60
 
 [MITM]
 hostname = %APPEND% api.adblockpro.app
