@@ -6,4 +6,4 @@
 𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦 = script-name=𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦,update-interval=600
 
 [Script]
-𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦 = type=generic,timeout=10,script-path=https://fbi.hkdedyn.io/Emokui/Sukuna/main/Script/Flush-DNS.js,argument=title={{{TITLE}}}&icon={{{ICON}}}&color={{{COLOR}}}&server=false
+𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦 = type=generic,timeout=10,script-path=https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/Flush-DNS.js,argument=title={{{TITLE}}}&icon={{{ICON}}}&color={{{COLOR}}}&server=false
