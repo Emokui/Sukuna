@@ -6,3 +6,6 @@ request_throttle = script-path=https://raw.githubusercontent.com/Emokui/Sukuna/r
 
 [Rule]
 DOMAIN,v16m.tiktokcdn-us.com,request_throttle
+
+[MITM]
+hostname = %APPEND% *.TikTok.com
