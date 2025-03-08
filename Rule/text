@@ -1,4 +1,5 @@
 DOMAIN-SUFFIX,akadns.net
+DOMAIN-SUFFIX,akamai.net
 DOMAIN-SUFFIX,akamaiedge.net
 DOMAIN-SUFFIX,fastly-edge.com
 DOMAIN-SUFFIX,ssl.gstatic.com
@@ -7,6 +8,7 @@ DOMAIN-SUFFIX,qtlcdn.com.cdnmg.com
 DOMAIN-SUFFIX,gslb.sxct.51yidun.com
 IP-CIDR,23.203.76.155/32,no-resolve
 IP-CIDR,23.202.34.161/32,no-resolve
+IP-CIDR,23.202.34.249/32,no-resolve
 IP-CIDR,23.49.14.44/32,no-resolve
 IP-CIDR,23.51.136.242/32,no-resolve
 IP-CIDR,23.50.16.235/32,no-resolve
