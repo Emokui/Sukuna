@@ -3,6 +3,14 @@ DOMAIN-SUFFIX,a2.mzstatic.com
 DOMAIN-SUFFIX,a3.mzstatic.com
 DOMAIN-SUFFIX,a4.mzstatic.com
 DOMAIN-SUFFIX,a5.mzstatic.com
+DOMAIN-SUFFIX,akadns.net
+DOMAIN-SUFFIX,akamai.net
+DOMAIN-SUFFIX,akamaiedge.net
+DOMAIN-SUFFIX,fastly-edge.com
+DOMAIN-SUFFIX,ssl.gstatic.com
+DOMAIN-SUFFIX,safebrowsing.apple
+DOMAIN-SUFFIX,qtlcdn.com.cdnmg.com
+DOMAIN-SUFFIX,gslb.sxct.51yidun.com
 DOMAIN-SUFFIX,adcdownload.apple.com.akadns.net
 DOMAIN-SUFFIX,adcdownload.apple.com
 DOMAIN-SUFFIX,amp-api.media.apple.com
@@ -215,3 +223,6 @@ IP-CIDR,144.178.48.0/20,no-resolve
 IP-CIDR,192.35.50.0/24,no-resolve
 IP-CIDR,198.183.17.0/24,no-resolve
 IP-CIDR,205.180.175.0/24,no-resolve
+IP-CIDR,23.0.0.0/8,no-resolve
+IP-CIDR,184.26.91.14/32,no-resolve
+IP-CIDR,104.71.138.68/32,no-resolve
