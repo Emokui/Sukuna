@@ -4,11 +4,11 @@ DOMAIN-SUFFIX,ipa.store
 DOMAIN-SUFFIX,fenxm.com
 DOMAIN-SUFFIX,423down.com
 DOMAIN-SUFFIX,alipay.com
-DOMAIN-SUFFIX,alipayobjects.com
 DOMAIN-SUFFIX,aliyuncs.com
 DOMAIN-SUFFIX,aliapp.org
 DOMAIN-SUFFIX,cnblogs.com
 DOMAIN-SUFFIX,mmstat.com
+DOMAIN-SUFFIX,darock.top
 DOMAIN-SUFFIX,edu.cn
 DOMAIN-SUFFIX,amap.com
 DOMAIN-SUFFIX,wx.qq.com
@@ -16,6 +16,10 @@ DOMAIN-SUFFIX,mybank.cn
 DOMAIN-SUFFIX,alibaba.com
 DOMAIN-SUFFIX,alibabachengdun.com
 DOMAIN-SUFFIX,zhisanzhao.com
+DOMAIN-SUFFIX,gylm2020.com
+DOMAIN-SUFFIX,manmanbuy.com
+DOMAIN-SUFFIX,m.taobao.com
+DOMAIN,api.25mao.com
 DOMAIN-SUFFIX,localdomain
 DOMAIN-SUFFIX,c-t.work
 DOMAIN-SUFFIX,mijia.tech
@@ -1513,6 +1517,7 @@ IP-CIDR,47.122.0.0/17,no-resolve
 IP-CIDR,47.122.128.0/18,no-resolve
 IP-CIDR,47.122.192.0/19,no-resolve
 IP-CIDR,47.123.0.0/16,no-resolve
+IP-CIDR,47.246.96.0/19.no-resolve
 IP-CIDR,49.4.0.0/18,no-resolve
 IP-CIDR,49.4.64.0/19,no-resolve
 IP-CIDR,49.4.96.0/21,no-resolve
@@ -3688,6 +3693,7 @@ IP-CIDR,125.254.184.0/22,no-resolve
 IP-CIDR,125.254.188.0/23,no-resolve
 IP-CIDR,125.254.190.0/24,no-resolve
 IP-CIDR,128.1.143.0/24,no-resolve
+IP-CIDR,128.1.157.0/24,no-resolve
 IP-CIDR,128.1.166.0/24,no-resolve
 IP-CIDR,128.1.183.0/24,no-resolve
 IP-CIDR,128.1.184.0/24,no-resolve
