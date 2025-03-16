@@ -6,7 +6,7 @@
 
 
 #### Duet ####
-*https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/Duet.sgmodule*
+*https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/DuetPro.sgmodule*
 
 
 #### Talkatone ####
