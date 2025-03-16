@@ -1,6 +1,6 @@
 #!name= 𝗦𝗰𝗿𝗶𝗽𝘁 𝗛𝘂𝗯
 #!desc= 规则重写转换
-#!arguments=Notify:开启通知
+#!arguments=Notify:关闭通知
 #!arguments-desc=Notify:\nScriptHub通知设置, 可选 开启通知, 关闭通知, 跟随链接
 
 [General]
