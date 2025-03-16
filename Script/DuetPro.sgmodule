@@ -1,0 +1,8 @@
+#!name= 𝗗𝘂𝗲𝘁𝗣𝗿𝗼
+#!desc= 𝗥𝗲𝗽𝗿𝗶𝗻𝘁 𝗮𝗻𝗱 𝗰𝗿𝗮𝗰𝗸, 𝘂𝗻𝗹𝗼𝗰𝗸 𝗔𝗶𝗿
+
+[Script]
+DuetDisplay = type=http-response, pattern=https://rdp.duetdisplay.com/v1/users/validateReceipt, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/DuetDisplay.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% rdp.duetdisplay.com
