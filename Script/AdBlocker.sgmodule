@@ -1,5 +1,5 @@
 #!name= 𝗔𝗱𝗕𝗹𝗼𝗰𝗸𝗲𝗿
-#!desc= 解锁pro,Mac版亦可
+#!desc= 𝗨𝗻𝗹𝗼𝗰𝗸 𝗽𝗿𝗼, 𝗠𝗮𝗰 𝘃𝗲𝗿𝘀𝗶𝗼𝗻 𝗶𝘀 𝗮𝗹𝘀𝗼 𝗮𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲
 
 [Script]
 adblockpro = type=http-response, pattern=^https:\/\/api\.adblockpro\.app\/verify, script-path=https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/adblockpro.js, requires-body=true, max-size=-1, timeout=60
