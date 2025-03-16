@@ -1,0 +1,9 @@
+#!name= 𝐑𝐞𝐯𝐞𝐧𝐮𝐞𝐂𝐚𝐭
+#!desc= 𝐡𝐭𝐭𝐩𝐬://𝐚𝐩𝐩𝐫𝐚𝐯𝐞𝐧.𝐧𝐞𝐭/𝐜𝐨𝐥𝐥𝐞𝐜𝐭𝐢𝐨𝐧/𝟕𝟕𝟐𝟗𝟗𝟗𝟔𝟗
+[Script]
+
+RevenueCatVip = type=http-response, pattern=^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/[^/]+$), script-path=https://gist.githubusercontent.com/ddgksf2013/dbb1695cd96743eef18f3fac5c6fe227/raw/revenuecat.js, requires-body=true, max-size=-1, timeout=60
+RevenueCatDeleteHeader = type=http-request, pattern=^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts|subscribers), script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/master/deleteHeader.js, timeout=60
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com, api.rc-backup.com
