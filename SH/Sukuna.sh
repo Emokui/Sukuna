@@ -196,7 +196,7 @@ rule-providers:
     behavior: classical
     format: text
     path: ./𝗢𝗽𝗲𝗻𝗔𝗜
-    url: https://fbi.hk dõi: "https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗢𝗽𝗲𝗻𝗔𝗜"
+    url: https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗢𝗽𝗲𝗻𝗔𝗜
     interval: 86400
   YouTube:
     type: http
