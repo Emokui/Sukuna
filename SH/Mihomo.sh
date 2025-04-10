@@ -141,6 +141,7 @@ geox-url:
   mmdb: "https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb"
 geo-update-interval: 24
 tcp-concurrent: true
+find-process-mode: off
 allow-lan: false
 mode: rule
 log-level: warning
