@@ -1,19 +1,4 @@
-### CDN脚本命令 ###
-
-
-##### 3XUI ####
-
-```
-bash <(curl -Ls https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/3xui.sh)
-```
-
-#### Snell ####
-
-```
-wget -O snell.sh --no-check-certificate https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/snell.sh && chmod +x snell.sh && ./snell.sh
-```
-
-#### DD system ####
+#### DD系統 ####
 
 ```
 wget -N --no-check-certificate "https://fbi.hk.dedyn.io/Emokui/Sukuna//main/Linux/dd.sh"
@@ -28,11 +13,6 @@ apt-get install sudo
 sudo apt install curl -y
 ```
 
-#### AliceDNS ####
-
-```
-wget https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/alicedns.sh && bash alicedns.sh
-```
 
 #### ACME ####
 
@@ -40,16 +20,11 @@ wget https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/alicedns.sh && bash aliced
 wget -N --no-check-certificate https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/acme.sh && bash acme.sh
 ```
 
-#### Hysteria ####
-
-```
-wget -N --no-check-certificate https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/hysteria.sh && bash hysteria.sh
-```
 
 #### SubStore ####
 **docker**
 ```
-bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/substore-docker.sh)
+bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/substore.sh)
 ```
 
 #### Serv00 ####
