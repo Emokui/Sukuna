@@ -207,9 +207,9 @@ rule-providers:
     interval: 86400
 
 rules:
-  - RULE-SET,YouTube,warp
-  - RULE-SET,OpenAi,warp
-  - RULE-SET,China,warp
+  - RULE-SET,YouTube,warp,no-resolve
+  - RULE-SET,OpenAi,warp,no-resolve
+  - RULE-SET,China,warp,no-resolve
   - GEOIP,CN,warp,no-resolve
   - MATCH,DIRECT
 EOF
