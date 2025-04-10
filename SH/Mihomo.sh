@@ -162,13 +162,14 @@ dns:
   direct-nameserver:
     - 1.1.1.1
     - 8.8.8.8
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip # or redir-host
+
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - '*'
     - '+.lan'
     - '+.local'
-  use-hosts: true
+ # use-hosts: true
 
 proxies:
   - name: "warp"
