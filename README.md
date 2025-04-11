@@ -1,9 +1,9 @@
 ## Blog ##
-https://102004.xyz
+https://snell.zone.id
 
 
 ## R2网盘 ##
-https://cn.hk.dedyn.io
+https://cover.zone.id
 
 
 ## 分流库 ##
