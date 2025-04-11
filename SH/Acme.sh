@@ -164,7 +164,6 @@ checktls() {
             green "建議如下: "
             yellow "1. 自行檢測防火牆是否打開，如使用 80 端口申請模式時，請關閉防火牆或放行 80 端口"
             yellow "2. 同一域名多次申請可能會觸發 Let's Encrypt 官方風控，請嘗試使用腳本菜單的 9 選項更換證書頒發機構，再重試申請證書，或更換域名、或等待 7 天後再嘗試執行腳本"
-            yellow "3. 腳本可能跟不上時代，建議截圖發布到 GitHub Issues、GitLab Issues、論壇或 TG 群詢問"
         fi
     fi
 }
@@ -247,7 +246,6 @@ acme_standalone(){
             green "建議如下："
             yellow "1. 請確保 CloudFlare 小雲朵為關閉狀態 (僅限 DNS)，其他域名解析或 CDN 網站設置同理"
             yellow "2. 請檢查 DNS 解析設置的 IP 是否為 VPS 的真實 IP"
-            yellow "3. 腳本可能跟不上時代，建議截圖發布到 GitHub Issues、GitLab Issues、論壇或 TG 群詢問"
             back2menu
         fi
     fi
@@ -376,7 +374,7 @@ menu() {
     clear
     echo "#############################################################"
     echo -e "#                   ${RED}Acme 證書一鍵申請腳本${PLAIN}                  #"
-    echo -e "# ${GREEN}介紹${PLAIN}: Musashi の 轉載                                  #"
+    echo -e "# ${GREEN}介紹${PLAIN}: Musashi の AI整合                                #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安裝 Acme.sh 域名證書申請腳本"
