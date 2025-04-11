@@ -370,11 +370,55 @@ switch_provider(){
     back2menu
 }
 
+generate_self_signed_cert() {
+    echo ""
+    yellow "开始生成自签名ECC证书..."
+    # 默认参数
+    DEFAULT_DOMAIN="bing.com"
+    DEFAULT_CERT_PATH="/etc/cert"
+    DEFAULT_DAYS=36500
+    
+    # 获取用户输入
+    read -rp "请输入证书的域名（默认: ${DEFAULT_DOMAIN}）: " domain
+    domain="${domain:-$DEFAULT_DOMAIN}"
+    read -rp "请输入证书存放路径（默认: ${DEFAULT_CERT_PATH}）: " cert_path
+    cert_path="${cert_path:-$DEFAULT_CERT_PATH}"
+    read -rp "请输入证书有效天数（默认: ${DEFAULT_DAYS}）: " days
+    days="${days:-$DEFAULT_DAYS}"
+    
+    # 文件路径
+    key_file="${cert_path}/server.key"
+    crt_file="${cert_path}/server.crt"
+    
+    # 创建目录
+    sudo mkdir -p "$cert_path"
+    
+    # 生成 ECC 私钥
+    echo "生成 ECC 私钥..."
+    sudo openssl ecparam -name prime256v1 -genkey -noout -out "$key_file"
+    
+    # 使用私钥生成自签证书
+    echo "使用私钥生成自签证书..."
+    sudo openssl req -new -x509 -key "$key_file" -out "$crt_file" -days "$days" \
+        -subj "/CN=$domain" -addext "subjectAltName=DNS:$domain"
+    
+    # 设置适当的权限
+    sudo chmod 644 "$crt_file"
+    sudo chmod 600 "$key_file"
+    
+    echo ""
+    green "自签名证书生成完成！"
+    echo "私钥位置: $key_file"
+    echo "证书位置: $crt_file"
+    
+    back2menu
+}
+
 menu() {
     clear
     echo "#############################################################"
     echo -e "#                   ${RED}Acme 證書一鍵申請腳本${PLAIN}                  #"
-    echo -e "# ${GREEN}介紹${PLAIN}: Musashi の AI整合                                #"
+    echo -e "#                  ${GREEN}介紹${PLAIN}: Musashi の AI整合                 #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安裝 Acme.sh 域名證書申請腳本"
@@ -388,10 +432,11 @@ menu() {
     echo -e " ${GREEN}7.${PLAIN} 撤銷並刪除已申請的證書"
     echo -e " ${GREEN}8.${PLAIN} 手動續期已申請的證書"
     echo -e " ${GREEN}9.${PLAIN} 切換證書頒發機構"
+    echo -e " ${GREEN}10.${PLAIN} 生成自簽名 ECC 證書 ${YELLOW}(本地生成)${PLAIN}"
     echo " -------------"
     echo -e " ${GREEN}0.${PLAIN} 退出腳本"
     echo ""
-    read -rp "請輸入選項 [0-9]: " menuInput
+    read -rp "請輸入選項 [0-10]: " menuInput
     case "$menuInput" in
         1 ) inst_acme ;;
         2 ) unst_acme ;;
@@ -402,6 +447,7 @@ menu() {
         7 ) revoke_cert ;;
         8 ) renew_cert ;;
         9 ) switch_provider ;;
+        10 ) generate_self_signed_cert ;;
         * ) exit 1 ;;
     esac
 }
