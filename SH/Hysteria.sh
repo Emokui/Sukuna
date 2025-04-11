@@ -4,7 +4,7 @@ while true; do
   # 顯示選項菜單
   echo "請選擇操作:"
   echo "0. 退出腳本"
-  echo "1. 生成自簽證書"
+  echo "1. 申请證書or自签证书"
   echo "2. 安裝 Hysteria"
   echo "3. 管理 Hysteria 服務"
   echo "4. 設置端口跳躍規則"
@@ -15,28 +15,11 @@ while true; do
       echo "退出腳本..."
       exit 0
 
-  # 選項1: 生成自簽證書
+  # 選項1: 申请證書or自签证书 
   elif [ "$option" -eq 1 ]; then
-      default_domain="bing.com"
-      default_path="/etc/hysteria"
-
-      read -p "請輸入證書的域名（默認為 ${default_domain}）： " domain
-      domain=${domain:-$default_domain}
-
-      read -p "請輸入證書存放路徑（默認為 ${default_path}）： " cert_path
-      cert_path=${cert_path:-$default_path}
-
-      key_file="${cert_path}/server.key"
-      crt_file="${cert_path}/server.crt"
-
-      sudo mkdir -p "$cert_path"
-
-      openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) -keyout "$key_file" -out "$crt_file" -subj "/CN=${domain}" -days 36500
-
-      sudo chown hysteria "$key_file"
-      sudo chown hysteria "$crt_file"
-
-      echo "證書生成完成！"
+      echo "正在下載並執行 Acme.sh..."
+      wget -N --no-check-certificate https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/Acme.sh && bash Acme.sh
+      
       read -p "按 Enter 鍵返回主菜單..." _
 
   # 選項2: 安裝 Hysteria
@@ -63,13 +46,13 @@ while true; do
       read -r listen_port
       listen_port=${listen_port:-:443}
 
-      echo "請輸入證書路徑 (默認 /etc/hysteria/server.crt):"
+      echo "請輸入證書路徑 (默認自签证书 /etc/cert/server.crt):"
       read -r cert_path
-      cert_path=${cert_path:-/etc/hysteria/server.crt}
+      cert_path=${cert_path:-/etc/cert/server.crt}
 
-      echo "請輸入私鑰路徑 (默認 /etc/hysteria/server.key):"
+      echo "請輸入私鑰路徑 (默認自签证书 /etc/cert/server.key):"
       read -r key_path
-      key_path=${key_path:-/etc/hysteria/server.key}
+      key_path=${key_path:-/etc/cert/server.key}
 
       echo "請輸入認證密碼 (默認 123456asd):"
       read -r auth_password
