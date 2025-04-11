@@ -224,7 +224,7 @@ EOF
       read -r port_range
       port_range=${port_range:-20000:50000}
 
-      echo "請輸入目標端口 (默認 443):"
+      echo "請輸入HY端口 (默認 443):"
       read -r target_port
       target_port=${target_port:-443}
 
