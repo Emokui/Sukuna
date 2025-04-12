@@ -84,14 +84,14 @@ function install_trojan_go() {
     read -p "請輸入本地監聽端口 (節點端口) [預設: 443]: " local_port
     local_port=${local_port:-443}
 
-    read -p "請輸入轉發目標地址 [預設: httpforever.com]: " remote_addr
-    remote_addr=${remote_addr:-httpforever.com}
+    read -p "請輸入轉發目標地址 [預設: speedtest.tele2.net]: " remote_addr
+    remote_addr=${remote_addr:-speedtest.tele2.net}
 
     read -p "請輸入轉發目標端口 [預設: 80]: " remote_port
     remote_port=${remote_port:-80}
 
-    read -p "請輸入密碼 (建議更改) [預設: 123123]: " password
-    password=${password:-123123}
+    read -p "請輸入密碼 (建議更改) [預設: 123123asd]: " password
+    password=${password:-123123asd}
 
     read -p "請輸入路徑 [預設: /]: " ws_path
     ws_path=${ws_path:-/}
