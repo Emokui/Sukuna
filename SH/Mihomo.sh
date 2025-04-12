@@ -193,12 +193,12 @@ rule-providers:
     path: ./𝗗𝗜𝗥𝗘𝗖𝗧
     url: https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗗𝗜𝗥𝗘𝗖𝗧
     interval: 86400
-  OpenAi:
+  Ai:
     type: http
     behavior: classical
     format: text
-    path: ./𝗢𝗽𝗲𝗻𝗔𝗜
-    url: https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗢𝗽𝗲𝗻𝗔𝗜
+    path: ./𝗔𝗜
+    url: https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗔𝗜
     interval: 86400
   YouTube:
     type: http
@@ -210,7 +210,7 @@ rule-providers:
 
 rules:
   - RULE-SET,YouTube,warp,no-resolve
-  - RULE-SET,OpenAi,warp,no-resolve
+  - RULE-SET,Ai,warp,no-resolve
   - RULE-SET,China,warp,no-resolve
   - GEOIP,CN,warp,no-resolve
   - MATCH,DIRECT
