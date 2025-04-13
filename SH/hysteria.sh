@@ -27,18 +27,20 @@ while true; do
       HY2_DIR="/root/hysteria"
       EXEC_PATH="${HY2_DIR}/hysteria"
 
+  # 确保目录存在
       mkdir -p "$HY2_DIR"
 
       echo "正在下載最新版本的 Hysteria 內核..."
+  # 直接下载到目标位置
       wget -O "${EXEC_PATH}" "https://download.hysteria.network/app/latest/hysteria-linux-amd64"
 
       if [ ! -s "$EXEC_PATH" ]; then
-          echo "下載的文件為空，請檢查網絡或下載鏈接是否正確。"
-          exit 1
+      echo "下載的文件為空，請檢查網絡或下載鏈接是否正確。"
+      exit 1
       fi
 
-      mv "$EXEC_PATH" "$HY2_DIR/hysteria"
-      chmod +x "$HY2_DIR/hysteria"
+  # 赋予执行权限
+      chmod +x "$EXEC_PATH"
 
       echo "Hysteria 內核已成功下載並賦予執行權限"
 
