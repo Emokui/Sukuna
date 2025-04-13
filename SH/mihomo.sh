@@ -186,13 +186,6 @@ proxies:
     mtu: $mtu
 
 rule-providers:
-  China:
-    type: http
-    behavior: classical
-    format: text
-    path: ./𝗗𝗜𝗥𝗘𝗖𝗧
-    url: https://fbi.hk.dedyn.io/Emokui/Rule/𝗟𝗶𝘀𝘁/𝗗𝗜𝗥𝗘𝗖𝗧
-    interval: 86400
   Ai:
     type: http
     behavior: classical
@@ -211,8 +204,6 @@ rule-providers:
 rules:
   - RULE-SET,YouTube,warp,no-resolve
   - RULE-SET,Ai,warp,no-resolve
-  - RULE-SET,China,warp,no-resolve
-  - GEOIP,CN,warp,no-resolve
   - MATCH,DIRECT
 EOF
     check_status "创建配置文件"
