@@ -24,7 +24,7 @@ while true; do
 
   # 選項2: 安裝 Hysteria
   elif [ "$option" -eq 2 ]; then
-      HY2_DIR="/root/hy2"
+      HY2_DIR="/root/hysteria"
       EXEC_PATH="${HY2_DIR}/hysteria"
 
       mkdir -p "$HY2_DIR"
@@ -91,7 +91,7 @@ Description=Hysteria Server Service
 After=network.target
 
 [Service]
-ExecStart=/root/hy2/hysteria server --config /root/hy2/config.yaml
+ExecStart=/root/hysteria/hysteria server --config /root/hysteria/config.yaml
 User=root
 Group=root
 Restart=always
@@ -113,7 +113,7 @@ EOF
   # 選項3: 管理 Hysteria 服務
   elif [ "$option" -eq 3 ]; then
       SERVICE_NAME="hysteria"
-      HY2_DIR="/root/hy2"
+      HY2_DIR="/root/hysteria"
       EXEC_PATH="${HY2_DIR}/hysteria"
       CONFIG_PATH="${HY2_DIR}/config.yaml"
       SERVICE_FILE="/etc/systemd/system/hysteria.service"
