@@ -119,7 +119,7 @@ EOF
       EXEC_PATH="${HY2_DIR}/hysteria"
       CONFIG_PATH="${HY2_DIR}/config.yaml"
       SERVICE_FILE="/etc/systemd/system/hysteria.service"
-      CERT_DIR="/etc/hysteria"
+      CERT_DIR="/etc/cert"
       PORT_JUMP_SERVICE="/etc/systemd/system/port-jump.service"
 
       echo "請選擇操作:"
