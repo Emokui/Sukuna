@@ -70,7 +70,7 @@ function manage_trojan_go() {
 # 安裝 ACME.sh
 function install_acme() {
     echo "正在安裝 ACME.sh 自動 SSL 憑證管理腳本……"
-    wget -N --no-check-certificate https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/Acme.sh && bash Acme.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh && bash acme.sh
 }
 
 # 安裝 Trojan-Go
