@@ -114,6 +114,22 @@ change_timezone() {
 configure_firewall() {
     echo "[*] 偵測並準備防火牆工具..."
     FIREWALL_TOOL=""
+    
+    # 检查iptables是否安装
+    if ! command -v iptables &>/dev/null; then
+        echo "[!] 未偵測到iptables，開始安裝..."
+        if [[ -f /etc/debian_version ]]; then
+            apt update && apt install -y iptables
+        elif [[ -f /etc/centos-release || -f /etc/redhat-release ]]; then
+            yum install -y iptables iptables-services
+            systemctl enable iptables
+            systemctl start iptables
+        fi
+        echo "[✓] iptables 已安裝"
+    else
+        echo "[✓] iptables 已存在"
+    fi
+    
     if command -v ufw &>/dev/null; then
         FIREWALL_TOOL="ufw"
     elif command -v firewall-cmd &>/dev/null; then
@@ -134,83 +150,69 @@ configure_firewall() {
         echo "請選擇防火牆操作："
         echo "1) 開啟端口"
         echo "2) 關閉端口"
-        echo "3) 開啟全部端口"
+        echo "3) 開啟全部端口" 
         echo "4) 關閉全部端口"
-        echo "5) 返回世界线"
-        read -rp "請輸入選項 (1-5): " action_choice
+        echo "5) 顯示已開啟的端口"
+        echo "6) 返回世界线"
+        read -rp "請輸入選項 (1-6): " action_choice
         case "$action_choice" in
             1|2)
                 read -rp "請輸入端口（如 22 443 或 1000-2000）: " input_ports
                 for port_spec in $input_ports; do
-                    # 检查端口范围有效性
+                    # 处理端口范围
                     if [[ "$port_spec" =~ ^([0-9]+)-([0-9]+)$ ]]; then
                         start_port=${BASH_REMATCH[1]}
                         end_port=${BASH_REMATCH[2]}
                         
-                        # 检查端口范围是否有效
-                        if [[ $start_port -lt 0 || $start_port -gt 65535 || $end_port -lt 0 || $end_port -gt 65535 ]]; then
-                            echo "[!] 无效端口范围: $port_spec (有效端口范围为 0-65535)"
+                        # 验证端口范围
+                        if [[ $start_port -lt 1 || $start_port -gt 65535 || $end_port -lt 1 || $end_port -gt 65535 ]]; then
+                            echo "[!] 无效端口范围: $port_spec (端口必须在 1-65535 之间)"
                             continue
                         fi
                         
-                        # 检查端口范围是否过大
-                        if [[ $((end_port - start_port)) -gt 5000 ]]; then
-                            echo "[*] 端口范围 $port_spec 过大，将分块处理"
-                            current_start=$start_port
-                            
-                            while [[ $current_start -le $end_port ]]; do
-                                current_end=$((current_start + 5000))
-                                if [[ $current_end -gt $end_port ]]; then
-                                    current_end=$end_port
-                                fi
-                                
-                                port_range="${current_start}-${current_end}"
-                                echo "[*] 处理端口范围: $port_range"
-                                
-                                if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
-                                    if [[ "$action_choice" == "1" ]]; then
-                                        ufw allow "$port_range/tcp"
-                                        ufw allow "$port_range/udp"
-                                    else
-                                        ufw deny "$port_range/tcp"
-                                        ufw deny "$port_range/udp"
-                                    fi
-                                elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
-                                    if [[ "$action_choice" == "1" ]]; then
-                                        firewall-cmd --permanent --add-port="$port_range/tcp"
-                                        firewall-cmd --permanent --add-port="$port_range/udp"
-                                    else
-                                        firewall-cmd --permanent --remove-port="$port_range/tcp"
-                                        firewall-cmd --permanent --remove-port="$port_range/udp"
-                                    fi
-                                fi
-                                
-                                current_start=$((current_end + 1))
-                            done
+                        echo "[*] 处理端口范围: $port_spec (从 $start_port 到 $end_port)"
+                        
+                        # 使用iptables直接添加规则，无论使用什么防火墙工具
+                        if [[ "$action_choice" == "1" ]]; then
+                            echo "[*] 使用iptables直接添加端口范围..."
+                            iptables -A INPUT -p tcp --match multiport --dports $start_port:$end_port -j ACCEPT
+                            iptables -A INPUT -p udp --match multiport --dports $start_port:$end_port -j ACCEPT
                         else
-                            # 处理较小的端口范围
-                            if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
-                                if [[ "$action_choice" == "1" ]]; then
-                                    ufw allow "$port_spec/tcp"
-                                    ufw allow "$port_spec/udp"
-                                else
-                                    ufw deny "$port_spec/tcp"
-                                    ufw deny "$port_spec/udp"
-                                fi
-                            elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
-                                if [[ "$action_choice" == "1" ]]; then
-                                    firewall-cmd --permanent --add-port="$port_spec/tcp"
-                                    firewall-cmd --permanent --add-port="$port_spec/udp"
-                                else
-                                    firewall-cmd --permanent --remove-port="$port_spec/tcp"
-                                    firewall-cmd --permanent --remove-port="$port_spec/udp"
-                                fi
+                            echo "[*] 使用iptables直接阻止端口范围..."
+                            iptables -A INPUT -p tcp --match multiport --dports $start_port:$end_port -j DROP
+                            iptables -A INPUT -p udp --match multiport --dports $start_port:$end_port -j DROP
+                        fi
+                        
+                        # 保存iptables规则以便持久化
+                        echo "[*] 保存iptables规则..."
+                        if command -v netfilter-persistent &>/dev/null; then
+                            netfilter-persistent save
+                        elif [[ -f /etc/debian_version ]]; then
+                            if ! command -v netfilter-persistent &>/dev/null; then
+                                echo "[*] 安装 iptables-persistent..."
+                                DEBIAN_FRONTEND=noninteractive apt install -y iptables-persistent
+                            fi
+                            netfilter-persistent save
+                        elif [[ -f /etc/centos-release || -f /etc/redhat-release ]]; then
+                            service iptables save
+                        fi
+                        
+                        # 如果使用的是防火墙工具，也相应地添加规则
+                        if [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
+                            if [[ "$action_choice" == "1" ]]; then
+                                echo "[*] 使用firewalld rich rules添加端口范围..."
+                                firewall-cmd --permanent --add-rich-rule="rule family='ipv4' port port='$start_port-$end_port' protocol='tcp' accept"
+                                firewall-cmd --permanent --add-rich-rule="rule family='ipv4' port port='$start_port-$end_port' protocol='udp' accept"
+                            else
+                                echo "[*] 使用firewalld rich rules阻止端口范围..."
+                                firewall-cmd --permanent --add-rich-rule="rule family='ipv4' port port='$start_port-$end_port' protocol='tcp' reject"
+                                firewall-cmd --permanent --add-rich-rule="rule family='ipv4' port port='$start_port-$end_port' protocol='udp' reject"
                             fi
                         fi
                     else
                         # 处理单个端口
-                        if [[ ! "$port_spec" =~ ^[0-9]+$ || $port_spec -lt 0 || $port_spec -gt 65535 ]]; then
-                            echo "[!] 无效端口: $port_spec (有效端口范围为 0-65535)"
+                        if [[ ! "$port_spec" =~ ^[0-9]+$ || $port_spec -lt 1 || $port_spec -gt 65535 ]]; then
+                            echo "[!] 无效端口: $port_spec (端口必须在 1-65535 之间)"
                             continue
                         fi
                         
@@ -242,14 +244,116 @@ configure_firewall() {
                 fi
                 ;;
             3)
+                echo "[*] 正在开启所有端口..."
+                # 使用iptables直接开启所有端口
+                iptables -P INPUT ACCEPT
+                iptables -P FORWARD ACCEPT
+                iptables -P OUTPUT ACCEPT
+                iptables -F
+                
+                # 保存iptables规则
+                if command -v netfilter-persistent &>/dev/null; then
+                    netfilter-persistent save
+                elif [[ -f /etc/debian_version ]]; then
+                    if ! command -v netfilter-persistent &>/dev/null; then
+                        DEBIAN_FRONTEND=noninteractive apt install -y iptables-persistent
+                    fi
+                    netfilter-persistent save
+                elif [[ -f /etc/centos-release || -f /etc/redhat-release ]]; then
+                    service iptables save
+                fi
+                
+                # 同时配置防火墙工具
                 [[ "$FIREWALL_TOOL" == "ufw" ]] && ufw default allow && ufw --force enable
                 [[ "$FIREWALL_TOOL" == "firewalld" ]] && firewall-cmd --set-default-zone=trusted && firewall-cmd --reload
                 ;;
             4)
-                [[ "$FIREWALL_TOOL" == "ufw" ]] && ufw default deny && ufw --force enable
-                [[ "$FIREWALL_TOOL" == "firewalld" ]] && firewall-cmd --set-default-zone=drop && firewall-cmd --reload
+                echo "[*] 正在关闭所有端口..."
+                # 先关闭所有端口，但保留SSH (22)端口，防止被锁在系统外
+                iptables -P INPUT DROP
+                iptables -P FORWARD DROP
+                iptables -F
+                iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+                iptables -A INPUT -i lo -j ACCEPT
+                iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+                
+                # 保存iptables规则
+                if command -v netfilter-persistent &>/dev/null; then
+                    netfilter-persistent save
+                elif [[ -f /etc/debian_version ]]; then
+                    if ! command -v netfilter-persistent &>/dev/null; then
+                        DEBIAN_FRONTEND=noninteractive apt install -y iptables-persistent
+                    fi
+                    netfilter-persistent save
+                elif [[ -f /etc/centos-release || -f /etc/redhat-release ]]; then
+                    service iptables save
+                fi
+                
+                # 同时配置防火墙工具
+                [[ "$FIREWALL_TOOL" == "ufw" ]] && ufw default deny && ufw allow 22/tcp && ufw --force enable
+                [[ "$FIREWALL_TOOL" == "firewalld" ]] && firewall-cmd --set-default-zone=drop && firewall-cmd --add-port=22/tcp --permanent && firewall-cmd --reload
                 ;;
-            5) break ;;
+            5)
+                echo "[*] 显示已开启的端口..."
+                echo "=== iptables开放的端口 ==="
+                # 安装netstat工具（如果不存在）
+                if ! command -v netstat &>/dev/null; then
+                    echo "[*] 安装netstat工具..."
+                    if [[ -f /etc/debian_version ]]; then
+                        apt update && apt install -y net-tools
+                    elif [[ -f /etc/centos-release || -f /etc/redhat-release ]]; then
+                        yum install -y net-tools
+                    fi
+                fi
+                
+                # 使用netstat查看监听端口
+                echo "系统正在监听的端口:"
+                netstat -tuln | grep LISTEN
+                
+                # 显示iptables INPUT链中允许的端口
+                echo -e "\niptables允许的端口:"
+                iptables -L INPUT -n -v | grep -i accept
+                
+                # 根据防火墙工具显示更多信息
+                if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
+                    echo -e "\nUFW防火墙状态:"
+                    ufw status verbose
+                elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
+                    echo -e "\nFirewallD防火墙状态:"
+                    firewall-cmd --list-all
+                    echo -e "\n开放的端口范围:"
+                    firewall-cmd --list-rich-rules | grep port
+                fi
+                
+                # 如果安装了ss工具，也使用它来显示开放端口
+                if command -v ss &>/dev/null; then
+                    echo -e "\n使用ss工具显示开放端口:"
+                    ss -tuln
+                fi
+                
+                # 检查一些常见服务使用的端口
+                echo -e "\n检查一些常见服务端口状态:"
+                for common_port in 22 80 443 3306 8080 21 25 110 143 587 993 995 1433 3389 5432 6379 27017; do
+                    # 使用nmap如果可用
+                    if command -v nmap &>/dev/null; then
+                        nmap -p $common_port localhost | grep $common_port
+                    else
+                        # 否则使用netcat或telnet
+                        if command -v nc &>/dev/null; then
+                            nc -zv 127.0.0.1 $common_port -w 1 >/dev/null 2>&1
+                            if [ $? -eq 0 ]; then
+                                echo "端口 $common_port 开放"
+                            fi
+                        elif command -v telnet &>/dev/null; then
+                            timeout 1 telnet 127.0.0.1 $common_port >/dev/null 2>&1
+                            if [ $? -eq 0 ]; then
+                                echo "端口 $common_port 开放"
+                            fi
+                        fi
+                    fi
+                done
+                ;;
+            6) break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
     done
