@@ -243,6 +243,206 @@ install_install() {
     bash <(curl -sL https://raw.githubusercontent.com/chiakge/installNET/master/Install.sh)
 }
 
+# ====== DNS 配置工具 ======
+# 檢測系統使用的網絡管理工具
+detect_network_manager() {
+    if command -v systemctl > /dev/null && systemctl is-active --quiet systemd-resolved; then
+        echo "systemd-resolved"
+    elif command -v nmcli > /dev/null; then
+        echo "NetworkManager"
+    elif [ -f "/etc/netplan" ] || [ -d "/etc/netplan" ]; then
+        echo "netplan"
+    else
+        echo "traditional"
+    fi
+}
+
+# 顯示當前DNS配置
+show_current_dns() {
+    echo -e "${gl_huang}當前DNS配置:${gl_bai}"
+    echo "================="
+    cat /etc/resolv.conf | grep "nameserver" || echo "未找到DNS配置"
+    echo "================="
+    
+    # 顯示持久化配置信息（如果存在）
+    network_manager=$(detect_network_manager)
+    case $network_manager in
+        "NetworkManager")
+            echo -e "${gl_huang}NetworkManager配置:${gl_bai}"
+            nmcli dev show | grep DNS || echo "未找到NetworkManager DNS配置"
+            ;;
+        "systemd-resolved")
+            echo -e "${gl_huang}systemd-resolved配置:${gl_bai}"
+            resolvectl status | grep "DNS Servers" || echo "未找到systemd-resolved DNS配置"
+            ;;
+    esac
+}
+
+# 持久化設置DNS
+persistent_set_dns() {
+    local primary_dns=$1
+    local secondary_dns=$2
+    
+    network_manager=$(detect_network_manager)
+    case $network_manager in
+        "NetworkManager")
+            echo -e "${gl_huang}使用NetworkManager持久化DNS配置...${gl_bai}"
+            # 獲取當前活動連接
+            CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
+            if [ -z "$CONNECTION" ]; then
+                echo -e "${gl_hong}錯誤: 未找到活動的網絡連接${gl_bai}"
+                return 1
+            fi
+            
+            # 設置DNS
+            if [ -z "$secondary_dns" ]; then
+                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns"
+            else
+                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns,$secondary_dns"
+            fi
+            
+            # 確保NetworkManager不會覆蓋resolv.conf
+            nmcli con mod "$CONNECTION" ipv4.ignore-auto-dns yes
+            
+            # 重新應用配置
+            nmcli con up "$CONNECTION"
+            ;;
+            
+        "systemd-resolved")
+            echo -e "${gl_huang}使用systemd-resolved持久化DNS配置...${gl_bai}"
+            # 獲取主要網絡接口
+            INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
+            if [ -z "$INTERFACE" ]; then
+                echo -e "${gl_hong}錯誤: 未找到默認網絡接口${gl_bai}"
+                return 1
+            fi
+            
+            # 設置DNS
+            if [ -z "$secondary_dns" ]; then
+                resolvectl dns "$INTERFACE" "$primary_dns"
+            else
+                resolvectl dns "$INTERFACE" "$primary_dns" "$secondary_dns"
+            fi
+            ;;
+            
+        "netplan")
+            echo -e "${gl_huang}使用netplan持久化DNS配置...${gl_bai}"
+            # 找到主要的netplan配置文件
+            NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
+            if [ -z "$NETPLAN_FILE" ]; then
+                echo -e "${gl_hong}錯誤: 未找到netplan配置文件${gl_bai}"
+                return 1
+            fi
+            
+            # 創建備份
+            cp "$NETPLAN_FILE" "${NETPLAN_FILE}.bak"
+            
+            # 檢查文件中是否已經有nameservers配置
+            if grep -q "nameservers:" "$NETPLAN_FILE"; then
+                # 已存在nameservers配置，更新它
+                sed -i '/nameservers:/,/addresses:/c\      nameservers:\n        addresses: ['"$primary_dns"']' "$NETPLAN_FILE"
+            else
+                # 不存在nameservers配置，添加它到第一個網絡接口
+                sed -i '/dhcp4: true/a\      nameservers:\n        addresses: ['"$primary_dns"']' "$NETPLAN_FILE"
+            fi
+            
+            # 如果有次要DNS，添加它
+            if [ ! -z "$secondary_dns" ]; then
+                sed -i '/addresses: \[/s/\[.*\]/\['"$primary_dns"', '"$secondary_dns"'\]/' "$NETPLAN_FILE"
+            fi
+            
+            # 應用netplan配置
+            netplan apply
+            ;;
+            
+        *)
+            echo -e "${gl_huang}使用傳統方法持久化DNS配置...${gl_bai}"
+            # 創建備份
+            cp /etc/resolv.conf /etc/resolv.conf.bak
+            
+            # 確保resolv.conf不會被其他進程修改
+            chattr -i /etc/resolv.conf 2>/dev/null || true
+            
+            # 設置DNS
+            echo "nameserver $primary_dns" > /etc/resolv.conf
+            if [ ! -z "$secondary_dns" ]; then
+                echo "nameserver $secondary_dns" >> /etc/resolv.conf
+            fi
+            
+            # 保護文件不被修改（如果支持）
+            chattr +i /etc/resolv.conf 2>/dev/null || true
+            ;;
+    esac
+    
+    # 更新當前resolv.conf（以防萬一）
+    echo "nameserver $primary_dns" > /etc/resolv.conf
+    if [ ! -z "$secondary_dns" ]; then
+        echo "nameserver $secondary_dns" >> /etc/resolv.conf
+    fi
+    
+    echo -e "${gl_lv}DNS設置已更新並已持久化${gl_bai}"
+}
+
+# 修改DNS為預設值(Google DNS 8.8.8.8和Cloudflare DNS 1.1.1.1)
+set_predefined_dns() {
+    echo -e "${gl_huang}正在設置DNS為 8.8.8.8 和 1.1.1.1...${gl_bai}"
+    persistent_set_dns "8.8.8.8" "1.1.1.1"
+}
+
+# 手動設置DNS
+set_manual_dns() {
+    echo -e "${gl_huang}請輸入主要DNS服務器:${gl_bai}"
+    read primary_dns
+    echo -e "${gl_huang}請輸入次要DNS服務器(可選，直接按回車跳過):${gl_bai}"
+    read secondary_dns
+    
+    if [ -z "$primary_dns" ]; then
+        echo -e "${gl_hong}錯誤: 主要DNS服務器不能為空${gl_bai}"
+        return
+    fi
+    
+    echo -e "${gl_huang}正在設置DNS為 $primary_dns 和 $secondary_dns...${gl_bai}"
+    persistent_set_dns "$primary_dns" "$secondary_dns"
+}
+
+# DNS配置工具主菜單
+dns_config_menu() {
+    while true; do
+        clear
+        echo -e "${gl_kjlan}DNS配置工具${gl_bai}"
+        echo "================="
+        
+        show_current_dns
+        
+        echo -e "${gl_huang}請選擇操作:${gl_bai}"
+        echo "1. 修改DNS為8.8.8.8和1.1.1.1"
+        echo "2. 手動修改DNS"
+        echo "0. 返回主菜單"
+        echo "================="
+        echo -e "${gl_huang}請輸入選項(0-2):${gl_bai}"
+        read option
+        
+        case $option in
+            1)
+                set_predefined_dns
+                ;;
+            2)
+                set_manual_dns
+                ;;
+            0)
+                return
+                ;;
+            *)
+                echo -e "${gl_hong}無效選項，請重試${gl_bai}"
+                sleep 2
+                ;;
+        esac
+        
+        echo ""
+        echo -e "${gl_huang}按任意鍵繼續...${gl_bai}"
+        read -n 1
+    done
+}
 
 # ====== 主選單 ======
 main_menu() {
@@ -267,6 +467,7 @@ main_menu() {
         echo "16) 安裝 Hysteria"
         echo "17) 安裝 SubStore"
         echo "18) 一键 DDSystem"
+        echo "19) DNS 配置工具"
         echo " 0) 離開"
         read -rp "請選擇操作: " choice
         case "$choice" in
@@ -288,6 +489,7 @@ main_menu() {
             16) install_hysteria ;;
             17) install_substore ;;
             18) install_install ;;
+            19) dns_config_menu ;;
             0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
