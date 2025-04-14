@@ -236,6 +236,10 @@ install_acme() {
 install_mihomo() {
     bash <(curl -sL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/mihomo.sh)
 }
+install_substore() {
+    bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/substore.sh)
+}
+
 
 # ====== 主選單 ======
 main_menu() {
@@ -252,12 +256,13 @@ main_menu() {
         echo " 8) BBR 管理"
         echo " 9) WARP 管理"
         echo "10) 重啟 VPS"
-        echo "11) 安裝 wget 與 unzip"
-        echo "12) 安裝 Snell"
-        echo "13) 安裝 Trojan"
-        echo "14) 安裝 Hysteria"
-        echo "15) 安裝 Acme"
-        echo "16) 安裝 Mihomo"
+        echo "11) 安裝 wget/unzip"
+        echo "12) 安裝 Acme"
+        echo "13) 安裝 Snell"
+        echo "14) 安裝 Mihomo"
+        echo "15) 安裝 Trojan"
+        echo "16) 安裝 Hysteria"
+        echo "17) 安裝 SubStore"
         echo " 0) 離開"
         read -rp "請選擇操作: " choice
         case "$choice" in
@@ -272,11 +277,12 @@ main_menu() {
             9) warp_menu ;;
             10) reboot_vps ;;
             11) install_base_tools ;;
-            12) install_snell ;;
-            13) install_trojan ;;
-            14) install_hysteria ;;
-            15) install_acme ;;
-            16) install_mihomo ;;
+            12) install_acme ;;
+            13) install_snell ;;
+            14) install_mihomo ;;
+            15) install_trojan ;;
+            16) install_hysteria ;;
+            17) install_substore ;;
             0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
