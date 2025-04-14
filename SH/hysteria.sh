@@ -8,7 +8,7 @@ while true; do
   echo "2. 安裝 Hysteria"
   echo "3. 管理 Hysteria 服務"
   echo "4. 設置端口跳躍規則"
-  echo "0. 退出腳本"
+  echo "0. 離開 El Psy Kongroo"
   read -p "請選擇操作: " option
 
   # 選項0: 退出腳本
@@ -21,7 +21,7 @@ while true; do
       echo "正在下載並執行 Acme.sh..."
       bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh)
       
-      read -p "按 Enter 鍵返回主菜單..." _
+      read -p "按 Enter 鍵返回世界线..." _
 
   # 選項2: 安裝 Hysteria
   elif [ "$option" -eq 2 ]; then
@@ -206,9 +206,9 @@ EOF
       read -r user_interface
       user_interface=${user_interface:-$interface}
 
-      echo "請輸入端口範圍 (默認 20000:50000):"
+      echo "請輸入端口範圍 (默認 18443:28444):"
       read -r port_range
-      port_range=${port_range:-20000:50000}
+      port_range=${port_range:-18443:28444}
 
       echo "請輸入HY端口 (默認 443):"
       read -r target_port
@@ -244,6 +244,6 @@ EOF
 
   else
       echo "無效選項，請選擇 0 到 4 的選項"
-      read -p "按 Enter 鍵返回主菜單..." _
+      read -p "按 Enter 鍵返回世界线..." _
   fi
 done
