@@ -393,19 +393,19 @@ install_snell() {
     bash <(curl -sL https://raw.githubusercontent.com/xOS/Snell/master/Snell.sh)
 }
 install_trojan() {
-    bash <(curl -sL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/trojan.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan.sh)
 }
 install_hysteria() {
-    bash <(curl -sL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/hysteria.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/hysteria.sh)
 }
 install_acme() {
-    bash <(curl -sL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/acme.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh)
 }
 install_mihomo() {
-    bash <(curl -sL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/mihomo.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/mihomo.sh)
 }
 install_substore() {
-    bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/substore.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/substore.sh)
 }
 install_install() {
     bash <(curl -sL https://raw.githubusercontent.com/chiakge/installNET/master/Install.sh)
