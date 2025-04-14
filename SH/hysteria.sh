@@ -18,7 +18,7 @@ while true; do
   # 選項1: 申请證書or自签证书 
   elif [ "$option" -eq 1 ]; then
       echo "正在下載並執行 Acme.sh..."
-      wget -N --no-check-certificate https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh && bash acme.sh
+      bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh)
       
       read -p "按 Enter 鍵返回主菜單..." _
 
