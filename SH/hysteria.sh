@@ -123,7 +123,7 @@ EOF
       CERT_DIR="/etc/cert"
       PORT_JUMP_SERVICE="/etc/systemd/system/port-jump.service"
 
-      echo "請選擇操作:"
+      echo "请选择你的命运石之门:"
       echo "1) 查看 Hysteria 狀態"
       echo "2) 啟動 Hysteria 服務"
       echo "3) 停止 Hysteria 服務"
