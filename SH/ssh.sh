@@ -361,7 +361,7 @@ configure_firewall() {
 
 # ====== BBR 管理 ======
 bbr_menu() {
-    bash <(curl -sL https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
+    bash <(wget -O - https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
 }
 
 # ====== WARP 管理 ======
