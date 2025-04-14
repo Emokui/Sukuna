@@ -449,15 +449,15 @@ main_menu() {
     while true; do
         echo
         echo -e "${gl_kjlan}==== Steins Gate - 鳳凰院凶真 Ver.1.0 ==== ${gl_bai}"
-        echo " 1. 系統更新"
-        echo " 2. 系統清理"
-        echo " 3. 開啟 root 登錄"
-        echo " 4. 修改 root 密碼"
-        echo " 5. 修改 SSH 端口"
-        echo " 6. 更改時區"
-        echo " 7. 設定防火牆"
-        echo " 8. 配置 DNS"
-        echo " 9. 管理 BBR"
+        echo " 01. 系統更新"
+        echo " 02. 系統清理"
+        echo " 03. 開啟 root 登錄"
+        echo " 04. 修改 root 密碼"
+        echo " 05. 修改 SSH 端口"
+        echo " 06. 更改時區"
+        echo " 07. 設定防火牆"
+        echo " 08. 配置 DNS"
+        echo " 09. 管理 BBR"
         echo " 10. 管理 WARP"
         echo " 11. 重啟 VPS"
         echo " 12. 安裝 wget/unzip"
@@ -468,7 +468,7 @@ main_menu() {
         echo " 17. 安裝 Hysteria"
         echo " 18. 安裝 SubStore"
         echo " 19. 一键 DDSystem"
-        echo "  0. 離開 El Psy Kongroo"
+        echo " 0. 離開 El Psy Kongroo"
         read -rp "請選擇操作: " choice
         case "$choice" in
             1) linux_update ;;
