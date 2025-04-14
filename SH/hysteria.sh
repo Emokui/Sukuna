@@ -191,8 +191,24 @@ EOF
 
       read -p "按 Enter 鍵返回主菜單..." _
 
-  # 選項4: 設置端口跳躍規則
+    # 選項4: 設置端口跳躍規則
   elif [ "$option" -eq 4 ]; then
+      echo "檢查 iptables 是否已安裝..."
+      if ! command -v iptables &> /dev/null; then
+          echo "未檢測到 iptables，正在安裝中..."
+          if [ -f /etc/debian_version ]; then
+              sudo apt-get update
+              sudo apt-get install -y iptables
+          elif [ -f /etc/redhat-release ]; then
+              sudo yum install -y iptables
+          else
+              echo "無法識別的系統，請手動安裝 iptables！中止任務！"
+              exit 1
+          fi
+      else
+          echo "iptables 已安裝，進入跳躍準備階段..."
+      fi
+
       interface=$(ip -o link show | awk -F': ' '{print $2}' | grep -v lo | head -n 1)
 
       if [ -z "$interface" ]; then
@@ -241,9 +257,5 @@ EOF
 
       echo "端口跳躍規則已啟用並設置為開機自動啟動"
       read -p "按 Enter 鍵返回主菜單..." _
-
-  else
-      echo "無效選項，請選擇 0 到 4 的選項"
-      read -p "按 Enter 鍵返回世界线..." _
   fi
 done
