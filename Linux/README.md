@@ -14,19 +14,6 @@ sudo apt install curl -y
 ```
 
 
-#### ACME ####
-
-```
-wget -N --no-check-certificate https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/acme.sh && bash acme.sh
-```
-
-
-#### SubStore ####
-**docker**
-```
-bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/substore.sh)
-```
-
 #### Serv00 ####
 **serv00重置**
 ```
