@@ -78,8 +78,13 @@ update_mihomo() {
     # 重啟 Mihomo 服務
     echo "[*] 重启 Mihomo 服务..."
     "$MIHOMO_PATH" -f "$CONFIG_PATH" &
-    check_status "重启 Mihomo"
-    echo "[*] Mihomo 更新并重启完成。"
+    sleep 2
+    if pgrep -f mihomo > /dev/null; then
+        echo "[*] Mihomo 更新并重启完成。"
+    else
+        echo "[!] Mihomo 重启失败，请检查配置文件或日志。"
+        exit 1
+    fi
 }
 
 # 函數：下載並安裝 Mihomo
@@ -111,18 +116,29 @@ install_mihomo() {
     chmod +x mihomo
     check_status "设置执行权限"
 
-    # 提示用户输入代理设置
-    echo "[*] 请提供代理设置："
-    read -p "Private-key: " private_key
-    read -p "Server: " server
-    read -p "Port: " port
+    # 提示用户输入代理设置，提供默认值
+    echo "[*] 请提供代理设置（直接按 Enter 使用默认值）："
+    read -p "Private-key [2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=]: " private_key
+    private_key=${private_key:-2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=}
+    
+    read -p "Server [162.159.193.10]: " server
+    server=${server:-162.159.193.10}
+    
+    read -p "Port [4500]: " port
+    port=${port:-4500}
     if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
         echo "[!] 无效的端口号，请输入 1-65535 之间的数字。"
         exit 1
     fi
-    read -p "Public-key: " public_key
-    read -p "Reserved: " reserved
-    read -p "MTU: " mtu
+    
+    read -p "Public-key [bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=]: " public_key
+    public_key=${public_key:-bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=}
+    
+    read -p "Reserved [[154,242,221]]: " reserved
+    reserved=${reserved:-[154,242,221]}
+    
+    read -p "MTU [1350]: " mtu
+    mtu=${mtu:-1350}
 
     # 创建 config.yaml 配置文件
     echo "[*] 创建 config.yaml 配置文件..."
@@ -208,11 +224,16 @@ rules:
 EOF
     check_status "创建配置文件"
 
-    # 启动 Mihomo
+    # 启动 Mihomo（后台运行）
     echo "[*] 启动 Mihomo..."
-    ./mihomo -f ./config.yaml
-    check_status "启动 Mihomo"
-    echo "[*] 请稍候，Mihomo 已启动并配置完成。"
+    ./mihomo -f ./config.yaml &
+    sleep 2  # 等待进程启动
+    if pgrep -f mihomo > /dev/null; then
+        echo "[*] Mihomo 已成功启动并配置完成。"
+    else
+        echo "[!] Mihomo 启动失败，请检查配置文件或日志。"
+        exit 1
+    fi
 }
 
 # 函數：管理 Mihomo 服務
@@ -238,21 +259,35 @@ manage_service() {
                 ;;
             2)
                 echo "[*] 启动 Mihomo..."
-                $MIHOMO_PATH -f $CONFIG_PATH
-                check_status "启动 Mihomo"
-                echo "[*] Mihomo 已启动。"
+                if pgrep -f mihomo > /dev/null; then
+                    echo "[*] Mihomo 已在运行，无需重复启动。"
+                else
+                    "$MIHOMO_PATH" -f "$CONFIG_PATH" &
+                    sleep 2
+                    if pgrep -f mihomo > /dev/null; then
+                        echo "[*] Mihomo 已启动。"
+                    else
+                        echo "[!] Mihomo 启动失败，请检查配置文件或日志。"
+                    fi
+                fi
                 ;;
             3)
                 echo "[*] 重启 Mihomo..."
                 if pgrep -f mihomo > /dev/null; then
                     pkill -f mihomo
+                    check_status "停止 Mihomo"
                     sleep 2
                 fi
-                $MIHOMO_PATH -f $CONFIG_PATH
-                check_status "重启 Mihomo"
-                echo "[*] Mihomo 已重启。"
+                "$MIHOMO_PATH" -f "$CONFIG_PATH" &
+                sleep 2
+                if pgrep -f mihomo > /dev/null; then
+                    echo "[*] Mihomo 已重启。"
+                else
+                    echo "[!] Mihomo 重启失败，请检查配置文件或日志。"
+                fi
                 ;;
             4)
+                echo "[*] 返回主菜单..."
                 break
                 ;;
             *)
