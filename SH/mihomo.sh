@@ -239,12 +239,11 @@ EOF
 # 函數：管理 Mihomo 服務
 manage_service() {
     while true; do
-        echo -e "==== Steins Gate - mihomo Ver.1.0 ===="
-        echo "请选择操作："
-        echo "1) 停止 Mihomo"
-        echo "2) 启动 Mihomo"
-        echo "3) 重启 Mihomo"
-        echo "4) 返回主菜单"
+        echo "選擇屬於你的命運之門"
+        echo "1. 停止 Mihomo"
+        echo "2. 启动 Mihomo"
+        echo "3. 重启 Mihomo"
+        echo "4. 返回世界線"
         read -p "请输入选项 [1-4]: " subchoice
 
         case $subchoice in
@@ -300,11 +299,12 @@ manage_service() {
 
 # 主菜單
 while true; do
-    echo "请选择操作："
-    echo "1) 安装并配置 Mihomo"
-    echo "2) 管理 Mihomo 服务"
-    echo "3) 更新 Mihomo"
-    echo "4) 退出"
+    echo "==== Steins Gate - mihomo Ver.1.0 ===="
+    echo "選擇屬於你的命運之門："
+    echo "1. 安装并配置 Mihomo"
+    echo "2. 管理 Mihomo 服务"
+    echo "3. 更新 Mihomo"
+    echo "4. 退出"
     read -p "请输入选项 [1-4]: " choice
 
     case $choice in
