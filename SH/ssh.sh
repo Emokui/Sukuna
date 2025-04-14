@@ -239,6 +239,9 @@ install_mihomo() {
 install_substore() {
     bash <(curl -fsSL https://fbi.hk.dedyn.io/Emokui/Sukuna/main/SH/substore.sh)
 }
+install_install() {
+    bash <(curl -sL https://raw.githubusercontent.com/chiakge/installNET/master/Install.sh)
+}
 
 
 # ====== 主選單 ======
@@ -263,6 +266,7 @@ main_menu() {
         echo "15) 安裝 Trojan"
         echo "16) 安裝 Hysteria"
         echo "17) 安裝 SubStore"
+        echo "18) 一键 DDSystem"
         echo " 0) 離開"
         read -rp "請選擇操作: " choice
         case "$choice" in
@@ -283,6 +287,7 @@ main_menu() {
             15) install_trojan ;;
             16) install_hysteria ;;
             17) install_substore ;;
+            18) install_install ;;
             0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
