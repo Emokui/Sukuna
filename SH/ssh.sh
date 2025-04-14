@@ -141,42 +141,103 @@ configure_firewall() {
         case "$action_choice" in
             1|2)
                 read -rp "請輸入端口（如 22 443 或 1000-2000）: " input_ports
-                # 直接處理輸入而不展開範圍
-                if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
-                    for port_spec in $input_ports; do
-                        if [[ "$action_choice" == "1" ]]; then
-                            if [[ "$port_spec" =~ ^[0-9]+-[0-9]+$ ]]; then
-                                echo "[*] 批量開啟端口範圍: $port_spec"
-                                ufw allow "$port_spec/tcp"
-                                ufw allow "$port_spec/udp"
-                            else
-                                ufw allow "$port_spec/tcp"
-                                ufw allow "$port_spec/udp"
-                            fi
+                for port_spec in $input_ports; do
+                    # 检查端口范围有效性
+                    if [[ "$port_spec" =~ ^([0-9]+)-([0-9]+)$ ]]; then
+                        start_port=${BASH_REMATCH[1]}
+                        end_port=${BASH_REMATCH[2]}
+                        
+                        # 检查端口范围是否有效
+                        if [[ $start_port -lt 0 || $start_port -gt 65535 || $end_port -lt 0 || $end_port -gt 65535 ]]; then
+                            echo "[!] 无效端口范围: $port_spec (有效端口范围为 0-65535)"
+                            continue
+                        fi
+                        
+                        # 检查端口范围是否过大
+                        if [[ $((end_port - start_port)) -gt 5000 ]]; then
+                            echo "[*] 端口范围 $port_spec 过大，将分块处理"
+                            current_start=$start_port
+                            
+                            while [[ $current_start -le $end_port ]]; do
+                                current_end=$((current_start + 5000))
+                                if [[ $current_end -gt $end_port ]]; then
+                                    current_end=$end_port
+                                fi
+                                
+                                port_range="${current_start}-${current_end}"
+                                echo "[*] 处理端口范围: $port_range"
+                                
+                                if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
+                                    if [[ "$action_choice" == "1" ]]; then
+                                        ufw allow "$port_range/tcp"
+                                        ufw allow "$port_range/udp"
+                                    else
+                                        ufw deny "$port_range/tcp"
+                                        ufw deny "$port_range/udp"
+                                    fi
+                                elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
+                                    if [[ "$action_choice" == "1" ]]; then
+                                        firewall-cmd --permanent --add-port="$port_range/tcp"
+                                        firewall-cmd --permanent --add-port="$port_range/udp"
+                                    else
+                                        firewall-cmd --permanent --remove-port="$port_range/tcp"
+                                        firewall-cmd --permanent --remove-port="$port_range/udp"
+                                    fi
+                                fi
+                                
+                                current_start=$((current_end + 1))
+                            done
                         else
-                            if [[ "$port_spec" =~ ^[0-9]+-[0-9]+$ ]]; then
-                                echo "[*] 批量關閉端口範圍: $port_spec"
-                                ufw deny "$port_spec/tcp"
-                                ufw deny "$port_spec/udp"
-                            else
-                                ufw deny "$port_spec/tcp"
-                                ufw deny "$port_spec/udp"
+                            # 处理较小的端口范围
+                            if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
+                                if [[ "$action_choice" == "1" ]]; then
+                                    ufw allow "$port_spec/tcp"
+                                    ufw allow "$port_spec/udp"
+                                else
+                                    ufw deny "$port_spec/tcp"
+                                    ufw deny "$port_spec/udp"
+                                fi
+                            elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
+                                if [[ "$action_choice" == "1" ]]; then
+                                    firewall-cmd --permanent --add-port="$port_spec/tcp"
+                                    firewall-cmd --permanent --add-port="$port_spec/udp"
+                                else
+                                    firewall-cmd --permanent --remove-port="$port_spec/tcp"
+                                    firewall-cmd --permanent --remove-port="$port_spec/udp"
+                                fi
                             fi
                         fi
-                    done
+                    else
+                        # 处理单个端口
+                        if [[ ! "$port_spec" =~ ^[0-9]+$ || $port_spec -lt 0 || $port_spec -gt 65535 ]]; then
+                            echo "[!] 无效端口: $port_spec (有效端口范围为 0-65535)"
+                            continue
+                        fi
+                        
+                        if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
+                            if [[ "$action_choice" == "1" ]]; then
+                                ufw allow "$port_spec/tcp"
+                                ufw allow "$port_spec/udp"
+                            else
+                                ufw deny "$port_spec/tcp"
+                                ufw deny "$port_spec/udp"
+                            fi
+                        elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
+                            if [[ "$action_choice" == "1" ]]; then
+                                firewall-cmd --permanent --add-port="$port_spec/tcp"
+                                firewall-cmd --permanent --add-port="$port_spec/udp"
+                            else
+                                firewall-cmd --permanent --remove-port="$port_spec/tcp"
+                                firewall-cmd --permanent --remove-port="$port_spec/udp"
+                            fi
+                        fi
+                    fi
+                done
+                
+                # 应用防火墙规则
+                if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
                     ufw --force enable
                 elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
-                    for port_spec in $input_ports; do
-                        if [[ "$action_choice" == "1" ]]; then
-                            echo "[*] 開啟端口: $port_spec"
-                            firewall-cmd --permanent --add-port="$port_spec/tcp"
-                            firewall-cmd --permanent --add-port="$port_spec/udp"
-                        else
-                            echo "[*] 關閉端口: $port_spec"
-                            firewall-cmd --permanent --remove-port="$port_spec/tcp"
-                            firewall-cmd --permanent --remove-port="$port_spec/udp"
-                        fi
-                    done
                     firewall-cmd --reload
                 fi
                 ;;
