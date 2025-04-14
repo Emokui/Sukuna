@@ -117,28 +117,28 @@ install_mihomo() {
     check_status "设置执行权限"
 
     # 提示用户输入代理设置，提供默认值
-    echo "[*] 请提供代理设置（直接按 Enter 使用默认值）："
-    read -p "Private-key [2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=]: " private_key
+    echo "[*] 请提供 wireguard 配置（按 Enter 使用默认值）："
+    read -p "Private-key: " private_key
     private_key=${private_key:-2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=}
     
-    read -p "Server [162.159.193.10]: " server
+    read -p "Server: " server
     server=${server:-162.159.193.10}
     
-    read -p "Port [4500]: " port
-    port=${port:-4500}
+    read -p "Port: " port
+    port=${port:-2408}
     if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
         echo "[!] 无效的端口号，请输入 1-65535 之间的数字。"
         exit 1
     fi
     
-    read -p "Public-key [bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=]: " public_key
+    read -p "Public-key: " public_key
     public_key=${public_key:-bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=}
     
-    read -p "Reserved [[154,242,221]]: " reserved
+    read -p "Reserved: " reserved
     reserved=${reserved:-[154,242,221]}
     
-    read -p "MTU [1350]: " mtu
-    mtu=${mtu:-1350}
+    read -p "MTU: " mtu
+    mtu=${mtu:-1280}
 
     # 创建 config.yaml 配置文件
     echo "[*] 创建 config.yaml 配置文件..."
@@ -304,7 +304,7 @@ while true; do
     echo "1. 安装并配置 Mihomo"
     echo "2. 管理 Mihomo 服务"
     echo "3. 更新 Mihomo"
-    echo "4. 退出"
+    echo "4. 返回世界線"
     read -p "请输入选项 [1-4]: " choice
 
     case $choice in
