@@ -148,12 +148,12 @@ configure_firewall() {
     echo "[✓] 使用防火牆：$FIREWALL_TOOL"
     while true; do
         echo "請選擇防火牆操作："
-        echo "1) 開啟端口"
-        echo "2) 關閉端口"
-        echo "3) 開啟全部端口" 
-        echo "4) 關閉全部端口"
-        echo "5) 顯示已開啟的端口"
-        echo "6) 返回世界线"
+        echo "1. 開啟端口"
+        echo "2. 關閉端口"
+        echo "3. 開啟全部端口" 
+        echo "4. 關閉全部端口"
+        echo "5. 顯示已開啟的端口"
+        echo "6. 返回世界线"
         read -rp "請輸入選項 (1-6): " action_choice
         case "$action_choice" in
             1|2)
@@ -361,12 +361,12 @@ configure_firewall() {
 
 # ====== BBR 管理 ======
 bbr_menu() {
-    bash <(wget -O - https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
+    bash <(curl -sL https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
 }
 
 # ====== WARP 管理 ======
 warp_menu() {
-    bash <(wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh)
+    bash <(curl -sL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh)
 }
 
 # ====== 重啟系統 ======
