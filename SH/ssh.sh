@@ -456,18 +456,18 @@ main_menu() {
         echo " 5) 修改 SSH 端口"
         echo " 6) 更改時區"
         echo " 7) 設定防火牆"
-        echo " 8) BBR 管理"
-        echo " 9) WARP 管理"
-        echo "10) 重啟 VPS"
-        echo "11) 安裝 wget/unzip"
-        echo "12) 安裝 Acme"
-        echo "13) 安裝 Snell"
-        echo "14) 安裝 Mihomo"
-        echo "15) 安裝 Trojan"
-        echo "16) 安裝 Hysteria"
-        echo "17) 安裝 SubStore"
-        echo "18) 一键 DDSystem"
-        echo "19) DNS 配置工具"
+        echo " 8) DNS 配置"
+        echo " 9) BBR 管理"
+        echo " 10) WARP 管理"
+        echo "11) 重啟 VPS"
+        echo "12) 安裝 wget/unzip"
+        echo "13) 安裝 Acme"
+        echo "14) 安裝 Snell"
+        echo "15) 安裝 Mihomo"
+        echo "16) 安裝 Trojan"
+        echo "17) 安裝 Hysteria"
+        echo "18) 安裝 SubStore"
+        echo "19) 一键 DDSystem"
         echo " 0) 離開"
         read -rp "請選擇操作: " choice
         case "$choice" in
@@ -478,18 +478,18 @@ main_menu() {
             5) change_ssh_port ;;
             6) change_timezone ;;
             7) configure_firewall ;;
-            8) bbr_menu ;;
-            9) warp_menu ;;
-            10) reboot_vps ;;
-            11) install_base_tools ;;
-            12) install_acme ;;
-            13) install_snell ;;
-            14) install_mihomo ;;
-            15) install_trojan ;;
-            16) install_hysteria ;;
-            17) install_substore ;;
-            18) install_install ;;
-            19) dns_config_menu ;;
+            8) dns_config_menu ;;
+            9) bbr_menu ;;
+            10) warp_menu ;;
+            11) reboot_vps ;;
+            12) install_base_tools ;;
+            13) install_acme ;;
+            14) install_snell ;;
+            15) install_mihomo ;;
+            16) install_trojan ;;
+            17) install_hysteria ;;
+            18) install_substore ;;
+            19) install_install ;;
             0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
