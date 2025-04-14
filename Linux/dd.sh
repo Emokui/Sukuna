@@ -3,14 +3,14 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 #=================================================
-#	System Required: CentOS 6/7,Debian 8/9,Ubuntu 16+
+#	System Required: CentOS 6/7,Debian 8/9/10/11/12,Ubuntu 16+
 #	Description: 一键重装系统
-#	Version: 1.0.1
-#	Author: 千影,Vicer
+#	Version: 1.0.2
+#	Author: 千影,Vicer (增强版)
 #	Blog: https://www.94ish.me/
 #=================================================
 
-sh_ver="1.0.1"
+sh_ver="1.0.2"
 github="raw.githubusercontent.com/chiakge/installNET/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -100,7 +100,7 @@ echo && echo -e " 一键网络重装管理脚本 ${Red_font_prefix}[v${sh_ver}]$
 
 echo -e " 当前模式: 安装${Red_font_prefix}${vbit}${Font_color_suffix}位系统，${Red_font_prefix}${model}${Font_color_suffix}模式,${Red_font_prefix}${country}${Font_color_suffix}镜像源。"
 echo
-read -p " 请输入数字 [0-11]:" num
+read -p " 请输入数字 [0-5]:" num
 case "$num" in
 	0)
 	start_menu
@@ -125,7 +125,7 @@ case "$num" in
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [0-11]"
+	echo -e "${Error}:请输入正确数字 [0-5]"
 	sleep 5s
 	installCentos
 	;;
@@ -143,16 +143,17 @@ echo && echo -e " 一键网络重装管理脚本 ${Red_font_prefix}[v${sh_ver}]$
  ${Green_font_prefix}1.${Font_color_suffix} 安装 Debian9系统
  ${Green_font_prefix}2.${Font_color_suffix} 安装 Debian10系统
  ${Green_font_prefix}3.${Font_color_suffix} 安装 Debian11系统
+ ${Green_font_prefix}4.${Font_color_suffix} 安装 Debian12系统
 ————————————切换模式————————————
- ${Green_font_prefix}4.${Font_color_suffix} 切换安装位数
- ${Green_font_prefix}5.${Font_color_suffix} 切换安装模式
- ${Green_font_prefix}6.${Font_color_suffix} 切换镜像源
+ ${Green_font_prefix}5.${Font_color_suffix} 切换安装位数
+ ${Green_font_prefix}6.${Font_color_suffix} 切换安装模式
+ ${Green_font_prefix}7.${Font_color_suffix} 切换镜像源
 ————————————————————————————————
  ${Green_font_prefix}0.${Font_color_suffix} 返回主菜单" && echo
 
 echo -e " 当前模式: 安装${Red_font_prefix}${vbit}${Font_color_suffix}位系统，${Red_font_prefix}${model}${Font_color_suffix}模式,${Red_font_prefix}${country}${Font_color_suffix}镜像源。"
 echo
-read -p " 请输入数字 [0-11]:" num
+read -p " 请输入数字 [0-7]:" num
 case "$num" in
 	0)
 	start_menu
@@ -167,22 +168,25 @@ case "$num" in
 	InstallOS "11"
 	;;
 	4)
+	InstallOS "12"
+	;;
+	5)
 	switchbit
 	installDebian
 	;;
-	5)
+	6)
 	switchmodel
 	installDebian
 	;;
-	6)
+	7)
 	switchcountry
 	installDebian
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [0-11]"
+	echo -e "${Error}:请输入正确数字 [0-7]"
 	sleep 5s
-	installCentos
+	installDebian
 	;;
 esac
 }
@@ -207,7 +211,7 @@ echo && echo -e " 一键网络重装管理脚本 ${Red_font_prefix}[v${sh_ver}]$
 
 echo -e " 当前模式: 安装${Red_font_prefix}${vbit}${Font_color_suffix}位系统，${Red_font_prefix}${model}${Font_color_suffix}模式,${Red_font_prefix}${country}${Font_color_suffix}镜像源。"
 echo
-read -p " 请输入数字 [0-11]:" num
+read -p " 请输入数字 [0-6]:" num
 case "$num" in
 	0)
 	start_menu
@@ -235,9 +239,9 @@ case "$num" in
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [0-11]"
+	echo -e "${Error}:请输入正确数字 [0-6]"
 	sleep 5s
-	installCentos
+	installUbuntu
 	;;
 esac
 }
@@ -260,7 +264,7 @@ echo && echo -e " 一键网络重装管理脚本 ${Red_font_prefix}[v${sh_ver}]$
 
 echo -e " 当前模式: 安装${Red_font_prefix}${vbit}${Font_color_suffix}位系统，${Red_font_prefix}${model}${Font_color_suffix}模式,${Red_font_prefix}${country}${Font_color_suffix}镜像源。"
 echo
-read -p " 请输入数字 [0-11]:" num
+read -p " 请输入数字 [0-7]:" num
 case "$num" in
 	1)
 	installCentos
@@ -288,7 +292,7 @@ case "$num" in
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [0-11]"
+	echo -e "${Error}:请输入正确数字 [0-7]"
 	sleep 5s
 	start_menu
 	;;
