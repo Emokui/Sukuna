@@ -114,7 +114,6 @@ change_timezone() {
 configure_firewall() {
     echo "[*] 偵測並準備防火牆工具..."
     FIREWALL_TOOL=""
-
     if command -v ufw &>/dev/null; then
         FIREWALL_TOOL="ufw"
     elif command -v firewall-cmd &>/dev/null; then
@@ -130,9 +129,7 @@ configure_firewall() {
             FIREWALL_TOOL="firewalld"
         fi
     fi
-
     echo "[✓] 使用防火牆：$FIREWALL_TOOL"
-
     while true; do
         echo "請選擇防火牆操作："
         echo "1) 開啟端口"
@@ -141,38 +138,44 @@ configure_firewall() {
         echo "4) 關閉全部端口"
         echo "5) 返回世界线"
         read -rp "請輸入選項 (1-5): " action_choice
-
         case "$action_choice" in
             1|2)
                 read -rp "請輸入端口（如 22 443 或 1000-2000）: " input_ports
-                parse_ports() {
-                    local input=($1)
-                    local parsed=()
-                    for p in "${input[@]}"; do
-                        if [[ "$p" =~ ^[0-9]+-[0-9]+$ ]]; then
-                            start=${p%-*}
-                            end=${p#*-}
-                            for ((i=start; i<=end; i++)); do parsed+=("$i"); done
-                        else
-                            parsed+=("$p")
-                        fi
-                    done
-                    echo "${parsed[@]}"
-                }
-                PORTS=$(parse_ports "$input_ports")
-
+                # 直接處理輸入而不展開範圍
                 if [[ "$FIREWALL_TOOL" == "ufw" ]]; then
-                    for port in $PORTS; do
-                        [[ "$action_choice" == "1" ]] && ufw allow "$port/tcp" && ufw allow "$port/udp" || ufw deny "$port/tcp" && ufw deny "$port/udp"
+                    for port_spec in $input_ports; do
+                        if [[ "$action_choice" == "1" ]]; then
+                            if [[ "$port_spec" =~ ^[0-9]+-[0-9]+$ ]]; then
+                                echo "[*] 批量開啟端口範圍: $port_spec"
+                                ufw allow "$port_spec/tcp"
+                                ufw allow "$port_spec/udp"
+                            else
+                                ufw allow "$port_spec/tcp"
+                                ufw allow "$port_spec/udp"
+                            fi
+                        else
+                            if [[ "$port_spec" =~ ^[0-9]+-[0-9]+$ ]]; then
+                                echo "[*] 批量關閉端口範圍: $port_spec"
+                                ufw deny "$port_spec/tcp"
+                                ufw deny "$port_spec/udp"
+                            else
+                                ufw deny "$port_spec/tcp"
+                                ufw deny "$port_spec/udp"
+                            fi
+                        fi
                     done
                     ufw --force enable
                 elif [[ "$FIREWALL_TOOL" == "firewalld" ]]; then
-                    for port in $PORTS; do
-                        [[ "$action_choice" == "1" ]] && \
-                        firewall-cmd --permanent --add-port="$port/tcp" && \
-                        firewall-cmd --permanent --add-port="$port/udp" || \
-                        firewall-cmd --permanent --remove-port="$port/tcp" && \
-                        firewall-cmd --permanent --remove-port="$port/udp"
+                    for port_spec in $input_ports; do
+                        if [[ "$action_choice" == "1" ]]; then
+                            echo "[*] 開啟端口: $port_spec"
+                            firewall-cmd --permanent --add-port="$port_spec/tcp"
+                            firewall-cmd --permanent --add-port="$port_spec/udp"
+                        else
+                            echo "[*] 關閉端口: $port_spec"
+                            firewall-cmd --permanent --remove-port="$port_spec/tcp"
+                            firewall-cmd --permanent --remove-port="$port_spec/udp"
+                        fi
                     done
                     firewall-cmd --reload
                 fi
