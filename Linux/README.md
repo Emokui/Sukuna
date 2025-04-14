@@ -8,7 +8,6 @@ sudo apt install curl -y
 ```
 
 
-#### Serv00 ####
 **serv00重置**
 ```
 curl -O "https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/serv00.sh"
