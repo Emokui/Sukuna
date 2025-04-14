@@ -239,6 +239,7 @@ EOF
 # 函數：管理 Mihomo 服務
 manage_service() {
     while true; do
+        echo -e "==== Steins Gate - mihomo Ver.1.0 ===="
         echo "请选择操作："
         echo "1) 停止 Mihomo"
         echo "2) 启动 Mihomo"
