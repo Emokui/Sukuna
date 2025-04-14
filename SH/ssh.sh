@@ -277,7 +277,7 @@ main_menu() {
             14) install_hysteria ;;
             15) install_acme ;;
             16) install_mihomo ;;
-            0) echo -e "${gl_zi}再會，鳳凰的後繼者。El Psy Kongroo。${gl_bai}" && break ;;
+            0) echo -e "${gl_zi}「運命石之扉の選択（Steins Gate）」。El Psy Kongroo。${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
     done
