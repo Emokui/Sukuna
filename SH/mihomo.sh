@@ -304,7 +304,7 @@ while true; do
     echo "1. 安装并配置 Mihomo"
     echo "2. 管理 Mihomo 服务"
     echo "3. 更新 Mihomo"
-    echo "4. 返回世界線"
+    echo "4. 再见 El Psy Kongroo"
     read -p "请输入选项 [1-4]: " choice
 
     case $choice in
