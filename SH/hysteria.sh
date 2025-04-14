@@ -2,12 +2,13 @@
 
 while true; do
   # 顯示選項菜單
-  echo "請選擇操作:"
-  echo "0. 退出腳本"
+  echo "==== Steins Gate - hysteria Ver.1.0 ===="
+  echo "请选择你的命运石之门:"
   echo "1. 申请證書or自签证书"
   echo "2. 安裝 Hysteria"
   echo "3. 管理 Hysteria 服務"
   echo "4. 設置端口跳躍規則"
+  echo "0. 退出腳本"
   read -p "請選擇操作: " option
 
   # 選項0: 退出腳本
