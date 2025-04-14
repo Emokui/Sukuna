@@ -417,8 +417,8 @@ generate_self_signed_cert() {
 menu() {
     clear
     echo "#############################################################"
-    echo -e "#                   ${RED}Acme 證書一鍵申請腳本${PLAIN}                  #"
-    echo -e "#                  ${GREEN}介紹${PLAIN}: Musashi の AI整合                 #"
+    echo -e "#                   ${RED}证书申请 OR 自签证书${PLAIN}                  #"
+    echo -e "#                  ${GREEN}運命石之扉の選択,El Psy Kongroo${PLAIN}                 #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安裝 Acme.sh 域名證書申請腳本"
