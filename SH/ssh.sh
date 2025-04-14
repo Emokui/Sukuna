@@ -468,7 +468,7 @@ main_menu() {
         echo " 17. 安裝 Hysteria"
         echo " 18. 安裝 SubStore"
         echo " 19. 一键 DDSystem"
-        echo " 0. 離開 El Psy Kongroo"
+        echo "  0. 離開 El Psy Kongroo"
         read -rp "請選擇操作: " choice
         case "$choice" in
             1) linux_update ;;
