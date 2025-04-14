@@ -418,7 +418,7 @@ menu() {
     clear
     echo "#############################################################"
     echo -e "#                   ${RED}证书申请 OR 自签证书${PLAIN}                  #"
-    echo -e "#            ${GREEN}運命石之扉の選択,El Psy Kongroo${PLAIN}             #"
+    echo -e "#             ${GREEN}運命石之扉の選択,El Psy Kongroo${PLAIN}             #"
     echo "#############################################################"
     echo ""
     echo -e " ${GREEN}1.${PLAIN} 安裝 Acme.sh 域名證書申請腳本"
