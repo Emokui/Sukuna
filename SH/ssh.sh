@@ -168,13 +168,13 @@ configure_firewall() {
 
 bbr_manage() {
     echo "==== BBR 管理（內核加速）===="
-    wget -O tcp.sh "https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+    bash <(curl -sL https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
 }
 
 warp_manage() {
     echo "==== WARP 管理（Cloudflare）===="
     read -rp "請輸入參數（可留空使用互動模式）: " warp_args
-    wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh $warp_args
+    bash <(curl -sL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh)
 }
 
 reboot_vps() {
