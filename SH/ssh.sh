@@ -241,7 +241,7 @@ install_mihomo() {
 main_menu() {
     while true; do
         echo
-        echo -e "${gl_kjlan}==== VPS 控制腳本 - 鳳凰院凶真 Ver.1.0 ==== ${gl_bai}"
+        echo -e "${gl_kjlan}==== Steins Gate - 鳳凰院凶真 Ver.1.0 ==== ${gl_bai}"
         echo " 1) 系統更新"
         echo " 2) 系統清理"
         echo " 3) 開啟 root 登錄"
@@ -277,7 +277,7 @@ main_menu() {
             14) install_hysteria ;;
             15) install_acme ;;
             16) install_mihomo ;;
-            0) echo -e "${gl_zi}「運命石之扉の選択（Steins Gate）」。El Psy Kongroo。${gl_bai}" && break ;;
+            0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
     done
