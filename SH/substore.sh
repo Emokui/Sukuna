@@ -49,7 +49,7 @@ setup_docker() {
     echo "生成的密钥: $secret_key"
 
     # 交互获取端口号
-    local default_port=17741
+    local default_port=3001
     read -p "请输入你想使用的端口号（默认: $default_port）: " custom_port
     custom_port="${custom_port:-$default_port}"
 
