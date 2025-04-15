@@ -359,21 +359,6 @@ configure_firewall() {
     done
 }
 
-# 檢查是否為 root 用戶
-if [[ $EUID -ne 0 ]]; then
-   echo "[!] 此腳本需要 root 權限才能執行"
-   echo "請使用 sudo 執行此腳本"
-   exit 1
-fi
-
-# 檢查是否為 Debian/Ubuntu 系統
-if [[ ! -f /etc/debian_version ]]; then
-    echo "[!] 此腳本僅支援 Debian/Ubuntu 系統"
-    exit 1
-fi
-
-# 執行防火牆配置函數
-configure_firewall
 # ====== BBR 管理 ======
 bbr_menu() {
     bash <(wget -O - https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
