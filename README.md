@@ -1,5 +1,8 @@
 ## ssh工具 ##
+```
 bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/ssh.sh)
+```
+
 
 ## Blog ##
 https://snell.zone.id
