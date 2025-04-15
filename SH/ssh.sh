@@ -154,9 +154,9 @@ configure_firewall() {
                             continue
                         fi
                         
-                        echo -e "${gl_huang}[*] 開啟端口範圍: $port_spec${gl_bai}"
-                        ufw allow $start_port:$end_port/tcp
-                        ufw allow $start_port:$end_port/udp
+                        echo -e "${gl_huang}[*] 開啟端口範圍: $start_port:$end_port${gl_bai}"
+                        ufw allow "$start_port:$end_port/tcp"
+                        ufw allow "$start_port:$end_port/udp"
                     else
                         # 處理單個端口
                         if [[ ! "$port_spec" =~ ^[0-9]+$ || $port_spec -lt 1 || $port_spec -gt 65535 ]]; then
@@ -169,9 +169,12 @@ configure_firewall() {
                         ufw allow "$port_spec/udp"
                     fi
                 done
-                # 確保 ufw 已啟用
+                # 確保 ufw 已啟用並應用規則
                 ufw --force enable
                 echo -e "${gl_lv}[✓] 端口已開啟${gl_bai}"
+                echo -e "${gl_huang}[*] 當前防火牆狀態：${gl_bai}"
+                ufw status verbose
+                echo -e "${gl_huang}[!] 請確認端口是否正常監聽（可使用 'netstat -tuln' 或 'ss -tuln' 檢查）${gl_bai}"
                 ;;
                 
             2)  # 關閉端口
@@ -188,9 +191,9 @@ configure_firewall() {
                             continue
                         fi
                         
-                        echo -e "${gl_huang}[*] 關閉端口範圍: $port_spec${gl_bai}"
-                        ufw deny $start_port:$end_port/tcp
-                        ufw deny $start_port:$end_port/udp
+                        echo -e "${gl_huang}[*] 關閉端口範圍: $start_port:$end_port${gl_bai}"
+                        ufw deny "$start_port:$end_port/tcp"
+                        ufw deny "$start_port:$end_port/udp"
                     else
                         # 處理單個端口
                         if [[ ! "$port_spec" =~ ^[0-9]+$ || $port_spec -lt 1 || $port_spec -gt 65535 ]]; then
@@ -203,9 +206,11 @@ configure_firewall() {
                         ufw deny "$port_spec/udp"
                     fi
                 done
-                # 確保 ufw 已啟用
+                # 確保 ufw 已啟用並應用規則
                 ufw --force enable
                 echo -e "${gl_lv}[✓] 端口已關閉${gl_bai}"
+                echo -e "${gl_huang}[*] 當前防火牆狀態：${gl_bai}"
+                ufw status verbose
                 ;;
                 
             3)  # 開啟全部端口
@@ -214,15 +219,27 @@ configure_firewall() {
                 ufw default allow
                 ufw --force enable
                 echo -e "${gl_lv}[✓] 所有端口已開啟${gl_bai}"
+                echo -e "${gl_huang}[*] 當前防火牆狀態：${gl_bai}"
+                ufw status verbose
                 ;;
                 
             4)  # 關閉全部端口 (保留 SSH)
                 echo -e "${gl_huang}[*] 正在關閉所有端口 (保留 SSH)...${gl_bai}"
+                # 動態檢測當前 SSH 端口
+                ssh_port=$(grep "^Port" /etc/ssh/sshd_config | awk '{print $2}' || echo 22)
+                echo -e "${gl_huang}[*] 檢測到當前 SSH 端口: $ssh_port${gl_bai}"
                 ufw --force reset
                 ufw default deny
-                ufw allow 22/tcp
+                ufw allow "$ssh_port/tcp"
                 ufw --force enable
-                echo -e "${gl_lv}[✓] 已關閉所有端口 (SSH 保持開放)${gl_bai}"
+                # 驗證 SSH 端口是否保留
+                if ufw status | grep -q "$ssh_port/tcp.*ALLOW"; then
+                    echo -e "${gl_lv}[✓] 已關閉所有端口 (SSH 端口 $ssh_port 保持開放)${gl_bai}"
+                else
+                    echo -e "${gl_hong}[!] 警告：SSH 端口 $ssh_port 未正確保留，請檢查配置${gl_bai}"
+                fi
+                echo -e "${gl_huang}[*] 當前防火牆狀態：${gl_bai}"
+                ufw status verbose
                 ;;
                 
             5)  # 顯示已開啟的端口
