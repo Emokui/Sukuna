@@ -7,7 +7,7 @@ CERT_DIR="/home/nginx/certs"
 
 banner() {
   echo "————————————————————————————————"
-  echo "命運石之門：多反向代理 Nginx 部署系統"
+  echo "命運石之門：反向代理 Nginx "
   echo "————————————————————————————————"
 }
 
@@ -94,7 +94,7 @@ install_base() {
   fi
 
   echo "[*] 建立 Nginx 資料夾..."
-  mkdir -p /home/nginx/certs /home/nginx/html
+  mkdir -p /home/nginx/certs
   touch "$NGINX_CONF"
 
   echo "[*] 安裝 acme.sh 並註冊帳號..."
@@ -173,7 +173,7 @@ EOF
 manage_docker() {
   echo "=== Docker 管理選單 ==="
   echo "1. 更新 compose 所有鏡像"
-  echo "2. 刪除所有 compose 鏡像"
+  echo "2. 刪除 compose 所有鏡像"
   echo "3. 刪除指定鏡像"
   echo "4. 深度清理所有無用資源"
   echo "5. 徹底卸載 Docker"
@@ -202,9 +202,9 @@ manage_docker() {
 
 # 命運選單
 banner
-echo "1. 安裝 Nginx 並部署第一個反向代理"
-echo "2. 添加新的反向代理設定"
-echo "3. Docker 系統管理"
+echo "1. 安裝 Nginx 並部署反向代理"
+echo "2. 添加新的反向代理"
+echo "3. Docker 管理"
 echo "0. 離開世界線"
 
 read -p "請選擇操作 (0-3): " choice
