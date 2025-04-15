@@ -1,9 +1,0 @@
-#!name= 𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦
-#!desc= 𝗖𝗹𝗲𝗮𝗻 𝘂𝗽 𝗮𝗻𝗱 𝘀𝗮𝘃𝗲
-#!arguments=TITLE:𝗗𝗡𝗦𝗙𝗹𝘂𝘀𝗵,ICON:cube,COLOR:#AFE59A
-
-[Panel]
-𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦 = script-name=𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦,update-interval=600
-
-[Script]
-𝗙𝗹𝘂𝘀𝗵𝗗𝗡𝗦 = type=generic,timeout=10,script-path=https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/Flush-DNS.js,argument=title={{{TITLE}}}&icon={{{ICON}}}&color={{{COLOR}}}&server=false
