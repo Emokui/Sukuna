@@ -243,8 +243,8 @@ manage_service() {
         echo "1. 停止 Mihomo"
         echo "2. 启动 Mihomo"
         echo "3. 重启 Mihomo"
-        echo "4. 返回世界線"
-        read -p "请输入选项 [1-4]: " subchoice
+        echo "0. 返回世界線"
+        read -p "请输入选项 [0-3]: " subchoice
 
         case $subchoice in
             1)
@@ -286,7 +286,7 @@ manage_service() {
                     echo "[!] Mihomo 重启失败，请检查配置文件或日志。"
                 fi
                 ;;
-            4)
+            0)
                 echo "[*] 返回主菜单..."
                 break
                 ;;
@@ -304,8 +304,8 @@ while true; do
     echo "1. 安装并配置 Mihomo"
     echo "2. 管理 Mihomo 服务"
     echo "3. 更新 Mihomo"
-    echo "4. 再见 El Psy Kongroo"
-    read -p "请输入选项 [1-4]: " choice
+    echo "0. 再见 El Psy Kongroo"
+    read -p "请输入选项 [0-3]: " choice
 
     case $choice in
         1) install_mihomo ;;
@@ -323,7 +323,7 @@ while true; do
             fi
             update_mihomo
             ;;
-        4) echo "[*] 退出脚本..."; exit 0 ;;
+        0) echo "[*] 退出脚本..."; exit 0 ;;
         *) echo "无效选项，请重新选择。" ;;
     esac
 done
