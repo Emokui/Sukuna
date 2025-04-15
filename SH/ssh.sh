@@ -111,8 +111,7 @@ change_timezone() {
 }
 
 # ====== 防火牆設置 ======
-
-configure_firewall() {
+#configure_firewall() {
     echo "[*] 檢查並安裝 ufw..."
     
     # 確保 ufw 已安裝
