@@ -1,8 +1,190 @@
 #!/bin/bash
 
+# 彩色與格式化
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[1;34m"
+PLAIN='\033[0m'
+
+red(){ echo -e "\033[31m\033[01m$1\033[0m"; }
+green(){ echo -e "\033[32m\033[01m$1\033[0m"; }
+yellow(){ echo -e "\033[33m\033[01m$1\033[0m"; }
+
+pause_and_return() {
+    echo ""
+    read -p "請按回車鍵返回上一層..." temp
+}
+
+generate_self_signed_cert() {
+    echo ""
+    yellow "開始生成自簽名ECC證書..."
+    DEFAULT_DOMAIN="bing.com"
+    DEFAULT_CERT_PATH="/etc/cert"
+    DEFAULT_DAYS=36500
+
+    read -rp "請輸入證書的域名（預設: ${DEFAULT_DOMAIN}）: " domain
+    domain="${domain:-$DEFAULT_DOMAIN}"
+    read -rp "請輸入證書存放路徑（預設: ${DEFAULT_CERT_PATH}）: " cert_path
+    cert_path="${cert_path:-$DEFAULT_CERT_PATH}"
+    read -rp "請輸入證書有效天數（預設: ${DEFAULT_DAYS}）: " days
+    days="${days:-$DEFAULT_DAYS}"
+
+    key_file="${cert_path}/server.key"
+    crt_file="${cert_path}/server.crt"
+
+    sudo mkdir -p "$cert_path"
+    echo "生成 ECC 私鑰..."
+    sudo openssl ecparam -name prime256v1 -genkey -noout -out "$key_file"
+
+    echo "使用私鑰生成自簽證書..."
+    sudo openssl req -new -x509 -key "$key_file" -out "$crt_file" -days "$days" \
+        -subj "/CN=$domain" -addext "subjectAltName=DNS:$domain"
+
+    sudo chmod 644 "$crt_file"
+    sudo chmod 600 "$key_file"
+
+    echo ""
+    green "自簽名證書生成完成！"
+    echo "私鑰位置: $key_file"
+    echo "證書位置: $crt_file"
+    pause_and_return
+}
+
+issue_acme_cert() {
+    CERT_DIR="/root/cert"
+
+    read -p "請輸入你的域名（例如 example.com）: " domain
+    if [[ -z "$domain" ]]; then
+      echo "請輸入域名參數，操作中止。"
+      pause_and_return
+      return 1
+    fi
+
+    read -p "請輸入你的 Email（ACME 使用，直接回車將隨機生成）: " email
+    if [ -z "$email" ]; then
+      email="$(head /dev/urandom | tr -dc a-z0-9 | head -c 8)@gmail.com"
+      echo "[!] 未輸入，已生成：$email"
+    fi
+
+    mkdir -p "$CERT_DIR"
+
+    if [[ -f "${CERT_DIR}/${domain}.crt" && -f "${CERT_DIR}/${domain}.key" ]]; then
+      echo "[✓] 已檢測到 ${domain} 憑證，跳過簽發步驟。"
+      pause_and_return
+      return 0
+    fi
+
+    if ! command -v curl &>/dev/null; then
+      echo "安裝 curl..."
+      apt update -y && apt install -y curl
+    fi
+
+    if [ ! -d ~/.acme.sh ]; then
+      echo "[*] 安裝 acme.sh ..."
+      curl https://get.acme.sh | sh
+    fi
+
+    ~/.acme.sh/acme.sh --register-account -m "$email"
+
+    ~/.acme.sh/acme.sh --issue -d "$domain" --standalone
+    if [ $? -ne 0 ]; then
+      echo "[✘] 憑證簽發失敗，請確認 DNS 或 80 埠可用性。"
+      pause_and_return
+      return 2
+    fi
+
+    ~/.acme.sh/acme.sh --install-cert -d "$domain" \
+      --key-file "${CERT_DIR}/${domain}.key" \
+      --fullchain-file "${CERT_DIR}/${domain}.crt"
+
+    echo "[✓] 憑證已申請並保存於 ${CERT_DIR}/"
+    pause_and_return
+}
+
+cert_menu() {
+    while true; do
+        clear
+        echo "#############################################"
+        echo -e "#        ${GREEN}證書生成/申請輔助工具${PLAIN}           #"
+        echo "#############################################"
+        echo ""
+        echo -e " ${GREEN}1.${PLAIN} 生成自簽名ECC證書"
+        echo -e " ${GREEN}2.${PLAIN} 申請 ACME 證書（需開放80端口 自動保存於 /root/cert）"
+        echo -e " ${GREEN}0.${PLAIN} 返回主菜單"
+        echo ""
+
+        read -p "請輸入選項 [0-2]: " choice
+
+        case "$choice" in
+            1) generate_self_signed_cert ;;
+            2) issue_acme_cert ;;
+            0) break ;;
+            *) echo "無效選項，請重新輸入。"; pause_and_return ;;
+        esac
+    done
+}
+
+random_pass() {
+    head /dev/urandom | tr -dc 'A-Za-z0-9' | head -c 10
+}
+
+select_cert_for_hysteria() {
+    echo "請選擇證書配置方式："
+    echo "1. 自簽證書（檢查 /etc/cert/ 下證書直接使用）"
+    echo "2. 域名證書（檢查 /root/cert 下所有證書，支持多域名選擇）"
+    echo "3. 自定義證書路徑"
+    echo "0. 返回主菜單"
+    read -p "請選擇 [0-3]: " cert_option
+
+    if [[ "$cert_option" == "1" ]]; then
+        if [[ -f /etc/cert/server.crt && -f /etc/cert/server.key ]]; then
+            cert_path="/etc/cert/server.crt"
+            key_path="/etc/cert/server.key"
+            return 0
+        else
+            red "未檢測到 /etc/cert/server.crt 與 /etc/cert/server.key，請先生成自簽證書！"
+            pause_and_return
+            return 1
+        fi
+    elif [[ "$cert_option" == "2" ]]; then
+        if ! compgen -G "/root/cert/*.crt" > /dev/null; then
+            red "未檢測到 /root/cert 下任何證書，請先申請域名證書！"
+            pause_and_return
+            return 1
+        fi
+        echo "檢測到以下域名證書："
+        select crtfile in /root/cert/*.crt; do
+            [[ -z "$crtfile" ]] && echo "請輸入有效選項。" && continue
+            domain_base=$(basename "$crtfile" .crt)
+            keyfile="/root/cert/${domain_base}.key"
+            if [[ -f "$keyfile" ]]; then
+                cert_path="$crtfile"
+                key_path="$keyfile"
+                break
+            else
+                echo "未找到對應私鑰：$keyfile，請重新選擇。"
+            fi
+        done
+    elif [[ "$cert_option" == "3" ]]; then
+        read -p "請輸入證書(.crt/.pem)路徑: " cert_path
+        read -p "請輸入私鑰(.key)路徑: " key_path
+        if [[ ! -f "$cert_path" || ! -f "$key_path" ]]; then
+            red "自定義證書或私鑰路徑無效！"
+            pause_and_return
+            return 1
+        fi
+    else
+        return 1
+    fi
+    return 0
+}
+
 while true; do
-  # 顯示選項菜單
-  echo "==== Steins Gate - hysteria Ver.1.0 ===="
+  # ==== 高亮藍色主菜單標題 ====
+  echo -e "${BLUE}==============================================${PLAIN}"
+  echo -e "${BLUE}====      Steins Gate - hysteria Ver.1.0    ====${PLAIN}"
+  echo -e "${BLUE}==============================================${PLAIN}"
   echo "请选择你的命运石之门:"
   echo "1. 申请證書or自签证书"
   echo "2. 安裝 Hysteria"
@@ -18,48 +200,48 @@ while true; do
 
   # 選項1: 申请證書or自签证书 
   elif [ "$option" -eq 1 ]; then
-      echo "正在下載並執行 Acme.sh..."
-      bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh)
-      
-      read -p "按 Enter 鍵返回世界线..." _
+      cert_menu
 
   # 選項2: 安裝 Hysteria
   elif [ "$option" -eq 2 ]; then
       HY2_DIR="/root/hysteria"
       EXEC_PATH="${HY2_DIR}/hysteria"
 
-  # 确保目录存在
       mkdir -p "$HY2_DIR"
 
       echo "正在下載最新版本的 Hysteria 內核..."
-  # 直接下载到目标位置
       wget -O "${EXEC_PATH}" "https://download.hysteria.network/app/latest/hysteria-linux-amd64"
 
       if [ ! -s "$EXEC_PATH" ]; then
-      echo "下載的文件為空，請檢查網絡或下載鏈接是否正確。"
-      exit 1
+          echo "下載的文件為空，請檢查網絡或下載鏈接是否正確。"
+          exit 1
       fi
 
-  # 赋予执行权限
       chmod +x "$EXEC_PATH"
-
       echo "Hysteria 內核已成功下載並賦予執行權限"
+
+      # 證書/私鑰選擇
+      while true; do
+          select_cert_for_hysteria
+          CERT_RTN=$?
+          [[ $CERT_RTN -eq 0 ]] && break
+          # 用戶選了返回或錯誤則返回主菜單
+          [[ $CERT_RTN -eq 1 ]] && break
+      done
+
+      # 若未正確選擇證書則不再繼續
+      [[ $CERT_RTN -ne 0 ]] && continue
 
       echo "請輸入監聽端口 (默認 :443):"
       read -r listen_port
       listen_port=${listen_port:-:443}
 
-      echo "請輸入證書路徑 (默認自签证书 /etc/cert/server.crt):"
-      read -r cert_path
-      cert_path=${cert_path:-/etc/cert/server.crt}
-
-      echo "請輸入私鑰路徑 (默認自签证书 /etc/cert/server.key):"
-      read -r key_path
-      key_path=${key_path:-/etc/cert/server.key}
-
-      echo "請輸入認證密碼 (默認 123456asd):"
-      read -r auth_password
-      auth_password=${auth_password:-123456asd}
+      # 密碼支持自定義，回車為隨機
+      read -p "請輸入認證密碼 (回車自動隨機): " auth_password
+      if [ -z "$auth_password" ]; then
+        auth_password=$(random_pass)
+        echo "已自動生成認證密碼: $auth_password"
+      fi
 
       echo "請輸入偽裝 URL (默認 https://www.bing.com):"
       read -r masquerade_url
