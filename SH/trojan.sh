@@ -77,7 +77,7 @@ function install_acme() {
 function install_trojan_go() {
     echo "準備安裝 Trojan-Go 並設置配置……"
     mkdir -p /root/trojan && cd /root/trojan
-    wget https://raw.githubusercontent.com/Emokui/Sukuna/main/Linux/trojan-go && chmod +x trojan-go
+    wget https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan-go && chmod +x trojan-go
 
     echo "請根據提示設置 Trojan-Go 配置"
 
