@@ -270,7 +270,11 @@ manage_docker() {
         apk del docker
       fi
       rm -rf /var/lib/docker /etc/docker
-      color_info "[✓] Docker 已清除。"
+      # 新增自定義檔案與資料夾清理
+      rm -rf /home/nginx
+      rm -rf /root/docker-compose.yml
+      rm -rf /root/sub-store-data
+      color_info "[✓] Docker 及 nginx 配置與自定義檔案已清除。"
       ;;
     0) return ;;
     *) color_warn "無效選項。";;
