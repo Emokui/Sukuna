@@ -173,9 +173,9 @@ configure_firewall() {
         echo "3. 开启全部端口" 
         echo "4. 关闭全部端口 (保留 SSH)"
         echo "5. 显示已开启的端口"
-        echo "6. 返回主菜单"
+        echo "0. 返回主菜单"
         echo "==============================================="
-        read -rp "请输入选项 (1-6): " action_choice
+        read -rp "请输入选项 (0-5): " action_choice
         case "$action_choice" in
             1|2)
                 read -rp "请输入端口（如 22 443 或 1000-2000）: " input_ports
