@@ -118,26 +118,26 @@ install_mihomo() {
 
     # 提示用户输入代理设置，提供默认值
     echo "[*] 请提供 wireguard 配置（按 Enter 使用默认值）："
-    read -p "Private-key: " private_key
+    read -p "Private-key 回车默认: " private_key
     private_key=${private_key:-2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=}
     
-    read -p "Server: " server
+    read -p "Endpoint 回车默认: " server
     server=${server:-162.159.193.10}
     
-    read -p "Port: " port
+    read -p "Port 回车默认: " port
     port=${port:-2408}
     if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
         echo "[!] 无效的端口号，请输入 1-65535 之间的数字。"
         exit 1
     fi
     
-    read -p "Public-key: " public_key
+    read -p "Public-key 回车默认: " public_key
     public_key=${public_key:-bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=}
     
-    read -p "Reserved: " reserved
+    read -p "Reserved 回车默认: " reserved
     reserved=${reserved:-[154,242,221]}
     
-    read -p "MTU: " mtu
+    read -p "MTU 回车默认: " mtu
     mtu=${mtu:-1280}
 
     # 创建 config.yaml 配置文件
