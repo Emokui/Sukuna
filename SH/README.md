@@ -1,11 +1,17 @@
-**dd系统后安装sudo与curl**
+## ssh工具 ##
+```
+bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/ssh.sh)
+```
+
+
+## dd系统后安装sudo与curl ##
 
 ```
 apt update && apt install sudo && sudo apt update && sudo apt install curl
 ```
 
 
-**serv00重置**
+## serv00清除数据 ##
 ```
 curl -O "https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Linux/serv00.sh"
 chmod +x serv00.sh
