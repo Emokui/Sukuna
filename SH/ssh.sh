@@ -288,7 +288,7 @@ configure_firewall() {
                 echo "==============================================="
                 iptables -L INPUT -n -v
                 ;;
-            6) 
+            0) 
                 echo "[*] 返回主菜单..."
                 break 
                 ;;
