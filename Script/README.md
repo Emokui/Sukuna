@@ -1,10 +1,6 @@
 ### CDNURL ###
 
 
-#### Duet ####
-*https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/DuetPro.sgmodule*
-
-
 #### Unlock ####
 *https://fbi.hk.dedyn.io/Emokui/Sukuna/main/Script/Unlock.sgmodule*
 
