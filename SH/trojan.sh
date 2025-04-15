@@ -256,7 +256,7 @@ function main_menu() {
         echo "======================================"
         echo ""
         echo "請選擇你的命運："
-        echo "1. 安裝 ACME申請證書 "
+        echo "1. 安裝 ACME申請證書(需開放80端口)"
         echo "2. 安裝 Trojan-Go"
         echo "3. 管理 Trojan-Go"
         echo "0. 離開命運石之門"
