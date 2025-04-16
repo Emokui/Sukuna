@@ -9,6 +9,7 @@ gl_lan='\033[34m'
 gl_bai='\033[0m'
 gl_zi='\033[35m'
 gl_kjlan='\033[96m'
+GREEN="\033[1;32m"
 
 send_stats() {
     local action="$1"
