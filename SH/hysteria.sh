@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 彩色與格式化
+# 彩色与格式化
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
@@ -54,52 +54,81 @@ generate_self_signed_cert() {
 
 issue_acme_cert() {
     CERT_DIR="/root/cert"
+    ACME_SH="$HOME/.acme.sh/acme.sh"
+    ACME_ACCOUNT_CONF="$HOME/.acme.sh/account.conf"
 
-    read -p "$(echo -e "${YELLOW}請輸入你的域名${PLAIN}（例如 example.com）: ")" domain
-    if [[ -z "$domain" ]]; then
-      echo -e "${RED}請輸入域名參數，操作中止。${PLAIN}"
-      pause_and_return
-      return 1
+    # 自动安装 curl
+    if ! command -v curl &>/dev/null; then
+        echo -e "${YELLOW}安裝 curl...${PLAIN}"
+        apt update -y && apt install -y curl
     fi
 
-    read -p "$(echo -e "${YELLOW}請輸入你的 Email${PLAIN}（ACME 使用，直接回車將隨機生成）: ")" email
-    if [ -z "$email" ]; then
-      email="$(head /dev/urandom | tr -dc a-z0-9 | head -c 8)@gmail.com"
-      echo -e "${YELLOW}[!] 未輸入，已生成：$email${PLAIN}"
+    # 自动安装 socat
+    if ! command -v socat &>/dev/null; then
+        echo -e "${YELLOW}安裝 socat...${PLAIN}"
+        apt update -y && apt install -y socat
+    fi
+
+    # 自动安装 acme.sh
+    if [ ! -f "$ACME_SH" ]; then
+        echo -e "${YELLOW}[*] 正在安裝 acme.sh ...${PLAIN}"
+        curl https://get.acme.sh | sh
+    fi
+
+    # 检查邮箱是否已注册
+    if [ ! -f "$ACME_ACCOUNT_CONF" ] || ! grep -q "ACCOUNT_EMAIL=" "$ACME_ACCOUNT_CONF"; then
+        read -p "$(echo -e "${YELLOW}請輸入你的 Email（ACME 註冊使用，僅需一次）: ${PLAIN}")" email
+        if [ -z "$email" ]; then
+            email="$(head /dev/urandom | tr -dc a-z0-9 | head -c 8)@gmail.com"
+            echo -e "${YELLOW}[!] 未輸入，已生成：$email${PLAIN}"
+        fi
+        ~/.acme.sh/acme.sh --register-account -m "$email"
+    else
+        email=$(grep ACCOUNT_EMAIL "$ACME_ACCOUNT_CONF" | cut -d= -f2 | tr -d '"')
+        echo -e "${GREEN}已檢測到已註冊郵箱：$email，將自動使用。${PLAIN}"
     fi
 
     mkdir -p "$CERT_DIR"
 
+    read -p "$(echo -e "${YELLOW}請輸入你的域名${PLAIN}（例如 example.com）: ")" domain
+    if [[ -z "$domain" ]]; then
+        echo -e "${RED}請輸入域名參數，操作中止。${PLAIN}"
+        pause_and_return
+        return 1
+    fi
+
     if [[ -f "${CERT_DIR}/${domain}.crt" && -f "${CERT_DIR}/${domain}.key" ]]; then
-      echo -e "${GREEN}[✓] 已檢測到 ${domain} 憑證，跳過簽發步驟。${PLAIN}"
-      pause_and_return
-      return 0
+        echo -e "${GREEN}[✓] 已檢測到 ${domain} 憑證，跳過簽發步驟。${PLAIN}"
+        pause_and_return
+        return 0
     fi
-
-    if ! command -v curl &>/dev/null; then
-      echo -e "${YELLOW}安裝 curl...${PLAIN}"
-      apt update -y && apt install -y curl
-    fi
-
-    if [ ! -d ~/.acme.sh ]; then
-      echo -e "${YELLOW}[*] 安裝 acme.sh ...${PLAIN}"
-      curl https://get.acme.sh | sh
-    fi
-
-    ~/.acme.sh/acme.sh --register-account -m "$email"
 
     ~/.acme.sh/acme.sh --issue -d "$domain" --standalone
     if [ $? -ne 0 ]; then
-      echo -e "${RED}[✘] 憑證簽發失敗，請確認 DNS 或 80 埠可用性。${PLAIN}"
-      pause_and_return
-      return 2
+        echo -e "${RED}[✘] 憑證簽發失敗，請確認 DNS 或 80 埠可用性。${PLAIN}"
+        pause_and_return
+        return 2
     fi
 
     ~/.acme.sh/acme.sh --install-cert -d "$domain" \
-      --key-file "${CERT_DIR}/${domain}.key" \
-      --fullchain-file "${CERT_DIR}/${domain}.crt"
+        --key-file "${CERT_DIR}/${domain}.key" \
+        --fullchain-file "${CERT_DIR}/${domain}.crt"
 
     echo -e "${GREEN}[✓] 憑證已申請並保存於 ${CERT_DIR}/${PLAIN}"
+    pause_and_return
+}
+
+show_hysteria_config() {
+    HY2_DIR="/root/hysteria"
+    CONFIG_PATH="${HY2_DIR}/config.yaml"
+    if [ -f "$CONFIG_PATH" ]; then
+        echo -e "${YELLOW}當前 Hysteria 配置如下:${PLAIN}"
+        echo -e "${CYAN}------------------------------------------------"
+        cat "$CONFIG_PATH"
+        echo -e "------------------------------------------------${PLAIN}"
+    else
+        echo -e "${RED}未檢測到配置文件: $CONFIG_PATH${PLAIN}"
+    fi
     pause_and_return
 }
 
@@ -325,8 +354,9 @@ EOF
         echo -e "${GREEN}5.${PLAIN} 更新 Hysteria 內核"
         echo -e "${GREEN}6.${PLAIN} 刪除 Hysteria 服務與相關資源"
         echo -e "${GREEN}7.${PLAIN} 修改 Hysteria 配置"
+        echo -e "${GREEN}8.${PLAIN} 查看當前 Hysteria 配置"
         echo -e "${GREEN}0.${PLAIN} 返回主菜单"
-        read -p "$(echo -e "${YELLOW}選擇操作 (0-7): ${PLAIN}")" ACTION
+        read -p "$(echo -e "${YELLOW}選擇操作 (0-8): ${PLAIN}")" ACTION
 
         case "$ACTION" in
             1)
@@ -460,11 +490,14 @@ EOF2
                 sudo systemctl restart $SERVICE_NAME
                 sudo systemctl status $SERVICE_NAME
                 ;;
+            8)
+                show_hysteria_config
+                ;;
             0)
                 break
                 ;;
             *)
-                red "無效選項，請輸入 0 到 7"
+                red "無效選項，請輸入 0 到 8"
                 ;;
         esac
 
