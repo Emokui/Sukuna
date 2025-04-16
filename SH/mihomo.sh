@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# 定義變量
+# 定义变量
 MIHOMO_DIR="${HOME}/clash"
 MIHOMO_PATH="${MIHOMO_DIR}/mihomo"
 CONFIG_PATH="${MIHOMO_DIR}/config.yaml"
 SERVICE_NAME="mihomo-user"
 TIMER_NAME="mihomo-user.timer"
 
-# 檢查命令執行結果
+# 检查命令执行结果
 check_status() {
     if [ $? -ne 0 ]; then
         echo "[!] $1 失败。"
@@ -15,7 +15,7 @@ check_status() {
     fi
 }
 
-# 產生 systemd 服務單元文件
+# 生成 systemd 服务单元文件
 create_systemd_service() {
     cat <<EOF | sudo tee /etc/systemd/system/${SERVICE_NAME}.service > /dev/null
 [Unit]
@@ -32,7 +32,7 @@ EOF
     sudo chmod 644 /etc/systemd/system/${SERVICE_NAME}.service
 }
 
-# 產生 systemd timer 文件（開機5分鐘後啟動）
+# 生成 systemd timer 文件（开机5分钟后启动）
 create_systemd_timer() {
     cat <<EOF | sudo tee /etc/systemd/system/${TIMER_NAME} > /dev/null
 [Unit]
@@ -49,7 +49,7 @@ EOF
     sudo chmod 644 /etc/systemd/system/${TIMER_NAME}
 }
 
-# 函數：獲取最新穩定 Mihomo 版本
+# 获取最新稳定 Mihomo 版本
 get_latest_stable_version() {
     local raw_version
     echo "[*] 检查最新稳定 Mihomo 版本..." >&2
@@ -65,12 +65,12 @@ get_latest_stable_version() {
     echo "$latest_version"
 }
 
-# 安裝並配置 Mihomo + systemd
+# 安装并配置 Mihomo + systemd
 install_mihomo() {
     echo "[*] 开始安装并配置 Mihomo..."
     mkdir -p "$MIHOMO_DIR" && cd "$MIHOMO_DIR" || exit 1
 
-    # 獲取最新穩定版本
+    # 获取最新稳定版本
     latest_version=$(get_latest_stable_version)
     download_url="https://github.com/MetaCubeX/mihomo/releases/download/${latest_version}/mihomo-linux-amd64-compatible-${latest_version}.gz"
 
@@ -85,7 +85,17 @@ install_mihomo() {
     chmod +x mihomo
     check_status "设置执行权限"
 
-    # 提示用户输入 wireguard 配置，提供默认值
+    # 询问用户是否开启 tun
+    echo "[*] 是否启用 tun 模式？"
+    read -p "启用请输入 yes，禁用请输入 no [yes/no]: " enable_tun
+    enable_tun=${enable_tun:-yes}
+    if [[ "$enable_tun" == "yes" ]]; then
+        tun_enable=true
+    else
+        tun_enable=false
+    fi
+
+    # 无论如何都需要输入 WireGuard 配置
     echo "[*] 请提供 wireguard 配置（按 Enter 使用默认值）："
     read -p "Private-key 回车默认: " private_key
     private_key=${private_key:-2Nk08dzxAkzubjt19fO2VKEgdBjpHxEluNvTJKDHW1w=}
@@ -104,11 +114,21 @@ install_mihomo() {
     read -p "MTU 回车默认: " mtu
     mtu=${mtu:-1280}
 
+    # 仅在 tun 关闭时需要交互输入以下内容
+    if [[ "$tun_enable" == "false" ]]; then
+        read -p "socks-port [默认18443]: " socks_port
+        socks_port=${socks_port:-18443}
+        read -p "external-controller [默认0.0.0.0:14443]: " external_controller
+        external_controller=${external_controller:-0.0.0.0:14443}
+        read -p "secret [默认123123asd]: " secret
+        secret=${secret:-123123asd}
+    fi
+
     # 创建 config.yaml 配置文件
     echo "[*] 创建 config.yaml 配置文件..."
     cat <<EOF > config.yaml
 tun:
-  enable: true
+  enable: $tun_enable
   stack: system
   dns-hijack:
     - '0.0.0.0:53'
@@ -123,10 +143,18 @@ geo-update-interval: 24
 tcp-concurrent: true
 find-process-mode: off
 allow-lan: true
-socks-port: 18443
+EOF
+
+    if [[ "$tun_enable" == "false" ]]; then
+    cat <<EOF >> config.yaml
+socks-port: $socks_port
 bind-address: "127.0.0.1"
-external-controller: 0.0.0.0:14443
-secret: "123123asd"
+external-controller: $external_controller
+secret: "$secret"
+EOF
+    fi
+
+    cat <<EOF >> config.yaml
 mode: rule
 log-level: warning
 ipv6: false
@@ -192,18 +220,18 @@ rules:
 EOF
     check_status "创建配置文件"
 
-    echo "[*] 配置 systemd service 與 timer..."
+    echo "[*] 配置 systemd service 与 timer..."
     create_systemd_service
     create_systemd_timer
 
     sudo systemctl daemon-reload
     sudo systemctl enable --now ${TIMER_NAME}
-    echo "[*] Mihomo 安裝完成，將於開機5分鐘後自動啟動。"
+    echo "[*] Mihomo 安装完成，将于开机5分钟后自动启动。"
     echo "你也可以用 'sudo systemctl [start|stop|restart|status] ${SERVICE_NAME}' 管理"
-    echo "查看定時器狀態：sudo systemctl status ${TIMER_NAME}"
+    echo "查看定时器状态：sudo systemctl status ${TIMER_NAME}"
 }
 
-# 更新 Mihomo 僅需覆蓋二進制，無需動到 systemd/timer
+# 更新 Mihomo 仅需覆盖二进制，无需动到 systemd/timer
 update_mihomo() {
     echo "[*] 开始更新 Mihomo..."
     cd "$MIHOMO_DIR" || { echo "[!] 无法进入 $MIHOMO_DIR 目录。"; exit 1; }
@@ -226,18 +254,18 @@ update_mihomo() {
     check_status "设置执行权限"
     rm -f "$MIHOMO_PATH.old"
 
-    echo "[*] 重启 Mihomo systemd 服務..."
+    echo "[*] 重启 Mihomo systemd 服务..."
     sudo systemctl restart ${SERVICE_NAME}.service
     sleep 2
     sudo systemctl status ${SERVICE_NAME}.service
 }
 
-# 刪除 Mihomo 及配置並關閉 systemd
+# 删除 Mihomo 及配置并关闭 systemd
 delete_mihomo() {
     echo "[!] 此操作将停止并彻底删除 Mihomo 及其配置，无法恢复！"
     read -p "确定要删除 Mihomo 及配置吗？(yes/no): " confirm
     if [[ "$confirm" == "yes" ]]; then
-        echo "[*] 停止並禁用 Mihomo systemd/timer..."
+        echo "[*] 停止并禁用 Mihomo systemd/timer..."
         sudo systemctl stop ${SERVICE_NAME}.service
         sudo systemctl disable ${SERVICE_NAME}.service
         sudo systemctl stop ${TIMER_NAME}
@@ -256,23 +284,23 @@ delete_mihomo() {
         else
             echo "[*] 未检测到 $MIHOMO_DIR 目录。"
         fi
-        echo "[*] Mihomo 及配置、systemd單元已全部刪除。"
+        echo "[*] Mihomo 及配置、systemd单元已全部删除。"
     else
         echo "[*] 已取消删除操作。"
     fi
 }
 
-# 管理 Mihomo systemd 服務
+# 管理 Mihomo systemd 服务
 manage_service() {
     while true; do
-        echo "選擇屬於你的命運之門"
+        echo "选择属于你的命运之门"
         echo "1. 停止 Mihomo"
         echo "2. 启动 Mihomo"
         echo "3. 重启 Mihomo"
-        echo "4. 查看 Mihomo 狀態"
-        echo "5. 查看 Timer 狀態"
-        echo "6. 刪除 Mihomo 及配置"
-        echo "0. 返回世界線"
+        echo "4. 查看 Mihomo 状态"
+        echo "5. 查看 Timer 状态"
+        echo "6. 删除 Mihomo 及配置"
+        echo "0. 返回世界线"
         read -p "请输入选项 [0-6]: " subchoice
 
         case $subchoice in
@@ -289,11 +317,11 @@ manage_service() {
                 sudo systemctl restart ${SERVICE_NAME}.service
                 ;;
             4)
-                echo "[*] systemd 查看 Mihomo 狀態..."
+                echo "[*] systemd 查看 Mihomo 状态..."
                 sudo systemctl status ${SERVICE_NAME}.service
                 ;;
             5)
-                echo "[*] 查看 Timer 狀態..."
+                echo "[*] 查看 Timer 状态..."
                 sudo systemctl status ${TIMER_NAME}
                 ;;
             6)
@@ -311,7 +339,7 @@ manage_service() {
     done
 }
 
-# 主菜單
+# 主菜单
 BLUE="\033[1;34m"
 PLAIN="\033[0m"
 while true; do
@@ -319,7 +347,7 @@ while true; do
     echo -e "${BLUE}==============================================${PLAIN}"
     echo -e "${BLUE}====      Steins Gate - mihomo Ver.1.0     ====${PLAIN}"
     echo -e "${BLUE}==============================================${PLAIN}"
-    echo "選擇屬於你的命運之門："
+    echo "选择属于你的命运之门："
     echo "1. 安装并配置 Mihomo (systemd/timer 5分钟后自启)"
     echo "2. 管理 Mihomo 服务 (systemd)"
     echo "3. 更新 Mihomo"
