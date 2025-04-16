@@ -335,6 +335,9 @@ install_base_tools() {
 install_snell() {
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/snell.sh)
 }
+install_snell-pro() {
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/snell-pro.sh)
+}
 install_trojan() {
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan.sh)
 }
@@ -583,6 +586,7 @@ main_menu() {
         echo " 18. 安裝 SubStore"
         echo " 19. 一键 DDSystem"
         echo " 20. 反代 Nginx"
+        echo " 21. 超级 Snell"
         echo "  0. 離開 El Psy Kongroo"
         read -rp "請選擇操作: " choice
         case "$choice" in
@@ -606,6 +610,7 @@ main_menu() {
             18) install_substore ;;
             19) install_install ;;
             20) install_nginx ;;
+            21) install_snell-pro ;;
             0) echo -e "${gl_zi}「運命石之扉の選択,El Psy Kongroo」${gl_bai}" && break ;;
             *) echo "[!] 無效選項，請重新選擇" ;;
         esac
