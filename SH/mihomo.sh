@@ -306,13 +306,13 @@ delete_mihomo() {
 manage_service() {
     while true; do
         echo -e "${BLUE}选择属于你的命运之门${PLAIN}"
-        echo -e "${CYAN}1. 停止 Mihomo${PLAIN}"
-        echo -e "${CYAN}2. 启动 Mihomo${PLAIN}"
-        echo -e "${CYAN}3. 重启 Mihomo${PLAIN}"
-        echo -e "${CYAN}4. 查看 Mihomo 状态${PLAIN}"
-        echo -e "${CYAN}5. 查看 Timer 状态${PLAIN}"
-        echo -e "${CYAN}6. 删除 Mihomo 及配置${PLAIN}"
-        echo -e "${CYAN}0. 返回世界线${PLAIN}"
+        echo -e "${GREEN}1.${PLAIN} 停止 Mihomo${PLAIN}"
+        echo -e "${GREEN}2.${PLAIN} 启动 Mihomo${PLAIN}"
+        echo -e "${GREEN}3.${PLAIN} 重启 Mihomo${PLAIN}"
+        echo -e "${GREEN}4.${PLAIN} 查看 Mihomo 状态${PLAIN}"
+        echo -e "${GREEN}5.${PLAIN} 查看 Timer 状态${PLAIN}"
+        echo -e "${GREEN}6.${PLAIN} 删除 Mihomo 及配置${PLAIN}"
+        echo -e "${GREEN}0.${PLAIN} 返回世界线${PLAIN}"
         read -e -p "$(echo -e "${YELLOW}请输入选项 [0-6]: ${PLAIN}")" subchoice
 
         case $subchoice in
@@ -358,10 +358,10 @@ while true; do
     echo -e "${BLUE}====      Steins Gate - mihomo Ver.1.0     ====${PLAIN}"
     echo -e "${BLUE}==============================================${PLAIN}"
     echo -e "${CYAN}选择属于你的命运之门：${PLAIN}"
-    echo -e "${CYAN}1. 安装并配置 Mihomo (systemd/timer 2分钟后自启)${PLAIN}"
-    echo -e "${CYAN}2. 管理 Mihomo 服务 (systemd)${PLAIN}"
-    echo -e "${CYAN}3. 更新 Mihomo${PLAIN}"
-    echo -e "${CYAN}0. 再见 El Psy Kongroo${PLAIN}"
+    echo -e "${GREEN}1.${PLAIN} 安装并配置 Mihomo (systemd/timer 2分钟后自启)${PLAIN}"
+    echo -e "${GREEN}2.${PLAIN} 管理 Mihomo 服务 (systemd)${PLAIN}"
+    echo -e "${GREEN}3.${PLAIN} 更新 Mihomo${PLAIN}"
+    echo -e "${GREEN}0.${PLAIN} 再见 El Psy Kongroo${PLAIN}"
     read -e -p "$(echo -e "${YELLOW}请输入选项 [0-3]: ${PLAIN}")" choice
 
     case $choice in
