@@ -122,7 +122,11 @@ geox-url:
 geo-update-interval: 24
 tcp-concurrent: true
 find-process-mode: off
-allow-lan: false
+allow-lan: true
+socks-port: 18443
+bind-address: "127.0.0.1"
+external-controller: 0.0.0.0:14443
+secret: "123123asd"
 mode: rule
 log-level: warning
 ipv6: false
