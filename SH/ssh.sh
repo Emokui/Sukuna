@@ -333,7 +333,7 @@ install_base_tools() {
 
 # ====== 其他快速安裝 ======
 install_snell() {
-    bash <(curl -sL https://raw.githubusercontent.com/xOS/Snell/master/Snell.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/snell.sh)
 }
 install_trojan() {
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan.sh)
