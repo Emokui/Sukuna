@@ -9,7 +9,6 @@ gl_lan='\033[34m'
 gl_bai='\033[0m'
 gl_zi='\033[35m'
 gl_kjlan='\033[96m'
-GREEN="\033[1;32m"
 
 send_stats() {
     local action="$1"
@@ -567,28 +566,28 @@ main_menu() {
     while true; do
         echo
         echo -e "${gl_kjlan}==== Steins Gate - 鳳凰院凶真 Ver.1.0 ==== ${gl_bai}"
-        echo " ${GREEN}01.${PLAIN} 系統更新${PLAIN}"
-        echo " ${GREEN}02.${PLAIN} 系統清理${PLAIN}"
-        echo " ${GREEN}03.${PLAIN} 開啟 root 登錄${PLAIN}"
-        echo " ${GREEN}04.${PLAIN} 修改 root 密碼${PLAIN}"
-        echo " ${GREEN}05.${PLAIN} 修改 SSH 端口${PLAIN}"
-        echo " ${GREEN}06.${PLAIN} 更改時區${PLAIN}"
-        echo " ${GREEN}07.${PLAIN} 設定防火牆${PLAIN}"
-        echo " ${GREEN}08.${PLAIN} 配置 DNS${PLAIN}"
-        echo " ${GREEN}09.${PLAIN} 管理 BBR${PLAIN}"
-        echo " ${GREEN}10.${PLAIN} 管理 WARP${PLAIN}"
-        echo " ${GREEN}11.${PLAIN} 重啟 VPS${PLAIN}"
-        echo " ${GREEN}12.${PLAIN} 安裝 wget/unzip${PLAIN}"
-        echo " ${GREEN}13.${PLAIN} 安裝 Acme${PLAIN}"
-        echo " ${GREEN}14.${PLAIN} 安裝 Snell${PLAIN}"
-        echo " ${GREEN}15.${PLAIN} 安裝 Mihomo${PLAIN}"
-        echo " ${GREEN}16.${PLAIN} 安裝 Trojan${PLAIN}"
-        echo " ${GREEN}17.${PLAIN} 安裝 Hysteria${PLAIN}"
-        echo " ${GREEN}18.${PLAIN} 安裝 SubStore${PLAIN}"
-        echo " ${GREEN}19.${PLAIN} 一键 DDSystem${PLAIN}"
-        echo " ${GREEN}20.${PLAIN} 反代 Nginx${PLAIN}"
-        echo " ${GREEN}21.${PLAIN} 超级 Snell${PLAIN}"
-        echo "  ${GREEN}0.${PLAIN} 離開 El Psy Kongroo${PLAIN}"
+        echo " ${gl_lv}01.${PLAIN} 系統更新${PLAIN}"
+        echo " ${gl_lv}02.${PLAIN} 系統清理${PLAIN}"
+        echo " ${gl_lv}03.${PLAIN} 開啟 root 登錄${PLAIN}"
+        echo " ${gl_lv}04.${PLAIN} 修改 root 密碼${PLAIN}"
+        echo " ${gl_lv}05.${PLAIN} 修改 SSH 端口${PLAIN}"
+        echo " ${gl_lv}04.${PLAIN} 更改時區${PLAIN}"
+        echo " ${gl_lv}07.${PLAIN} 設定防火牆${PLAIN}"
+        echo " ${gl_lv}08.${PLAIN} 配置 DNS${PLAIN}"
+        echo " ${gl_lv}09.${PLAIN} 管理 BBR${PLAIN}"
+        echo " ${gl_lv}10.${PLAIN} 管理 WARP${PLAIN}"
+        echo " ${gl_lv}11.${PLAIN} 重啟 VPS${PLAIN}"
+        echo " ${gl_lv}12.${PLAIN} 安裝 wget/unzip${PLAIN}"
+        echo " ${gl_lv}13.${PLAIN} 安裝 Acme${PLAIN}"
+        echo " ${gl_lv}14.${PLAIN} 安裝 Snell${PLAIN}"
+        echo " ${gl_lv}15.${PLAIN} 安裝 Mihomo${PLAIN}"
+        echo " ${gl_lv}16.${PLAIN} 安裝 Trojan${PLAIN}"
+        echo " ${gl_lv}17.${PLAIN} 安裝 Hysteria${PLAIN}"
+        echo " ${gl_lv}18.${PLAIN} 安裝 SubStore${PLAIN}"
+        echo " ${gl_lv}19.${PLAIN} 一键 DDSystem${PLAIN}"
+        echo " ${gl_lv}20.${PLAIN} 反代 Nginx${PLAIN}"
+        echo " ${gl_lv}21.${PLAIN} 超级 Snell${PLAIN}"
+        echo "  ${gl_lv}0.${PLAIN} 離開 El Psy Kongroo${PLAIN}"
         read -rp "請選擇操作: " choice
         case "$choice" in
             1) linux_update ;;
