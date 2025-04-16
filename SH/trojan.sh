@@ -435,7 +435,7 @@ main_menu() {
         clear
         banner
         echo -e "${BOLD}${BLUE}========== 主 選 單 ==========${PLAIN}"
-        echo -e "${GREEN}1.${PLAIN} 安裝 ACME申請證書(需開放80端口)"
+        echo -e "${GREEN}1.${PLAIN} ACME申請證書(需開放80端口)"
         echo -e "${GREEN}2.${PLAIN} 安裝 Trojan-Go"
         echo -e "${GREEN}3.${PLAIN} 管理 Trojan-Go"
         echo -e "${GREEN}4.${PLAIN} 卸載 acme.sh 及證書"
