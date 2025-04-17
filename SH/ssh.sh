@@ -463,60 +463,70 @@ show_current_dns() {
 persistent_set_dns() {
     local primary_dns=$1
     local secondary_dns=$2
-    network_manager=$(detect_network_manager)
-    case $network_manager in
-        "NetworkManager")
-            CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
-            if [ -z "$CONNECTION" ]; then
-                echo -e "${gl_hong}错误: 未找到活动的网络连接${gl_bai}"
-                return 1
-            fi
-            if [ -z "$secondary_dns" ]; then
-                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns"
-            else
-                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns,$secondary_dns"
-            fi
-            nmcli con mod "$CONNECTION" ipv4.ignore-auto-dns yes
-            nmcli con up "$CONNECTION"
-            ;;
-        "systemd-resolved")
+
+    # 1. 检测并优先处理 systemd-resolved
+    if [ -L /etc/resolv.conf ] && readlink /etc/resolv.conf | grep -q 'systemd'; then
+        if command -v resolvectl &>/dev/null; then
             INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
             if [ -z "$INTERFACE" ]; then
                 echo -e "${gl_hong}错误: 未找到默认网络接口${gl_bai}"
                 return 1
             fi
-            if [ -z "$secondary_dns" ]; then
-                resolvectl dns "$INTERFACE" "$primary_dns"
-            else
-                resolvectl dns "$INTERFACE" "$primary_dns" "$secondary_dns"
-            fi
-            ;;
-        "netplan")
-            NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
-            if [ -z "$NETPLAN_FILE" ]; then
-                echo -e "${gl_hong}错误: 未找到netplan配置文件${gl_bai}"
-                return 1
-            fi
+            resolvectl dns "$INTERFACE" "$primary_dns" ${secondary_dns:+"$secondary_dns"}
+            resolvectl flush-caches
+            echo -e "${gl_lv}已通过 systemd-resolved 设置DNS（如不生效可尝试重启网络）${gl_bai}"
+            return
+        fi
+    fi
+
+    # 2. NetworkManager
+    if command -v nmcli &>/dev/null; then
+        CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
+        if [ -z "$CONNECTION" ]; then
+            echo -e "${gl_hong}错误: 未找到活动的网络连接${gl_bai}"
+            return 1
+        fi
+        nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns${secondary_dns:+,$secondary_dns}"
+        nmcli con mod "$CONNECTION" ipv4.ignore-auto-dns yes
+        nmcli con up "$CONNECTION"
+        echo -e "${gl_lv}已通过 NetworkManager 设置DNS（如不生效请重启网络）${gl_bai}"
+        return
+    fi
+
+    # 3. netplan
+    if [ -d /etc/netplan ]; then
+        NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
+        if [ -n "$NETPLAN_FILE" ]; then
             cp "$NETPLAN_FILE" "${NETPLAN_FILE}.bak"
-            addresses="['$primary_dns'"
-            [ -n "$secondary_dns" ] && addresses+=", '$secondary_dns'"
-            addresses+="]"
-            if grep -q "nameservers:" "$NETPLAN_FILE"; then
-                sed -i "/nameservers:/,/addresses:/c\      nameservers:\n        addresses: $addresses" "$NETPLAN_FILE"
-            else
-                sed -i "/dhcp4: true/a\      nameservers:\n        addresses: $addresses" "$NETPLAN_FILE"
-            fi
+            # 移除已有 nameservers 块
+            sed -i '/nameservers:/,/addresses:/d' "$NETPLAN_FILE"
+            # 追加到 dhcp4: true 下面
+            sed -i "/dhcp4: true/a\      nameservers:\n        addresses: ['$primary_dns'${secondary_dns:+, '$secondary_dns'}]" "$NETPLAN_FILE"
             netplan apply
-            ;;
-        *)
-            cp /etc/resolv.conf /etc/resolv.conf.bak
-            chattr -i /etc/resolv.conf 2>/dev/null || true
-            echo "nameserver $primary_dns" > /etc/resolv.conf
-            [ -n "$secondary_dns" ] && echo "nameserver $secondary_dns" >> /etc/resolv.conf
-            chattr +i /etc/resolv.conf 2>/dev/null || true
-            ;;
-    esac
-    echo -e "${gl_lv}DNS设置已更新并已持久化${gl_bai}"
+            echo -e "${gl_lv}已通过 netplan 设置DNS（如不生效请重启网络）${gl_bai}"
+            return
+        fi
+    fi
+
+    # 4. 检查 cloud-init 并提醒
+    if [ -f /etc/cloud/cloud.cfg ]; then
+        if grep -q 'manage_resolv_conf: true' /etc/cloud/cloud.cfg; then
+            echo -e "${gl_hong}警告: 检测到 cloud-init 可能会覆盖DNS设置，建议在 /etc/cloud/cloud.cfg 中将 manage_resolv_conf 设为 false${gl_bai}"
+        fi
+    fi
+
+    # 5. 传统 /etc/resolv.conf
+    if [ -f /etc/resolv.conf ]; then
+        chattr -i /etc/resolv.conf 2>/dev/null || true
+        echo "nameserver $primary_dns" > /etc/resolv.conf
+        [ -n "$secondary_dns" ] && echo "nameserver $secondary_dns" >> /etc/resolv.conf
+        chattr +i /etc/resolv.conf 2>/dev/null || true
+        echo -e "${gl_lv}已直接修改 /etc/resolv.conf（如不生效请检查是否被DHCP或云面板覆盖）${gl_bai}"
+    else
+        echo -e "${gl_hong}未找到 /etc/resolv.conf，无法设置DNS${gl_bai}"
+    fi
+
+    echo -e "${gl_huang}如DNS依然无效，建议重启网络/主机，并检查 cloud-init、dhclient 或面板等自动配置服务${gl_bai}"
 }
 
 set_predefined_dns() {
