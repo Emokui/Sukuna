@@ -12,7 +12,7 @@ DOCKER_IMAGE="nginx:latest"
 color_info() { echo -e "\033[36m$1\033[0m"; }
 color_warn() { echo -e "\033[33m$1\033[0m"; }
 color_err()  { echo -e "\033[31m$1\033[0m"; }
-pause() { read -r -p "按 Enter 鍵繼續..."; }
+pause_and_clear() { read -r -p "按 Enter 鍵繼續..."; clear_screen; }
 clear_screen() { command -v clear &>/dev/null && clear || true; }
 
 if [ "$EUID" -ne 0 ]; then
@@ -21,7 +21,6 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 banner() {
-  clear_screen
   color_info "————————————————————————————————"
   color_info "命運石之門：反向代理 Nginx"
   color_info "————————————————————————————————"
@@ -97,7 +96,7 @@ issue_cert() {
   $ACME_SH --issue -d "$domain" --standalone
   if [ $? -ne 0 ]; then
     color_err "[✘] 憑證簽發失敗，請確認 DNS 或 80 埠可用性。"
-    pause
+    pause_and_clear
     exit 1
   fi
   $ACME_SH --install-cert -d "$domain" \
@@ -193,7 +192,7 @@ EOF
     append_server_block "$domain" "$proxy_target"
     reload_nginx_container
     color_info "[✓] 已新增反代：$domain -> $proxy_target"
-    pause
+    pause_and_clear
     return
   fi
 
@@ -218,71 +217,75 @@ EOF
   reload_nginx_container
   color_info "[✓] Nginx 部署完成，已啟動。"
   docker ps | grep nginx
-  pause
+  pause_and_clear
 }
 
 manage_docker() {
-  color_info "=== Docker 管理選單 ==="
-  echo "1. 更新 compose 所有鏡像"
-  echo "2. 刪除 compose 所有鏡像"
-  echo "3. 刪除指定鏡像"
-  echo "4. 深度清理所有無用資源"
-  echo "5. 徹底卸載 Docker"
-  echo "0. 返回主選單"
-  read -r -p "請選擇操作 (0-5): " action
-  case $action in
-    1)
-      if command -v docker-compose &>/dev/null; then
-        docker-compose pull
-      else
-        color_err "未安裝 docker-compose"
-      fi
-      ;;
-    2)
-      if command -v docker-compose &>/dev/null; then
-        docker-compose down --rmi all
-      else
-        color_err "未安裝 docker-compose"
-      fi
-      ;;
-    3)
-      read -r -p "請輸入鏡像名稱或 ID: " image
-      if [ -n "$image" ]; then
-        docker image rm -f "$image"
-      else
-        color_warn "未輸入鏡像名稱"
-      fi
-      ;;
-    4) docker system prune -af --volumes ;;
-    5)
-      color_warn "[*] 開始卸載..."
-      docker rm $(docker ps -aq) 2>/dev/null || true
-      docker rmi $(docker images -q) 2>/dev/null || true
-      docker network prune -f
-      if command -v apt &>/dev/null; then
-        apt-get remove -y docker docker-ce docker-ce-cli
-        apt-get purge -y docker-ce docker-ce-cli
-      elif command -v yum &>/dev/null; then
-        yum remove -y docker docker-ce docker-ce-cli
-      elif command -v dnf &>/dev/null; then
-        dnf remove -y docker docker-ce docker-ce-cli
-      elif command -v apk &>/dev/null; then
-        apk del docker
-      fi
-      rm -rf /var/lib/docker /etc/docker
-      # 新增自定義檔案與資料夾清理
-      rm -rf /home/nginx
-      rm -rf /root/docker-compose.yml
-      rm -rf /root/sub-store-data
-      color_info "[✓] Docker 及 nginx 配置與自定義檔案已清除。"
-      ;;
-    0) return ;;
-    *) color_warn "無效選項。";;
-  esac
-  pause
+  while true; do
+    clear_screen
+    color_info "=== Docker 管理選單 ==="
+    echo "1. 更新 compose 所有鏡像"
+    echo "2. 刪除 compose 所有鏡像"
+    echo "3. 刪除指定鏡像"
+    echo "4. 深度清理所有無用資源"
+    echo "5. 徹底卸載 Docker"
+    echo "0. 返回主選單"
+    read -r -p "請選擇操作 (0-5): " action
+    case $action in
+      1)
+        if command -v docker-compose &>/dev/null; then
+          docker-compose pull
+        else
+          color_err "未安裝 docker-compose"
+        fi
+        ;;
+      2)
+        if command -v docker-compose &>/dev/null; then
+          docker-compose down --rmi all
+        else
+          color_err "未安裝 docker-compose"
+        fi
+        ;;
+      3)
+        read -r -p "請輸入鏡像名稱或 ID: " image
+        if [ -n "$image" ]; then
+          docker image rm -f "$image"
+        else
+          color_warn "未輸入鏡像名稱"
+        fi
+        ;;
+      4) docker system prune -af --volumes ;;
+      5)
+        color_warn "[*] 開始卸載..."
+        docker rm $(docker ps -aq) 2>/dev/null || true
+        docker rmi $(docker images -q) 2>/dev/null || true
+        docker network prune -f
+        if command -v apt &>/dev/null; then
+          apt-get remove -y docker docker-ce docker-ce-cli
+          apt-get purge -y docker-ce docker-ce-cli
+        elif command -v yum &>/dev/null; then
+          yum remove -y docker docker-ce docker-ce-cli
+        elif command -v dnf &>/dev/null; then
+          dnf remove -y docker docker-ce docker-ce-cli
+        elif command -v apk &>/dev/null; then
+          apk del docker
+        fi
+        rm -rf /var/lib/docker /etc/docker
+        # 新增自定義檔案與資料夾清理
+        rm -rf /home/nginx
+        rm -rf /root/docker-compose.yml
+        rm -rf /root/sub-store-data
+        color_info "[✓] Docker 及 nginx 配置與自定義檔案已清除。"
+        ;;
+      0) break ;;
+      *) color_warn "無效選項。";;
+    esac
+    pause_and_clear
+  done
 }
 
 while true; do
+  clear_screen
   banner
   echo "1. 安裝/新增反向代理"
   echo "2. Docker 管理"
@@ -292,6 +295,6 @@ while true; do
     1) install_or_add_proxy ;;
     2) manage_docker ;;
     0) color_info "觀測者離線，世界線收束。"; exit 0 ;;
-    *) color_warn "你觸碰了未知的 Reading Steiner。"; pause ;;
+    *) color_warn "你觸碰了未知的 Reading Steiner。"; pause_and_clear ;;
   esac
 done
