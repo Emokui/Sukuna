@@ -91,18 +91,27 @@ enable_root_login() {
     echo "==== 开启 root 登录 ===="
     # 备份
     cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-    # 注释掉所有 ssh 配置文件中的 PermitRootLogin
+    # 注释掉所有 PermitRootLogin
     find /etc/ssh/ -type f -name "*.conf" -o -name "sshd_config" | while read -r file; do
         sed -i 's/^\s*PermitRootLogin/#PermitRootLogin/' "$file"
     done
-    # 追加到主配置末尾
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+    # 警告特殊用户限制
+    if grep -qE 'DenyUsers|AllowUsers|Match' /etc/ssh/sshd_config /etc/ssh/sshd_config.d/* 2>/dev/null; then
+        echo -e "${gl_huang}警告：检测到 DenyUsers/AllowUsers/Match 配置，请手动检查是否允许 root 登录！${gl_bai}"
+    fi
     # 重启服务
     systemctl restart sshd || systemctl restart ssh
-    # 提示设置密码
+    # SELinux提示
+    if command -v getenforce &>/dev/null && [ "$(getenforce)" != "Disabled" ]; then
+        echo -e "${gl_huang}警告：SELinux已开启，可能影响SSH root登录。${gl_bai}"
+    fi
+    # 云平台提示
+    if (grep -qiE 'Google|GCP|Compute Engine|Aliyun|Tencent|AWS' /sys/class/dmi/id/product_name 2>/dev/null) || (hostnamectl 2>/dev/null | grep -qE 'Google|Aliyun|Tencent|AWS'); then
+        echo -e "${gl_huang}警告：检测到云主机，云安全组或面板也可能限制root登录。${gl_bai}"
+    fi
     echo "请为 root 用户设置密码："
     passwd root
-    echo -e "${gl_huang}如依然无法登录，请检查云面板安全策略、SELinux/PAM/AllowUsers等限制。${gl_bai}"
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 change_root_password() {
