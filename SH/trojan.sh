@@ -12,6 +12,7 @@ BOLD="\033[1m"
 pause_and_return() {
     echo ""
     read -p "$(echo -e "${BLUE}請按回車鍵返回上一層...${PLAIN}")" temp
+    clear
 }
 
 banner() {
@@ -424,7 +425,7 @@ manage_trojan_go() {
             4) show_trojan_config ;;
             5) modify_trojan_config ;;
             6) remove_trojan_go ;;
-            0) break ;;
+            0) clear; break ;;
             *) echo -e "${RED}無效選擇，請重新嘗試。${PLAIN}" ;;
         esac
     done
@@ -448,7 +449,7 @@ main_menu() {
             2) install_trojan_go ;;
             3) manage_trojan_go ;;
             4) uninstall_acme ;;
-            0) echo -e "${CYAN}命運已中斷，回歸現實世界……${PLAIN}" && exit 0 ;;
+            0) clear; echo -e "${CYAN}命運已中斷，回歸現實世界……${PLAIN}" && exit 0 ;;
             *) echo -e "${RED}錯誤的命運選擇。請重新啟動世界線。${PLAIN}"; pause_and_return ;;
         esac
     done
