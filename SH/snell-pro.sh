@@ -20,8 +20,14 @@ SNELL_V4_ZIP="snell-v4.zip"
 # 初始化目录
 mkdir -p "$SNELL_V3_CONFIGS" "$SNELL_V4_CONFIGS"
 
+pause_and_clear() {
+  read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+  clear
+}
+
 # 下载并自动解压 Snell v3/v4
 install_snell() {
+  clear
   echo -e "${CYAN}开始安装 Snell Server...${PLAIN}"
 
   # v3
@@ -44,13 +50,15 @@ install_snell() {
 
   echo -e "${GREEN}Snell v3/v4 已自动下载并解压完成。${PLAIN}"
   echo -e "${CYAN}请用[选项2]生成并管理配置文件。${PLAIN}"
+  pause_and_clear
 }
 
 # 一键删除 /root/snell 及所有相关 systemd 服务
 delete_all_snell() {
+  clear
   echo -e "${RED}警告！此操作将彻底删除 /root/snell 目录及所有相关 systemd 服务。${PLAIN}"
   read -p "确定继续? [y/N]: " confirm
-  [[ ! "$confirm" =~ ^[yY]$ ]] && echo -e "${YELLOW}操作已取消。${PLAIN}" && return
+  [[ ! "$confirm" =~ ^[yY]$ ]] && echo -e "${YELLOW}操作已取消。${PLAIN}" && pause_and_clear && return
 
   # 删除所有 systemd snell服务
   for svc in $(systemctl list-unit-files | grep -oE 'snell-(v3|v4)@[^ ]+.service'); do
@@ -62,29 +70,32 @@ delete_all_snell() {
   # 删除目录
   rm -rf /root/snell
   echo -e "${GREEN}已彻底删除 /root/snell 及 systemd 服务。${PLAIN}"
+  pause_and_clear
 }
 
 # 修改指定配置
 modify_config() {
+  clear
   local version=$1
   local config_dir
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS";;
     v4) config_dir="$SNELL_V4_CONFIGS";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
 
   echo -e "${CYAN}当前可用配置：${PLAIN}"
   list_configs $version
   echo "请选择要修改的配置名称："
   read -p "(如: config1): " config_name
-  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && return
-  
+  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && pause_and_clear && return
+
   local config_file="${config_dir}/${config_name}.conf"
   local service_name="snell-${version}@${config_name}.service"
-  
+
   if [[ ! -f "$config_file" ]]; then
     echo -e "${RED}配置文件 $config_name 不存在！${PLAIN}"
+    pause_and_clear
     return
   fi
 
@@ -103,7 +114,7 @@ modify_config() {
   echo -e "${YELLOW}开始修改配置...${PLAIN}"
   read -p "请输入新端口 (当前${current_port}, 保持不变请直接回车): " port
   port=${port:-$current_port}
-  
+
   read -p "请输入新PSK密钥 (当前${current_psk}, 随机生成请输入r, 保持不变请直接回车): " psk
   if [[ "$psk" == "r" ]]; then
     psk=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 16)
@@ -149,27 +160,30 @@ EOF
   echo -e "${YELLOW}配置已更新，正在重启服务...${PLAIN}"
   systemctl restart "$service_name"
   echo -e "${GREEN}服务已重启，新配置已生效。${PLAIN}"
-  
+
   echo -e "${CYAN}------ 当前服务状态 ------${PLAIN}"
   systemctl status "$service_name" --no-pager
+  pause_and_clear
 }
 
 # 生成配置文件
 generate_config() {
+  clear
   local version=$1
   local config_dir
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS";;
     v4) config_dir="$SNELL_V4_CONFIGS";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
   mkdir -p "$config_dir"
   echo "请输入配置名称："
   read -p "(如: config1): " config_name
-  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && return
+  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && pause_and_clear && return
   local config_file="${config_dir}/${config_name}.conf"
   if [[ -f "$config_file" ]]; then
     echo -e "${RED}配置文件 $config_name 已存在！${PLAIN}"
+    pause_and_clear
     return
   fi
   read -p "请输入监听端口 (默认5000): " port
@@ -209,25 +223,28 @@ EOF
   fi
 
   echo -e "${GREEN}配置文件已生成: $config_file${PLAIN}"
+  pause_and_clear
 }
 
 # 启动配置并设置开机自启
 start_and_enable_config() {
+  clear
   local version=$1 config_dir config_bin
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS"; config_bin="$SNELL_V3_DIR/snell-server";;
     v4) config_dir="$SNELL_V4_CONFIGS"; config_bin="$SNELL_V4_DIR/snell-server";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
   echo -e "${CYAN}当前可用配置：${PLAIN}"
   list_configs $version
   echo "请选择要启动的配置名称："
   read -p "(如: config1): " config_name
-  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && return
+  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && pause_and_clear && return
   local config_file="${config_dir}/${config_name}.conf"
   local service_name="snell-${version}@${config_name}.service"
   if [[ ! -f "$config_file" ]]; then
     echo -e "${RED}配置文件 $config_name 不存在！${PLAIN}"
+    pause_and_clear
     return
   fi
   cat > "/etc/systemd/system/$service_name" << EOF
@@ -246,70 +263,78 @@ EOF
   systemctl daemon-reload
   systemctl enable --now $service_name
   echo -e "${GREEN}配置 $config_name 已启动并设置为开机自启。${PLAIN}"
+  pause_and_clear
 }
 
 # 查看配置内容与状态
 view_config() {
+  clear
   local version=$1 config_dir
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS";;
     v4) config_dir="$SNELL_V4_CONFIGS";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
   echo -e "${CYAN}当前可用配置：${PLAIN}"
   list_configs $version
   echo "请选择要查看的配置名称："
   read -p "(如: config1): " config_name
-  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && return
+  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && pause_and_clear && return
   local config_file="${config_dir}/${config_name}.conf"
   local service_name="snell-${version}@${config_name}.service"
   if [[ ! -f "$config_file" ]]; then
     echo -e "${RED}配置文件 $config_name 不存在！${PLAIN}"
+    pause_and_clear
     return
   fi
   echo -e "${CYAN}------ 配置内容 ------${PLAIN}"
   cat "$config_file"
   echo -e "${CYAN}------ 服务状态 ------${PLAIN}"
   systemctl status $service_name --no-pager
+  pause_and_clear
 }
 
 # 删除指定配置及服务
 delete_config() {
+  clear
   local version=$1 config_dir
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS";;
     v4) config_dir="$SNELL_V4_CONFIGS";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
   echo -e "${CYAN}当前可用配置：${PLAIN}"
   list_configs $version
   echo "请选择要删除的配置名称："
   read -p "(如: config1): " config_name
-  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && return
+  [[ -z "$config_name" ]] && echo -e "${RED}配置名称不能为空！${PLAIN}" && pause_and_clear && return
   local config_file="${config_dir}/${config_name}.conf"
   local service_name="snell-${version}@${config_name}.service"
   if [[ ! -f "$config_file" ]]; then
     echo -e "${RED}配置文件 $config_name 不存在！${PLAIN}"
+    pause_and_clear
     return
   fi
   systemctl disable --now "$service_name" &>/dev/null
   rm -f "/etc/systemd/system/$service_name"
   rm -f "$config_file"
   echo -e "${GREEN}配置 $config_name 及其服务已删除。${PLAIN}"
+  pause_and_clear
 }
 
 # 删除所有配置及服务（单一版本）
 delete_all_configs() {
+  clear
   local version=$1
   local config_dir service_prefix
   case $version in
     v3) config_dir="$SNELL_V3_CONFIGS"; service_prefix="snell-v3@";;
     v4) config_dir="$SNELL_V4_CONFIGS"; service_prefix="snell-v4@";;
-    *) echo -e "${RED}未知版本：$version${PLAIN}"; return;;
+    *) echo -e "${RED}未知版本：$version${PLAIN}"; pause_and_clear; return;;
   esac
   echo -e "${RED}警告：即将删除 $version 的所有配置及服务！${PLAIN}"
   read -p "确定继续？[y/N]: " choice
-  [[ ! "$choice" =~ ^[yY]$ ]] && return
+  [[ ! "$choice" =~ ^[yY]$ ]] && pause_and_clear && return
   for config_file in "$config_dir"/*.conf; do
     [[ ! -f "$config_file" ]] && continue
     local config_name=$(basename "$config_file" .conf)
@@ -320,6 +345,7 @@ delete_all_configs() {
   rm -rf "$config_dir"
   mkdir -p "$config_dir"
   echo -e "${GREEN}$version 的所有配置及服务已删除。${PLAIN}"
+  pause_and_clear
 }
 
 # 列出当前所有配置
@@ -339,6 +365,7 @@ list_configs() {
 
 # 主菜单
 show_main_menu() {
+  clear
   echo -e "${BLUE}=======================${PLAIN}"
   echo -e "${CYAN}      Snell 管理工具${PLAIN}"
   echo -e "${BLUE}=======================${PLAIN}"
@@ -350,6 +377,7 @@ show_main_menu() {
 
 # 子菜单
 show_sub_menu() {
+  clear
   echo -e "${BLUE}=======================${PLAIN}"
   echo -e "${CYAN}    Snell $1 配置管理${PLAIN}"
   echo -e "${BLUE}=======================${PLAIN}"
@@ -359,7 +387,7 @@ show_sub_menu() {
   echo -e "${GREEN}4.${PLAIN} 删除配置及服务"
   echo -e "${GREEN}5.${PLAIN} 删除所有配置及服务"
   echo -e "${GREEN}6.${PLAIN} 修改指定配置"
-  echo -e "${GREEN}7.${PLAIN} 返回主菜单"
+  echo -e "${GREEN}0.${PLAIN} 返回主菜单"
 }
 
 # 主流程
@@ -370,6 +398,7 @@ main() {
     case $main_choice in
       1) install_snell ;;
       2)
+        clear
         echo -e "${CYAN}请选择版本：${PLAIN}"
         echo -e "${GREEN}1.${PLAIN} v3 配置管理"
         echo -e "${GREEN}2.${PLAIN} v4 配置管理"
@@ -378,7 +407,7 @@ main() {
         case $version_choice in
           1) version="v3" ;;
           2) version="v4" ;;
-          *) echo -e "${RED}无效选项${PLAIN}"; continue ;;
+          *) echo -e "${RED}无效选项${PLAIN}"; pause_and_clear; continue ;;
         esac
         while true; do
           show_sub_menu "$version"
@@ -390,14 +419,14 @@ main() {
             4) delete_config "$version" ;;
             5) delete_all_configs "$version" ;;
             6) modify_config "$version" ;;
-            7) break ;;
-            *) echo -e "${RED}无效选项，请重新选择。${PLAIN}" ;;
+            0) break ;;
+            *) echo -e "${RED}无效选项，请重新选择。${PLAIN}"; pause_and_clear ;;
           esac
         done
         ;;
       3) delete_all_snell ;;
       0) exit 0 ;;
-      *) echo -e "${RED}无效选项，请重新选择。${PLAIN}" ;;
+      *) echo -e "${RED}无效选项，请重新选择。${PLAIN}"; pause_and_clear ;;
     esac
   done
 }
