@@ -87,23 +87,23 @@ linux_clean() {
 }
 
 enable_root_login() {
-    # 检查所有 ssh 配置文件
-    grep -ri PermitRootLogin /etc/ssh/ | while read -r line; do
-        file=$(echo "$line" | cut -d: -f1)
-        # 注释掉其它地方的 PermitRootLogin
+    send_stats "开启root登录"
+    echo "==== 开启 root 登录 ===="
+    # 备份
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+    # 注释掉所有 ssh 配置文件中的 PermitRootLogin
+    find /etc/ssh/ -type f -name "*.conf" -o -name "sshd_config" | while read -r file; do
         sed -i 's/^\s*PermitRootLogin/#PermitRootLogin/' "$file"
     done
-    # 主配置文件末尾追加
+    # 追加到主配置末尾
     echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
     # 重启服务
     systemctl restart sshd || systemctl restart ssh
-    # 检查SELinux
-    if command -v getenforce &>/dev/null && [ "$(getenforce)" != "Disabled" ]; then
-        echo "警告: SELinux已启用, root登录可能仍被阻止"
-    fi
+    # 提示设置密码
     echo "请为 root 用户设置密码："
     passwd root
-    echo "如仍无效，请检查云商面板、安全组、PAM等限制"
+    echo -e "${gl_huang}如依然无法登录，请检查云面板安全策略、SELinux/PAM/AllowUsers等限制。${gl_bai}"
+    read -n 1 -s -r -p "按任意键返回菜单..."
 }
 change_root_password() {
     send_stats "修改root密码"
