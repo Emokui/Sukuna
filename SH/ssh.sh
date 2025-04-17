@@ -325,11 +325,15 @@ configure_firewall() {
         case "$action_choice" in
             1|2)
                 read -rp "请输入端口（如 22 443 或 1000-2000）: " ports
-                port_action_success=true
                 for port in $ports; do
                     if [[ "$port" =~ ^([0-9]+)-([0-9]+)$ ]]; then
                         start_port=${BASH_REMATCH[1]}
                         end_port=${BASH_REMATCH[2]}
+                        # 先删除旧规则（tcp/udp）
+                        iptables -D INPUT -p tcp --dport $start_port:$end_port -j ACCEPT 2>/dev/null || true
+                        iptables -D INPUT -p tcp --dport $start_port:$end_port -j DROP 2>/dev/null || true
+                        iptables -D INPUT -p udp --dport $start_port:$end_port -j ACCEPT 2>/dev/null || true
+                        iptables -D INPUT -p udp --dport $start_port:$end_port -j DROP 2>/dev/null || true
                         if [[ "$action_choice" == "1" ]]; then
                             iptables -A INPUT -p tcp --dport $start_port:$end_port -j ACCEPT
                             iptables -A INPUT -p udp --dport $start_port:$end_port -j ACCEPT
@@ -343,13 +347,17 @@ configure_firewall() {
                     else
                         if [[ ! "$port" =~ ^[0-9]+$ ]]; then
                             echo -e "${COLOR[red]}[!] 无效端口: $port${COLOR[reset]}"
-                            port_action_success=false
                             continue
                         fi
                         if [[ "$port" == "22" && "$action_choice" == "2" ]]; then
                             echo -e "${COLOR[yellow]}[!] 警告: 不允许关闭 SSH 端口 (22)，跳过${COLOR[reset]}"
                             continue
                         fi
+                        # 先删除旧规则（tcp/udp）
+                        iptables -D INPUT -p tcp --dport $port -j ACCEPT 2>/dev/null || true
+                        iptables -D INPUT -p tcp --dport $port -j DROP 2>/dev/null || true
+                        iptables -D INPUT -p udp --dport $port -j ACCEPT 2>/dev/null || true
+                        iptables -D INPUT -p udp --dport $port -j DROP 2>/dev/null || true
                         if [[ "$action_choice" == "1" ]]; then
                             iptables -A INPUT -p tcp --dport $port -j ACCEPT
                             iptables -A INPUT -p udp --dport $port -j ACCEPT
