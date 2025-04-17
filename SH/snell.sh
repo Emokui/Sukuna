@@ -53,34 +53,18 @@ installDependencies(){
 }
 
 enableTCPFastOpen() {
-	kernel=$(uname -r | awk -F . '{print $1}')
-	if [ "$kernel" -ge 3 ]; then
-		echo 3 >/proc/sys/net/ipv4/tcp_fastopen
-		[[ ! -e $sysctl_conf ]] && echo "fs.file-max = 51200
-net.core.rmem_max = 67108864
-net.core.wmem_max = 67108864
-net.core.rmem_default = 65536
-net.core.wmem_default = 65536
-net.core.netdev_max_backlog = 4096
-net.core.somaxconn = 4096
-net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_tw_reuse = 1
-net.ipv4.tcp_tw_recycle = 0
-net.ipv4.tcp_fin_timeout = 30
-net.ipv4.tcp_keepalive_time = 1200
-net.ipv4.ip_local_port_range = 10000 65000
-net.ipv4.tcp_max_syn_backlog = 4096
-net.ipv4.tcp_max_tw_buckets = 5000
-net.ipv4.tcp_fastopen = 3
-net.ipv4.tcp_rmem = 4096 87380 67108864
-net.ipv4.tcp_wmem = 4096 65536 67108864
-net.ipv4.tcp_mtu_probing = 1
-net.ipv4.tcp_ecn=1
-net.core.default_qdisc=fq
-net.ipv4.tcp_congestion_control = bbr" >>/etc/sysctl.d/local.conf && sysctl --system >/dev/null 2>&1
-	else
-		echo -e "$Error 系统内核版本过低，无法支持 TCP Fast Open！"
-	fi
+    kernel=$(uname -r | awk -F . '{print $1}')
+    if [ "$kernel" -ge 3 ]; then
+        sysctl -w net.ipv4.tcp_fastopen=3 >/dev/null 2>&1
+        if ! grep -q "^net.ipv4.tcp_fastopen" "$sysctl_conf" 2>/dev/null; then
+            echo "net.ipv4.tcp_fastopen = 3" >> "$sysctl_conf"
+        else
+            sed -i 's/^net.ipv4.tcp_fastopen.*/net.ipv4.tcp_fastopen = 3/' "$sysctl_conf"
+        fi
+        sysctl --system >/dev/null 2>&1
+    else
+        echo -e "$Error 系统内核版本过低，无法支持 TCP Fast Open！"
+    fi
 }
 
 setupService(){
@@ -140,7 +124,7 @@ setPort(){
         read -e -p "(默认: 2345):" port
         [[ -z "${port}" ]] && port="2345"
         if [[ $port =~ ^[0-9]+$ ]] && [[ $port -ge 1 && $port -le 65535 ]]; then
-            if ss -tuln | grep -q ":$port "; then
+            if ss -tuln | grep -E "\b:$port\b" >/dev/null; then
                 echo -e "${Error} 端口 $port 已被占用，请选择其他端口。"
             else
                 break
@@ -188,8 +172,13 @@ setIpv6(){
 }
 
 setTFO(){
-	read -e -p "是否开启 TCP Fast Open？[y/N] (默认: true):" tfo
-	[[ -z "${tfo}" || "$tfo" == "y" || "$tfo" == "Y" ]] && tfo="true" && enableTCPFastOpen || tfo="false"
+    read -e -p "是否开启 TCP Fast Open？[y/N] (默认: true):" tfo
+    if [[ -z "${tfo}" || "$tfo" == "y" || "$tfo" == "Y" ]]; then
+        tfo="true"
+        enableTCPFastOpen
+    else
+        tfo="false"
+    fi
 }
 
 setDNS(){
