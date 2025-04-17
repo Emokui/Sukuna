@@ -73,6 +73,146 @@ get_latest_stable_version() {
     echo "$latest_version"
 }
 
+# 修改 Mihomo 配置交互式子菜单
+modify_mihomo_config() {
+    if [ ! -f "$CONFIG_PATH" ]; then
+        echo -e "${RED}[!] 未找到 $CONFIG_PATH 配置文件，请先安装 Mihomo。${PLAIN}"
+        read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键返回...${PLAIN}")"
+        clear
+        return
+    fi
+
+    # 读取配置
+    tun_enable=$(awk '/^tun:/ {f=1} f && /enable:/ {print $2;f=0}' "$CONFIG_PATH")
+    socks_port=$(awk '/^socks-port:/ {print $2}' "$CONFIG_PATH")
+    private_key=$(awk '/- name: "warp"/, /mtu:/ {if($1=="private-key:")print $2}' "$CONFIG_PATH")
+    server=$(awk '/- name: "warp"/, /mtu:/ {if($1=="server:")print $2}' "$CONFIG_PATH")
+    port=$(awk '/- name: "warp"/, /mtu:/ {if($1=="port:")print $2}' "$CONFIG_PATH")
+    public_key=$(awk '/- name: "warp"/, /mtu:/ {if($1=="public-key:")print $2}' "$CONFIG_PATH")
+    reserved=$(awk '/- name: "warp"/, /mtu:/ {if($1=="reserved:")print $2}' "$CONFIG_PATH")
+    mtu=$(awk '/- name: "warp"/, /mtu:/ {if($1=="mtu:")print $2}' "$CONFIG_PATH")
+
+    while true; do
+        clear
+        echo -e "${BLUE}========== Mihomo 配置修改 ==========${PLAIN}"
+        echo -e "${CYAN}当前配置:${PLAIN}"
+        echo -e "${GREEN}1.${PLAIN} tun.enable:      ${YELLOW}$tun_enable${PLAIN}"
+        echo -e "${GREEN}2.${PLAIN} socks-port:      ${YELLOW}${socks_port:-无}${PLAIN}"
+        echo -e "${GREEN}3.${PLAIN} WireGuard Private-key: ${YELLOW}$private_key${PLAIN}"
+        echo -e "${GREEN}4.${PLAIN} WireGuard Server:      ${YELLOW}$server${PLAIN}"
+        echo -e "${GREEN}5.${PLAIN} WireGuard Port:        ${YELLOW}$port${PLAIN}"
+        echo -e "${GREEN}6.${PLAIN} WireGuard Public-key:  ${YELLOW}$public_key${PLAIN}"
+        echo -e "${GREEN}7.${PLAIN} WireGuard Reserved:    ${YELLOW}$reserved${PLAIN}"
+        echo -e "${GREEN}8.${PLAIN} WireGuard MTU:         ${YELLOW}$mtu${PLAIN}"
+        echo -e "${GREEN}0.${PLAIN} 保存并重启 Mihomo 服务${PLAIN}"
+        echo -e "${GREEN}q.${PLAIN} 放弃修改并返回${PLAIN}"
+        read -e -p "$(echo -e "${YELLOW}请选择要修改的项目 [0-8/q]: ${PLAIN}")" modchoice
+
+        case $modchoice in
+            1)
+                read -e -p "$(echo -e "${BLUE}tun.enable (true/false) [当前:$tun_enable]: ${PLAIN}")" newval
+                newval=${newval:-$tun_enable}
+                awk -v val="$newval" '
+                  BEGIN{f=0}
+                  /^tun:/ {f=1}
+                  f && /enable:/ {sub(/enable: .*/, "enable: "val); f=0}
+                  {print}
+                ' "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                tun_enable="$newval"
+                ;;
+            2)
+                read -e -p "$(echo -e "${BLUE}socks-port [当前:$socks_port]: ${PLAIN}")" newval
+                newval=${newval:-$socks_port}
+                if grep -q "^socks-port:" "$CONFIG_PATH"; then
+                    sed -i "s/^socks-port:.*/socks-port: $newval/" "$CONFIG_PATH"
+                else
+                    sed -i "/^allow-lan:/a socks-port: $newval" "$CONFIG_PATH"
+                fi
+                socks_port="$newval"
+                ;;
+            3)
+                read -e -p "$(echo -e "${BLUE}WireGuard Private-key [当前:$private_key]: ${PLAIN}")" newval
+                newval=${newval:-$private_key}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /private-key:/{$2=": "newval; $0="    private-key: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                private_key="$newval"
+                ;;
+            4)
+                read -e -p "$(echo -e "${BLUE}WireGuard Server [当前:$server]: ${PLAIN}")" newval
+                newval=${newval:-$server}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /server:/{$2=": "newval; $0="    server: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                server="$newval"
+                ;;
+            5)
+                read -e -p "$(echo -e "${BLUE}WireGuard Port [当前:$port]: ${PLAIN}")" newval
+                newval=${newval:-$port}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /port:/{$2=": "newval; $0="    port: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                port="$newval"
+                ;;
+            6)
+                read -e -p "$(echo -e "${BLUE}WireGuard Public-key [当前:$public_key]: ${PLAIN}")" newval
+                newval=${newval:-$public_key}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /public-key:/{$2=": "newval; $0="    public-key: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                public_key="$newval"
+                ;;
+            7)
+                read -e -p "$(echo -e "${BLUE}WireGuard Reserved [当前:$reserved]: ${PLAIN}")" newval
+                newval=${newval:-$reserved}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /reserved:/{$2=": "newval; $0="    reserved: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                reserved="$newval"
+                ;;
+            8)
+                read -e -p "$(echo -e "${BLUE}WireGuard MTU [当前:$mtu]: ${PLAIN}")" newval
+                newval=${newval:-$mtu}
+                awk '
+                  /- name: "warp"/{f=1}
+                  f && /mtu:/{$2=": "newval; $0="    mtu: "newval; f=0}
+                  {print}
+                ' newval="$newval" "$CONFIG_PATH" > "$CONFIG_PATH.tmp" && mv "$CONFIG_PATH.tmp" "$CONFIG_PATH"
+                mtu="$newval"
+                ;;
+            0)
+                echo -e "${CYAN}[*] 保存并重启 Mihomo 服务...${PLAIN}"
+                sudo systemctl restart ${SERVICE_NAME}.service
+                sleep 2
+                sudo systemctl status ${SERVICE_NAME}.service
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键返回主菜单...${PLAIN}")"
+                clear
+                break
+                ;;
+            q|Q)
+                echo -e "${CYAN}[*] 放弃修改，返回主菜单...${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键返回主菜单...${PLAIN}")"
+                clear
+                break
+                ;;
+            *)
+                echo -e "${RED}无效选项，请重新选择。${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                ;;
+        esac
+    done
+}
+
 # 安装并配置 Mihomo
 install_mihomo() {
     echo -e "${CYAN}[*] 开始安装并配置 Mihomo...${PLAIN}"
@@ -93,8 +233,7 @@ install_mihomo() {
     check_status "设置执行权限"
 
     # tun 模式选择
-    echo -e "${YELLOW}[*] 是否启用 ${GREEN}tun 模式${YELLOW}？${PLAIN}"
-    echo -e "${YELLOW}    启用则无需 SOCKS 端口，禁用将开启本地 SOCKS 代理。${PLAIN}"
+    echo -e "${YELLOW}[*] 是否启用 tun 模式？${PLAIN}"
     read -e -p "$(echo -e "${BLUE}启用请输入 y，禁用请输入 n [y/n]: ${PLAIN}")" enable_tun
     enable_tun=${enable_tun:-y}
     if [[ "$enable_tun" == "y" || "$enable_tun" == "Y" ]]; then
@@ -131,12 +270,10 @@ install_mihomo() {
     echo
 
     # socks-port 配置
-    if [[ "$tun_enable" == "false" ]]; then
-        echo -e "${YELLOW}[*] 请输入本地 SOCKS 代理端口（仅 tun 关闭时有效）：${PLAIN}"
-        read -e -p "$(echo -e "${BLUE}  socks-port  ${PLAIN}${CYAN}[默认: 18443]${PLAIN}: ")" socks_port
-        socks_port=${socks_port:-18443}
-        echo
-    fi
+    echo -e "${YELLOW}[*] 请输入本地 SOCKS 代理端口（直接回车为默认18443）：${PLAIN}"
+    read -e -p "$(echo -e "${BLUE}  socks-port  ${PLAIN}${CYAN}[默认: 18443]${PLAIN}: ")" socks_port
+    socks_port=${socks_port:-18443}
+    echo
 
     # 写入 config.yaml
     echo -e "${CYAN}[*] 创建 config.yaml 配置文件...${PLAIN}"
@@ -157,16 +294,8 @@ geo-update-interval: 24
 tcp-concurrent: true
 find-process-mode: off
 allow-lan: true
-EOF
-
-    if [[ "$tun_enable" == "false" ]]; then
-    cat <<EOF >> config.yaml
 socks-port: $socks_port
 bind-address: "127.0.0.1"
-EOF
-    fi
-
-    cat <<EOF >> config.yaml
 mode: rule
 log-level: warning
 ipv6: false
@@ -241,6 +370,9 @@ EOF
     echo -e "${GREEN}[*] Mihomo 安装完成，将于开机2分钟后自动启动。${PLAIN}"
     echo -e "${CYAN}你也可以用 'sudo systemctl [start|stop|restart|status] ${SERVICE_NAME}' 管理"
     echo "查看定时器状态：sudo systemctl status ${TIMER_NAME}${PLAIN}"
+
+    read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+    clear
 }
 
 # 更新 Mihomo
@@ -270,6 +402,9 @@ update_mihomo() {
     sudo systemctl restart ${SERVICE_NAME}.service
     sleep 2
     sudo systemctl status ${SERVICE_NAME}.service
+
+    read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+    clear
 }
 
 # 删除 Mihomo 及配置
@@ -297,8 +432,14 @@ delete_mihomo() {
             echo -e "${GREEN}[*] 未检测到 $MIHOMO_DIR 目录。${PLAIN}"
         fi
         echo -e "${GREEN}[*] Mihomo 及配置、systemd单元已全部删除。${PLAIN}"
+
+        read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+        clear
     else
         echo -e "${CYAN}[*] 已取消删除操作。${PLAIN}"
+
+        read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+        clear
     fi
 }
 
@@ -312,40 +453,60 @@ manage_service() {
         echo -e "${GREEN}4.${PLAIN} 查看 Mihomo 状态${PLAIN}"
         echo -e "${GREEN}5.${PLAIN} 查看 Timer 状态${PLAIN}"
         echo -e "${GREEN}6.${PLAIN} 删除 Mihomo 及配置${PLAIN}"
+        echo -e "${GREEN}7.${PLAIN} 修改 Mihomo 配置并自动重启${PLAIN}"
         echo -e "${GREEN}0.${PLAIN} 返回世界线${PLAIN}"
-        read -e -p "$(echo -e "${YELLOW}请输入选项 [0-6]: ${PLAIN}")" subchoice
+        read -e -p "$(echo -e "${YELLOW}请输入选项 [0-7]: ${PLAIN}")" subchoice
 
         case $subchoice in
             1)
                 echo -e "${CYAN}[*] systemd 停止 Mihomo...${PLAIN}"
                 sudo systemctl stop ${SERVICE_NAME}.service
+                echo -e "${GREEN}[*] Mihomo 已停止${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
             2)
                 echo -e "${CYAN}[*] systemd 启动 Mihomo...${PLAIN}"
                 sudo systemctl start ${SERVICE_NAME}.service
+                echo -e "${GREEN}[*] Mihomo 已启动${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
             3)
                 echo -e "${CYAN}[*] systemd 重启 Mihomo...${PLAIN}"
                 sudo systemctl restart ${SERVICE_NAME}.service
+                echo -e "${GREEN}[*] Mihomo 已重启${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
             4)
                 echo -e "${CYAN}[*] systemd 查看 Mihomo 状态...${PLAIN}"
                 sudo systemctl status ${SERVICE_NAME}.service
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
             5)
                 echo -e "${CYAN}[*] 查看 Timer 状态...${PLAIN}"
                 sudo systemctl status ${TIMER_NAME}
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
             6)
                 delete_mihomo
                 break
                 ;;
+            7)
+                modify_mihomo_config
+                ;;
             0)
                 echo -e "${CYAN}[*] 返回主菜单...${PLAIN}"
+                clear
                 break
                 ;;
             *)
                 echo -e "${RED}无效选项，请重新选择。${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 ;;
         esac
     done
@@ -369,6 +530,8 @@ while true; do
         2)
             if [ ! -f "$MIHOMO_PATH" ]; then
                 echo -e "${RED}[!] Mihomo 未安装，请先选择选项 1。${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 continue
             fi
             manage_service
@@ -376,11 +539,17 @@ while true; do
         3)
             if [ ! -d "${HOME}/clash" ]; then
                 echo -e "${RED}[!] 未找到 ~/clash 目录，请先选择选项 1 安装。${PLAIN}"
+                read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+                clear
                 continue
             fi
             update_mihomo
             ;;
         0) echo -e "${GREEN}[*] 退出脚本...${PLAIN}"; exit 0 ;;
-        *) echo -e "${RED}无效选项，请重新选择。${PLAIN}" ;;
+        *) 
+            echo -e "${RED}无效选项，请重新选择。${PLAIN}" 
+            read -n 1 -s -r -p "$(echo -e "${YELLOW}按任意键继续...${PLAIN}")"
+            clear
+            ;;
     esac
 done
