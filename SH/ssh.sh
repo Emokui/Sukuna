@@ -89,16 +89,22 @@ linux_clean() {
 enable_root_login() {
     send_stats "开启root登录"
     echo "==== 开启 root 登录 ===="
-    if ! grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
-        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+    # 备份
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+    # 移除所有相关行，最后追加一行
+    sed -i '/^#\?PermitRootLogin/d' /etc/ssh/sshd_config
+    echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+    # 适配不同服务名
+    if systemctl list-units --type=service | grep -q sshd; then
+        systemctl restart sshd
     else
-        sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+        systemctl restart ssh
     fi
-    systemctl restart sshd
     echo "[✓] Root 登录已开启"
+    echo "请为 root 用户设置密码："
+    passwd root
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
-
 change_root_password() {
     send_stats "修改root密码"
     echo "==== 修改 root 密码 ===="
