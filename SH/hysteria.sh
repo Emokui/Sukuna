@@ -15,6 +15,7 @@ yellow(){ echo -e "\033[33m\033[01m$1\033[0m"; }
 pause_and_return() {
     echo ""
     read -p "$(echo -e "${BLUE}請按回車鍵返回上一層...${PLAIN}")" temp
+    clear
 }
 
 generate_self_signed_cert() {
@@ -346,6 +347,7 @@ EOF
     PORT_JUMP_SERVICE="/etc/systemd/system/port-jump.service"
 
     while true; do
+        clear
         echo -e "${BLUE}请选择你的命运石之门:${PLAIN}"
         echo -e "${GREEN}1.${PLAIN} 查看 Hysteria 狀態"
         echo -e "${GREEN}2.${PLAIN} 啟動 Hysteria 服務"
@@ -362,21 +364,25 @@ EOF
             1)
                 echo -e "${CYAN}Hysteria 服務當前狀態：${PLAIN}"
                 sudo systemctl status $SERVICE_NAME
+                pause_and_return
                 ;;
             2)
                 echo -e "${CYAN}正在啟動 Hysteria 服務...${PLAIN}"
                 sudo systemctl start $SERVICE_NAME
                 echo -e "${GREEN}已啟動${PLAIN}"
+                pause_and_return
                 ;;
             3)
                 echo -e "${CYAN}正在停止 Hysteria 服務...${PLAIN}"
                 sudo systemctl stop $SERVICE_NAME
                 echo -e "${GREEN}已停止${PLAIN}"
+                pause_and_return
                 ;;
             4)
                 echo -e "${CYAN}正在重啟 Hysteria 服務...${PLAIN}"
                 sudo systemctl restart $SERVICE_NAME
                 echo -e "${GREEN}已重啟${PLAIN}"
+                pause_and_return
                 ;;
             5)
                 echo -e "${CYAN}正在更新 Hysteria 內核...${PLAIN}"
@@ -387,6 +393,7 @@ EOF
                 echo -e "${CYAN}內核已更新，重啟服務中...${PLAIN}"
                 sudo systemctl daemon-reload
                 sudo systemctl restart $SERVICE_NAME
+                pause_and_return
                 ;;
             6)
                 echo -e "${CYAN}正在刪除 Hysteria 相關資源...${PLAIN}"
@@ -403,6 +410,7 @@ EOF
                 fi
                 sudo systemctl daemon-reload
                 green "所有 Hysteria 相關資源已刪除"
+                pause_and_return
                 ;;
             7)
                 # 修改配置子菜单
@@ -489,19 +497,20 @@ EOF2
                 green "新配置已保存，將重啟 Hysteria 服務..."
                 sudo systemctl restart $SERVICE_NAME
                 sudo systemctl status $SERVICE_NAME
+                pause_and_return
                 ;;
             8)
                 show_hysteria_config
                 ;;
             0)
+                clear
                 break
                 ;;
             *)
                 red "無效選項，請輸入 0 到 8"
+                pause_and_return
                 ;;
         esac
-
-        pause_and_return
     done
 
   elif [ "$option" -eq 4 ]; then
