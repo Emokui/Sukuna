@@ -87,18 +87,33 @@ linux_clean() {
 }
 
 enable_root_login() {
-    send_stats "开启root登录"
-    echo "==== 开启 root 登录 ===="
+    send_stats "开启root登录并设置密码"
+
+    # 设置 Root 密码
+    echo "==== 设置 Root 密码 ===="
+    passwd root
+    echo "[✓] Root 密码已成功设置"
+
+    # 修改 SSH 配置文件
+    echo "==== 开启 Root 登录并启用密码登录 ===="
     if ! grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
         echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
     else
         sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
     fi
+
+    # 确保密码登录被启用
+    if ! grep -q '^PasswordAuthentication' /etc/ssh/sshd_config; then
+        echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+    else
+        sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    fi
+
+    # 重启 SSH 服务以应用更改
     systemctl restart sshd
-    echo "[✓] Root 登录已开启"
+    echo "[✓] Root 登录和密码登录已启用，请尝试使用密码登录"
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
-
 change_root_password() {
     send_stats "修改root密码"
     echo "==== 修改 root 密码 ===="
