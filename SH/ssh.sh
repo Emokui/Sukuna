@@ -473,7 +473,23 @@ persistent_set_dns() {
     local primary_dns=$1
     local secondary_dns=$2
 
-    # 1. 检测并优先处理 systemd-resolved
+    # 1. 检查是否云主机
+    if (grep -qiE 'Google|GCP|Compute Engine|Aliyun|Tencent|AWS' /sys/class/dmi/id/product_name 2>/dev/null) || \
+       (hostnamectl 2>/dev/null | grep -qE 'Google|Aliyun|Tencent|AWS'); then
+        echo -e "${gl_hong}检测到本机为云主机（如GCP、阿里云、腾讯云、AWS等），直接修改/etc/resolv.conf极可能被cloud-init、DHCP或云平台Agent覆盖。${gl_bai}"
+        echo -e "${gl_huang}建议：\n"
+        echo -e "  1. 在云控制台或VPC配置自定义DNS（推荐，永久生效）"
+        echo -e "  2. 或编辑 /etc/cloud/cloud.cfg，添加/修改如下内容："
+        echo -e "     manage_resolv_conf: true"
+        echo -e "     resolv_conf:"
+        echo -e "       nameservers: [$primary_dns${secondary_dns:+, $secondary_dns}]"
+        echo -e "     然后执行：sudo cloud-init clean && sudo cloud-init init"
+        echo -e "  3. 或配置 /etc/dhcp/dhclient.conf："
+        echo -e "     supersede domain-name-servers $primary_dns${secondary_dns:+, $secondary_dns};"
+        echo -e "${gl_bai}"
+    fi
+
+    # 2. systemd-resolved 优先
     if [ -L /etc/resolv.conf ] && readlink /etc/resolv.conf | grep -q 'systemd'; then
         if command -v resolvectl &>/dev/null; then
             INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
@@ -483,12 +499,12 @@ persistent_set_dns() {
             fi
             resolvectl dns "$INTERFACE" "$primary_dns" ${secondary_dns:+"$secondary_dns"}
             resolvectl flush-caches
-            echo -e "${gl_lv}已通过 systemd-resolved 设置DNS（如不生效可尝试重启网络）${gl_bai}"
+            echo -e "${gl_lv}已通过 systemd-resolved 设置DNS（如不生效请重启网络）${gl_bai}"
             return
         fi
     fi
 
-    # 2. NetworkManager
+    # 3. NetworkManager
     if command -v nmcli &>/dev/null; then
         CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
         if [ -z "$CONNECTION" ]; then
@@ -502,14 +518,12 @@ persistent_set_dns() {
         return
     fi
 
-    # 3. netplan
+    # 4. netplan
     if [ -d /etc/netplan ]; then
         NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
         if [ -n "$NETPLAN_FILE" ]; then
             cp "$NETPLAN_FILE" "${NETPLAN_FILE}.bak"
-            # 移除已有 nameservers 块
             sed -i '/nameservers:/,/addresses:/d' "$NETPLAN_FILE"
-            # 追加到 dhcp4: true 下面
             sed -i "/dhcp4: true/a\      nameservers:\n        addresses: ['$primary_dns'${secondary_dns:+, '$secondary_dns'}]" "$NETPLAN_FILE"
             netplan apply
             echo -e "${gl_lv}已通过 netplan 设置DNS（如不生效请重启网络）${gl_bai}"
@@ -517,14 +531,14 @@ persistent_set_dns() {
         fi
     fi
 
-    # 4. 检查 cloud-init 并提醒
+    # 5. cloud-init提醒
     if [ -f /etc/cloud/cloud.cfg ]; then
         if grep -q 'manage_resolv_conf: true' /etc/cloud/cloud.cfg; then
-            echo -e "${gl_hong}警告: 检测到 cloud-init 可能会覆盖DNS设置，建议在 /etc/cloud/cloud.cfg 中将 manage_resolv_conf 设为 false${gl_bai}"
+            echo -e "${gl_hong}警告: 检测到 cloud-init 管理DNS，建议在 /etc/cloud/cloud.cfg 配置 nameservers，并重启 cloud-init。${gl_bai}"
         fi
     fi
 
-    # 5. 传统 /etc/resolv.conf
+    # 6. 传统 resolv.conf
     if [ -f /etc/resolv.conf ]; then
         chattr -i /etc/resolv.conf 2>/dev/null || true
         echo "nameserver $primary_dns" > /etc/resolv.conf
@@ -535,7 +549,7 @@ persistent_set_dns() {
         echo -e "${gl_hong}未找到 /etc/resolv.conf，无法设置DNS${gl_bai}"
     fi
 
-    echo -e "${gl_huang}如DNS依然无效，建议重启网络/主机，并检查 cloud-init、dhclient 或面板等自动配置服务${gl_bai}"
+    echo -e "${gl_huang}如DNS依然无效，建议重启网络/主机，并检查 cloud-init、dhclient、云面板等自动配置服务${gl_bai}"
 }
 
 set_predefined_dns() {
