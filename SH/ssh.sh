@@ -89,31 +89,16 @@ linux_clean() {
 enable_root_login() {
     send_stats "开启root登录"
     echo "==== 开启 root 登录 ===="
-    # 备份
-    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-    # 注释掉所有 PermitRootLogin
-    find /etc/ssh/ -type f -name "*.conf" -o -name "sshd_config" | while read -r file; do
-        sed -i 's/^\s*PermitRootLogin/#PermitRootLogin/' "$file"
-    done
-    echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-    # 警告特殊用户限制
-    if grep -qE 'DenyUsers|AllowUsers|Match' /etc/ssh/sshd_config /etc/ssh/sshd_config.d/* 2>/dev/null; then
-        echo -e "${gl_huang}警告：检测到 DenyUsers/AllowUsers/Match 配置，请手动检查是否允许 root 登录！${gl_bai}"
+    if ! grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
+        echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+    else
+        sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
     fi
-    # 重启服务
-    systemctl restart sshd || systemctl restart ssh
-    # SELinux提示
-    if command -v getenforce &>/dev/null && [ "$(getenforce)" != "Disabled" ]; then
-        echo -e "${gl_huang}警告：SELinux已开启，可能影响SSH root登录。${gl_bai}"
-    fi
-    # 云平台提示
-    if (grep -qiE 'Google|GCP|Compute Engine|Aliyun|Tencent|AWS' /sys/class/dmi/id/product_name 2>/dev/null) || (hostnamectl 2>/dev/null | grep -qE 'Google|Aliyun|Tencent|AWS'); then
-        echo -e "${gl_huang}警告：检测到云主机，云安全组或面板也可能限制root登录。${gl_bai}"
-    fi
-    echo "请为 root 用户设置密码："
-    passwd root
+    systemctl restart sshd
+    echo "[✓] Root 登录已开启"
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
+
 change_root_password() {
     send_stats "修改root密码"
     echo "==== 修改 root 密码 ===="
@@ -472,84 +457,60 @@ show_current_dns() {
 persistent_set_dns() {
     local primary_dns=$1
     local secondary_dns=$2
-
-    # 1. 检查是否云主机
-    if (grep -qiE 'Google|GCP|Compute Engine|Aliyun|Tencent|AWS' /sys/class/dmi/id/product_name 2>/dev/null) || \
-       (hostnamectl 2>/dev/null | grep -qE 'Google|Aliyun|Tencent|AWS'); then
-        echo -e "${gl_hong}检测到本机为云主机（如GCP、阿里云、腾讯云、AWS等），直接修改/etc/resolv.conf极可能被cloud-init、DHCP或云平台Agent覆盖。${gl_bai}"
-        echo -e "${gl_huang}建议：\n"
-        echo -e "  1. 在云控制台或VPC配置自定义DNS（推荐，永久生效）"
-        echo -e "  2. 或编辑 /etc/cloud/cloud.cfg，添加/修改如下内容："
-        echo -e "     manage_resolv_conf: true"
-        echo -e "     resolv_conf:"
-        echo -e "       nameservers: [$primary_dns${secondary_dns:+, $secondary_dns}]"
-        echo -e "     然后执行：sudo cloud-init clean && sudo cloud-init init"
-        echo -e "  3. 或配置 /etc/dhcp/dhclient.conf："
-        echo -e "     supersede domain-name-servers $primary_dns${secondary_dns:+, $secondary_dns};"
-        echo -e "${gl_bai}"
-    fi
-
-    # 2. systemd-resolved 优先
-    if [ -L /etc/resolv.conf ] && readlink /etc/resolv.conf | grep -q 'systemd'; then
-        if command -v resolvectl &>/dev/null; then
+    network_manager=$(detect_network_manager)
+    case $network_manager in
+        "NetworkManager")
+            CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
+            if [ -z "$CONNECTION" ]; then
+                echo -e "${gl_hong}错误: 未找到活动的网络连接${gl_bai}"
+                return 1
+            fi
+            if [ -z "$secondary_dns" ]; then
+                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns"
+            else
+                nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns,$secondary_dns"
+            fi
+            nmcli con mod "$CONNECTION" ipv4.ignore-auto-dns yes
+            nmcli con up "$CONNECTION"
+            ;;
+        "systemd-resolved")
             INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
             if [ -z "$INTERFACE" ]; then
                 echo -e "${gl_hong}错误: 未找到默认网络接口${gl_bai}"
                 return 1
             fi
-            resolvectl dns "$INTERFACE" "$primary_dns" ${secondary_dns:+"$secondary_dns"}
-            resolvectl flush-caches
-            echo -e "${gl_lv}已通过 systemd-resolved 设置DNS（如不生效请重启网络）${gl_bai}"
-            return
-        fi
-    fi
-
-    # 3. NetworkManager
-    if command -v nmcli &>/dev/null; then
-        CONNECTION=$(nmcli -t -f NAME c show --active | head -n1)
-        if [ -z "$CONNECTION" ]; then
-            echo -e "${gl_hong}错误: 未找到活动的网络连接${gl_bai}"
-            return 1
-        fi
-        nmcli con mod "$CONNECTION" ipv4.dns "$primary_dns${secondary_dns:+,$secondary_dns}"
-        nmcli con mod "$CONNECTION" ipv4.ignore-auto-dns yes
-        nmcli con up "$CONNECTION"
-        echo -e "${gl_lv}已通过 NetworkManager 设置DNS（如不生效请重启网络）${gl_bai}"
-        return
-    fi
-
-    # 4. netplan
-    if [ -d /etc/netplan ]; then
-        NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
-        if [ -n "$NETPLAN_FILE" ]; then
+            if [ -z "$secondary_dns" ]; then
+                resolvectl dns "$INTERFACE" "$primary_dns"
+            else
+                resolvectl dns "$INTERFACE" "$primary_dns" "$secondary_dns"
+            fi
+            ;;
+        "netplan")
+            NETPLAN_FILE=$(find /etc/netplan -name "*.yaml" | head -n1)
+            if [ -z "$NETPLAN_FILE" ]; then
+                echo -e "${gl_hong}错误: 未找到netplan配置文件${gl_bai}"
+                return 1
+            fi
             cp "$NETPLAN_FILE" "${NETPLAN_FILE}.bak"
-            sed -i '/nameservers:/,/addresses:/d' "$NETPLAN_FILE"
-            sed -i "/dhcp4: true/a\      nameservers:\n        addresses: ['$primary_dns'${secondary_dns:+, '$secondary_dns'}]" "$NETPLAN_FILE"
+            addresses="['$primary_dns'"
+            [ -n "$secondary_dns" ] && addresses+=", '$secondary_dns'"
+            addresses+="]"
+            if grep -q "nameservers:" "$NETPLAN_FILE"; then
+                sed -i "/nameservers:/,/addresses:/c\      nameservers:\n        addresses: $addresses" "$NETPLAN_FILE"
+            else
+                sed -i "/dhcp4: true/a\      nameservers:\n        addresses: $addresses" "$NETPLAN_FILE"
+            fi
             netplan apply
-            echo -e "${gl_lv}已通过 netplan 设置DNS（如不生效请重启网络）${gl_bai}"
-            return
-        fi
-    fi
-
-    # 5. cloud-init提醒
-    if [ -f /etc/cloud/cloud.cfg ]; then
-        if grep -q 'manage_resolv_conf: true' /etc/cloud/cloud.cfg; then
-            echo -e "${gl_hong}警告: 检测到 cloud-init 管理DNS，建议在 /etc/cloud/cloud.cfg 配置 nameservers，并重启 cloud-init。${gl_bai}"
-        fi
-    fi
-
-    # 6. 传统 resolv.conf
-    if [ -f /etc/resolv.conf ]; then
-        chattr -i /etc/resolv.conf 2>/dev/null || true
-        echo "nameserver $primary_dns" > /etc/resolv.conf
-        [ -n "$secondary_dns" ] && echo "nameserver $secondary_dns" >> /etc/resolv.conf
-        chattr +i /etc/resolv.conf 2>/dev/null || true
-        echo -e "${gl_lv}已直接修改 /etc/resolv.conf（如不生效请检查是否被DHCP或云面板覆盖）${gl_bai}"
-    else
-        echo -e "${gl_hong}未找到 /etc/resolv.conf，无法设置DNS${gl_bai}"
-    fi
-
-    echo -e "${gl_huang}如DNS依然无效，建议重启网络/主机，并检查 cloud-init、dhclient、云面板等自动配置服务${gl_bai}"
+            ;;
+        *)
+            cp /etc/resolv.conf /etc/resolv.conf.bak
+            chattr -i /etc/resolv.conf 2>/dev/null || true
+            echo "nameserver $primary_dns" > /etc/resolv.conf
+            [ -n "$secondary_dns" ] && echo "nameserver $secondary_dns" >> /etc/resolv.conf
+            chattr +i /etc/resolv.conf 2>/dev/null || true
+            ;;
+    esac
+    echo -e "${gl_lv}DNS设置已更新并已持久化${gl_bai}"
 }
 
 set_predefined_dns() {
