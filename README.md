@@ -1,6 +1,6 @@
 ## ssh工具 ##
 ```
-bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/ssh.sh)
+bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/ssh.sh)
 ```
 
 
