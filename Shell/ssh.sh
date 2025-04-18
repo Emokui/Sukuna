@@ -213,42 +213,42 @@ install_base_tools() {
 install_acme() {
     send_stats "安装Acme"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/acme.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/acme.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_snell() {
     send_stats "安装Snell"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/snell.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/snell.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_mihomo() {
     send_stats "安装Mihomo"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/mihomo.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/mihomo.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_trojan() {
     send_stats "安装Trojan"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/trojan.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_hysteria() {
     send_stats "安装Hysteria"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/hysteria.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/hysteria.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_substore() {
     send_stats "安装SubStore"
     set +e
-    bash <(curl -fsSL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/substore.sh)
+    bash <(curl -fsSL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/substore.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
@@ -262,14 +262,14 @@ install_install() {
 install_nginx() {
     send_stats "反代Nginx"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/nginx.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/nginx.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
 install_snell-pro() {
     send_stats "超级Snell"
     set +e
-    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/snell-pro.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/snell-pro.sh)
     set -e
     read -n 1 -s -r -p "按任意键返回菜单..."
 }
