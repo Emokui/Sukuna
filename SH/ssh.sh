@@ -518,24 +518,14 @@ persistent_set_dns() {
             netplan apply
             ;;
         *)
-            # 1. 关闭 systemd-resolved 防止自动生成 127.0.0.53
-            if systemctl is-active --quiet systemd-resolved; then
-                systemctl stop systemd-resolved
-                systemctl disable systemd-resolved
-            fi
-            # 2. 删除原有 resolv.conf（无论文件还是软链）
-            rm -f /etc/resolv.conf
-            # 3. 写入你的 DNS
+            cp /etc/resolv.conf /etc/resolv.conf.bak
+            chattr -i /etc/resolv.conf 2>/dev/null || true
             echo "nameserver $primary_dns" > /etc/resolv.conf
             [ -n "$secondary_dns" ] && echo "nameserver $secondary_dns" >> /etc/resolv.conf
-            # 4. 加锁，防止被覆盖
             chattr +i /etc/resolv.conf 2>/dev/null || true
             ;;
     esac
     echo -e "${gl_lv}DNS设置已更新并已持久化${gl_bai}"
-    echo -e "${gl_huang}当前 /etc/resolv.conf 内容:${gl_bai}"
-    cat /etc/resolv.conf
-    echo -e "${gl_huang}如需修改请先执行: sudo chattr -i /etc/resolv.conf${gl_bai}"
 }
 
 set_predefined_dns() {
