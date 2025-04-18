@@ -292,7 +292,7 @@ install_trojan_go() {
     if [ -f ./trojan-go ]; then
         echo -e "${YELLOW}檢測到 trojan-go 已存在，跳過下載。${PLAIN}"
     else
-        wget https://raw.githubusercontent.com/Emokui/Sukuna/main/SH/trojan-go && chmod +x trojan-go
+        wget https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/trojan-go && chmod +x trojan-go
         echo -e "${GREEN}trojan-go 已下載。${PLAIN}"
     fi
 
