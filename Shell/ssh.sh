@@ -32,6 +32,16 @@ gl_zi=${COLOR[purple]}
 gl_kjlan=${COLOR[lightcyan]}
 gl_rst=${COLOR[reset]}
 
+press_any_key_to_continue() {
+    if [ -t 0 ]; then
+        local msg="${1:-按任意键返回菜单...}"
+        read -n 1 -s -r -p "$msg"
+        echo
+    else
+        echo
+    fi
+}
+
 send_stats() {
     local action="$1"
     echo -e "${gl_hui}执行选项: $action${gl_bai}" >&2
@@ -57,7 +67,7 @@ linux_update() {
         return 1
     fi
     echo -e "${gl_lv}系统更新完成${gl_bai}"
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 
 linux_clean() {
@@ -83,7 +93,7 @@ linux_clean() {
         return 1
     fi
     echo -e "${gl_lv}系统清理完成${gl_bai}"
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 
 enable_root_login() {
@@ -112,13 +122,13 @@ enable_root_login() {
     # 重启 SSH 服务以应用更改
     systemctl restart sshd
     echo "[✓] Root 登录和密码登录已启用，请尝试使用密码登录"
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 change_root_password() {
     send_stats "修改root密码"
     echo "==== 修改 root 密码 ===="
     passwd root
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 
 change_ssh_port() {
@@ -136,14 +146,14 @@ change_ssh_port() {
     else
         echo "[!] 无效的端口格式"
     fi
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 
 change_timezone() {
     send_stats "更改时区"
     if ! command -v timedatectl >/dev/null; then
         echo -e "${gl_hong}未安装timedatectl，无法自动设置时区${gl_bai}"
-        read -n 1 -s -r -p "按任意键返回菜单..."
+        press_any_key_to_continue
         return
     fi
     while true; do
@@ -184,7 +194,7 @@ change_timezone() {
             else
                 echo -e "${gl_hong}设置失败，请重试${gl_bai}"
             fi
-            read -n 1 -s -r -p "按任意键返回菜单..."
+            press_any_key_to_continue
             return
         done
     done
@@ -207,7 +217,7 @@ install_base_tools() {
     else
         echo -e "[!] 无法识别的系统"
     fi
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 
 install_acme() {
@@ -215,77 +225,77 @@ install_acme() {
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/acme.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_snell() {
     send_stats "安装Snell"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/snell.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_mihomo() {
     send_stats "安装Mihomo"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/mihomo.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_trojan() {
     send_stats "安装Trojan"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/trojan.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_hysteria() {
     send_stats "安装Hysteria"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/hysteria.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_substore() {
     send_stats "安装SubStore"
     set +e
     bash <(curl -fsSL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/substore.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_install() {
     send_stats "一键DDSystem"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/chiakge/installNET/master/Install.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_nginx() {
     send_stats "反代Nginx"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/nginx.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 install_snell-pro() {
     send_stats "超级Snell"
     set +e
     bash <(curl -sL https://raw.githubusercontent.com/Emokui/Nothing/Zero/Shell/snell-pro.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 bbr_menu() {
     send_stats "管理BBR"
     set +e
     bash <(wget -O - https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 warp_menu() {
     send_stats "管理WARP"
     set +e
     bash <(curl -sL https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh)
     set -e
-    read -n 1 -s -r -p "按任意键返回菜单..."
+    press_any_key_to_continue
 }
 reboot_vps() {
     send_stats "重启VPS"
@@ -316,7 +326,7 @@ configure_firewall() {
             apk add iptables
         else
             echo -e "${COLOR[red]}[!] 无法安装 iptables，请手动安装。${COLOR[reset]}"
-            read -n 1 -s -r -p "按任意键返回菜单..."
+            press_any_key_to_continue
             return 1
         fi
         echo -e "${COLOR[green]}[✓] iptables 已安装${COLOR[reset]}"
@@ -394,7 +404,7 @@ configure_firewall() {
                 else
                     echo -e "${COLOR[red]}[✓] 所有指定端口已关闭完成${COLOR[reset]}"
                 fi
-                read -n 1 -s -r -p "按任意键返回菜单..."
+                press_any_key_to_continue
                 ;;
             3)
                 iptables -F
@@ -407,7 +417,7 @@ configure_firewall() {
                     service iptables save
                 fi
                 echo -e "${COLOR[green]}[✓] 所有端口已开启${COLOR[reset]}"
-                read -n 1 -s -r -p "按任意键返回菜单..."
+                press_any_key_to_continue
                 ;;
             4)
                 iptables -F
@@ -423,12 +433,12 @@ configure_firewall() {
                     service iptables save
                 fi
                 echo -e "${COLOR[red]}[✓] 所有端口已关闭 (SSH 端口除外)${COLOR[reset]}"
-                read -n 1 -s -r -p "按任意键返回菜单..."
+                press_any_key_to_continue
                 ;;
             5)
                 iptables_output=$(iptables -L INPUT -n -v)
                 echo -e "${COLOR[blue]}$iptables_output${COLOR[reset]}"
-                read -n 1 -s -r -p "按任意键继续..."
+                press_any_key_to_continue
                 ;;
             *)
                 echo -e "${COLOR[red]}[!] 无效选项，请重新选择${COLOR[reset]}"
@@ -563,8 +573,7 @@ dns_config_menu() {
             0) return;;
             *) echo -e "${gl_hong}无效选项，请重试${gl_bai}"; sleep 1;;
         esac
-        echo -e "${gl_huang}按任意键继续...${gl_bai}"
-        read -n 1 -s
+        press_any_key_to_continue "按任意键继续..."
     done
 }
 
